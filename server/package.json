@@ -4,17 +4,30 @@
   "description": "",
   "license": "ISC",
   "author": "Franklyn Gomes",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec node --loader ts-node/esm ./src/index.ts",
+    "build": "tsc --project tsconfig.json",
+    "start": "nodemon ./dist/index.js",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "^24.0.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0"
   },
   "dependencies": {
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
-    "ejs": "^3.1.10",
+    "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "joi": "^18.0.1",
     "mongoose": "^8.18.0"
   }
 }
