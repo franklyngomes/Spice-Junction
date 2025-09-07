@@ -20,6 +20,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
