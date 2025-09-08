@@ -1,1 +1,1 @@
-{"version":3,"file":"ResturantModel.d.ts","sourceRoot":"","sources":["../../src/model/ResturantModel.ts"],"names":[],"mappings":""}
+{"version":3,"file":"ResturantModel.d.ts","sourceRoot":"","sources":["../../src/model/ResturantModel.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,UAAU,CAAC;AAEhC,OAAO,GAAG,MAAM,KAAK,CAAC;AAEtB,QAAA,MAAM,mBAAmB,uBAQvB,CAAA;AAqCF,QAAA,MAAM,eAAe;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;GAAiD,CAAC;AACvE,OAAO,EAAC,eAAe,EAAE,mBAAmB,EAAC,CAAC"}

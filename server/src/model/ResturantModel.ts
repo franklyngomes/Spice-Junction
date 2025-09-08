@@ -41,7 +41,7 @@ const RestaurantSchema = new Schema ({
     type: mongoose.Schema.Types.ObjectId,
     ref: "delivery_zones"
   },
-  isActive: {
+  isApproved: {
     type: Boolean,
     default: false
   }

@@ -1,21 +1,17 @@
 import express from "express"
-import type { Request, Response } from "express"
 import cors from "cors"
-import bodyParser from "body-parser"
 import dotenv  from "dotenv"
+dotenv.config()
 import Database from "./config/config.js"
 
 const app = express();
-dotenv.config()
 Database()
 app.use(express.urlencoded())
 app.use(express.json())
-app.use(bodyParser)
 app.use(cors());
 
-app.get("/health", (req: Request, res: Response) => {
-  res.json({ status: true });
-})
+import AuthRouter from "./routes/AuthRoutes.js"
+app.use(AuthRouter);
 
 const port = 5000;
 app.listen(port, async () => {
