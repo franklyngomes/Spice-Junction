@@ -72,7 +72,7 @@ class UserController {
         to: email,
         subject: "Verify Your Email - Spice Junction",
         html: `
-      <body style="margin: 0; padding: 0; background-color: #f4f4f5;">
+      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -369,7 +369,7 @@ class UserController {
         from:`Spice Junction ${process.env.NODEMAILER_EMAIL}`,
         to: email,
         subject: "Rest password OTP",
-        html: `<body style="margin: 0; padding: 0; background-color: #f4f4f5;">
+        html: `<body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -389,7 +389,8 @@ class UserController {
           >
             <tr>
               <td align="center" style="font-size: 20px; font-weight: bold; color: #F90912; padding-bottom: 10px;">
-              Hi ${user.firstName},
+                <h4>Hello ${user.firstName}</h4>
+              </td>
               </td>
             </tr>
             <tr>
@@ -400,6 +401,11 @@ class UserController {
             <tr>
               <td align="center" style="font-size: 16px; color: #F90912; padding-bottom: 10px;">
                 <strong>${code}</strong> <br />
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-size: 12px; color: #6b7280; padding-top: 30px;">
+                You're receiving this email because you have an account in Spice Junction. If you are not sure why you're receiving this, please contact us by replying to this email.
               </td>
             </tr>
           </table>
