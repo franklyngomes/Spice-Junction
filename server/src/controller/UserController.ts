@@ -3,7 +3,21 @@ import { UserModel, UserSchemaJoi } from "../model/UserModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 import type { Request, Response } from "express";
-import { comparePassword, hashPassword } from "../middleware/Auth.js";
+
+// Extend Express Request interface to include 'user'
+declare global {
+  namespace Express {
+    interface Request {
+      user?:{
+        _id: string,
+        firstName: string,
+        lastName: string,
+        email: string
+      };
+    }
+  }
+}
+import { comparePassword, hashPassword, hmacProcess } from "../middleware/Auth.js";
 import transporter from "../middleware/SendMail.js";
 import jwt from "jsonwebtoken";
 
@@ -54,7 +68,7 @@ class UserController {
       });
       await newUser.save();
       await transporter.sendMail({
-        from: `Spice Junction franklyn.office@gmail.com`,
+        from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
         to: email,
         subject: "Verify Your Email - Spice Junction",
         html: `
@@ -205,8 +219,9 @@ class UserController {
         });
       }
       //Access
-      const token = jwt.sign(
+      const accessToken = jwt.sign(
         {
+          _id: user._id,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user?.email,
@@ -218,6 +233,7 @@ class UserController {
       //Refresh
       const refreshToken = jwt.sign(
         {
+          _id: user._id,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user?.email,
@@ -226,18 +242,24 @@ class UserController {
         jwtSecretKey,
         { expiresIn: "7d" }
       );
-      user.refreshToken = refreshToken
+      user.refreshToken = refreshToken;
       await user.save();
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+      });
       return res.status(HttpCode.success).json({
         status: true,
         message: "Logged in successfully!",
         user: {
+          _id: user._id,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user?.email,
           role: user?.role,
         },
-        token: token,
+        accessToken: accessToken,
       });
     } catch (error) {
       return res.status(HttpCode.serverError).json({
@@ -246,17 +268,242 @@ class UserController {
       });
     }
   }
-  async refreshToken(req:Request, res: Response){
+  async refreshToken(req: Request, res: Response) {
+    try {
+      const token = req.cookies.refreshToken;
+      if (!token) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "Refresh token not found!",
+        });
+      }
+      const user = await UserModel.findOne({ refreshToken: token });
+      if (!user) {
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "Invalid refresh token!",
+        });
+      }
+      const jwtRefreshSecretKey = process.env.JWT_REFRESH_SECRET_KEY;
+      if (!jwtRefreshSecretKey) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "JWT refresh secret key is missing!",
+        });
+      }
+      const jwtSecretKey = process.env.JWT_SECRET_KEY;
+      if (!jwtSecretKey) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "JWT Secret key is missing!",
+        });
+      }
+      jwt.verify(
+        token,
+        jwtRefreshSecretKey,
+        async (error: any, decoded: any) => {
+          if (error) {
+            return res.status(HttpCode.unauthorized).json({
+              status: false,
+              message: "Invalid or expired refresh token",
+            });
+          }
 
+          //New Access Token
+          const newAccessToken = jwt.sign(
+            {
+              _id: user._id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user?.email,
+              role: user?.role,
+            },
+            jwtSecretKey,
+            { expiresIn: "3hr" }
+          );
+
+          //New Refresh Token
+          const newRefreshToken = jwt.sign(
+            {
+              _id: user._id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user?.email,
+              role: user?.role,
+            },
+            jwtRefreshSecretKey,
+            { expiresIn: "7d" }
+          );
+
+          res.cookie("refreshToken", newRefreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+          });
+          return res.status(HttpCode.success).json({
+            status: true,
+            message: "New access token generated",
+            accessToken: newAccessToken,
+          });
+        }
+      );
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message || error,
+      });
+    }
   }
   async forgotPassword(req: Request, res: Response) {
-    
+    try {
+      const { email } = req.body;
+      const user = await UserModel.findOne({ email });
+      if (!user) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "User not found!",
+        });
+      }
+      const code  = Math.floor(Math.random() * 1000000).toString()
+      const mail = await transporter.sendMail({
+        from:`Spice Junction ${process.env.NODEMAILER_EMAIL}`,
+        to: email,
+        subject: "Rest password OTP",
+        html: `<body style="margin: 0; padding: 0; background-color: #f4f4f5;">
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      style="padding: 40px 0;"
+    >
+      <tr>
+        <td align="center">
+          <table
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="max-width: 500px; background-color: #ffffff; border-radius: 12px; padding: 40px 20px; font-family: Arial, sans-serif;"
+          >
+            <tr>
+              <td align="center" style="font-size: 20px; font-weight: bold; color: #F90912; padding-bottom: 10px;">
+              Hi ${user.firstName},
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-size: 14px; color: #374151; padding-bottom: 10px;">
+                Use this OTP to reset your password
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-size: 16px; color: #F90912; padding-bottom: 10px;">
+                <strong>${code}</strong> <br />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+  `,
+      });
+       const hmacSecretKey = process.env.HMAC_VERIFICATION_SECRET;
+      if (!hmacSecretKey) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "JWT Secret key is missing!",
+        });
+      }
+      if(mail.accepted[0] === user.email){
+        const hashCode = hmacProcess(code, hmacSecretKey)
+        user.forgotPasswordCode = hashCode
+        user.forgotPasswordCodeValidation = Date.now()
+        await user.save();
+        return res.status(HttpCode.success).json({
+          status: true,
+          message: "OTP for reset password sent!"
+        })
+      }
+
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message || error,
+      });
+    }
   }
   async resetPassword(req: Request, res: Response) {
+    try {
+      const {email, code, newPassword} = req.body
+      const user = await UserModel.findOne({email})
+      if(!user){
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "User not found!"
+        })
+      }
+      if(!user.forgotPasswordCode || !user.forgotPasswordCodeValidation){
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "Cannot reset password, Try again!"
+        })
+      }
+      if(Date.now() - user.forgotPasswordCodeValidation > 5 * 60 * 100000){
+         return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "OTP expired, Try again!"
+        })
+      }
+      const hmacSecretKey = process.env.HMAC_VERIFICATION_SECRET;
+      if (!hmacSecretKey) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "JWT Secret key is missing!",
+        });
+      }
+      const encryptCode = hmacProcess(code, hmacSecretKey)
+      if(encryptCode === user.forgotPasswordCode){
+        const encryptPassword = hashPassword(newPassword)
+        user.password = encryptPassword
+        user.forgotPasswordCode = null
+        user.forgotPasswordCodeValidation = null
+        await user.save()
 
+        return res.status(HttpCode.success).json({
+          status: true,
+          message: "Password reset successful"
+        })
+      }
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message || error,
+      });
+    }
   }
-  async userProfile(req:Request, res:Response){
-
+  async userProfile(req: Request, res: Response) {
+    try {
+      const id = req.params.id
+      const user = await UserModel.find({_id: {$eq: id}},{_id: 1, firstName: 1, lastName:1, role: 1, email: 1, phone: 1, address: 1});
+      if(!user){
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "User not found!"
+        })
+      }
+      return res.status(HttpCode.success).json({
+        status: true,
+        message: "User details fetched successfully",
+        data: user
+      })
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message || error,
+      });
+    }
   }
 }
 export default new UserController();

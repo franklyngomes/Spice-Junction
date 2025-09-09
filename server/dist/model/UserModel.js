@@ -91,7 +91,7 @@ const UserSchema = new Schema({
         type: String,
     },
     forgotPasswordCodeValidation: {
-        type: String,
+        type: Number,
     },
     isBlocked: {
         type: Boolean,

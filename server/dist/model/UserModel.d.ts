@@ -30,7 +30,7 @@ declare const UserModel: mongoose.Model<{
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
     forgotPasswordCode?: string | null;
-    forgotPasswordCodeValidation?: string | null;
+    forgotPasswordCodeValidation?: number | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -60,7 +60,7 @@ declare const UserModel: mongoose.Model<{
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
     forgotPasswordCode?: string | null;
-    forgotPasswordCodeValidation?: string | null;
+    forgotPasswordCodeValidation?: number | null;
 }, {}, {
     timestamps: true;
 }> & {
@@ -92,7 +92,7 @@ declare const UserModel: mongoose.Model<{
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
     forgotPasswordCode?: string | null;
-    forgotPasswordCodeValidation?: string | null;
+    forgotPasswordCodeValidation?: number | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -128,7 +128,7 @@ declare const UserModel: mongoose.Model<{
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
     forgotPasswordCode?: string | null;
-    forgotPasswordCodeValidation?: string | null;
+    forgotPasswordCodeValidation?: number | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -158,7 +158,7 @@ declare const UserModel: mongoose.Model<{
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
     forgotPasswordCode?: string | null;
-    forgotPasswordCodeValidation?: string | null;
+    forgotPasswordCodeValidation?: number | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
@@ -190,7 +190,7 @@ declare const UserModel: mongoose.Model<{
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
     forgotPasswordCode?: string | null;
-    forgotPasswordCodeValidation?: string | null;
+    forgotPasswordCodeValidation?: number | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {
