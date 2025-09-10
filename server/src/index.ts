@@ -19,6 +19,9 @@ app.use(express.static(path.join(__dirname , "../public")))
 import AuthRouter from "./routes/AuthRoutes.js"
 app.use(AuthRouter);
 
+import ApiRouter from "./routes/ApiRoutes.js"
+app.use(ApiRouter)
+
 const port = 5000;
 app.listen(port, async () => {
   console.log(`Server is running on http://localhost:5000`)

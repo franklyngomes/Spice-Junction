@@ -56,7 +56,7 @@ class UserController {
                 to: email,
                 subject: "Verify Your Email - Spice Junction",
                 html: `
-      <body style="margin: 0; padding: 0; background-color: #f4f4f5;">
+      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -333,7 +333,7 @@ class UserController {
                 from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
                 to: email,
                 subject: "Rest password OTP",
-                html: `<body style="margin: 0; padding: 0; background-image:url('http://localhost:5000/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+                html: `<body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"

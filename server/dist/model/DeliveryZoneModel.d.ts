@@ -6,15 +6,19 @@ declare const DeliveryZoneModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     pinCodeList: string[];
-    city?: string | null;
     zoneName?: string | null;
+    district?: string | null;
+    division?: string | null;
+    state?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     pinCodeList: string[];
-    city?: string | null;
     zoneName?: string | null;
+    district?: string | null;
+    division?: string | null;
+    state?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
@@ -22,8 +26,10 @@ declare const DeliveryZoneModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     pinCodeList: string[];
-    city?: string | null;
     zoneName?: string | null;
+    district?: string | null;
+    division?: string | null;
+    state?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -35,15 +41,19 @@ declare const DeliveryZoneModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     pinCodeList: string[];
-    city?: string | null;
     zoneName?: string | null;
+    district?: string | null;
+    division?: string | null;
+    state?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     pinCodeList: string[];
-    city?: string | null;
     zoneName?: string | null;
+    district?: string | null;
+    division?: string | null;
+    state?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
@@ -51,8 +61,10 @@ declare const DeliveryZoneModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     pinCodeList: string[];
-    city?: string | null;
     zoneName?: string | null;
+    district?: string | null;
+    division?: string | null;
+    state?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {
