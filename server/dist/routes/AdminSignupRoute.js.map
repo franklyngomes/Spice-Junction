@@ -1,0 +1,1 @@
+{"version":3,"file":"AdminSignupRoute.js","sourceRoot":"","sources":["../../src/routes/AdminSignupRoute.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,SAAS,CAAC;AAC9B,OAAO,cAAc,MAAM,iCAAiC,CAAC;AAC7D,MAAM,iBAAiB,GAAG,OAAO,CAAC,MAAM,EAAE,CAAA;AAE1C,iBAAiB,CAAC,IAAI,CAAC,SAAS,EAAE,cAAc,CAAC,WAAW,CAAC,CAAA;AAE7D,eAAe,iBAAiB,CAAA"}

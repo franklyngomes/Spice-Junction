@@ -6,6 +6,7 @@ declare const RestaurantModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     ownerId: mongoose.Types.ObjectId;
+    deliveryZone: mongoose.Types.ObjectId[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -15,12 +16,12 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     logo?: string | null;
-    deliveryZone?: mongoose.Types.ObjectId | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     ownerId: mongoose.Types.ObjectId;
+    deliveryZone: mongoose.Types.ObjectId[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -30,7 +31,6 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     logo?: string | null;
-    deliveryZone?: mongoose.Types.ObjectId | null;
 }, {}, {
     timestamps: true;
 }> & {
@@ -38,6 +38,7 @@ declare const RestaurantModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     ownerId: mongoose.Types.ObjectId;
+    deliveryZone: mongoose.Types.ObjectId[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -47,7 +48,6 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     logo?: string | null;
-    deliveryZone?: mongoose.Types.ObjectId | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -59,6 +59,7 @@ declare const RestaurantModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     ownerId: mongoose.Types.ObjectId;
+    deliveryZone: mongoose.Types.ObjectId[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -68,12 +69,12 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     logo?: string | null;
-    deliveryZone?: mongoose.Types.ObjectId | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     ownerId: mongoose.Types.ObjectId;
+    deliveryZone: mongoose.Types.ObjectId[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -83,7 +84,6 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     logo?: string | null;
-    deliveryZone?: mongoose.Types.ObjectId | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
@@ -91,6 +91,7 @@ declare const RestaurantModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     ownerId: mongoose.Types.ObjectId;
+    deliveryZone: mongoose.Types.ObjectId[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -100,7 +101,6 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     logo?: string | null;
-    deliveryZone?: mongoose.Types.ObjectId | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {
