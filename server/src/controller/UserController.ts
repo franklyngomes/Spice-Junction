@@ -8,16 +8,20 @@ import type { Request, Response } from "express";
 declare global {
   namespace Express {
     interface Request {
-      user?:{
-        _id: string,
-        firstName: string,
-        lastName: string,
-        email: string
+      user?: {
+        _id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
       };
     }
   }
 }
-import { comparePassword, hashPassword, hmacProcess } from "../middleware/Auth.js";
+import {
+  comparePassword,
+  hashPassword,
+  hmacProcess,
+} from "../middleware/Auth.js";
 import transporter from "../middleware/SendMail.js";
 import jwt from "jsonwebtoken";
 
@@ -133,7 +137,7 @@ class UserController {
       });
     }
   }
-    async adminSignup(req: Request, res: Response) {
+  async adminSignup(req: Request, res: Response) {
     try {
       const { firstName, lastName, email, phone, password } = req.body;
       if (!firstName || !lastName || !email || !phone || !password) {
@@ -205,6 +209,118 @@ class UserController {
             <tr>
               <td align="center" style="font-size: 24px; font-weight: bold; color: #111827; padding-bottom: 10px;">
                 <h4>Hello ${firstName} <br>Welcome to Spice Junction, Please verify your email to get started for <span style="color: #F90912;">Admin privileges<span></h4>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-size: 14px; color: #6b7280; padding-bottom: 30px;">
+                To use Spice Junction, click the verification button. This helps keep your account secure.
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <a
+                  href=${verificationLink}
+                  style="display: inline-block; background-color: #F90912; color: #ffffff; text-decoration: none; padding: 12px 24px; font-size: 14px; font-weight: bold; border-radius: 6px;"
+                >
+                  Verify Email
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-size: 12px; color: #6b7280; padding-top: 30px;">
+                You're receiving this email because you have an account in Spice Junction. If you are not sure why you're receiving this, please contact us by replying to this email.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+      `,
+      });
+      return res.status(HttpCode.create).json({
+        status: true,
+        message: "Registration successful, Please verify your email",
+      });
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message || error,
+      });
+    }
+  }
+  async restaurantSignup(req: Request, res: Response) {
+    try {
+      const { firstName, lastName, email, phone, password } = req.body;
+      if (!firstName || !lastName || !email || !phone || !password) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "All fields are required!",
+        });
+      }
+      const existingUser = await UserModel.findOne({ email });
+      if (existingUser) {
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "Admin with this email already exists!",
+        });
+      }
+      const jwtSecretKey = process.env.JWT_SECRET_KEY;
+      if (!jwtSecretKey) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "JWT Secret key is missing!",
+        });
+      }
+      const verificationToken = jwt.sign({ email }, jwtSecretKey, {
+        expiresIn: "10m",
+      });
+      const verificationLink = `http://localhost:5000/verify-email?token=${verificationToken}`;
+      const { value, error } = UserSchemaJoi.validate(req.body);
+      if (error) {
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: (error as Error)?.message,
+        });
+      }
+      const hash = hashPassword(password);
+      const newUser = new UserModel({
+        firstName: value.firstName,
+        lastName: value.lastName,
+        email: value.email,
+        password: hash,
+        phone: value.phone,
+        role: "restaurant",
+        verificationToken,
+        verificationTokenExpires: Date.now() + 10 * 60 * 1000,
+      });
+      await newUser.save();
+      await transporter.sendMail({
+        from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
+        to: email,
+        subject: "Verify Your Email - Spice Junction",
+        html: `
+      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      style="padding: 40px 0;"
+    >
+      <tr>
+        <td align="center">
+          <table
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="max-width: 500px; background-color: #ffffff; border-radius: 12px; padding: 40px 20px; font-family: Arial, sans-serif;"
+          >
+            <tr>
+              <td align="center" style="font-size: 24px; font-weight: bold; color: #111827; padding-bottom: 10px;">
+                <h4>Hello ${firstName} <br>Welcome to Spice Junction, Please verify your email to get started with your <span style="color: #F90912;">Restaurant Account<span></h4>
               </td>
             </tr>
             <tr>
@@ -476,9 +592,9 @@ class UserController {
           message: "User not found!",
         });
       }
-      const code  = Math.floor(Math.random() * 1000000).toString()
+      const code = Math.floor(Math.random() * 1000000).toString();
       const mail = await transporter.sendMail({
-        from:`Spice Junction ${process.env.NODEMAILER_EMAIL}`,
+        from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
         to: email,
         subject: "Rest password OTP",
         html: `<body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
@@ -527,24 +643,23 @@ class UserController {
   </body>
   `,
       });
-       const hmacSecretKey = process.env.HMAC_VERIFICATION_SECRET;
+      const hmacSecretKey = process.env.HMAC_VERIFICATION_SECRET;
       if (!hmacSecretKey) {
         return res.status(HttpCode.notFound).json({
           status: false,
           message: "JWT Secret key is missing!",
         });
       }
-      if(mail.accepted[0] === user.email){
-        const hashCode = hmacProcess(code, hmacSecretKey)
-        user.forgotPasswordCode = hashCode
-        user.forgotPasswordCodeValidation = Date.now()
+      if (mail.accepted[0] === user.email) {
+        const hashCode = hmacProcess(code, hmacSecretKey);
+        user.forgotPasswordCode = hashCode;
+        user.forgotPasswordCodeValidation = Date.now();
         await user.save();
         return res.status(HttpCode.success).json({
           status: true,
-          message: "OTP for reset password sent!"
-        })
+          message: "OTP for reset password sent!",
+        });
       }
-
     } catch (error) {
       return res.status(HttpCode.serverError).json({
         status: false,
@@ -554,25 +669,25 @@ class UserController {
   }
   async resetPassword(req: Request, res: Response) {
     try {
-      const {email, code, newPassword} = req.body
-      const user = await UserModel.findOne({email})
-      if(!user){
+      const { email, code, newPassword } = req.body;
+      const user = await UserModel.findOne({ email });
+      if (!user) {
         return res.status(HttpCode.badRequest).json({
           status: false,
-          message: "User not found!"
-        })
+          message: "User not found!",
+        });
       }
-      if(!user.forgotPasswordCode || !user.forgotPasswordCodeValidation){
+      if (!user.forgotPasswordCode || !user.forgotPasswordCodeValidation) {
         return res.status(HttpCode.badRequest).json({
           status: false,
-          message: "Cannot reset password, Try again!"
-        })
+          message: "Cannot reset password, Try again!",
+        });
       }
-      if(Date.now() - user.forgotPasswordCodeValidation > 5 * 60 * 100000){
-         return res.status(HttpCode.badRequest).json({
+      if (Date.now() - user.forgotPasswordCodeValidation > 5 * 60 * 100000) {
+        return res.status(HttpCode.badRequest).json({
           status: false,
-          message: "OTP expired, Try again!"
-        })
+          message: "OTP expired, Try again!",
+        });
       }
       const hmacSecretKey = process.env.HMAC_VERIFICATION_SECRET;
       if (!hmacSecretKey) {
@@ -581,18 +696,18 @@ class UserController {
           message: "JWT Secret key is missing!",
         });
       }
-      const encryptCode = hmacProcess(code, hmacSecretKey)
-      if(encryptCode === user.forgotPasswordCode){
-        const encryptPassword = hashPassword(newPassword)
-        user.password = encryptPassword
-        user.forgotPasswordCode = null
-        user.forgotPasswordCodeValidation = null
-        await user.save()
+      const encryptCode = hmacProcess(code, hmacSecretKey);
+      if (encryptCode === user.forgotPasswordCode) {
+        const encryptPassword = hashPassword(newPassword);
+        user.password = encryptPassword;
+        user.forgotPasswordCode = null;
+        user.forgotPasswordCodeValidation = null;
+        await user.save();
 
         return res.status(HttpCode.success).json({
           status: true,
-          message: "Password reset successful"
-        })
+          message: "Password reset successful",
+        });
       }
     } catch (error) {
       return res.status(HttpCode.serverError).json({
@@ -603,19 +718,30 @@ class UserController {
   }
   async userProfile(req: Request, res: Response) {
     try {
-      const id = req.params.id
-      const user = await UserModel.find({_id: {$eq: id}},{_id: 1, firstName: 1, lastName:1, role: 1, email: 1, phone: 1, address: 1});
-      if(!user){
+      const id = req.params.id;
+      const user = await UserModel.find(
+        { _id: { $eq: id } },
+        {
+          _id: 1,
+          firstName: 1,
+          lastName: 1,
+          role: 1,
+          email: 1,
+          phone: 1,
+          address: 1,
+        }
+      );
+      if (!user) {
         return res.status(HttpCode.notFound).json({
           status: false,
-          message: "User not found!"
-        })
+          message: "User not found!",
+        });
       }
       return res.status(HttpCode.success).json({
         status: true,
         message: "User details fetched successfully",
-        data: user
-      })
+        data: user,
+      });
     } catch (error) {
       return res.status(HttpCode.serverError).json({
         status: false,

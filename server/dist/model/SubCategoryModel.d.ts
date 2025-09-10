@@ -6,7 +6,7 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     categoryNo: string;
     name?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
@@ -14,7 +14,7 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     categoryNo: string;
     name?: string | null;
 }, {}, {
@@ -24,7 +24,7 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     categoryNo: string;
     name?: string | null;
 } & {
@@ -38,7 +38,7 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     categoryNo: string;
     name?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
@@ -46,7 +46,7 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     categoryNo: string;
     name?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
@@ -56,7 +56,7 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     categoryNo: string;
     name?: string | null;
 }> & {

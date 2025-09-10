@@ -19,6 +19,8 @@ import ApiRouter from "./routes/ApiRoutes.js";
 app.use(ApiRouter);
 import AdminSignupRouter from "./routes/AdminSignupRoute.js";
 app.use("/admin", AdminSignupRouter);
+import RestaurantSignupRouter from "./routes/RestaurantSignupRoute.js";
+app.use("/restaurant", RestaurantSignupRouter);
 const port = 5000;
 app.listen(port, async () => {
     console.log(`Server is running on http://localhost:5000`);

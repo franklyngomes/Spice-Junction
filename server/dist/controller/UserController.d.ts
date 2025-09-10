@@ -14,6 +14,7 @@ declare global {
 declare class UserController {
     signup(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     adminSignup(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    restaurantSignup(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     verifyEmail(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     signin(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     refreshToken(req: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined>;
