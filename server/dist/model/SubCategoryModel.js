@@ -4,18 +4,23 @@ import Joi from "joi";
 import { customAlphabet } from "nanoid";
 const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
 const SubCategorySchemaJoi = Joi.object({
-    name: Joi.string().min(3).max(20).required().message('Name cannot be empty!'),
-    image: Joi.string().required().message("Image is required!"),
+    name: Joi.string().min(3).max(15).required().messages({ "string.min": "Name must be at least 3 characters", "string.max": "Name should be not more than 15 characters", "any.required": "Name cannot be empty!" }),
+    category: Joi.string().required().custom((value, helpers) => {
+        if (!mongoose.Types.ObjectId.isValid(value)) {
+            return helpers.error("any.invalid");
+        }
+        return value;
+    }, "Object Validation").messages({ "any.required": 'Category is required!', "any.invalid": "Category must be valid object id!" }),
 });
 const SubCategorySchema = new Schema({
     name: {
         type: String
     },
-    category: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "category",
-            required: true
-        }],
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "category",
+        required: true
+    },
     image: {
         type: String,
         required: true,
@@ -23,8 +28,13 @@ const SubCategorySchema = new Schema({
     categoryNo: {
         type: String,
         unique: true,
-        default: () => nanoid()
-    }
+    },
+    items: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "food_items"
+        }
+    ]
 }, { timestamps: true });
 SubCategorySchema.pre("validate", async function (next) {
     if (!this.categoryNo) {

@@ -13,6 +13,7 @@ app.use(cors());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "../public")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 import AuthRouter from "./routes/AuthRoutes.js";
 app.use(AuthRouter);
 import ApiRouter from "./routes/ApiRoutes.js";

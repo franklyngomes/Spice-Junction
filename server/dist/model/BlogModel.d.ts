@@ -6,16 +6,16 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     description?: string | null;
-    title?: string | null;
     image?: string | null;
+    title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     description?: string | null;
-    title?: string | null;
     image?: string | null;
+    title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }, {}, {
     timestamps: true;
@@ -24,8 +24,8 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     description?: string | null;
-    title?: string | null;
     image?: string | null;
+    title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 } & {
     _id: mongoose.Types.ObjectId;
@@ -38,16 +38,16 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     description?: string | null;
-    title?: string | null;
     image?: string | null;
+    title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     description?: string | null;
-    title?: string | null;
     image?: string | null;
+    title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
@@ -56,8 +56,8 @@ declare const SubCategoryModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     description?: string | null;
-    title?: string | null;
     image?: string | null;
+    title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }> & {
     _id: mongoose.Types.ObjectId;

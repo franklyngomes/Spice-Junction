@@ -5,22 +5,22 @@ declare const CategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    categoryId: string;
     name?: string | null;
+    categoryId?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    categoryId: string;
     name?: string | null;
+    categoryId?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    categoryId: string;
     name?: string | null;
+    categoryId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -31,22 +31,22 @@ declare const CategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    categoryId: string;
     name?: string | null;
+    categoryId?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    categoryId: string;
     name?: string | null;
+    categoryId?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    categoryId: string;
     name?: string | null;
+    categoryId?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

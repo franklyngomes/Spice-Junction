@@ -23,7 +23,7 @@ export function AuthCheck(req: Request, res: Response, next : any ) {
   try {
     const authHeader = req.headers['authorization'];
     if(!authHeader || !authHeader.startsWith("Bearer ")){
-      return res.status(HttpCode.notFound).json({
+      return res.status(HttpCode.unauthorized).json({
         status: false,
         message: "You're not authorized!"
       })

@@ -76,7 +76,7 @@ class UserController {
           >
             <tr>
               <td align="center" style="font-size: 24px; font-weight: bold; color: #111827; padding-bottom: 10px;">
-                <h4>Hello ${firstName} <br>Welcome to Spice Junction, Please verify your email</h4>
+                <h4>Hello <span style="color: #F90912;">${firstName}</span>,</h4> <h5>Welcome to Spice Junction! Please verify your email</h5>
               </td>
             </tr>
             <tr>
@@ -189,7 +189,8 @@ class UserController {
           >
             <tr>
               <td align="center" style="font-size: 24px; font-weight: bold; color: #111827; padding-bottom: 10px;">
-                <h4>Hello ${firstName} <br>Welcome to Spice Junction, Please verify your email to get started for <span style="color: #F90912;">Admin privileges<span></h4>
+              <h4>Hello <span style="color: #F90912;">${firstName}</span>,</h4>
+                <h5>Welcome to Spice Junction! Please verify your email to get started for <span style="color: #F90912;">Admin privileges<span></h5>
               </td>
             </tr>
             <tr>
@@ -302,7 +303,8 @@ class UserController {
           >
             <tr>
               <td align="center" style="font-size: 24px; font-weight: bold; color: #111827; padding-bottom: 10px;">
-                <h4>Hello ${firstName} <br>Welcome to Spice Junction, Please verify your email to get started with your <span style="color: #F90912;">Restaurant Account<span></h4>
+                <h4>Hello <span style="color: #F90912;">${firstName}</span>, </h4>
+                <h5>Welcome to Spice Junction! Please verify your email to get started with your <span style="color: #F90912;">Restaurant Account<span></h5>
               </td>
             </tr>
             <tr>

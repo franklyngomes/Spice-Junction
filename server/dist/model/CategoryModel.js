@@ -4,8 +4,7 @@ import Joi from "joi";
 import { customAlphabet } from "nanoid";
 const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
 const CategorySchemaJoi = Joi.object({
-    name: Joi.string().min(3).max(20).required().message('Name cannot be empty!'),
-    image: Joi.string().required().message("Image is required!"),
+    name: Joi.string().min(3).max(20).required().messages({ "any.required": "Name cannot be empty!" }),
 });
 const CategorySchema = new Schema({
     name: {
@@ -14,8 +13,7 @@ const CategorySchema = new Schema({
     categoryId: {
         type: String,
         unique: true,
-        default: () => nanoid()
-    }
+    },
 }, { timestamps: true });
 CategorySchema.pre("validate", async function (next) {
     if (!this.categoryId) {

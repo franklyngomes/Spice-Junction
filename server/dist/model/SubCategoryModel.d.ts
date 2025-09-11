@@ -5,28 +5,31 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    category: mongoose.Types.ObjectId;
     image: string;
-    category: mongoose.Types.ObjectId[];
-    categoryNo: string;
+    items: mongoose.Types.ObjectId[];
     name?: string | null;
+    categoryNo?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    category: mongoose.Types.ObjectId;
     image: string;
-    category: mongoose.Types.ObjectId[];
-    categoryNo: string;
+    items: mongoose.Types.ObjectId[];
     name?: string | null;
+    categoryNo?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    category: mongoose.Types.ObjectId;
     image: string;
-    category: mongoose.Types.ObjectId[];
-    categoryNo: string;
+    items: mongoose.Types.ObjectId[];
     name?: string | null;
+    categoryNo?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -37,28 +40,31 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    category: mongoose.Types.ObjectId;
     image: string;
-    category: mongoose.Types.ObjectId[];
-    categoryNo: string;
+    items: mongoose.Types.ObjectId[];
     name?: string | null;
+    categoryNo?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    category: mongoose.Types.ObjectId;
     image: string;
-    category: mongoose.Types.ObjectId[];
-    categoryNo: string;
+    items: mongoose.Types.ObjectId[];
     name?: string | null;
+    categoryNo?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    category: mongoose.Types.ObjectId;
     image: string;
-    category: mongoose.Types.ObjectId[];
-    categoryNo: string;
+    items: mongoose.Types.ObjectId[];
     name?: string | null;
+    categoryNo?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

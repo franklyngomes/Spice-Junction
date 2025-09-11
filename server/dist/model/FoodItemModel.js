@@ -18,7 +18,7 @@ const FoodItemSchema = new Schema({
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "category",
+        ref: "sub_category",
         required: true,
     },
     price: {
