@@ -1,9 +1,9 @@
-const ROLES = {
+export const ROLES = {
     ADMIN: "admin",
     RESTAURANT: "restaurant",
     CUSTOMER: "customer",
 };
-const ROLE_PERMISSIONS = {
+export const ROLE_PERMISSIONS = {
     [ROLES.ADMIN]: [
         "create_admin",
         "approve_restaurant",
@@ -51,5 +51,4 @@ const ROLE_PERMISSIONS = {
         "delete_blog",
     ],
 };
-export {};
 //# sourceMappingURL=role.js.map

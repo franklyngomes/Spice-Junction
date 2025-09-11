@@ -1,10 +1,10 @@
-const ROLES = {
+export const ROLES = {
   ADMIN: "admin",
   RESTAURANT: "restaurant",
   CUSTOMER: "customer",
 };
 
-const ROLE_PERMISSIONS = {
+export const ROLE_PERMISSIONS = {
   [ROLES.ADMIN]: [
     "create_admin",
     "approve_restaurant",
@@ -46,7 +46,7 @@ const ROLE_PERMISSIONS = {
     "create_food_item",
     "update_food_item",
     "delete_food_item",
-    
+
     "approve_order",
     "view_payment_log",
     "update_payment_log",

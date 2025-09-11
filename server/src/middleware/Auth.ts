@@ -38,7 +38,7 @@ export function AuthCheck(req: Request, res: Response, next : any ) {
     }
     const decoded = jwt.verify(token, jwtSecretKey);
     if (typeof decoded === "object" && decoded !== null && "_id" in decoded && "firstName" in decoded && "lastName" in decoded && "email" in decoded) {
-      req.user = decoded as { _id: string; firstName: string; lastName: string; email: string };
+      req.user = decoded as { _id: string; firstName: string; lastName: string; email: string, role: string };
       next()
     } else {
       return res.status(HttpCode.serverError).json({
