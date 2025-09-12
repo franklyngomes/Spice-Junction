@@ -4,5 +4,10 @@
 .navbar .nav-link{color: white;}
 
 .hero-section  .col{padding-top: 337px;
+    padding-bottom:296px;
 color: #ffffff
 ;}
+
+.explore-section{padding-top: 60px;}
+.dish-section {padding-top: 60px;
+padding-bottom: 60px;}
