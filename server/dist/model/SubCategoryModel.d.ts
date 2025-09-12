@@ -5,8 +5,8 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    category: mongoose.Types.ObjectId;
     image: string;
+    category: mongoose.Types.ObjectId[];
     items: mongoose.Types.ObjectId[];
     name?: string | null;
     categoryNo?: string | null;
@@ -14,8 +14,8 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    category: mongoose.Types.ObjectId;
     image: string;
+    category: mongoose.Types.ObjectId[];
     items: mongoose.Types.ObjectId[];
     name?: string | null;
     categoryNo?: string | null;
@@ -25,8 +25,8 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    category: mongoose.Types.ObjectId;
     image: string;
+    category: mongoose.Types.ObjectId[];
     items: mongoose.Types.ObjectId[];
     name?: string | null;
     categoryNo?: string | null;
@@ -40,8 +40,8 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    category: mongoose.Types.ObjectId;
     image: string;
+    category: mongoose.Types.ObjectId[];
     items: mongoose.Types.ObjectId[];
     name?: string | null;
     categoryNo?: string | null;
@@ -49,8 +49,8 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    category: mongoose.Types.ObjectId;
     image: string;
+    category: mongoose.Types.ObjectId[];
     items: mongoose.Types.ObjectId[];
     name?: string | null;
     categoryNo?: string | null;
@@ -60,8 +60,8 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    category: mongoose.Types.ObjectId;
     image: string;
+    category: mongoose.Types.ObjectId[];
     items: mongoose.Types.ObjectId[];
     name?: string | null;
     categoryNo?: string | null;

@@ -23,10 +23,10 @@ app.use(AuthRouter);
 import ApiRouter from "./routes/ApiRoutes.js"
 app.use(ApiRouter)
 
-import AdminSignupRouter from "./routes/AdminSignupRoute.js"
+import AdminSignupRouter from "./routes/AdminRoutes.js"
 app.use("/admin", AdminSignupRouter)
 
-import RestaurantSignupRouter from "./routes/RestaurantSignupRoute.js"
+import RestaurantSignupRouter from "./routes/RestaurantRoutes.js"
 app.use("/restaurant", RestaurantSignupRouter)
 
 const port = 5000;

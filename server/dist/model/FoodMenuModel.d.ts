@@ -6,14 +6,56 @@ declare const FoodMenuModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    items: mongoose.Types.ObjectId[];
+    items: mongoose.Types.DocumentArray<{
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }> & {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }>;
     name?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    items: mongoose.Types.ObjectId[];
+    items: mongoose.Types.DocumentArray<{
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }> & {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }>;
     name?: string | null;
 }, {}, {
     timestamps: true;
@@ -22,7 +64,28 @@ declare const FoodMenuModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    items: mongoose.Types.ObjectId[];
+    items: mongoose.Types.DocumentArray<{
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }> & {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }>;
     name?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
@@ -35,14 +98,56 @@ declare const FoodMenuModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    items: mongoose.Types.ObjectId[];
+    items: mongoose.Types.DocumentArray<{
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }> & {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }>;
     name?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    items: mongoose.Types.ObjectId[];
+    items: mongoose.Types.DocumentArray<{
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }> & {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }>;
     name?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
@@ -51,7 +156,28 @@ declare const FoodMenuModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    items: mongoose.Types.ObjectId[];
+    items: mongoose.Types.DocumentArray<{
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }> & {
+        name?: string | null;
+        description?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+        image?: string | null;
+        id?: string | null;
+    }>;
     name?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;

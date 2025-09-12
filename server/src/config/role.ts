@@ -7,9 +7,9 @@ export const ROLES = {
 export const ROLE_PERMISSIONS = {
   [ROLES.ADMIN]: [
     "create_admin",
-    "approve_restaurant",
-    "block_restaurant",
+    "view_restaurant_request",
     "delete_restaurant",
+    "update_restaurant",
 
     "create_category",
     "update_category",

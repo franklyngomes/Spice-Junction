@@ -6,21 +6,25 @@ declare const FoodItemModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    category: mongoose.Types.ObjectId;
+    subCategory: mongoose.Types.ObjectId;
+    menu: mongoose.Types.ObjectId;
     isAvailable: boolean;
     name?: string | null;
+    description?: string | null;
+    price?: number | null;
     image?: string | null;
-    price?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    category: mongoose.Types.ObjectId;
+    subCategory: mongoose.Types.ObjectId;
+    menu: mongoose.Types.ObjectId;
     isAvailable: boolean;
     name?: string | null;
+    description?: string | null;
+    price?: number | null;
     image?: string | null;
-    price?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
@@ -28,11 +32,13 @@ declare const FoodItemModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    category: mongoose.Types.ObjectId;
+    subCategory: mongoose.Types.ObjectId;
+    menu: mongoose.Types.ObjectId;
     isAvailable: boolean;
     name?: string | null;
+    description?: string | null;
+    price?: number | null;
     image?: string | null;
-    price?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -44,21 +50,25 @@ declare const FoodItemModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    category: mongoose.Types.ObjectId;
+    subCategory: mongoose.Types.ObjectId;
+    menu: mongoose.Types.ObjectId;
     isAvailable: boolean;
     name?: string | null;
+    description?: string | null;
+    price?: number | null;
     image?: string | null;
-    price?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    category: mongoose.Types.ObjectId;
+    subCategory: mongoose.Types.ObjectId;
+    menu: mongoose.Types.ObjectId;
     isAvailable: boolean;
     name?: string | null;
+    description?: string | null;
+    price?: number | null;
     image?: string | null;
-    price?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
@@ -66,11 +76,13 @@ declare const FoodItemModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     restaurant: mongoose.Types.ObjectId;
-    category: mongoose.Types.ObjectId;
+    subCategory: mongoose.Types.ObjectId;
+    menu: mongoose.Types.ObjectId;
     isAvailable: boolean;
     name?: string | null;
+    description?: string | null;
+    price?: number | null;
     image?: string | null;
-    price?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

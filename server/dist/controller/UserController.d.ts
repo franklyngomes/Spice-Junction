@@ -22,6 +22,8 @@ declare class UserController {
     forgotPassword(req: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined>;
     resetPassword(req: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined>;
     userProfile(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    restaurantRequests(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    responseRestaurantRequest(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
 }
 declare const _default: UserController;
 export default _default;

@@ -5,6 +5,7 @@ dotenv.config();
 import { comparePassword, hashPassword, hmacProcess, } from "../middleware/Auth.js";
 import transporter from "../middleware/SendMail.js";
 import jwt from "jsonwebtoken";
+import { RestaurantModel } from "../model/ResturantModel.js";
 class UserController {
     async signup(req, res) {
         try {
@@ -709,6 +710,63 @@ class UserController {
             return res.status(HttpCode.serverError).json({
                 status: false,
                 message: error?.message || error,
+            });
+        }
+    }
+    async restaurantRequests(req, res) {
+        try {
+            const requests = await RestaurantModel.find({ isApproved: false });
+            if (!requests || requests.length === 0) {
+                return res.status(HttpCode.notFound).json({
+                    status: false,
+                    message: "No new requests!",
+                });
+            }
+            return res.status(HttpCode.success).json({
+                status: false,
+                message: "Requests fetched successfully",
+                data: requests,
+            });
+        }
+        catch (error) {
+            return res.status(HttpCode.serverError).json({
+                status: false,
+                message: error?.message,
+            });
+        }
+    }
+    async responseRestaurantRequest(req, res) {
+        try {
+            const id = req.params.id;
+            const { response } = req.body;
+            const restaurant = await RestaurantModel.findByIdAndUpdate(id, req.body);
+            if (!restaurant) {
+                return res.status(HttpCode.notFound).json({
+                    status: false,
+                    message: "Restaurant not found!",
+                });
+            }
+            if (response === true) {
+                restaurant.isApproved = true;
+                await restaurant.save();
+                return res.status(HttpCode.success).json({
+                    status: true,
+                    message: "Request Approved",
+                });
+            }
+            else {
+                restaurant.isApproved = false;
+                await restaurant.save();
+                return res.status(HttpCode.success).json({
+                    status: true,
+                    message: "Request Rejected!",
+                });
+            }
+        }
+        catch (error) {
+            return res.status(HttpCode.serverError).json({
+                status: false,
+                message: error?.message,
             });
         }
     }

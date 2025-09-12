@@ -5,8 +5,10 @@ declare const RestaurantModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
+    cuisine: string[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -14,14 +16,17 @@ declare const RestaurantModel: mongoose.Model<{
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
+        buildingNo?: string | null;
     } | null;
-    logo?: string | null;
+    image?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
+    cuisine: string[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -29,16 +34,19 @@ declare const RestaurantModel: mongoose.Model<{
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
+        buildingNo?: string | null;
     } | null;
-    logo?: string | null;
+    image?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
+    cuisine: string[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -46,8 +54,9 @@ declare const RestaurantModel: mongoose.Model<{
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
+        buildingNo?: string | null;
     } | null;
-    logo?: string | null;
+    image?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -58,8 +67,10 @@ declare const RestaurantModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
+    cuisine: string[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -67,14 +78,17 @@ declare const RestaurantModel: mongoose.Model<{
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
+        buildingNo?: string | null;
     } | null;
-    logo?: string | null;
+    image?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
+    cuisine: string[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -82,16 +96,19 @@ declare const RestaurantModel: mongoose.Model<{
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
+        buildingNo?: string | null;
     } | null;
-    logo?: string | null;
+    image?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
+    cuisine: string[];
     isApproved: boolean;
     phone?: string | null;
     name?: string | null;
@@ -99,8 +116,9 @@ declare const RestaurantModel: mongoose.Model<{
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
+        buildingNo?: string | null;
     } | null;
-    logo?: string | null;
+    image?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {
