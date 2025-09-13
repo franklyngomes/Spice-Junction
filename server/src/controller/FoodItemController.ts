@@ -4,7 +4,6 @@ import { HttpCode } from "../helper/HttpCode.js";
 import type { Request, Response } from "express";
 import * as fsSync from "fs";
 import { promises as fs } from "fs";
-import mongoose from "mongoose";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -99,6 +98,7 @@ class FoodItemController {
       });
     }
   }
+ 
   async getFoodItemDetails(req: Request, res: Response) {
     try {
       const id = req.params.id;

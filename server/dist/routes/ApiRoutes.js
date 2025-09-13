@@ -14,7 +14,7 @@ import FoodItemImageUpload from "../helper/FoodItemImageUpload.js";
 //Delivery Zone
 ApiRouter.post("/create-delivery-zone", AuthCheck, DeliveryZoneController.createDeliveryZone);
 ApiRouter.get("/all-delivery-zone", DeliveryZoneController.getAllDeliveryZones);
-ApiRouter.get("/delivery-zone-details/:id", AuthCheck, DeliveryZoneController.getDeliveryZoneDetails);
+ApiRouter.get("/delivery-zone-details/:id", DeliveryZoneController.getDeliveryZoneDetails);
 ApiRouter.delete("/delete-delivery-zone/:id", AuthCheck, DeliveryZoneController.deleteDeliveryZone);
 //Category Routes
 ApiRouter.get("/all-category", CategoryController.getAllCategory);

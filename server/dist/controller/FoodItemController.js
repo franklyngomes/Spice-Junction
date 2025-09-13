@@ -3,7 +3,6 @@ import { FoodMenuModel } from "../model/FoodMenuModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
 import * as fsSync from "fs";
 import { promises as fs } from "fs";
-import mongoose from "mongoose";
 class FoodItemController {
     async createFoodItem(req, res) {
         try {
