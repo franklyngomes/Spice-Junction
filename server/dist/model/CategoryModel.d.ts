@@ -5,12 +5,56 @@ declare const CategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    items: mongoose.Types.DocumentArray<{
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }> & {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }>;
     name?: string | null;
     categoryId?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    items: mongoose.Types.DocumentArray<{
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }> & {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }>;
     name?: string | null;
     categoryId?: string | null;
 }, {}, {
@@ -19,6 +63,28 @@ declare const CategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    items: mongoose.Types.DocumentArray<{
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }> & {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }>;
     name?: string | null;
     categoryId?: string | null;
 } & {
@@ -31,12 +97,56 @@ declare const CategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    items: mongoose.Types.DocumentArray<{
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }> & {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }>;
     name?: string | null;
     categoryId?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    items: mongoose.Types.DocumentArray<{
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }> & {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }>;
     name?: string | null;
     categoryId?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
@@ -45,6 +155,28 @@ declare const CategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    items: mongoose.Types.DocumentArray<{
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }> & {
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        image?: string | null;
+        subCategory?: mongoose.Types.ObjectId | null;
+        price?: number | null;
+    }>;
     name?: string | null;
     categoryId?: string | null;
 }> & {

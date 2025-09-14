@@ -1,5 +1,7 @@
 import { FoodItemModel, FoodItemSchemaJoi } from "../model/FoodItemModel.js";
 import { FoodMenuModel } from "../model/FoodMenuModel.js";
+import { CategoryModel } from "../model/CategoryModel.js";
+import { SubCategoryModel } from "../model/SubCategoryModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
 import * as fsSync from "fs";
 import { promises as fs } from "fs";
@@ -44,6 +46,31 @@ class FoodItemController {
                 });
             }
             const foodMenu = await FoodMenuModel.updateOne({ _id: foodItem.menu }, {
+                $push: {
+                    items: {
+                        id: foodItem._id,
+                        name: foodItem.name,
+                        description: foodItem.description,
+                        price: foodItem.price,
+                        subCategory: foodItem.subCategory,
+                        image: foodItem.image,
+                    },
+                },
+            });
+            const findCategory = await SubCategoryModel.findById(foodItem.subCategory);
+            const addToCategory = await CategoryModel.updateOne({ _id: findCategory?.category }, {
+                $push: {
+                    items: {
+                        id: foodItem._id,
+                        name: foodItem.name,
+                        description: foodItem.description,
+                        price: foodItem.price,
+                        subCategory: foodItem.subCategory,
+                        image: foodItem.image,
+                    },
+                },
+            });
+            const addToSubCategory = await SubCategoryModel.updateOne({ _id: foodItem?.subCategory }, {
                 $push: {
                     items: {
                         id: foodItem._id,
@@ -150,6 +177,27 @@ class FoodItemController {
                     "items.$.image": foodItem.image,
                 },
             });
+            const findCategory = await SubCategoryModel.findById(foodItem.subCategory);
+            const updateCategory = await CategoryModel.updateOne({ _id: findCategory?.category, "items.id": id }, {
+                $set: {
+                    "items.$.id": foodItem._id,
+                    "items.$.name": foodItem.name,
+                    "items.$.description": foodItem.description,
+                    "items.$.price": foodItem.price,
+                    "items.$.subCategory": foodItem.subCategory,
+                    "items.$.image": foodItem.image,
+                },
+            });
+            const updateSubCategory = await SubCategoryModel.updateOne({ _id: foodItem?.subCategory, "items.id": id }, {
+                $set: {
+                    "items.$.id": foodItem._id,
+                    "items.$.name": foodItem.name,
+                    "items.$.description": foodItem.description,
+                    "items.$.price": foodItem.price,
+                    "items.$.image": foodItem.image,
+                },
+            });
+            console.log(updateSubCategory);
             return res.status(HttpCode.success).json({
                 status: false,
                 message: "Food item updated successfully",
@@ -179,6 +227,13 @@ class FoodItemController {
                 }
             }
             const foodMenu = await FoodMenuModel.updateOne({ "items.id": id }, {
+                $pull: { items: { id: id } },
+            });
+            const deleteSubCategory = await SubCategoryModel.updateOne({ _id: foodItem.subCategory }, {
+                $pull: { items: { id: id } }
+            });
+            const findCategory = await SubCategoryModel.findById(foodItem.subCategory);
+            const deleteCategory = await CategoryModel.updateOne({ _id: findCategory?.category, "items.id": id }, {
                 $pull: { items: { id: id } }
             });
             return res.status(HttpCode.success).json({

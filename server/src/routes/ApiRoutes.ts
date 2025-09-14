@@ -11,6 +11,7 @@ import FoodMenuController from "../controller/FoodMenuController.js";
 import FoodItemController from "../controller/FoodItemController.js";
 import CheckPermission from "../middleware/CheckPermission.js";
 import FoodItemImageUpload from "../helper/FoodItemImageUpload.js";
+import AggregationController from "../controller/AggregationController.js";
 
 //Delivery Zone
 ApiRouter.post("/create-delivery-zone",AuthCheck, DeliveryZoneController.createDeliveryZone)
@@ -53,5 +54,7 @@ ApiRouter.get("/food-item-details/:id",FoodItemController.getFoodItemDetails);
 ApiRouter.patch("/update-food-item/:id",AuthCheck,CheckPermission(["update_food_item"]),FoodItemImageUpload.single("image"), FoodItemController.updateFoodItem);
 ApiRouter.delete("/delete-food-item/:id",AuthCheck,CheckPermission(["delete_food_item"]),FoodItemController.deleteFoodItem);
 
+//Aggregation Routes
+ApiRouter.post("/search", AggregationController.GlobalSearch)
 
 export default ApiRouter
