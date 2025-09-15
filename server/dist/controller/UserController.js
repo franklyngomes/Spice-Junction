@@ -439,7 +439,7 @@ class UserController {
                 lastName: user.lastName,
                 email: user?.email,
                 role: user?.role,
-            }, jwtSecretKey, { expiresIn: "3hr" });
+            }, jwtSecretKey, { expiresIn: "3d" });
             //Refresh
             const refreshToken = jwt.sign({
                 _id: user._id,

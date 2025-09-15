@@ -460,7 +460,7 @@ class UserController {
           role: user?.role,
         },
         jwtSecretKey,
-        { expiresIn: "3hr" }
+        { expiresIn: "3d" }
       );
       //Refresh
       const refreshToken = jwt.sign(
