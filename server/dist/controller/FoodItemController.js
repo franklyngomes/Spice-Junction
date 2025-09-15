@@ -118,10 +118,32 @@ class FoodItemController {
             });
         }
     }
+    async getAllFoodItems(req, res) {
+        try {
+            const foodItem = await FoodItemModel.find().populate("restaurant");
+            if (!foodItem || foodItem.length === 0) {
+                return res.status(HttpCode.badRequest).json({
+                    status: false,
+                    message: "No food items found!",
+                });
+            }
+            return res.status(HttpCode.success).json({
+                status: false,
+                message: "Food items fetched successfully",
+                data: foodItem,
+            });
+        }
+        catch (error) {
+            return res.status(HttpCode.serverError).json({
+                status: false,
+                message: error?.message,
+            });
+        }
+    }
     async getFoodItemDetails(req, res) {
         try {
             const id = req.params.id;
-            const foodItem = await FoodItemModel.findById(id);
+            const foodItem = await FoodItemModel.findById(id).populate("restaurant").populate("subCategory");
             if (!foodItem) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -197,7 +219,6 @@ class FoodItemController {
                     "items.$.image": foodItem.image,
                 },
             });
-            console.log(updateSubCategory);
             return res.status(HttpCode.success).json({
                 status: false,
                 message: "Food item updated successfully",

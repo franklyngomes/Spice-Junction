@@ -37,7 +37,9 @@ export const ROLE_PERMISSIONS = {
         "create_food_item",
         "update_food_item",
         "delete_food_item",
-        "approve_order",
+        "create_order",
+        "view_order",
+        "update_order",
         "view_payment_log",
         "update_payment_log",
     ],
@@ -49,6 +51,8 @@ export const ROLE_PERMISSIONS = {
         "create_blog",
         "update_blog",
         "delete_blog",
+        "view_order",
+        "create_order"
     ],
 };
 //# sourceMappingURL=role.js.map

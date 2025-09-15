@@ -7,14 +7,17 @@ declare const UserModel: mongoose.Model<{
 } & {
     role: string;
     address: mongoose.Types.DocumentArray<{
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }> & {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
@@ -37,14 +40,17 @@ declare const UserModel: mongoose.Model<{
 } & {
     role: string;
     address: mongoose.Types.DocumentArray<{
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }> & {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
@@ -69,14 +75,17 @@ declare const UserModel: mongoose.Model<{
 } & {
     role: string;
     address: mongoose.Types.DocumentArray<{
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }> & {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
@@ -105,14 +114,17 @@ declare const UserModel: mongoose.Model<{
 } & {
     role: string;
     address: mongoose.Types.DocumentArray<{
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }> & {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
@@ -135,14 +147,17 @@ declare const UserModel: mongoose.Model<{
 } & {
     role: string;
     address: mongoose.Types.DocumentArray<{
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }> & {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
@@ -167,14 +182,17 @@ declare const UserModel: mongoose.Model<{
 } & {
     role: string;
     address: mongoose.Types.DocumentArray<{
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     }> & {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;

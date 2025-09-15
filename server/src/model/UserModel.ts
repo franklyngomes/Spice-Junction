@@ -8,25 +8,55 @@ const RoleOptions = {
   restaurant: "restaurant",
 };
 const UserSchemaJoi = Joi.object({
-  firstName: Joi.string().min(3).max(15).required().messages({"string.min" : "First name must be at least 3 characters","string.max": "First name should be not more than 15 characters","any.required":"First name cannot be empty!"}),
-  lastName: Joi.string().min(3).max(15).required().messages({"string.min" : "Last name must be at least 3 characters","string.max": "Last name should be not more than 15 characters","any.required":"Last name cannot be empty!"}),
-  email: Joi.string().email().required().messages({"string.email" : "Please provide a valid email","any.required":"Email is required!"}),
+  firstName: Joi.string()
+    .min(3)
+    .max(15)
+    .required()
+    .messages({
+      "string.min": "First name must be at least 3 characters",
+      "string.max": "First name should be not more than 15 characters",
+      "any.required": "First name cannot be empty!",
+    }),
+  lastName: Joi.string()
+    .min(3)
+    .max(15)
+    .required()
+    .messages({
+      "string.min": "Last name must be at least 3 characters",
+      "string.max": "Last name should be not more than 15 characters",
+      "any.required": "Last name cannot be empty!",
+    }),
+  email: Joi.string()
+    .email()
+    .required()
+    .messages({
+      "string.email": "Please provide a valid email",
+      "any.required": "Email is required!",
+    }),
   password: Joi.string()
-  .min(8)
-  .max(15)
-  .required()
-  .pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[@!#$%^&*_-])[A-Za-z0-9@!#$%^&*_-]+$/)
-  .messages({
-    "string.pattern.base": "Password must contain at least one uppercase letter, one number, and one special character",
-    "string.min": "Password must be at least 8 characters",
-    "string.max": "Password should be not more than 15 characters",
-    "any.required": "Password is required!",
+    .min(8)
+    .max(15)
+    .required()
+    .pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[@!#$%^&*_-])[A-Za-z0-9@!#$%^&*_-]+$/)
+    .messages({
+      "string.pattern.base":
+        "Password must contain at least one uppercase letter, one number, and one special character",
+      "string.min": "Password must be at least 8 characters",
+      "string.max": "Password should be not more than 15 characters",
+      "any.required": "Password is required!",
+    }),
+  role: Joi.string()
+    .valid(...Object.values(RoleOptions))
+    .messages({
+      "any.only": "Role must be one of customer, admin, or restaurant",
+    }),
+  buildingNo: Joi.string().min(3).max(40).messages({
+    "string.min": "Building no. must be at least 3 characters",
+    "string.max": "Building no. must be at most 40 characters",
   }),
-  role: Joi.string().valid(...Object.values(RoleOptions)).messages({
-      "any.only": "Role must be one of customer, admin, or restaurant"}),
-  street: Joi.string().min(8).max(20).messages({
+  street: Joi.string().min(8).max(40).messages({
     "string.min": "Street must be at least 8 characters",
-    "string.max": "Street must be at most 20 characters",
+    "string.max": "Street must be at most 40 characters",
   }),
   city: Joi.string().min(4).max(10).messages({
     "string.min": "City must be at least 4 characters",
@@ -36,7 +66,10 @@ const UserSchemaJoi = Joi.object({
     "string.min": "Pin code must be exactly 6 characters",
     "string.max": "Pin code must be exactly 6 characters",
   }),
-  phone: Joi.string().regex(/^[0-9]{10}$/).required().messages({
+  phone: Joi.string()
+    .regex(/^[0-9]{10}$/)
+    .required()
+    .messages({
       "string.pattern.base": "Valid phone number is required!",
       "any.required": "Phone is required",
     }),
@@ -64,6 +97,9 @@ const UserSchema = new Schema(
     },
     address: [
       {
+        buildingNo: {
+          type: String,
+        },
         street: {
           type: String,
         },
@@ -83,7 +119,7 @@ const UserSchema = new Schema(
       type: String,
     },
     refreshToken: {
-      type: String
+      type: String,
     },
     verificationTokenExpires: {
       type: String,

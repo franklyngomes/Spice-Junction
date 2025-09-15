@@ -5,67 +5,97 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    restaurant: mongoose.Types.ObjectId;
-    quantity: number;
     customerId: mongoose.Types.ObjectId;
+    items: mongoose.Types.DocumentArray<{
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }> & {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }>;
+    discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    address?: {
-        street?: string | null;
-        city?: string | null;
-        pinCode?: string | null;
-    } | null;
-    discount?: number | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
         platform: number;
     } | null;
     amount?: number | null;
+    address?: {
+        buildingNo?: string | null;
+        street?: string | null;
+        city?: string | null;
+        pinCode?: string | null;
+    } | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    restaurant: mongoose.Types.ObjectId;
-    quantity: number;
     customerId: mongoose.Types.ObjectId;
+    items: mongoose.Types.DocumentArray<{
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }> & {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }>;
+    discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    address?: {
-        street?: string | null;
-        city?: string | null;
-        pinCode?: string | null;
-    } | null;
-    discount?: number | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
         platform: number;
     } | null;
     amount?: number | null;
+    address?: {
+        buildingNo?: string | null;
+        street?: string | null;
+        city?: string | null;
+        pinCode?: string | null;
+    } | null;
 }, {}, {
     timestamps: true;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    restaurant: mongoose.Types.ObjectId;
-    quantity: number;
     customerId: mongoose.Types.ObjectId;
+    items: mongoose.Types.DocumentArray<{
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }> & {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }>;
+    discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    address?: {
-        street?: string | null;
-        city?: string | null;
-        pinCode?: string | null;
-    } | null;
-    discount?: number | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
         platform: number;
     } | null;
     amount?: number | null;
+    address?: {
+        buildingNo?: string | null;
+        street?: string | null;
+        city?: string | null;
+        pinCode?: string | null;
+    } | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -76,67 +106,97 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    restaurant: mongoose.Types.ObjectId;
-    quantity: number;
     customerId: mongoose.Types.ObjectId;
+    items: mongoose.Types.DocumentArray<{
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }> & {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }>;
+    discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    address?: {
-        street?: string | null;
-        city?: string | null;
-        pinCode?: string | null;
-    } | null;
-    discount?: number | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
         platform: number;
     } | null;
     amount?: number | null;
+    address?: {
+        buildingNo?: string | null;
+        street?: string | null;
+        city?: string | null;
+        pinCode?: string | null;
+    } | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    restaurant: mongoose.Types.ObjectId;
-    quantity: number;
     customerId: mongoose.Types.ObjectId;
+    items: mongoose.Types.DocumentArray<{
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }> & {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }>;
+    discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    address?: {
-        street?: string | null;
-        city?: string | null;
-        pinCode?: string | null;
-    } | null;
-    discount?: number | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
         platform: number;
     } | null;
     amount?: number | null;
+    address?: {
+        buildingNo?: string | null;
+        street?: string | null;
+        city?: string | null;
+        pinCode?: string | null;
+    } | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    restaurant: mongoose.Types.ObjectId;
-    quantity: number;
     customerId: mongoose.Types.ObjectId;
+    items: mongoose.Types.DocumentArray<{
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }> & {
+        foodItem: mongoose.Types.ObjectId;
+        quantity: number;
+    }>;
+    discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    address?: {
-        street?: string | null;
-        city?: string | null;
-        pinCode?: string | null;
-    } | null;
-    discount?: number | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
         platform: number;
     } | null;
     amount?: number | null;
+    address?: {
+        buildingNo?: string | null;
+        street?: string | null;
+        city?: string | null;
+        pinCode?: string | null;
+    } | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

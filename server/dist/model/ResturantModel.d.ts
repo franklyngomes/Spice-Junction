@@ -13,10 +13,10 @@ declare const RestaurantModel: mongoose.Model<{
     phone?: string | null;
     name?: string | null;
     address?: {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
-        buildingNo?: string | null;
     } | null;
     image?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
@@ -31,10 +31,10 @@ declare const RestaurantModel: mongoose.Model<{
     phone?: string | null;
     name?: string | null;
     address?: {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
-        buildingNo?: string | null;
     } | null;
     image?: string | null;
 }, {}, {
@@ -51,10 +51,10 @@ declare const RestaurantModel: mongoose.Model<{
     phone?: string | null;
     name?: string | null;
     address?: {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
-        buildingNo?: string | null;
     } | null;
     image?: string | null;
 } & {
@@ -75,10 +75,10 @@ declare const RestaurantModel: mongoose.Model<{
     phone?: string | null;
     name?: string | null;
     address?: {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
-        buildingNo?: string | null;
     } | null;
     image?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
@@ -93,10 +93,10 @@ declare const RestaurantModel: mongoose.Model<{
     phone?: string | null;
     name?: string | null;
     address?: {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
-        buildingNo?: string | null;
     } | null;
     image?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
@@ -113,10 +113,10 @@ declare const RestaurantModel: mongoose.Model<{
     phone?: string | null;
     name?: string | null;
     address?: {
+        buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
-        buildingNo?: string | null;
     } | null;
     image?: string | null;
 }> & {

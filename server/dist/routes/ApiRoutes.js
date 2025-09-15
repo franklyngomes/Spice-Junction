@@ -12,6 +12,7 @@ import FoodItemController from "../controller/FoodItemController.js";
 import CheckPermission from "../middleware/CheckPermission.js";
 import FoodItemImageUpload from "../helper/FoodItemImageUpload.js";
 import AggregationController from "../controller/AggregationController.js";
+import OrderController from "../controller/OrderController.js";
 //Delivery Zone
 ApiRouter.post("/create-delivery-zone", AuthCheck, DeliveryZoneController.createDeliveryZone);
 ApiRouter.get("/all-delivery-zone", DeliveryZoneController.getAllDeliveryZones);
@@ -42,6 +43,7 @@ ApiRouter.get("/food-menu-details/:id", FoodMenuController.getFoodMenuDetails);
 ApiRouter.patch("/update-food-menu/:id", AuthCheck, CheckPermission(["update_menu"]), FoodMenuController.updateFoodMenu);
 ApiRouter.delete("/delete-food-menu/:id", AuthCheck, CheckPermission(["delete_menu"]), FoodMenuController.deleteFoodMenu);
 //Food Item Routes
+ApiRouter.get("/all-food-item", FoodItemController.getAllFoodItems);
 ApiRouter.get("/restaurant-food-item/:id", FoodItemController.getRestaurantFoodItem),
     ApiRouter.post("/create-food-item", AuthCheck, CheckPermission(["create_food_item"]), FoodItemImageUpload.single("image"), FoodItemController.createFoodItem);
 ApiRouter.get("/food-item-details/:id", FoodItemController.getFoodItemDetails);
@@ -49,5 +51,14 @@ ApiRouter.patch("/update-food-item/:id", AuthCheck, CheckPermission(["update_foo
 ApiRouter.delete("/delete-food-item/:id", AuthCheck, CheckPermission(["delete_food_item"]), FoodItemController.deleteFoodItem);
 //Aggregation Routes
 ApiRouter.post("/search", AggregationController.GlobalSearch);
+ApiRouter.post("/sort-by-price", AggregationController.SortByPrice);
+//Order Routes
+ApiRouter.post("/create-order", AuthCheck, CheckPermission(["create_order"]), OrderController.createOrder);
+ApiRouter.get("/all-order", AuthCheck, CheckPermission(["view_order"]), OrderController.getAllOrder);
+ApiRouter.get("/order-details/:id", AuthCheck, CheckPermission(["view_order"]), OrderController.getOrderDetails);
+ApiRouter.get("/order-by-customer/:id", AuthCheck, CheckPermission(["view_order"]), OrderController.getOrderByCustomer);
+ApiRouter.get("/order-by-restaurant/:id", AuthCheck, CheckPermission(["view_order"]), OrderController.getOrderByRestaurant);
+ApiRouter.patch("/order-update/:id", AuthCheck, CheckPermission(["update_order"]), OrderController.updateOrder);
+ApiRouter.delete("/order-delete/:id", AuthCheck, CheckPermission(["delete_order"]), OrderController.deleteOrder);
 export default ApiRouter;
 //# sourceMappingURL=ApiRoutes.js.map

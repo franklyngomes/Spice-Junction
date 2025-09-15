@@ -115,7 +115,28 @@ class FoodItemController {
   async getRestaurantFoodItem(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const foodItem = await FoodItemModel.find({ restaurant: id });
+      const foodItem = await FoodItemModel.find({ restaurant: id}) 
+      if (!foodItem || foodItem.length === 0) {
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "No food items found!",
+        });
+      }
+      return res.status(HttpCode.success).json({
+        status: false,
+        message: "Food items fetched successfully",
+        data: foodItem,
+      });
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message,
+      });
+    }
+  }
+  async getAllFoodItems(req: Request, res: Response) {
+    try {
+      const foodItem = await FoodItemModel.find().populate("restaurant")
       if (!foodItem || foodItem.length === 0) {
         return res.status(HttpCode.badRequest).json({
           status: false,
@@ -138,7 +159,7 @@ class FoodItemController {
   async getFoodItemDetails(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const foodItem = await FoodItemModel.findById(id);
+      const foodItem = await FoodItemModel.findById(id).populate("restaurant").populate("subCategory");
       if (!foodItem) {
         return res.status(HttpCode.badRequest).json({
           status: false,
@@ -225,7 +246,6 @@ class FoodItemController {
           },
         }
       );
-      console.log(updateSubCategory)
       return res.status(HttpCode.success).json({
         status: false,
         message: "Food item updated successfully",
