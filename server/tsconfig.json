@@ -19,7 +19,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    "typeRoots": ["./node_modules/@types", "./types"],
+    // "typeRoots": ["./node_modules/@types", "./types"],
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
@@ -42,5 +42,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "types/**/*"]
 }
