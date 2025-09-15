@@ -5,8 +5,9 @@ dotenv.config();
 import Database from "./config/config.js";
 import { fileURLToPath } from "url";
 import path from "path";
-import swaggerJSDoc from "swagger-jsdoc";
 import * as swaggerui from "swagger-ui-express";
+import fs from "fs";
+import YAML from "yaml";
 const app = express();
 Database();
 app.use(express.urlencoded());
@@ -42,6 +43,8 @@ import AdminSignupRouter from "./routes/AdminRoutes.js";
 app.use("/admin", AdminSignupRouter);
 import RestaurantSignupRouter from "./routes/RestaurantRoutes.js";
 app.use("/restaurant", RestaurantSignupRouter);
+const swaggerFile = fs.readFileSync(path.join(__dirname, './../swagger.yaml'), 'utf-8');
+const swaggerDocument = YAML.parse(swaggerFile);
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -51,14 +54,13 @@ const options = {
         },
         servers: [
             {
-                url: ""
-            }
+                url: "https://spice-junction-server.onrender.com"
+            },
         ]
     },
-    apis: ['./src/routes*.js'], // files containing annotations as above
+    apis: ['./src/routes/*.ts'], // files containing annotations as above
 };
-const openapiSpecification = swaggerJSDoc(options);
-app.use("/api-doc", swaggerui.serve);
+app.use("/api-doc", swaggerui.serve, swaggerui.setup(swaggerDocument));
 const port = 5000;
 app.listen(port, async () => {
     console.log(`Server is running on http://localhost:5000`);

@@ -1,0 +1,1113 @@
+openapi: 3.0.0
+info:
+  title: Spice Junction
+  version: 1.0.0
+servers:
+  - url: https://spice-junction-server.onrender.com
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+tags:
+  - name: Authentication
+  - name: Restaurant
+  - name: Food Menu
+  - name: Food Item
+  - name: Category
+  - name: Sub Category
+  - name: Order
+  - name: Delivery Zone
+  - name: Admin
+  - name: Restaurant Panel
+  - name: Search/Sort
+paths:
+  /signup:
+    post:
+      tags:
+        - Authentication
+      summary: signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: John
+                lastName: Doe
+                email: quadeyaunifre-8075@yopmail.com
+                password: Spicejtn@12
+                phone: '9845768333'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/signup:
+    post:
+      tags:
+        - Authentication
+      summary: admin/signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Franklyn
+                lastName: Gomes
+                email: franklyngomes15@gmail.com
+                password: Admin_12345
+                phone: '9845768333'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /signin:
+    post:
+      tags:
+        - Authentication
+      summary: restaurant-signin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: 3jtvu@powerscrews.com
+                password: Res_12345
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /forgot-password:
+    post:
+      tags:
+        - Authentication
+      summary: forgot-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: quadeyaunifre-8075@yopmail.com
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /reset-password:
+    post:
+      tags:
+        - Authentication
+      summary: reset-password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: quadeyaunifre-8075@yopmail.com
+                code: '416384'
+                newPassword: Customer_1234
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user-profile/68bea9b51a3871015b45f6cb:
+    get:
+      tags:
+        - Authentication
+      summary: user-profile
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /restaurant/signup:
+    post:
+      tags:
+        - Authentication
+      summary: restaurant/signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                firstName: Jason
+                lastName: Duval
+                email: g3dyc@powerscrews.com
+                password: Res_12345
+                phone: '9845768333'
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-restaurant:
+    get:
+      tags:
+        - Restaurant
+      summary: all-restaurant
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /restaurant-details/68c28d6ef26f0f1146aa2bd6:
+    get:
+      tags:
+        - Restaurant
+      summary: restaurant-details
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /update-restaurant/68c28d6ef26f0f1146aa2bd6:
+    patch:
+      tags:
+        - Restaurant
+      summary: update-restaurant
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Vertex - Fairfield by Marriott
+                ownerId:
+                  type: string
+                  example: 68c1638b62ba343428ccc74e
+                buildingNo:
+                  type: string
+                  example: Cb 218
+                street:
+                  type: string
+                  example: Action Area 1C New Town Near State Bank Of India
+                city:
+                  type: string
+                  example: Kolkata
+                pinCode:
+                  type: integer
+                  example: '700156'
+                phone:
+                  type: integer
+                  example: '7605086818'
+                cuisine:
+                  type: string
+                  example: Finger Food
+                deliveryZone:
+                  type: string
+                  example: 68c111460db754e3111cd548
+                image:
+                  type: string
+                  format: binary
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjY3Mjc4LCJleHAiOjE3NTc2NzgwNzh9.u_252k2ITzeErAGIOE_WmshM0hCB0rX09U7P4SazSWQ
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-food-menu:
+    post:
+      tags:
+        - Food Menu
+      summary: create-food-menu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Biryani
+                restaurant: 68c7a951fead776eb280e8c0
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTE1NDQ4LCJleHAiOjE3NTc5MjYyNDh9.GhBBoeXPcnWyz5gW0_1vKNd3gefeZVvbbs0rItpNBLE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-food-menu:
+    get:
+      tags:
+        - Food Menu
+      summary: all-food-menu
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /food-menu-details/68c3c39d5cdde5fd45a87c87:
+    get:
+      tags:
+        - Food Menu
+      summary: food-menu-details
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /delete-food-menu/68c3c4fc5cdde5fd45a87c90:
+    delete:
+      tags:
+        - Food Menu
+      summary: delete-food-menu
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjYwMDQ4LCJleHAiOjE3NTc2NzA4NDh9.6r3VkkEMI-7zUR7fdCt2OFSt_Bi8CKSCmteeRbksxi8
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /update-food-menu/68c3c4fc5cdde5fd45a87c90:
+    patch:
+      tags:
+        - Food Menu
+      summary: update-food-menu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Chicken Main Course
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjYwMDQ4LCJleHAiOjE3NTc2NzA4NDh9.6r3VkkEMI-7zUR7fdCt2OFSt_Bi8CKSCmteeRbksxi8
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /restaurant-food-item/68c2d209bb5dcc00c93e7927:
+    get:
+      tags:
+        - Food Item
+      summary: restaurant-food-item
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-food-item:
+    post:
+      tags:
+        - Food Item
+      summary: create-food-item
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Mutton Biryani Special (2pcs)
+                description:
+                  type: string
+                  example: >-
+                    Enjoy our soft mutton biryani specialty, delivering layered
+                    rice, subtle spices, and hearty goodness in every delicious
+                    serving.
+                restaurant:
+                  type: string
+                  example: 68c7a951fead776eb280e8c0
+                subCategory:
+                  type: string
+                  example: 68c256bd19895d64ea0cf23e
+                price:
+                  type: integer
+                  example: '750'
+                menu:
+                  type: string
+                  example: 68c7a9befead776eb280e8c3
+                image:
+                  type: string
+                  format: binary
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTExODE5LCJleHAiOjE3NTc5MjI2MTl9.Fj8lR2DPg1qRNyntNE67lWTBKCHEDonRBIMmu01Z4aA
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /food-item-details/68c6349fd2312180031c2123:
+    get:
+      tags:
+        - Food Item
+      summary: food-item-details
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /update-food-item/68c63ceea368459a2375fd58:
+    patch:
+      tags:
+        - Food Item
+      summary: update-food-item
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Test Data 123345345
+                description:
+                  type: string
+                  example: >-
+                    Marinated chicken with sauteed garlic tossed in butter and
+                    sweet ketchup
+                restaurant:
+                  type: string
+                  example: 68c2d209bb5dcc00c93e7927
+                subCategory:
+                  type: string
+                  example: 68c256de19895d64ea0cf241
+                price:
+                  type: integer
+                  example: '350'
+                menu:
+                  type: string
+                  example: 68c44fb69e3b35a99c29a782
+                image:
+                  type: string
+                  format: binary
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3ODE3Nzc5LCJleHAiOjE3NTc4Mjg1Nzl9.ACHLHw7bMDZmZtbALkD9FXIcvNnviURHQTHgF6mQabA
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /delete-food-item/68c6418403d4244ef8f4ada2:
+    delete:
+      tags:
+        - Food Item
+      summary: delete-food-item
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3ODE3Nzc5LCJleHAiOjE3NTc4Mjg1Nzl9.ACHLHw7bMDZmZtbALkD9FXIcvNnviURHQTHgF6mQabA
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-food-item:
+    get:
+      tags:
+        - Food Item
+      summary: all-food-item
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-category:
+    post:
+      tags:
+        - Category
+      summary: create-category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Main Course
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-category:
+    get:
+      tags:
+        - Category
+      summary: all-category
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /category-details/68c1670d1e07948832b01771:
+    get:
+      tags:
+        - Category
+      summary: category-details
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /category-update/68c1670d1e07948832b01771:
+    patch:
+      tags:
+        - Category
+      summary: category-update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Hot Breakfast
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /category-delete/68c1670d1e07948832b01771:
+    delete:
+      tags:
+        - Category
+      summary: category-delete
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-sub-category:
+    post:
+      tags:
+        - Sub Category
+      summary: create-sub-category
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: sdfg
+                image:
+                  type: string
+                  format: binary
+                category:
+                  type: string
+                  example: 68c17e40ab2e8417e8f0e4d9
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-sub-category:
+    get:
+      tags:
+        - Sub Category
+      summary: all-sub-category
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sub-category-details/68c2573417904b6e042a6ad8:
+    get:
+      tags:
+        - Sub Category
+      summary: sub-category-details
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /update-sub-category/68c2573417904b6e042a6ad8:
+    patch:
+      tags:
+        - Sub Category
+      summary: update-sub-category
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Dhokla
+                category:
+                  type: string
+                  example: 68c1675b68f13ab404ff248a
+                image:
+                  type: string
+                  format: binary
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /delete-sub-category/68c2599a32bef5673e702bf9:
+    delete:
+      tags:
+        - Sub Category
+      summary: delete-sub-category
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-order:
+    post:
+      tags:
+        - Order
+      summary: create-order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                customerId: 68bea9b51a3871015b45f6cb
+                items:
+                  - foodItem: 68c68bef9b7ba7e004d760e4
+                    quantity: 2
+                  - foodItem: 68c68adc9b7ba7e004d76075
+                    quantity: 1
+                buildingNo: Haldia Petrochemical Building
+                street: Sector v, Wipro More
+                city: Kolkata
+                pinCode: '700156'
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-order:
+    get:
+      tags:
+        - Order
+      summary: all-order
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyODUyNCwiZXhwIjoxNzU3OTM5MzI0fQ.Cl6FIOueuSU9sRblmu5qad-mvUn3qCShGt0f_seOjVE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /order-by-customer/68bea9b51a3871015b45f6cb:
+    get:
+      tags:
+        - Order
+      summary: order-by-customer
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyODUyNCwiZXhwIjoxNzU3OTM5MzI0fQ.Cl6FIOueuSU9sRblmu5qad-mvUn3qCShGt0f_seOjVE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /order-by-restaurant/68c2d209bb5dcc00c93e7927:
+    get:
+      tags:
+        - Order
+      summary: order-by-restaurant
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyODUyNCwiZXhwIjoxNzU3OTM5MzI0fQ.Cl6FIOueuSU9sRblmu5qad-mvUn3qCShGt0f_seOjVE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /order-update/68c7d73da5b9e1e410a30e07:
+    patch:
+      tags:
+        - Order
+      summary: order-update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                status: preparing
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTI5NzI2LCJleHAiOjE3NTc5NDA1MjZ9.2aDskQ-6MWp2ljJkxiof8-ccF__iD-83qqTm8qhu-vU
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /order-delete/68c7e19923ecf26b782d010e:
+    delete:
+      tags:
+        - Order
+      summary: order-delete
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc5Mjk5NTksImV4cCI6MTc1Nzk0MDc1OX0.VOLP3jzNsibIOUzo3vGUYmBreXTtfG1zp4TvOqy1gtU
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /order-details/68c7d73da5b9e1e410a30e07:
+    get:
+      tags:
+        - Order
+      summary: order-details
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1Nzk0ODEyNCwiZXhwIjoxNzU4MjA3MzI0fQ.yTG_b02FKSaZ-U6leKqBMoA7pBUVUsg9ydEWrVV1GZk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-delivery-zone:
+    post:
+      tags:
+        - Delivery Zone
+      summary: create-delivery-zone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                zoneName: Dum Dum
+                district: North 24 Parganas
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1OTg2MzQsImV4cCI6MTc1NzYwOTQzNH0.XvAQc4avl4WPUcTJDu5zlfQRGVJSBFIPBir49PaBHZw
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-delivery-zone:
+    get:
+      tags:
+        - Delivery Zone
+      summary: all-delivery-zone
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /delivery-zone-details/68c11b92a3275b7ddd0a2689:
+    get:
+      tags:
+        - Delivery Zone
+      summary: delivery-zone-details
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /delete-delivery-zone/68c11b92a3275b7ddd0a2689:
+    delete:
+      tags:
+        - Delivery Zone
+      summary: delete-delivery-zone
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/get-restaurant-request:
+    get:
+      tags:
+        - Admin
+      summary: admin/get-restaurant-request
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc2MDAzNjMsImV4cCI6MTc1NzYxMTE2M30.8mdtMpaKn6VA-5Bq3Yy7Sz6jvj_pstY4ltV0Iequ4kQ
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/respond-restaurant-request/68c2da329dc267c4bb6ca1c3:
+    patch:
+      tags:
+        - Admin
+      summary: respond-restaurant-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                response: true
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: number
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc2MDAzNjMsImV4cCI6MTc1NzYxMTE2M30.8mdtMpaKn6VA-5Bq3Yy7Sz6jvj_pstY4ltV0Iequ4kQ
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /delete-restaurant/68c2cfbabb5dcc00c93e7918:
+    delete:
+      tags:
+        - Admin
+      summary: delete-restaurant
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1OTc2ODUsImV4cCI6MTc1NzYwODQ4NX0.axkQuWo7XZnJju5QWhc41UoktgNYGLMsC3RnK7EUGvw
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-restaurant:
+    post:
+      tags:
+        - Restaurant Panel
+      summary: create-restaurant
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Arsalaan
+                ownerId:
+                  type: string
+                  example: 68c2d5ebc825ae760d06309c
+                buildingNo:
+                  type: string
+                  example: 123,
+                street:
+                  type: string
+                  example: Jessore Rd, Shyam Nagar, Satgachi, South Dumdum,
+                city:
+                  type: string
+                  example: Kolkata
+                pinCode:
+                  type: integer
+                  example: '700055'
+                phone:
+                  type: integer
+                  example: '7439513775'
+                cuisine:
+                  type: string
+                  example: Mughlai
+                image:
+                  type: string
+                  format: binary
+                deliveryZone:
+                  type: string
+                  example: 68c2d8f4c825ae760d0630ba
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTE1NDQ4LCJleHAiOjE3NTc5MjYyNDh9.GhBBoeXPcnWyz5gW0_1vKNd3gefeZVvbbs0rItpNBLE
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /search:
+    post:
+      tags:
+        - Search/Sort
+      summary: http://localhost:5000/search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                searchTerm: chilli chicken
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sort-by-price:
+    post:
+      tags:
+        - Search/Sort
+      summary: http://localhost:5000/sort-by-price
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                min: 0
+                max: 400
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
