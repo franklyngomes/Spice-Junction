@@ -19,7 +19,7 @@ const allowedOrigins = [
 ];
 app.set("trust proxy", 1);
 app.use(cors({
-  origin : function (origin, callback){
+  origin : (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
     if(!origin) return callback(null, true);
     if(allowedOrigins.includes(origin)){
       callback(null, true)
