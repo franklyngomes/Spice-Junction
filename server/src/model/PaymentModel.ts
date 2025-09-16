@@ -4,15 +4,10 @@ import Joi from "joi";
 import { customAlphabet } from "nanoid";
 const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6)
 
-const MethodOptions = {
-  "COD": "COD",
-  "card": "card",
-  "upi": "upi"
-}
 const PaymentSchemaJoi = Joi.object({
-  amount: Joi.number().required().message("Amount is required!"),
-  method: Joi.string().valid(...Object.values(MethodOptions)),
-  date: Joi.date().required().message("Transaction date is required!")
+  amount: Joi.number().required().messages({"any.required":"Amount is required!"}),
+  method: Joi.string(),
+  date: Joi.date()
 });
 const PaymentSchema = new Schema(
   {
@@ -31,22 +26,21 @@ const PaymentSchema = new Schema(
     },
     method: {
       type: String,
-      enum: ["COD", "card", "upi"],
     },
     transactionId: {
       type: String,
-      default:() => nanoid(),
       unique: true
     },
     date: {
       type: Date,
+      default: Date.now()
     }
   },
   { timestamps: true }
 );
 PaymentSchema.pre("validate", async function (next){
   if(!this.transactionId){
-    this.transactionId = `TXN${nanoid()}`;
+    this.transactionId = `TXN-${nanoid()}`;
   }
 })
 const PaymentModel = mongoose.model("payments", PaymentSchema);

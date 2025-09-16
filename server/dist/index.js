@@ -1,4 +1,4 @@
-import express from "express";
+import express, {} from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
@@ -8,6 +8,7 @@ import path from "path";
 import * as swaggerui from "swagger-ui-express";
 import fs from "fs";
 import YAML from "yaml";
+import Razorpay from "razorpay";
 const app = express();
 Database();
 app.use(express.urlencoded());
@@ -29,7 +30,7 @@ app.use(cors({
             callback(new Error("Not allowed by CORS"));
         }
     },
-    credentials: true
+    credentials: true,
 }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,25 +43,28 @@ app.use(ApiRouter);
 import AdminSignupRouter from "./routes/AdminRoutes.js";
 app.use("/admin", AdminSignupRouter);
 import RestaurantSignupRouter from "./routes/RestaurantRoutes.js";
+import { HttpCode } from "./helper/HttpCode.js";
 app.use("/restaurant", RestaurantSignupRouter);
-const swaggerFile = fs.readFileSync(path.join(__dirname, './../swagger.yaml'), 'utf-8');
+//Swagger Configuration Start
+const swaggerFile = fs.readFileSync(path.join(__dirname, "./../swagger.yaml"), "utf-8");
 const swaggerDocument = YAML.parse(swaggerFile);
 const options = {
     definition: {
-        openapi: '3.0.0',
+        openapi: "3.0.0",
         info: {
-            title: 'Spice Junction Api Doc',
-            version: '1.0.0',
+            title: "Spice Junction Api Doc",
+            version: "1.0.0",
         },
         servers: [
             {
-                url: "https://spice-junction-server.onrender.com"
+                url: "https://spice-junction-server.onrender.com",
             },
-        ]
+        ],
     },
-    apis: ['./src/routes/*.ts'], // files containing annotations as above
+    apis: ["./src/routes/*.ts"], // files containing annotations as above
 };
 app.use("/api-doc", swaggerui.serve, swaggerui.setup(swaggerDocument));
+//Swagger Configuration End
 const port = 5000;
 app.listen(port, async () => {
     console.log(`Server is running on http://localhost:5000`);

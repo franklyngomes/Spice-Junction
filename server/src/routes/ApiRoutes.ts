@@ -13,6 +13,7 @@ import CheckPermission from "../middleware/CheckPermission.js";
 import FoodItemImageUpload from "../helper/FoodItemImageUpload.js";
 import AggregationController from "../controller/AggregationController.js";
 import OrderController from "../controller/OrderController.js";
+import PaymentController from "../controller/PaymentController.js";
 
 //Delivery Zone
 ApiRouter.post("/create-delivery-zone",AuthCheck, DeliveryZoneController.createDeliveryZone)
@@ -68,5 +69,10 @@ ApiRouter.get("/order-by-customer/:id",AuthCheck,CheckPermission(["view_order"])
 ApiRouter.get("/order-by-restaurant/:id",AuthCheck,CheckPermission(["view_order"]), OrderController.getOrderByRestaurant)
 ApiRouter.patch("/order-update/:id",AuthCheck,CheckPermission(["update_order"]), OrderController.updateOrder)
 ApiRouter.delete("/order-delete/:id",AuthCheck,CheckPermission(["delete_order"]), OrderController.deleteOrder)
+
+//Payment Routes
+ApiRouter.post("/create-payment", PaymentController.createPaymentOrder)
+ApiRouter.post("/verify-payment", PaymentController.verifyPayment)
+ApiRouter.post("/create-payment-record", PaymentController.createPaymentRecord)
 
 export default ApiRouter

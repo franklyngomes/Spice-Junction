@@ -5,34 +5,34 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    status: "pending" | "success" | "failed";
+    date: NativeDate;
     order: mongoose.Types.ObjectId;
-    transactionId: string;
-    date?: NativeDate | null;
+    status: "success" | "pending" | "failed";
     amount?: number | null;
-    method?: "COD" | "card" | "upi" | null;
+    method?: string | null;
+    transactionId?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    status: "pending" | "success" | "failed";
+    date: NativeDate;
     order: mongoose.Types.ObjectId;
-    transactionId: string;
-    date?: NativeDate | null;
+    status: "success" | "pending" | "failed";
     amount?: number | null;
-    method?: "COD" | "card" | "upi" | null;
+    method?: string | null;
+    transactionId?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    status: "pending" | "success" | "failed";
+    date: NativeDate;
     order: mongoose.Types.ObjectId;
-    transactionId: string;
-    date?: NativeDate | null;
+    status: "success" | "pending" | "failed";
     amount?: number | null;
-    method?: "COD" | "card" | "upi" | null;
+    method?: string | null;
+    transactionId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -43,34 +43,34 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    status: "pending" | "success" | "failed";
+    date: NativeDate;
     order: mongoose.Types.ObjectId;
-    transactionId: string;
-    date?: NativeDate | null;
+    status: "success" | "pending" | "failed";
     amount?: number | null;
-    method?: "COD" | "card" | "upi" | null;
+    method?: string | null;
+    transactionId?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    status: "pending" | "success" | "failed";
+    date: NativeDate;
     order: mongoose.Types.ObjectId;
-    transactionId: string;
-    date?: NativeDate | null;
+    status: "success" | "pending" | "failed";
     amount?: number | null;
-    method?: "COD" | "card" | "upi" | null;
+    method?: string | null;
+    transactionId?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    status: "pending" | "success" | "failed";
+    date: NativeDate;
     order: mongoose.Types.ObjectId;
-    transactionId: string;
-    date?: NativeDate | null;
+    status: "success" | "pending" | "failed";
     amount?: number | null;
-    method?: "COD" | "card" | "upi" | null;
+    method?: string | null;
+    transactionId?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

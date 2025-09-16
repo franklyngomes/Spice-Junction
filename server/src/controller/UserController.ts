@@ -78,7 +78,7 @@ class UserController {
         to: email,
         subject: "Verify Your Email - Spice Junction",
         html: `
-      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -190,7 +190,7 @@ class UserController {
         to: email,
         subject: "Verify Your Email - Spice Junction",
         html: `
-      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -303,7 +303,7 @@ class UserController {
         to: email,
         subject: "Verify Your Email - Spice Junction",
         html: `
-      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -601,7 +601,7 @@ class UserController {
         from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
         to: email,
         subject: "Rest password OTP",
-        html: `<body style="margin: 0; padding: 0; background-image:url('url/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+        html: `<body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -746,6 +746,67 @@ class UserController {
         message: "User details fetched successfully",
         data: user,
       });
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message || error,
+      });
+    }
+  }
+  async setUserAddress(req: Request, res: Response) {
+    try {
+      const id = req.params.id;
+      const user = await UserModel.findById(id);
+      if (!user) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "User not found!",
+        });
+      }
+      const {buildingNo, street, city, pinCode} = req.body
+      const updateAddress = await UserModel.updateOne({_id: id},{
+        $push: {
+          address: {
+            buildingNo: buildingNo,
+            street: street,
+            city: city,
+            pinCode: pinCode
+          }
+        }
+      })
+      if(!updateAddress){
+         return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "Failed to update address!",
+        });
+      }
+      return res.status(HttpCode.success).json({
+        status: true,
+        message: "Address updated successfully!"
+      })
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message || error,
+      });
+    }
+  }
+  async deleteUserAddress(req: Request, res: Response) {
+    try {
+      const id = req.params.id;
+      const updateAddress = await UserModel.updateOne({"address._id": id},{
+        $pull: {address: {_id:id}}
+      })
+      if(!updateAddress){
+         return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "Failed to delete address!",
+        });
+      }
+      return res.status(HttpCode.success).json({
+        status: true,
+        message: "Address deleted successfully!"
+      })
     } catch (error) {
       return res.status(HttpCode.serverError).json({
         status: false,

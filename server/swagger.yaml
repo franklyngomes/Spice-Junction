@@ -72,7 +72,7 @@ paths:
     post:
       tags:
         - Authentication
-      summary: restaurant-signin
+      summary: signin
       requestBody:
         content:
           application/json:
@@ -1076,7 +1076,7 @@ paths:
     post:
       tags:
         - Search/Sort
-      summary: http://localhost:5000/search
+      summary: global search
       requestBody:
         content:
           application/json:
@@ -1095,7 +1095,7 @@ paths:
     post:
       tags:
         - Search/Sort
-      summary: http://localhost:5000/sort-by-price
+      summary: sort by price
       requestBody:
         content:
           application/json:
