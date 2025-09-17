@@ -14,6 +14,7 @@ Database();
 app.use(express.urlencoded());
 app.use(express.json());
 const allowedOrigins = [
+    "https://spice-junction-server.onrender.com",
     "http://localhost:5173",
     "http://localhost:3000",
     "http://localhost:5000",
@@ -65,8 +66,9 @@ const options = {
 };
 app.use("/api-doc", swaggerui.serve, swaggerui.setup(swaggerDocument));
 //Swagger Configuration End
-const port = 5000;
+const port = process.env.SERVER_PORT;
+console.log(port);
 app.listen(port, async () => {
-    console.log(`Server is running on http://localhost:5000`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
 //# sourceMappingURL=index.js.map
