@@ -3,7 +3,6 @@ info:
   title: Spice Junction
   version: 1.0.0
 servers:
-  - url: http://localhost:5000
   - url: https://spice-junction-server.onrender.com
 components:
   securitySchemes:
@@ -81,7 +80,9 @@ paths:
           application/json:
             schema:
               type: object
-              example: "{\r\n    // \"email\": \"franklyngomes15@gmail.com\",\r\n    // \"password\": \"Admin_12345\"\r\n    \"email\": \"quadeyaunifre-8075@yopmail.com\",\r\n    \"password\": \"Customer_1234\"\r\n}"
+              example:
+                email: franklyngomes15@gmail.com
+                password: Admin_12345
       security:
         - noauthAuth: []
       responses:
