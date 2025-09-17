@@ -3,7 +3,6 @@ info:
   title: Spice Junction
   version: 1.1.1
 servers:
-  - url: http://localhost:5000
   - url: https://spice-junction-server.onrender.com
 components:
   securitySchemes:
