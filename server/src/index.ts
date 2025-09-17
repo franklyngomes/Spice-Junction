@@ -15,6 +15,7 @@ Database();
 app.use(express.urlencoded());
 app.use(express.json());
 const allowedOrigins = [
+  "https://spice-junction-server.onrender.com",
   "http://localhost:5173",
   "http://localhost:3000",
   "http://localhost:5000",
