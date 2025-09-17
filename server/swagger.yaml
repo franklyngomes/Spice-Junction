@@ -1,8 +1,9 @@
 openapi: 3.0.0
 info:
   title: Spice Junction
-  version: 1.1.1
+  version: 1.0.0
 servers:
+  - url: http://localhost:5000
   - url: https://spice-junction-server.onrender.com
 components:
   securitySchemes:
@@ -34,7 +35,12 @@ paths:
           application/json:
             schema:
               type: object
-              example: "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    // \"email\": \"quadeyaunifre-8075@yopmail.com\",\r\n    \"email\": \"roroh70043@ishense.com\",\r\n    \"password\": \"Spicejtn@12\",\r\n    \"phone\": \"9845768333\"\r\n}"
+              example:
+                firstName: John
+                lastName: Doe
+                email: roroh70043@ishense.com
+                password: Spicejtn@12
+                phone: '9845768333'
       security:
         - noauthAuth: []
       responses:
