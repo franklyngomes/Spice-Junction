@@ -6,8 +6,8 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
-    status: "success" | "pending" | "failed";
     amount?: number | null;
     method?: string | null;
     transactionId?: string | null;
@@ -16,8 +16,8 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
-    status: "success" | "pending" | "failed";
     amount?: number | null;
     method?: string | null;
     transactionId?: string | null;
@@ -28,8 +28,8 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
-    status: "success" | "pending" | "failed";
     amount?: number | null;
     method?: string | null;
     transactionId?: string | null;
@@ -44,8 +44,8 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
-    status: "success" | "pending" | "failed";
     amount?: number | null;
     method?: string | null;
     transactionId?: string | null;
@@ -54,8 +54,8 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
-    status: "success" | "pending" | "failed";
     amount?: number | null;
     method?: string | null;
     transactionId?: string | null;
@@ -66,8 +66,8 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
-    status: "success" | "pending" | "failed";
     amount?: number | null;
     method?: string | null;
     transactionId?: string | null;

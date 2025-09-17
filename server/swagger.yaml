@@ -1,8 +1,9 @@
 openapi: 3.0.0
 info:
   title: Spice Junction
-  version: 1.0.0
+  version: 1.1.1
 servers:
+  - url: http://localhost:5000
   - url: https://spice-junction-server.onrender.com
 components:
   securitySchemes:
@@ -10,7 +11,7 @@ components:
       type: http
       scheme: noauth
 tags:
-  - name: Authentication
+  - name: Authentication/User
   - name: Restaurant
   - name: Food Menu
   - name: Food Item
@@ -21,23 +22,20 @@ tags:
   - name: Admin
   - name: Restaurant Panel
   - name: Search/Sort
+  - name: Payment
+  - name: Blogs
 paths:
   /signup:
     post:
       tags:
-        - Authentication
+        - Authentication/User
       summary: signup
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              example:
-                firstName: John
-                lastName: Doe
-                email: quadeyaunifre-8075@yopmail.com
-                password: Spicejtn@12
-                phone: '9845768333'
+              example: "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    // \"email\": \"quadeyaunifre-8075@yopmail.com\",\r\n    \"email\": \"roroh70043@ishense.com\",\r\n    \"password\": \"Spicejtn@12\",\r\n    \"phone\": \"9845768333\"\r\n}"
       security:
         - noauthAuth: []
       responses:
@@ -48,7 +46,7 @@ paths:
   /admin/signup:
     post:
       tags:
-        - Authentication
+        - Authentication/User
       summary: admin/signup
       requestBody:
         content:
@@ -71,26 +69,16 @@ paths:
   /signin:
     post:
       tags:
-        - Authentication
+        - Authentication/User
       summary: signin
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              example:
-                email: 3jtvu@powerscrews.com
-                password: Res_12345
+              example: "{\r\n    // \"email\": \"franklyngomes15@gmail.com\",\r\n    // \"password\": \"Admin_12345\"\r\n    \"email\": \"quadeyaunifre-8075@yopmail.com\",\r\n    \"password\": \"Customer_1234\"\r\n}"
       security:
         - noauthAuth: []
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: >-
-            Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
       responses:
         '200':
           description: Successful response
@@ -99,7 +87,7 @@ paths:
   /forgot-password:
     post:
       tags:
-        - Authentication
+        - Authentication/User
       summary: forgot-password
       requestBody:
         content:
@@ -118,7 +106,7 @@ paths:
   /reset-password:
     post:
       tags:
-        - Authentication
+        - Authentication/User
       summary: reset-password
       requestBody:
         content:
@@ -139,7 +127,7 @@ paths:
   /user-profile/68bea9b51a3871015b45f6cb:
     get:
       tags:
-        - Authentication
+        - Authentication/User
       summary: user-profile
       security:
         - noauthAuth: []
@@ -151,7 +139,7 @@ paths:
   /restaurant/signup:
     post:
       tags:
-        - Authentication
+        - Authentication/User
       summary: restaurant/signup
       requestBody:
         content:
@@ -171,6 +159,40 @@ paths:
           in: header
           schema:
             type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /set-user-address/68bea9b51a3871015b45f6cb:
+    post:
+      tags:
+        - Authentication/User
+      summary: set-user-address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                buildingNo: 35,
+                street: Ballygunge Circular Rd, Ballygunge
+                city: Kolkata
+                pinCode: '700019'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /delete-user-address/68c9010b23e3b1f2bda8c54c:
+    delete:
+      tags:
+        - Authentication/User
+      summary: delete-user-address
+      security:
+        - noauthAuth: []
       responses:
         '200':
           description: Successful response
@@ -1072,11 +1094,31 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /sort-by-price:
+    post:
+      tags:
+        - Search/Sort
+      summary: sort-by-price
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                min: 0
+                max: 400
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /search:
     post:
       tags:
         - Search/Sort
-      summary: global search
+      summary: search
       requestBody:
         content:
           application/json:
@@ -1091,19 +1133,119 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /sort-by-price:
+  /create-payment-record:
     post:
       tags:
-        - Search/Sort
-      summary: sort by price
+        - Payment
+      summary: payment-record
       requestBody:
         content:
           application/json:
             schema:
               type: object
               example:
-                min: 0
-                max: 400
+                order: 68bea9b51a3871015b45f6cb
+                amount: 1290
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /create-blog:
+    post:
+      tags:
+        - Blogs
+      summary: create-blog
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: My New Favorite Pizza Has a Cottage Cheese Crust
+                description:
+                  type: string
+                  example: >-
+                    This cottage cheese pizza crust is ridiculous. 4
+                    ingredients, 20 minutes, and actually chewy, crispy, and
+                    delicious.
+                author:
+                  type: string
+                  example: 68c1629f82510997c108858f
+                image:
+                  type: string
+                  format: binary
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /all-blogs:
+    get:
+      tags:
+        - Blogs
+      summary: all-blogs
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /blogs-details/68ca581dff354153d8dae4f6:
+    get:
+      tags:
+        - Blogs
+      summary: blogs-details
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /blog-update/68ca581dff354153d8dae4f6:
+    patch:
+      tags:
+        - Blogs
+      summary: blog-update
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: My New Favorite Pizza Has a Cottage Cheese Crust
+                description:
+                  type: string
+                  example: >-
+                    This cottage cheese pizza crust is ridiculous. 4
+                    ingredients, 20 minutes, and actually chewy, crispy, and
+                    delicious.
+                author:
+                  type: string
+                  example: 68c1629f82510997c108858f
+                image:
+                  type: string
+                  format: binary
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /blog-delete/68ca581dff354153d8dae4f6:
+    delete:
+      tags:
+        - Blogs
+      summary: blog-delete
       security:
         - noauthAuth: []
       responses:

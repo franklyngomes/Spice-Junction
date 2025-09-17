@@ -14,6 +14,8 @@ import FoodItemImageUpload from "../helper/FoodItemImageUpload.js";
 import AggregationController from "../controller/AggregationController.js";
 import OrderController from "../controller/OrderController.js";
 import PaymentController from "../controller/PaymentController.js";
+import BlogController from "../controller/BlogController.js";
+import BlogImageUpload from "../helper/BlogImageUpload.js";
 //Delivery Zone
 ApiRouter.post("/create-delivery-zone", AuthCheck, DeliveryZoneController.createDeliveryZone);
 ApiRouter.get("/all-delivery-zone", DeliveryZoneController.getAllDeliveryZones);
@@ -65,5 +67,11 @@ ApiRouter.delete("/order-delete/:id", AuthCheck, CheckPermission(["delete_order"
 ApiRouter.post("/create-payment", PaymentController.createPaymentOrder);
 ApiRouter.post("/verify-payment", PaymentController.verifyPayment);
 ApiRouter.post("/create-payment-record", PaymentController.createPaymentRecord);
+//Blog Routes
+ApiRouter.post("/create-blog", BlogImageUpload.single("image"), BlogController.createBlog);
+ApiRouter.get("/all-blogs", BlogController.getAllBlog);
+ApiRouter.get("/blogs-details/:id", BlogController.getBlogDetails);
+ApiRouter.patch("/blog-update/:id", BlogImageUpload.single("image"), BlogController.updateBlog);
+ApiRouter.delete("/blog-delete/:id", BlogController.deleteBlog);
 export default ApiRouter;
 //# sourceMappingURL=ApiRoutes.js.map

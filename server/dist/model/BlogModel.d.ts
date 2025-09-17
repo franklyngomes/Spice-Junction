@@ -1,32 +1,32 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 declare const BlogSchemaJoi: Joi.ObjectSchema<any>;
-declare const SubCategoryModel: mongoose.Model<{
+declare const BlogModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    description?: string | null;
-    image?: string | null;
+    image: string;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
+    description?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    description?: string | null;
-    image?: string | null;
+    image: string;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
+    description?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    description?: string | null;
-    image?: string | null;
+    image: string;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
+    description?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -37,32 +37,32 @@ declare const SubCategoryModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    description?: string | null;
-    image?: string | null;
+    image: string;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
+    description?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    description?: string | null;
-    image?: string | null;
+    image: string;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
+    description?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    description?: string | null;
-    image?: string | null;
+    image: string;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
+    description?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
 }>>;
-export { SubCategoryModel, BlogSchemaJoi };
+export { BlogModel, BlogSchemaJoi };
 //# sourceMappingURL=BlogModel.d.ts.map
