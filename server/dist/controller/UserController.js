@@ -33,7 +33,7 @@ class UserController {
             const verificationToken = jwt.sign({ email }, jwtSecretKey, {
                 expiresIn: "10m",
             });
-            const verificationLink = `http://localhost:5000/verify-email?token=${verificationToken}`;
+            const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
             const { value, error } = UserSchemaJoi.validate(req.body);
             if (error) {
                 return res.status(HttpCode.badRequest).json({
@@ -145,7 +145,7 @@ class UserController {
             const verificationToken = jwt.sign({ email }, jwtSecretKey, {
                 expiresIn: "10m",
             });
-            const verificationLink = `http://localhost:5000/verify-email?token=${verificationToken}`;
+            const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
             const { value, error } = UserSchemaJoi.validate(req.body);
             if (error) {
                 return res.status(HttpCode.badRequest).json({
@@ -259,7 +259,7 @@ class UserController {
             const verificationToken = jwt.sign({ email }, jwtSecretKey, {
                 expiresIn: "10m",
             });
-            const verificationLink = `http://localhost:5000/verify-email?token=${verificationToken}`;
+            const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
             const { value, error } = UserSchemaJoi.validate(req.body);
             if (error) {
                 return res.status(HttpCode.badRequest).json({
@@ -685,7 +685,7 @@ class UserController {
     async userProfile(req, res) {
         try {
             const id = req.params.id;
-            const user = await UserModel.find({ _id: { $eq: id } }, {
+            const user = await UserModel.findById(id, {
                 _id: 1,
                 firstName: 1,
                 lastName: 1,

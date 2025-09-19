@@ -723,8 +723,7 @@ class UserController {
   async userProfile(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const user = await UserModel.find(
-        { _id: { $eq: id } },
+      const user = await UserModel.findById(id,
         {
           _id: 1,
           firstName: 1,
