@@ -54,7 +54,7 @@ class UserController {
       const verificationToken = jwt.sign({ email }, jwtSecretKey, {
         expiresIn: "10m",
       });
-      const verificationLink = `http://localhost:5000/verify-email?token=${verificationToken}`;
+      const verificationLink = `https://spice-junction-server.onrender.com/verify-email?token=${verificationToken}`;
       const { value, error } = UserSchemaJoi.validate(req.body);
       if (error) {
         return res.status(HttpCode.badRequest).json({
@@ -165,7 +165,7 @@ class UserController {
       const verificationToken = jwt.sign({ email }, jwtSecretKey, {
         expiresIn: "10m",
       });
-      const verificationLink = `http://localhost:5000/verify-email?token=${verificationToken}`;
+      const verificationLink = `https://spice-junction-server.onrender.com/verify-email?token=${verificationToken}`;
       const { value, error } = UserSchemaJoi.validate(req.body);
       if (error) {
         return res.status(HttpCode.badRequest).json({
@@ -278,7 +278,7 @@ class UserController {
       const verificationToken = jwt.sign({ email }, jwtSecretKey, {
         expiresIn: "10m",
       });
-      const verificationLink = `http://localhost:5000/verify-email?token=${verificationToken}`;
+      const verificationLink = `https://spice-junction-server.onrender.com/verify-email?token=${verificationToken}`;
       const { value, error } = UserSchemaJoi.validate(req.body);
       if (error) {
         return res.status(HttpCode.badRequest).json({
