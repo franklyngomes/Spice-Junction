@@ -1,5 +1,5 @@
 import {useMutation, useQuery} from "@tanstack/react-query"
-import { queryClient } from "../../../app/(admin)/provider"
+import { queryClient } from "../../../app/provider"
 import {AppointmentBillDelete, AppointmentBillDetails, AppointmentBillUpdate, ListAppointmentBill, CreateAppointmentBill} from "../../functions/billing/AppointmentBillFunc"
 
 type UpdateProps = {

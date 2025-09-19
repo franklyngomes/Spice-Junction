@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from "@tanstack/react-query"
 import {ListPathologyTest ,CreatePathologyTest, PathologyTestDetails, PathologyTestUpdate, PathologyTestDelete} from "../functions/PathologyTestFunc"
-import { queryClient } from "../../app/(admin)/provider"
+import { queryClient } from "../../app/provider"
 import { PathologyTestProps } from "../functions/PathologyTestFunc"
 
 

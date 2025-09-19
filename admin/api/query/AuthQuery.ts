@@ -1,45 +1,39 @@
 import { useMutation} from "@tanstack/react-query"
-import { Signup, Signin, VerifyEmail, RestPassword, ForgotPassword } from "../functions/AuthFunc"
-import { queryClient } from "../../app/(admin)/provider"
+import {VerifyEmail,ForgotPassword, SigninFunc, AdminSignupFunc, RestaurantSignupFunc, ResetPassword } from "../functions/AuthFunc"
+import { Cookies } from "react-cookie";
 
-type SignupPayload = {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  doctorId?: string,
-  phone: string,
-  designation: string,
-  role: string
-}
-type SigninPayload= {
-  email: string,
-  password: string,
-}
-type ForgotPasswordPayload = {
-  email: string,
-}
-type ResetPasswordPayload = {
-  email: string,
-  newPassword: string,
-  code: number
-}
-export const SignupQuery = () => {
+export const AdminSignupQuery = () => {
   return useMutation({
-    mutationFn: (payload : SignupPayload) => Signup(payload),
-    onSuccess: () => {
-
-    }
-  })
-}
+    mutationFn:AdminSignupFunc,
+    onSuccess: () => {},
+    onError: (err) => {
+      return err;
+    },
+  });
+};
+export const RestaurantSignupQuery = () => {
+  return useMutation({
+    mutationFn:RestaurantSignupFunc,
+    onSuccess: () => {},
+    onError: (err) => {
+      return err;
+    },
+  });
+};
 export const SigninQuery = () => {
+  const cookie = new Cookies();
   return useMutation({
-    mutationFn: (payload : SigninPayload) => Signin(payload),
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey:["UserProfile"]})
-    }
-  })
-}
+    mutationFn: SigninFunc,
+    onSuccess: (res) => {
+      if (res.status === true) {
+        cookie.set("token", res.token, { path: "/", secure: true });
+      }
+    },
+    onError: (err) => {
+      return err;
+    },
+  });
+};
 export const VerifyEmailQuery = () => {
    return useMutation({
     mutationFn: (token : string) => VerifyEmail(token),
@@ -49,17 +43,19 @@ export const VerifyEmailQuery = () => {
 }
 export const ForgotPasswordQuery = () => {
   return useMutation({
-    mutationFn: (payload:ForgotPasswordPayload) => ForgotPassword(payload),
-    onSuccess: () => {
-
-    }
-  })
+    mutationFn:ForgotPassword,
+    onSuccess: () => {},
+    onError: (err) => {
+      return err;
+    },
+  });
 }
 export const RestPasswordQuery = () => {
-  return useMutation({
-    mutationFn: (payload : ResetPasswordPayload) => RestPassword(payload),
-    onSuccess: () => {
-
-    }
-  })
+ return useMutation({
+    mutationFn:ResetPassword,
+    onSuccess: () => {},
+    onError: (err) => {
+      return err;
+    },
+  });
 }

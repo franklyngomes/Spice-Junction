@@ -10,8 +10,9 @@ import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { SigninQuery } from "../../../../api/query/AuthQuery";
 import toast from "react-hot-toast";
-import {Cookies} from "react-cookie"
+import { Cookies } from "react-cookie"
 import { useRouter } from "next/navigation";
+// import { SigninProps } from "../../../../types/types";
 
 interface SigninFormProps {
   email: string;
@@ -24,29 +25,30 @@ const schema = yup.object({
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const { handleSubmit, reset, control, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-  const {mutateAsync} = SigninQuery()
+  const { mutateAsync } = SigninQuery()
   const cookies = new Cookies()
   const router = useRouter()
 
   const onSubmit = async (data: SigninFormProps) => {
-    const { email, password} = data
-    const formData = new FormData()
-    formData.append('email', email)
-    formData.append('password', password)
-    await mutateAsync(formData, {
+    const { email, password } = data
+    const payload = {
+      email,
+      password
+    }
+    mutateAsync(payload, {
       onSuccess: (res) => {
-        if (res?.data?.status === true) {
-          toast.success(res?.data?.message)
-          const token = res?.data?.token
-          cookies.set("token", token)
-          reset()
-          router.push("/")
-        } else {
-          toast.error(res?.response?.data?.message)
+        if (res.error) {
+          toast.error(res.message);
+          return;
         }
-      }
+        const token = res?.accessToken
+        cookies.set("token", token)
+        cookies.set("userId", res?.user._id)
+        reset()
+        toast.success(res?.message);
+        router.push("/")
+      },
     })
-
   }
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
@@ -56,9 +58,6 @@ export default function SignIn() {
             <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
               Sign In
             </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your email and password to sign in!
-            </p>
           </div>
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -138,9 +137,9 @@ export default function SignIn() {
 
             <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
-                Don&apos;t have an account? {""}
+                want to have a restaurant account? {""}
                 <Link
-                  href="/signup"
+                  href="/restaurant-signup"
                   className="text-brand-500 hover:text-brand-600 dark:text-brand-400 ml-2"
                 >
                   Sign Up

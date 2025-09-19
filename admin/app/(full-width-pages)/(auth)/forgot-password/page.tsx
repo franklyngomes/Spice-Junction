@@ -10,9 +10,10 @@ import toast from "react-hot-toast";
 import { ForgotPasswordQuery } from "../../../../api/query/AuthQuery";
 import { useRouter } from "next/navigation";
 
-interface ForgotPasswordFormProps {
-  email: string;
+type ForgotPasswordFormProps = {
+  email: string
 }
+
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
 })
@@ -20,22 +21,23 @@ export default function ForgotPassword() {
   const { handleSubmit, reset, control, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const { mutateAsync } = ForgotPasswordQuery()
   const router = useRouter()
-  const onSubmit = async (data : ForgotPasswordFormProps) => {
-    const { email } = data
-    const formData = new FormData()
-    formData.append('email', email)
-    await mutateAsync(formData, {
-      onSuccess: (res) => {
-        if (res?.data?.status === true) {
-          toast.success(res?.data?.message)
-          reset()
-          router.push('/reset-password')
-        } else {
-          toast.error(res?.response?.data?.message)
-        }
-      }
-    })
 
+  const onSubmit = async (data : ForgotPasswordFormProps) => {
+    const {email } = data
+    const payload = {
+      email
+    }
+    mutateAsync(payload, {
+      onSuccess: (res) => {
+        if (res.error) {
+          toast.error(res.message);
+          return;
+        }
+        toast.success(res?.message);
+        reset()
+        router.push('/reset-password')
+      },
+    })
   }
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
@@ -46,7 +48,7 @@ export default function ForgotPassword() {
               Forgot Password
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your email and we&apos;ll give you a reset instruction !
+              Enter your email and we&apos;ll give you an  OTP to reset password.
             </p>
           </div>
           <div>

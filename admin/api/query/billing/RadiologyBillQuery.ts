@@ -1,5 +1,5 @@
 import {useMutation, useQuery} from "@tanstack/react-query"
-import { queryClient } from "../../../app/(admin)/provider"
+import { queryClient } from "../../../app/provider"
 import {ListRadiologyBill, CreateRadiologyBill, RadiologyBillDetails, RadiologyBillUpdate, RadiologyBillDelete} from "../../functions/billing/RadiologyBillFunc"
 
 type UpdateProps = {

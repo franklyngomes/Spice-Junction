@@ -1,6 +1,6 @@
 "use client";
 import { ThemeToggleButton } from "../components/common/ThemeToggleButton";
-import NotificationDropdown from "../components/header/NotificationDropdown";
+// import NotificationDropdown from "../components/header/NotificationDropdown";
 import { useSidebar } from "../context/SidebarContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,13 +11,11 @@ import { Cookies } from "react-cookie";
 import { DropdownItem } from "../components/ui/dropdown/DropdownItem";
 import { Dropdown } from "../components/ui/dropdown/Dropdown";
 import { AccountIcon, InfoIcon, UsersIcon } from "../icons";
-import { useRouter } from "next/navigation";
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter()
   const cookies = new Cookies()
   const { user, setUser } = useStore()
   const token = cookies.get('token')
@@ -59,15 +57,11 @@ const AppHeader: React.FC = () => {
   function handleSignout() {
     if (cookies.get('token')) {
       cookies.remove('token')
+      cookies.remove('userId')
     }
   }
 useEffect(() => {
-  if (!token) return; // no token? don't redirect
-
-  if (isError) {
-    cookies.remove("token");
-    router.push("/signin");
-  }
+  if (!token) return;
 
   if (isSuccess) {
     setUser(data?.data?.data);
@@ -122,14 +116,14 @@ useEffect(() => {
               width={154}
               height={32}
               className="dark:hidden"
-              src="./images/logo/logo.svg"
+              src="./images/icons/darklogo.svg"
               alt="Logo"
             />
             <Image
               width={154}
               height={32}
               className="hidden dark:block"
-              src="./images/logo/logo.svg"
+              src="./images/icons/lightlogo.svg"
               alt="Logo"
             />
           </Link>
@@ -242,7 +236,7 @@ useEffect(() => {
             <Dropdown
               isOpen={isOpen}
               onClose={closeDropdown}
-              className="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark"
+              className="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-900"
             >
               <div>
                 <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">

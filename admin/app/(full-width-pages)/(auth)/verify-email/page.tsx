@@ -13,12 +13,12 @@ const VerifyEmail = () => {
     const token = urlParms.get("token") ?? ""
     mutateAsync(token, {
       onSuccess: (res) => {
-        if(res?.status === 200){
+        if(res?.data?.status === true){
           setVerificationStatus(res?.data?.message)
           setLogo("./images/logo/success.svg")
         }else{
-          setVerificationStatus(res?.response?.data?.message)
-          setLogo("./images/logo/warning.svg")
+          setVerificationStatus(res?.response?.data?.message ?? "")
+          setLogo("./images/logo/error.svg")
         }
       }
     })
@@ -28,7 +28,7 @@ const VerifyEmail = () => {
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
         <div>
           <div className="mb-5 sm:mb-8">
-            <Image src={logo ? logo : "./images/logo/error.svg"} width={60} height={60} alt='Success'/>
+            <Image src={logo ? logo : "./images/logo/warning.svg"} width={60} height={60} alt='Success'/>
             <h2 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
               {verificationStatus}
             </h2>

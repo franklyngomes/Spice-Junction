@@ -13,11 +13,11 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import OtpInput from 'react-otp-input';
 import { RestPasswordQuery } from "../../../../api/query/AuthQuery";
+import { useTheme } from "../../../../context/ThemeContext";
 
-interface ResetPaswordFormProps {
-  email: string;
-  newPassword: string;
-  code: number
+type ForgotPasswordFormProps = {
+  email: string,
+  newPassword: string
 }
 const schema = yup.object({
   email: yup.string().email().required("Email is required"),
@@ -29,25 +29,26 @@ export default function RestPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const { handleSubmit, reset, control, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const {mutateAsync} = RestPasswordQuery()
+  const {theme} = useTheme()
 
-  const onSubmit = async (data: ResetPaswordFormProps) => {
-    const { email, newPassword} = data
-    const formData = new FormData()
-    formData.append('email', email)
-    formData.append('newPassword', newPassword)
-    formData.append('code', code)
-    await mutateAsync(formData, {
+  const onSubmit = async (data : ForgotPasswordFormProps) => {
+    const {email, newPassword } = data
+    const payload = {
+      email,
+      newPassword,
+      code
+    }
+    mutateAsync(payload, {
       onSuccess: (res) => {
-        if (res?.data?.status === true) {
-          toast.success(res?.data?.message)
-          reset()
-          router.push("/signin")
-        } else {
-          toast.error(res?.response?.data?.message)
+        if (res.error) {
+          toast.error(res.message);
+          return;
         }
-      }
+        toast.success(res?.message);
+        reset()
+        router.push('/signin')
+      },
     })
-
   }
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
@@ -129,6 +130,15 @@ export default function RestPassword() {
                       numInputs={6}
                       renderSeparator={<span>-</span>}
                       renderInput={(props) => <input {...props} />}
+                      inputStyle={{
+                        width: "40px",
+                        height: "40px",
+                        border: `${theme === "light" ? "1px solid #111" : "1px solid #fff"}`,
+                        borderRadius: "8px",
+                        fontSize: "18px",
+                        textAlign: "center",
+                        color: `${theme === "light" ? "#111" : "#fff"}`
+                      }}
                     />
                   </div>
                 </div>

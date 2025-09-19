@@ -9,6 +9,37 @@ export interface Patient {
   createdAt: string;
   updatedAt: string;
 }
+export interface SigninData {
+  email: string,
+  password: string,
+}
+export interface SignupData {
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string,
+  phone: string,
+}
+export interface ForgotPasswordData{
+  email: string,
+}
+export interface ResetPasswordData{
+  email: string,
+  code: string,
+  newPassword: string
+}
+export interface VerifyEmailResponse {
+  data: {
+    status: boolean
+    message: string
+  }
+  response?: {
+    data: {
+      message: string,
+      status: string
+    }
+  }
+}
 export interface Doctor {
   _id: string;
   name: string;
@@ -33,17 +64,10 @@ export interface UserProfile {
   _id: string;
   firstName: string;
   lastName: string;
-  phone: string,
   email: string;
-  password: string;
+  phone: string,
   role: string;
-  designation: string;
-  doctorId?: string;
-  image?: string;
-  verified: boolean;
-  verificationToken: string;
-  verificationTokenExpires: Date;
-  deletedAt: null;
+  address?: string[]
 }
 
 export interface StoreState {

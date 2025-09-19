@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { AppointmentDelete, AppointmentDetails, AppointmentGroup, AppointmentUpdate, CreateAppointment, ListAppointment } from "../functions/AppointmentsFunc"
-import { queryClient } from "../../app/(admin)/provider"
+import { queryClient } from "../../app/provider"
 import { AxiosResponse } from "axios";
 
 interface AppointmentResponse {

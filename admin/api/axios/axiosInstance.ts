@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = "https://medisync-backend-ybge.onrender.com/api"
+const baseURL = "https://spice-junction-server.onrender.com"
 
 export const axiosInstance = axios.create({
   baseURL

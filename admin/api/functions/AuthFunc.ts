@@ -1,77 +1,72 @@
-import axios from "axios";
 import { axiosInstance } from "../axios/axiosInstance";
 import { endPoints } from "../endPoints/endPoints";
-import { Cookies } from "react-cookie";
+import { ForgotPasswordData, ResetPasswordData,SigninData, SignupData, VerifyEmailResponse } from "../../types/types";
+import axios from "axios";
 
-type SignupPayload = {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  doctorId?: string,
-  phone: string,
-  designation: string,
-  role: string
-}
-type SigninPayload = {
-  email: string,
-  password: string,
-}
-type ForgotPasswordPayload = {
-  email: string,
-}
-type ResetPasswordPayload = {
-  email: string,
-  newPassword: string,
-  code: number
-}
-export const Signup = async (payload: SignupPayload) => {
+export const AdminSignupFunc = async (Data: SignupData) => {
   try {
-    const cookies = new Cookies()
-    const token = cookies.get("token")
-    const response = await axiosInstance.post(endPoints.auth.signup, payload, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    return response
+    const response = await axiosInstance.post(endPoints.auth.adminsignup, Data);
+    return response?.data
   } catch (error) {
-    return error
+    if (axios.isAxiosError(error)) {
+      return { error: true, message: error.response?.data?.message || "Something went wrong" };
+    }
+    return { error: true, message: "Unexpected error" };
   }
 }
-export const Signin = async (payload: SigninPayload) => {
+export const RestaurantSignupFunc = async (Data: SignupData) => {
   try {
-    const response = await axiosInstance.post(endPoints.auth.signin, payload)
-    return response
+    const response = await axiosInstance.post(endPoints.auth.restaurantsignup, Data);
+    return response?.data
   } catch (error) {
-    return error
-
+    if (axios.isAxiosError(error)) {
+      return { error: true, message: error.response?.data?.message || "Something went wrong" };
+    }
+    return { error: true, message: "Unexpected error" };
   }
 }
-export const VerifyEmail = async (token: string) => {
+export const VerifyEmail = async (token: string): Promise<VerifyEmailResponse> => {
   try {
-    const response = await axios.get(`https://medisync-backend-ybge.onrender.com/api${endPoints.auth.verify_email}`,
+    const response = await axiosInstance.get(endPoints.auth.verifyEmail,
       {
         params: { token },
       })
     return response
   } catch (error) {
-    return error
+    throw error
   }
 }
-export const ForgotPassword = async (payload: ForgotPasswordPayload) => {
+export const SigninFunc = async (Data: SigninData) => {
   try {
-    const response = await axiosInstance.post(endPoints.auth.forgot_password, payload)
-    return response
+    const response = await axiosInstance.post(endPoints.auth.signin, Data);
+    return response?.data
   } catch (error) {
-    return error
+    if (axios.isAxiosError(error)) {
+      return { error: true, message: error.response?.data?.message || "Something went wrong" };
+    }
+    return { error: true, message: "Unexpected error" };
   }
 }
-export const RestPassword = async (payload: ResetPasswordPayload) => {
+
+export const ForgotPassword = async (payload: ForgotPasswordData) => {
   try {
-    const response = await axiosInstance.post(endPoints.auth.reset_password, payload)
-    return response
+    const response = await axiosInstance.post(endPoints.auth.forgot_password, payload);
+    return response?.data
   } catch (error) {
-    return error
+    if (axios.isAxiosError(error)) {
+      return { error: true, message: error.response?.data?.message || "Something went wrong" };
+    }
+    return { error: true, message: "Unexpected error" };
+  }
+}
+export const ResetPassword = async (payload: ResetPasswordData) => {
+  try {
+    const response = await axiosInstance.post(endPoints.auth.reset_password, payload);
+    return response?.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return { error: true, message: error.response?.data?.message || "Something went wrong" };
+    }
+    return { error: true, message: "Unexpected error" };
   }
 }

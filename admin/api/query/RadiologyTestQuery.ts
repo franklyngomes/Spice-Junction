@@ -1,5 +1,5 @@
 import {useMutation, useQuery} from "@tanstack/react-query"
-import { queryClient } from "../../app/(admin)/provider"
+import { queryClient } from "../../app/provider"
 import { RadiologyTestProps } from "../functions/RadiologyTestFunc"
 import {ListRadiologyTest, RadiologyTestDetails, CreateRadiologyTest, RadiologyTestUpdate, RadiologyTestDelete} from "../functions/RadiologyTestFunc"
 

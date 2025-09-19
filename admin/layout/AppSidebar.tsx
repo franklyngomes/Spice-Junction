@@ -39,12 +39,12 @@ const AdminNavItems: NavItem[] = [
   },
   {
     icon: <CategoryIcon />,
-    name: "Food Category",
+    name: "Category",
     path: "/category",
   },
   {
     icon: <SubCategoryIcon />,
-    name: "Food Sub Category",
+    name: "Sub Category",
     path: "/sub-category",
   },
   {
@@ -81,12 +81,12 @@ const RestaurantNavItems: NavItem[] = [
   },
   {
     icon: <CategoryIcon />,
-    name: "Food Category",
+    name: "Category",
     path: "/category",
   },
   {
     icon: <SubCategoryIcon />,
-    name: "Food Sub Category",
+    name: "Sub Category",
     path: "/sub-category",
   },
   {
@@ -267,14 +267,14 @@ const AppSidebar: React.FC = () => {
             <>
               <Image
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                src="/images/icons/darklogo.svg"
                 alt="Logo"
                 width={200}
                 height={80}
               />
               <Image
                 className="hidden dark:block"
-                src="/images/logo/logo.svg"
+                src="/images/icons/lightlogo.svg"
                 alt="Logo"
                 width={200}
                 height={80}
@@ -282,10 +282,10 @@ const AppSidebar: React.FC = () => {
             </>
           ) : (
             <Image
-              src="/images/logo/logo-icon.svg"
+              src="/images/icons/logo.png"
               alt="Logo"
-              width={32}
-              height={32}
+              width={50}
+              height={50}
             />
           )}
         </Link>
