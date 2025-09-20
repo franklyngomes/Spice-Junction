@@ -1,11 +1,12 @@
 "use client";
-
+import React from "react";
 import { useSidebar } from "../../context/SidebarContext";
 import AppHeader from "../../layout/AppHeader";
 import AppSidebar from "../../layout/AppSidebar";
 import Backdrop from "../../layout/Backdrop";
-import React from "react";
 import Provider from "../provider";
+import { RestaurantByOwnerQuery } from "../../api/query/RestaurantQuery";
+import { Cookies } from "react-cookie";
 
 export default function AdminLayout({
   children,
@@ -13,7 +14,9 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
-
+  const cookies = new Cookies()
+  const userId = cookies.get("userId")
+  const { data } = RestaurantByOwnerQuery(userId, !!userId)
   // Dynamic class for main content margin based on sidebar state
   const mainContentMargin = isMobileOpen
     ? "ml-0"
@@ -21,6 +24,9 @@ export default function AdminLayout({
       ? "lg:ml-[220px]"
       : "lg:ml-[90px]";
 
+  React.useEffect(() => {
+    cookies.set("restaurantId", data?.data[0]._id)
+  }, [data])
   return (
     <Provider>
 

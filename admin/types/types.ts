@@ -1,14 +1,3 @@
-export interface Patient {
-  _id: string;
-  name: string;
-  phone: string;
-  address: string;
-  bloodType: string;
-  gender: string;
-  deleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
 export interface SigninData {
   email: string,
   password: string,
@@ -20,10 +9,10 @@ export interface SignupData {
   password: string,
   phone: string,
 }
-export interface ForgotPasswordData{
+export interface ForgotPasswordData {
   email: string,
 }
-export interface ResetPasswordData{
+export interface ResetPasswordData {
   email: string,
   code: string,
   newPassword: string
@@ -39,26 +28,6 @@ export interface VerifyEmailResponse {
       status: string
     }
   }
-}
-export interface Doctor {
-  _id: string;
-  name: string;
-  phone: string;
-  email: string;
-  image: string;
-  specialization: string;
-  status: string;
-  deleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-export interface AppointmentListProps {
-  patientId: Patient;
-  note: string;
-  doctorId: Doctor;
-  appointmentDate: Date;
-  status?: string;
-  _id: string;
 }
 export interface UserProfile {
   _id: string;
@@ -77,4 +46,22 @@ export interface StoreState {
   setEditId: (id: string) => void;
   user: UserProfile | null
   setUser: (value: UserProfile) => void
+}
+export interface FoodMenuData {
+  name: string,
+  restaurant: string
+}
+export interface FoodMenuItem {
+  createdAt?: string
+  items?: []
+  name: string
+  restaurant: string
+  updatedAt?: string
+  __v?: number
+  _id: string
+}
+export interface FoodMenuResponse {
+  data?: FoodMenuItem[],
+  error?: boolean,
+  message?: string,
 }

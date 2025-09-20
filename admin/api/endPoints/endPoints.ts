@@ -1,4 +1,15 @@
 export const endPoints = {
+  foodmenu: {
+    create_food_menu: "/create-food-menu",
+    all_food_menu: "/all-food-menu",
+    food_menu_details:"/food-menu-details/",
+    restaurant_food_menu: "/restaurant-food-menu/",
+    delete_food_menu: "/delete-food-menu/",
+    update_food_menu: "/update-food-menu/"
+  },
+  restaurant: {
+    restaurant_by_owner: "/restaurant-by-owner/"
+  },
   appointments: {
     appointment_create: "/appointment-create",
     appointment_list: "/all-appointment",

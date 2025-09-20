@@ -6,7 +6,6 @@ export const queryClient = new QueryClient()
 const Provider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      
         {children}
     </QueryClientProvider>
   )
