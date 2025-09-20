@@ -94,6 +94,29 @@ class RestaurantController {
             });
         }
     }
+    async getRestaurantByOwner(req, res) {
+        try {
+            const id = req.params.id;
+            const restaurant = await RestaurantModel.find({ "ownerId": { $eq: id } });
+            if (!restaurant) {
+                return res.status(HttpCode.badRequest).json({
+                    status: false,
+                    message: "No restaurant found!",
+                });
+            }
+            return res.status(HttpCode.success).json({
+                status: false,
+                message: "Restaurant fetched successfully",
+                data: restaurant,
+            });
+        }
+        catch (error) {
+            return res.status(HttpCode.serverError).json({
+                status: false,
+                message: error?.message,
+            });
+        }
+    }
     async updateRestaurant(req, res) {
         try {
             const id = req.params.id;

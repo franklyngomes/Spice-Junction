@@ -62,7 +62,7 @@ class FoodMenuController {
         try {
             const id = req.params.id;
             const foodMenu = await FoodMenuModel.find({ "restaurant": { $eq: id } });
-            if (!foodMenu) {
+            if (!foodMenu || foodMenu.length === 0) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
                     message: "No food menu found!",

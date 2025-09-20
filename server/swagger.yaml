@@ -216,7 +216,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /restaurant-details/68c28d6ef26f0f1146aa2bd6:
+  /restaurant-details/68c2d209bb5dcc00c93e7927:
     get:
       tags:
         - Restaurant
@@ -279,6 +279,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjY3Mjc4LCJleHAiOjE3NTc2NzgwNzh9.u_252k2ITzeErAGIOE_WmshM0hCB0rX09U7P4SazSWQ
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /restaurant-by-owner/68c2d1a1bb5dcc00c93e7920:
+    get:
+      tags:
+        - Restaurant
+      summary: restaurant-by-owner
+      security:
+        - noauthAuth: []
       responses:
         '200':
           description: Successful response
