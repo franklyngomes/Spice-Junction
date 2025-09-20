@@ -1,9 +1,8 @@
 "use client"
 import React from 'react'
-import { FoodItemIcon, PencilIcon, TrashBinIcon } from '../../../icons'
+import { FoodMenuIcon, PencilIcon, TrashBinIcon } from '../../../icons'
 import Button from "../../../components/ui/button/Button";
 import PageBreadcrumb from '../../../components/common/PageBreadCrumb';
-import Link from 'next/link';
 import { CreateFoodMenuQuery, DeleteFoodMenuQuery, FoodMenuDetailsQuery, RestaurantFoodMenuQuery, UpdateFoodMenuQuery } from '../../../api/query/FoodMenuQuery';
 import { Modal } from '../../../components/ui/modal';
 import { useStore } from '../../../store/store';
@@ -105,16 +104,16 @@ const Menu = () => {
   }, [isEditing, food_details, reset]);
   return (
     <div>
-      <div className="flex flex-wrap justify-between items-center">
-        <PageBreadcrumb pageTitle="Food Menu" breadCrumbTitle="Food Menu" />
-        <Button size="sm" variant="primary" startIcon={<FoodItemIcon />} onClick={openModal}>
+      <div className="flex flex-wrap justify-between items-center mb-4">
+        <PageBreadcrumb pageTitle="Food Menu" breadCrumbTitle="Food Menu"/>
+        <Button size="sm" variant="primary" startIcon={<FoodMenuIcon />} onClick={openModal}>
           Add Food Menu
         </Button>
       </div>
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         {
           food_menu?.map((item, index) => (
-            <div className="col-span-6 space-y-6 md:col-span-4" key={index}>
+            <div className="col-span-12 sm:col-span-6 space-y-6 md:col-span-4" key={index}>
               <div className="rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.15]">
                 <div className="flex items-end justify-between">
                   <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
@@ -126,13 +125,11 @@ const Menu = () => {
                   <div className="flex items-center justify-center w-20 h-12 bg-gray-100 rounded-xl dark:bg-gray-300">
                     {item?.items?.length} Items
                   </div>
-                  <Link href="" className='hidden md:block'>
                     <Button size="sm" variant="primary" endIcon={<PencilIcon />} onClick={() => {
                       setIsEditing(true)
                       setEditId(item._id)
                     }}>
                     </Button>
-                  </Link>
                 </div>
               </div>
             </div>

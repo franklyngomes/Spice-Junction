@@ -65,3 +65,79 @@ export interface FoodMenuResponse {
   error?: boolean,
   message?: string,
 }
+export interface FoodItem {
+  createdAt?: string,
+  description: string,
+  image: string,
+  isAvailable: boolean
+  menu: {
+    name: string
+  },
+  name: string,
+  price: number
+  restaurant: string,
+  subCategory: string,
+  updatedAt?: string,
+  __v: number,
+  _id: string,
+}
+export interface FoodItemDetailsResponse{
+  data?:{
+    createdAt?: string,
+  description: string,
+  image: string,
+  isAvailable: boolean
+  menu?: {
+    name?: string,
+    _id?: string,
+  },
+  name: string,
+  price: number
+  restaurant: string,
+  subCategory?: {
+    _id?:string,
+    name?:string,
+  },
+  updatedAt?: string,
+  __v: number,
+  _id: string,
+  },
+  error?: boolean,
+  message?: string,
+}
+export interface FoodItemResponse {
+  data?: FoodItem[],
+  error?: boolean,
+  message?: string,
+}
+export interface FoodItemData {
+  name: string,
+  description: string,
+  restaurant: string,
+  subCategory: string,
+  price: number,
+  menu: string,
+  image: File | string | null
+}
+export interface SubCategory {
+  category: string[]
+  categoryNo: string,
+  createdAt?: string,
+  image: string,
+  items?: []
+  name: string,
+  updatedAt?: string,
+  __v?: number,
+  _id: string,
+}
+export interface SubCategoryResponse{
+  data?: SubCategory[],
+  error?: boolean,
+  message?: string,
+}
+export interface SubCategoryData{
+  name?: string,
+  image?: string,
+  category?: string,
+
+}

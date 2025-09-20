@@ -29,7 +29,6 @@ export default function AdminLayout({
   }, [data])
   return (
     <Provider>
-
       <div className="min-h-screen xl:flex">
         {/* Sidebar and Backdrop */}
         <AppSidebar />

@@ -18,7 +18,7 @@ const PageBreadcrumb: React.FC<BreadcrumbProps> = ({ pageTitle}) => {
   }
 
   return (
-    <div className="gap-3 mb-6">
+    <div className="gap-3">
       <h2
         className="text-xl font-semibold text-gray-800 dark:text-white/90"
         x-text="pageName"

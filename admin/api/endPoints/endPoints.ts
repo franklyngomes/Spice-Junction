@@ -7,6 +7,20 @@ export const endPoints = {
     delete_food_menu: "/delete-food-menu/",
     update_food_menu: "/update-food-menu/"
   },
+    fooditem: {
+    create_food_item: "/create-food-item",
+    food_item_details:"/food-item-details/",
+    restaurant_food_item: "/restaurant-food-item/",
+    delete_food_item: "/delete-food-item/",
+    update_food_item: "/update-food-item/"
+  },
+  subcategory: {
+    create_subcategory: "/create-sub-category",
+    subcategory_details:"/sub-category-details/",
+    all_subcategory: "/all-sub-category",
+    delete_subcategory: "/delete-sub-category/",
+    update_subcategory: "/update-sub-category"
+  },
   restaurant: {
     restaurant_by_owner: "/restaurant-by-owner/"
   },
