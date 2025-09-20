@@ -115,7 +115,7 @@ class FoodItemController {
   async getRestaurantFoodItem(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const foodItem = await FoodItemModel.find({ restaurant: id}) 
+      const foodItem = await FoodItemModel.find({ restaurant: id}).populate("menu","name") 
       if (!foodItem || foodItem.length === 0) {
         return res.status(HttpCode.badRequest).json({
           status: false,
