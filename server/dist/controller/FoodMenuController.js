@@ -58,6 +58,29 @@ class FoodMenuController {
             });
         }
     }
+    async getFoodMenuForRestaurant(req, res) {
+        try {
+            const id = req.params.id;
+            const foodMenu = await FoodMenuModel.find({ "restaurant": { $eq: id } });
+            if (!foodMenu) {
+                return res.status(HttpCode.badRequest).json({
+                    status: false,
+                    message: "No food menu found!",
+                });
+            }
+            return res.status(HttpCode.success).json({
+                status: false,
+                message: "Food menus fetched successfully",
+                data: foodMenu,
+            });
+        }
+        catch (error) {
+            return res.status(HttpCode.serverError).json({
+                status: false,
+                message: error?.message,
+            });
+        }
+    }
     async getFoodMenuDetails(req, res) {
         try {
             const id = req.params.id;

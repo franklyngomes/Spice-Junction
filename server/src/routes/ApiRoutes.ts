@@ -46,6 +46,7 @@ ApiRouter.delete("/delete-restaurant/:id",AuthCheck,CheckPermission(["delete_res
 
 //Food Menu Routes
 ApiRouter.get("/all-food-menu", FoodMenuController.getAllFoodMenu),
+ApiRouter.get("/restaurant-food-menu/:id", FoodMenuController.getFoodMenuForRestaurant),
 ApiRouter.post("/create-food-menu",AuthCheck, CheckPermission(["create_menu"]), FoodMenuController.createFoodMenu)
 ApiRouter.get("/food-menu-details/:id",FoodMenuController.getFoodMenuDetails);
 ApiRouter.patch("/update-food-menu/:id",AuthCheck,CheckPermission(["update_menu"]),FoodMenuController.updateFoodMenu);

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Spice Junction
-  version: 1.0.0
+  version: 1.1.0
 servers:
   - url: https://spice-junction-server.onrender.com
 components:
@@ -378,6 +378,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjYwMDQ4LCJleHAiOjE3NTc2NzA4NDh9.6r3VkkEMI-7zUR7fdCt2OFSt_Bi8CKSCmteeRbksxi8
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /restaurant-food-menu/68c2d209bb5dcc00c93e7927:
+    get:
+      tags:
+        - Food Menu
+      summary: restaurant-food-menu
+      security:
+        - noauthAuth: []
       responses:
         '200':
           description: Successful response
@@ -780,7 +792,7 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyOTg2MSwiZXhwIjoxNzU3OTQwNjYxfQ.AAGbgdo7uHq18Ne8Uxu84CXwzr5EZ_sYU24rYGm7R0E
       responses:
         '200':
           description: Successful response
