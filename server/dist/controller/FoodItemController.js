@@ -143,7 +143,7 @@ class FoodItemController {
     async getFoodItemDetails(req, res) {
         try {
             const id = req.params.id;
-            const foodItem = await FoodItemModel.findById(id).populate("restaurant").populate("subCategory");
+            const foodItem = await FoodItemModel.findById(id).populate("restaurant").populate("subCategory").populate("menu", "name _id");
             if (!foodItem) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
