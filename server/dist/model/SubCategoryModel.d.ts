@@ -25,7 +25,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId[];
+    category: mongoose.Types.ObjectId;
     name?: string | null;
     categoryNo?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
@@ -52,7 +52,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId[];
+    category: mongoose.Types.ObjectId;
     name?: string | null;
     categoryNo?: string | null;
 }, {}, {
@@ -81,7 +81,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId[];
+    category: mongoose.Types.ObjectId;
     name?: string | null;
     categoryNo?: string | null;
 } & {
@@ -114,7 +114,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId[];
+    category: mongoose.Types.ObjectId;
     name?: string | null;
     categoryNo?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
@@ -141,7 +141,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId[];
+    category: mongoose.Types.ObjectId;
     name?: string | null;
     categoryNo?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
@@ -170,7 +170,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId[];
+    category: mongoose.Types.ObjectId;
     name?: string | null;
     categoryNo?: string | null;
 }> & {

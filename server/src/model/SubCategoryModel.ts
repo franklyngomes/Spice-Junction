@@ -34,13 +34,12 @@ const SubCategorySchema = new Schema(
     name: {
       type: String,
     },
-    category: [
+    category:
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "category",
         required: true,
       },
-    ],
     image: {
       type: String,
       required: true,
