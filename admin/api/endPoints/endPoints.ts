@@ -19,7 +19,7 @@ export const endPoints = {
     subcategory_details:"/sub-category-details/",
     all_subcategory: "/all-sub-category",
     delete_subcategory: "/delete-sub-category/",
-    update_subcategory: "/update-sub-category"
+    update_subcategory: "/update-sub-category/"
   },
     category: {
     create_category: "/create-category",

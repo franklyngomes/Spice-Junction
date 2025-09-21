@@ -29,7 +29,7 @@ export const SubCategoryDetailsQuery = (id: string, enabled: boolean) => {
 }
 export const UpdateSubCategoryQuery = () => {
   return useMutation({
-    mutationFn:({editId, payload} : {editId:string, payload: SubCategoryData}) => UpdateSubCategory(editId, payload),
+    mutationFn:({editId, formdata} : {editId:string, formdata: FormData}) => UpdateSubCategory(editId, formdata),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:["SUBCATEGORY_LIST"]})
       queryClient.invalidateQueries({queryKey:["SUBCATEGORY_DETAILS"]})

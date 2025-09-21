@@ -2,9 +2,9 @@ import { Cookies } from "react-cookie";
 import { axiosInstance } from "../axios/axiosInstance";
 import { endPoints } from "../endPoints/endPoints";
 import axios from "axios";
-import { SubCategoryData, SubCategoryResponse } from "../../types/types";
+import { SubCategoryDetailsResponse, SubCategoryResponse } from "../../types/types";
 
-export const CreateSubCategory = async (payload: SubCategoryData) => {
+export const CreateSubCategory = async (payload: FormData) => {
   const cookies = new Cookies()
   const token = cookies.get("token")
   try {
@@ -21,7 +21,7 @@ export const CreateSubCategory = async (payload: SubCategoryData) => {
     return { error: true, message: "Unexpected error" };
   }
 }
-export const SubCategoryDetails = async (id: string) : Promise<SubCategoryResponse> => {
+export const SubCategoryDetails = async (id: string) : Promise<SubCategoryDetailsResponse> => {
   try {
     const response = await axiosInstance.get(endPoints.subcategory.subcategory_details+id);
     return response?.data
@@ -43,7 +43,7 @@ export const AllSubCategory = async () : Promise<SubCategoryResponse> => {
     return { error: true, message: "Unexpected error" };
   }
 }
-export const UpdateSubCategory = async (id : string, payload: SubCategoryData) => {
+export const UpdateSubCategory = async (id : string, payload: FormData) => {
   const cookies = new Cookies()
   const token = cookies.get("token")
   try {

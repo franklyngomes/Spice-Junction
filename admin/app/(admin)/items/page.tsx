@@ -211,7 +211,8 @@ const Items = () => {
                     <div className="flex items-center justify-center w-20 h-12 bg-gray-100 rounded-xl dark:bg-gray-300 text-sm">
                       ₹{item.price}
                     </div>
-                    <div className="flex items-center justify-center w-auto h-12 px-3 bg-gray-100 rounded-xl dark:bg-gray-300 text-sm">
+                    <div className="flex flex-col items-center justify-center w-auto h-12 px-3 bg-gray-100 rounded-xl dark:bg-gray-300 text-sm">
+                      <h6 className='text-[12px] text-brand-500'>Menu</h6>
                       {item?.menu?.name}
                     </div>
                     <div className="flex items-center justify-center w-20 h-12 bg-gray-100 rounded-xl dark:bg-gray-300 text-sm">

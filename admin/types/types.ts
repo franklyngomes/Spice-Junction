@@ -121,10 +121,13 @@ export interface FoodItemData {
   image: File | string | null
 }
 export interface SubCategory {
-  category: string[]
+  category: {
+    name: string,
+    _id: string
+  }
   categoryNo: string,
   createdAt?: string,
-  image: string,
+  image: File | string | null,
   items?: []
   name: string,
   updatedAt?: string,
@@ -136,10 +139,15 @@ export interface SubCategoryResponse {
   error?: boolean,
   message?: string,
 }
+export interface SubCategoryDetailsResponse{
+  data?:SubCategory,
+  error?: boolean,
+  message?: string,
+}
 export interface SubCategoryData {
-  name?: string,
-  image?: string,
-  category?: string,
+  name: string,
+  image: File | string | null,
+  category: string,
 }
 export interface CategoryData {
   name: string;
