@@ -6,6 +6,7 @@ const CheckPermission = (requiredPermission: string[]) => {
   return (req: Request, res: Response, next: any) => {
     try {
       const userRole = req.user?.role
+      console.log(userRole)
       if(!userRole){
         return res.status(HttpCode.notFound).json({
           status: false,

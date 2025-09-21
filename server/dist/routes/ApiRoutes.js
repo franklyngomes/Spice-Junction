@@ -23,16 +23,16 @@ ApiRouter.get("/delivery-zone-details/:id", DeliveryZoneController.getDeliveryZo
 ApiRouter.delete("/delete-delivery-zone/:id", AuthCheck, DeliveryZoneController.deleteDeliveryZone);
 //Category Routes
 ApiRouter.get("/all-category", CategoryController.getAllCategory);
-ApiRouter.post("/create-category", AuthCheck, CategoryController.createCategory);
+ApiRouter.post("/create-category", AuthCheck, CheckPermission(["create_category"]), CategoryController.createCategory);
 ApiRouter.get("/category-details/:id", CategoryController.getCategoryDetails);
-ApiRouter.patch("/category-update/:id", AuthCheck, CategoryController.updateCategory);
-ApiRouter.delete("/category-delete/:id", AuthCheck, CategoryController.deleteCategory);
+ApiRouter.patch("/category-update/:id", AuthCheck, CheckPermission(["update_category"]), CategoryController.updateCategory);
+ApiRouter.delete("/category-delete/:id", AuthCheck, CheckPermission(["delete_category"]), CategoryController.deleteCategory);
 //SubCategory Routes
 ApiRouter.get("/all-sub-category", SubCategoryController.getAllSubCategory);
-ApiRouter.post("/create-sub-category", CategoryImageUpload.single("image"), SubCategoryController.createSubCategory);
+ApiRouter.post("/create-sub-category", AuthCheck, CategoryImageUpload.single("image"), SubCategoryController.createSubCategory);
 ApiRouter.get("/sub-category-details/:id", SubCategoryController.getSubCategoryDetails);
-ApiRouter.patch("/update-sub-category/:id", CategoryImageUpload.single("image"), SubCategoryController.updateSubCategory);
-ApiRouter.delete("/delete-sub-category/:id", SubCategoryController.deleteSubCategory);
+ApiRouter.patch("/update-sub-category/:id", AuthCheck, CategoryImageUpload.single("image"), SubCategoryController.updateSubCategory);
+ApiRouter.delete("/delete-sub-category/:id", AuthCheck, SubCategoryController.deleteSubCategory);
 //Restaurant Routes
 ApiRouter.get("/all-restaurant", RestaurantController.getAllRestaurant),
     ApiRouter.post("/create-restaurant", AuthCheck, CheckPermission(["create_restaurant"]), RestaurantImageUpload.single("image"), RestaurantController.createRestaurant);
@@ -66,14 +66,14 @@ ApiRouter.get("/order-by-restaurant/:id", AuthCheck, CheckPermission(["view_orde
 ApiRouter.patch("/order-update/:id", AuthCheck, CheckPermission(["update_order"]), OrderController.updateOrder);
 ApiRouter.delete("/order-delete/:id", AuthCheck, CheckPermission(["delete_order"]), OrderController.deleteOrder);
 //Payment Routes
-ApiRouter.post("/create-payment", PaymentController.createPaymentOrder);
-ApiRouter.post("/verify-payment", PaymentController.verifyPayment);
-ApiRouter.post("/create-payment-record", PaymentController.createPaymentRecord);
+ApiRouter.post("/create-payment", AuthCheck, CheckPermission(["create_payment_log"]), PaymentController.createPaymentOrder);
+ApiRouter.post("/verify-payment", AuthCheck, CheckPermission(["create_payment_log"]), PaymentController.verifyPayment);
+ApiRouter.post("/create-payment-record", AuthCheck, CheckPermission(["create_payment_log"]), PaymentController.createPaymentRecord);
 //Blog Routes
-ApiRouter.post("/create-blog", BlogImageUpload.single("image"), BlogController.createBlog);
+ApiRouter.post("/create-blog", AuthCheck, CheckPermission(["create_blog"]), BlogImageUpload.single("image"), BlogController.createBlog);
 ApiRouter.get("/all-blogs", BlogController.getAllBlog);
 ApiRouter.get("/blogs-details/:id", BlogController.getBlogDetails);
-ApiRouter.patch("/blog-update/:id", BlogImageUpload.single("image"), BlogController.updateBlog);
-ApiRouter.delete("/blog-delete/:id", BlogController.deleteBlog);
+ApiRouter.patch("/blog-update/:id", AuthCheck, CheckPermission(["update_blog"]), BlogImageUpload.single("image"), BlogController.updateBlog);
+ApiRouter.delete("/blog-delete/:id", AuthCheck, CheckPermission(["delete_blog"]), BlogController.deleteBlog);
 export default ApiRouter;
 //# sourceMappingURL=ApiRoutes.js.map

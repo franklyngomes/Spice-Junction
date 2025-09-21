@@ -49,8 +49,6 @@ export const ROLE_PERMISSIONS = {
         "create_payment_log",
         "view_payment_log",
         "create_blog",
-        "update_blog",
-        "delete_blog",
         "view_order",
         "create_order"
     ],
