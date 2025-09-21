@@ -16,7 +16,6 @@ export const ROLE_PERMISSIONS = {
     "delete_category",
 
     "add_delivery_zone",
-    "update_delivery_zone",
     "delete_delivery_zone",
 
     "view_order",
