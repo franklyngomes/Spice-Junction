@@ -206,7 +206,6 @@ const Items = () => {
                       {item.name}
                     </h5>
                   </div>
-
                   <div className="flex items-center flex-wrap justify-start mt-5 gap-4">
                     <div className="flex items-center justify-center w-20 h-12 bg-gray-100 rounded-xl dark:bg-gray-300 text-sm">
                       ₹{item.price}

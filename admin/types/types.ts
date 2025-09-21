@@ -139,8 +139,8 @@ export interface SubCategoryResponse {
   error?: boolean,
   message?: string,
 }
-export interface SubCategoryDetailsResponse{
-  data?:SubCategory,
+export interface SubCategoryDetailsResponse {
+  data?: SubCategory,
   error?: boolean,
   message?: string,
 }
@@ -161,8 +161,28 @@ export interface CategoryItem {
   __v?: number,
   _id: string,
 }
-export interface CategoryResponse{
+export interface CategoryResponse {
   data?: CategoryItem[],
   error?: boolean,
   message?: string,
+}
+export interface DeliveryZoneItem {
+  createdAt: string,
+  district: string,
+  division: string,
+  pinCodeList: string[],
+  state: string
+  updatedAt: string,
+  zoneName: string,
+  __v: number
+  _id: string
+}
+export interface DeliveryZoneResponse{
+  data?: DeliveryZoneItem[],
+  error?: boolean,
+  message?: string,
+}
+export interface DeliveryZoneData{
+  zoneName: string,
+  district: string
 }

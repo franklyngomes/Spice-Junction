@@ -31,34 +31,20 @@ export const endPoints = {
   restaurant: {
     restaurant_by_owner: "/restaurant-by-owner/"
   },
-  appointments: {
-    appointment_create: "/appointment-create",
-    appointment_list: "/all-appointment",
-    appointment_details: "/appointment-details/",
-    appointment_update: "/appointment-update/",
-    appointment_delete: "/appointment-delete/",
-    appointment_group: "/appointment-group/"
+  delivery_zone: {
+    create_zone: "/create-delivery-zone",
+    get_zone: "/all-delivery-zone",
+    zone_details: "/delivery-zone-details/",
+    zone_delete: "/delete-delivery-zone/"
   },
-  patients: {
-    patient_create: "/patient-create",
-    patient_list: "/all-patients",
-    patient_details: "/patient-details/",
-    patient_update: "/patient-update/",
-    patient_delete: "/patient-delete/"
+  blogs: {
+    create_blog: "/create-blog",
+    all_blogs: "/all-blogs",
+    blog_details: "/blogs-details/",
+    blog_update:"/blog-update/",
+    blog_delete: "/blog-delete/"
   },
-  doctors: {
-    doctor_create: "/doctor-create",
-    doctor_list: "/all-doctor",
-    doctor_details: "/doctor-details/",
-    doctor_update: "/doctor-update/",
-    doctor_delete: "/doctor-delete/"
-  },
-  rooms: {
-    room_create: "/room-create",
-    room_list: "/all-room",
-    room_details: "/room-details/",
-    room_update: "/room-update/",
-    room_delete: "/room-delete/"
+  orders: {
   },
   auth: {
     adminsignup: "/admin/signup",

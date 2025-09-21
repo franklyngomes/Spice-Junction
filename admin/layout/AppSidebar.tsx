@@ -57,11 +57,6 @@ const AdminNavItems: NavItem[] = [
     name: "Orders",
     path: "/orders",
   },
-  {
-    icon: <PaymentIcon />,
-    name: "Payments",
-    path: "/payments",
-  }
 ];
 const RestaurantNavItems: NavItem[] = [
   {
@@ -104,11 +99,6 @@ const RestaurantNavItems: NavItem[] = [
     name: "Billing",
     path: "/billing",
   },
-  {
-    icon: <PaymentIcon />,
-    name: "Payments",
-    path: "/payments",
-  }
 ];
 const othersItems: NavItem[] = [
   {

@@ -2,14 +2,14 @@ import { Cookies } from "react-cookie";
 import { axiosInstance } from "../axios/axiosInstance";
 import { endPoints } from "../endPoints/endPoints";
 import axios from "axios";
-import { CategoryData, CategoryResponse } from "../../types/types";
+import { DeliveryZoneData, DeliveryZoneResponse } from "../../types/types";
 
 
-export const CreateCategory = async (payload: CategoryData) => {
+export const CreateZone = async (payload: DeliveryZoneData) => {
   const cookies = new Cookies()
   const token = cookies.get("token")
   try {
-    const response = await axiosInstance.post(endPoints.category.create_category, payload, {
+    const response = await axiosInstance.post(endPoints.delivery_zone.create_zone, payload, {
       "headers" : {
         "Authorization": `Bearer ${token}`
       }
@@ -22,9 +22,9 @@ export const CreateCategory = async (payload: CategoryData) => {
     return { error: true, message: "Unexpected error" };
   }
 }
-export const CategoryDetails = async (id: string) => {
+export const ZoneDetails = async (id: string) => {
   try {
-    const response = await axiosInstance.get(endPoints.category.category_details+id);
+    const response = await axiosInstance.get(endPoints.delivery_zone.zone_details+id);
     return response?.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -33,9 +33,9 @@ export const CategoryDetails = async (id: string) => {
     return { error: true, message: "Unexpected error" };
   }
 }
-export const AllCategory = async () :  Promise<CategoryResponse> => {
+export const AllZone = async () : Promise<DeliveryZoneResponse> => {
   try {
-    const response = await axiosInstance.get(endPoints.category.all_category);
+    const response = await axiosInstance.get(endPoints.delivery_zone.get_zone);
     return response?.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -44,28 +44,11 @@ export const AllCategory = async () :  Promise<CategoryResponse> => {
     return { error: true, message: "Unexpected error" };
   }
 }
-export const UpdateCategory = async (id : string, payload: CategoryData) => {
+export const DeleteZone = async (id : string) => {
   const cookies = new Cookies()
   const token = cookies.get("token")
   try {
-    const response = await axiosInstance.patch(endPoints.category.update_category+id, payload, {
-      "headers" : {
-        "Authorization": `Bearer ${token}`
-      }
-    });
-    return response?.data
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return { error: true, message: error.response?.data?.message || "Something went wrong" };
-    }
-    return { error: true, message: "Unexpected error" };
-  }
-}
-export const DeleteCategory = async (id : string) => {
-  const cookies = new Cookies()
-  const token = cookies.get("token")
-  try {
-    const response = await axiosInstance.delete(endPoints.category.delete_category+id, {
+    const response = await axiosInstance.delete(endPoints.delivery_zone.zone_delete+id, {
       "headers" : {
         "Authorization": `Bearer ${token}`
       }
