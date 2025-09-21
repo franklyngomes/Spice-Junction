@@ -78,7 +78,7 @@ class SubCategoryController {
   async getSubCategoryDetails(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const category = await SubCategoryModel.findById(id);
+      const category = await SubCategoryModel.findById(id).populate("category", "name _id");;
       if (!category) {
         return res.status(HttpCode.badRequest).json({
           status: false,
