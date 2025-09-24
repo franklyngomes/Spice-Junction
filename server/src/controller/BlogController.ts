@@ -1,8 +1,9 @@
 import { BlogModel, BlogSchemaJoi } from "../model/BlogModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
 import type { Request, Response } from "express";
-import * as fsSync from "fs"
-import {promises as fs} from "fs" 
+import * as fsSync from "fs";
+import { promises as fs } from "fs";
+import cloudinary from "../config/cloudinary.js";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -17,7 +18,7 @@ class BlogController {
           message: error.message,
         });
       }
-      const {title} = req.body
+      const { title } = req.body;
       const ifExists = await BlogModel.findOne({ title });
       if (ifExists) {
         return res.status(HttpCode.badRequest).json({
@@ -25,15 +26,29 @@ class BlogController {
           message: "Blog with this name already exists!",
         });
       }
+      const multerReq = req as MulterRequest;
+      if (!multerReq.file) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "Image is required!",
+        });
+      }
+      //upload to Cloudinary
+      const multerPath = multerReq.file.path.replace(/\\/g, "/");
+      const result = await cloudinary.uploader.upload(
+        multerPath.replace(/\\/g, "/"),
+        {
+          folder: "spice_junction_blogs",
+        }
+      );
+      fs.unlink(multerPath);
       const newBlog = new BlogModel({
         title: value.title,
         author: value.author,
         description: value.description,
+        image: result.secure_url,
+        imageId: result.public_id,
       });
-      const multerReq = req as MulterRequest;
-      if (!error && multerReq.file) {
-        newBlog.image = multerReq.file.path.replace(/\\/g, "/");
-      }
       await newBlog.save();
       return res.status(HttpCode.create).json({
         status: false,
@@ -49,7 +64,10 @@ class BlogController {
   }
   async getAllBlog(req: Request, res: Response) {
     try {
-      const blogs = await BlogModel.find().populate("author", "firstName lastName");
+      const blogs = await BlogModel.find().populate(
+        "author",
+        "firstName lastName"
+      );
       if (!blogs || blogs.length === 0) {
         return res.status(HttpCode.badRequest).json({
           status: false,
@@ -71,7 +89,10 @@ class BlogController {
   async getBlogDetails(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const blog = await BlogModel.findById(id).populate("author", "firstName lastName");
+      const blog = await BlogModel.findById(id).populate(
+        "author",
+        "firstName lastName"
+      );
       if (!blog) {
         return res.status(HttpCode.badRequest).json({
           status: false,
@@ -100,16 +121,23 @@ class BlogController {
           message: "No blog found!",
         });
       }
-      if(blog.image){
-        const existingImage = blog.image
-        if(fsSync.existsSync(existingImage)){
-          fs.unlink(existingImage)
+      const multerReq = req as MulterRequest;
+      if (multerReq.file) {
+        if (blog.imageId) {
+          await cloudinary.uploader.destroy(blog.imageId);
+          const multerPath = multerReq.file.path.replace(/\\/g, "/");
+          const result = await cloudinary.uploader.upload(
+            multerPath.replace(/\\/g, "/"),
+            {
+              folder: "spice_junction_blogs",
+            }
+          );
+          blog.image = result.secure_url;
+          blog.imageId = result.public_id;
+          fs.unlink(multerPath);
         }
       }
-      if(req.file){
-        blog.image = req.file.path.replace(/\\/g, "/")
-      }
-      await blog.save()
+      await blog.save();
       return res.status(HttpCode.success).json({
         status: false,
         message: "Blog updated successfully",
@@ -131,11 +159,8 @@ class BlogController {
           message: "Blog not found!",
         });
       }
-      if(blog.image){
-        const existingImage = blog.image
-        if(fsSync.existsSync(existingImage)){
-          fs.unlink(existingImage)
-        }
+      if (blog.imageId) {
+        await cloudinary.uploader.destroy(blog.imageId);
       }
       return res.status(HttpCode.success).json({
         status: false,

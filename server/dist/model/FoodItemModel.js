@@ -90,6 +90,9 @@ const FoodItemSchema = new Schema({
     image: {
         type: String,
     },
+    imageId: {
+        type: String,
+    },
     isAvailable: {
         type: Boolean,
         default: true,

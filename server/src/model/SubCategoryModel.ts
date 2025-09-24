@@ -44,6 +44,9 @@ const SubCategorySchema = new Schema(
       type: String,
       required: true,
     },
+    imageId:{
+      type:String,
+    },
     categoryNo: {
       type: String,
       unique: true,

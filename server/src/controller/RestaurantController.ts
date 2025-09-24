@@ -4,8 +4,9 @@ import {
 } from "../model/ResturantModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
 import type { Request, Response } from "express";
-import * as fsSync from "fs"
-import {promises as fs} from "fs" 
+import * as fsSync from "fs";
+import { promises as fs } from "fs";
+import cloudinary from "../config/cloudinary.js";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -20,7 +21,7 @@ class RestaurantController {
           message: error.message,
         });
       }
-      const {name} = req.body
+      const { name } = req.body;
       const ifExists = await RestaurantModel.findOne({ name });
       if (ifExists) {
         return res.status(HttpCode.badRequest).json({
@@ -28,6 +29,22 @@ class RestaurantController {
           message: "Restaurant with this name already exists!",
         });
       }
+      const multerReq = req as MulterRequest;
+      if (!multerReq.file) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "Image is required!",
+        });
+      }
+      //upload to Cloudinary
+      const multerPath = multerReq.file.path.replace(/\\/g, "/");
+      const result = await cloudinary.uploader.upload(
+        multerPath.replace(/\\/g, "/"),
+        {
+          folder: "spice_junction_restaurants",
+        }
+      );
+      fs.unlink(multerPath);
       const restaurant = new RestaurantModel({
         name: value.name,
         ownerId: value.ownerId,
@@ -38,11 +55,9 @@ class RestaurantController {
         phone: value.phone,
         deliveryZone: value.deliveryZone,
         cuisine: value.cuisine,
+        image: result.secure_url,
+        imageId: result.public_id,
       });
-      const multerReq = req as MulterRequest;
-      if (!error && multerReq.file) {
-        restaurant.image = multerReq.file.path.replace(/\\/g, "/");
-      }
       await restaurant.save();
       return res.status(HttpCode.create).json({
         status: false,
@@ -102,7 +117,7 @@ class RestaurantController {
   async getRestaurantByOwner(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const restaurant = await RestaurantModel.find({"ownerId": {$eq: id}});
+      const restaurant = await RestaurantModel.find({ ownerId: { $eq: id } });
       if (!restaurant) {
         return res.status(HttpCode.badRequest).json({
           status: false,
@@ -131,16 +146,23 @@ class RestaurantController {
           message: "No restaurant found!",
         });
       }
-      if(restaurant.image){
-        const existingImage = restaurant.image
-        if(fsSync.existsSync(existingImage)){
-          fs.unlink(existingImage)
+      const multerReq = req as MulterRequest;
+      if (multerReq.file) {
+        if (restaurant.imageId) {
+          await cloudinary.uploader.destroy(restaurant.imageId);
+          const multerPath = multerReq.file.path.replace(/\\/g, "/");
+          const result = await cloudinary.uploader.upload(
+            multerPath.replace(/\\/g, "/"),
+            {
+              folder: "spice_junction_restaurants",
+            }
+          );
+          restaurant.image = result.secure_url;
+          restaurant.imageId = result.public_id;
+          fs.unlink(multerPath);
         }
       }
-      if(req.file){
-        restaurant.image = req.file.path.replace(/\\/g, "/")
-      }
-      await restaurant.save()
+      await restaurant.save();
       return res.status(HttpCode.success).json({
         status: false,
         message: "Restaurant updated successfully",
@@ -162,11 +184,8 @@ class RestaurantController {
           message: "Restaurant not found!",
         });
       }
-      if(restaurant.image){
-        const existingImage = restaurant.image
-        if(fsSync.existsSync(existingImage)){
-          fs.unlink(existingImage)
-        }
+      if (restaurant.imageId) {
+        await cloudinary.uploader.destroy(restaurant.imageId);
       }
       return res.status(HttpCode.success).json({
         status: false,
