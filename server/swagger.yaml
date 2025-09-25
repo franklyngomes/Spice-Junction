@@ -3,7 +3,7 @@ info:
   title: Spice Junction
   version: 1.1.0
 servers:
-  - url: https://spice-junction-server.onrender.com
+  - url: https://spice-junction.onrender.com
 components:
   securitySchemes:
     noauthAuth:
