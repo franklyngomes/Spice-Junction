@@ -109,7 +109,7 @@ class RestaurantController {
     async getRestaurantByOwner(req, res) {
         try {
             const id = req.params.id;
-            const restaurant = await RestaurantModel.find({ ownerId: { $eq: id } });
+            const restaurant = await RestaurantModel.findOne({ ownerId: { $eq: id } });
             if (!restaurant) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,

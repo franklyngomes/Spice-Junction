@@ -29,10 +29,10 @@ ApiRouter.patch("/category-update/:id", AuthCheck, CheckPermission(["update_cate
 ApiRouter.delete("/category-delete/:id", AuthCheck, CheckPermission(["delete_category"]), CategoryController.deleteCategory);
 //SubCategory Routes
 ApiRouter.get("/all-sub-category", SubCategoryController.getAllSubCategory);
-ApiRouter.post("/create-sub-category", AuthCheck, CategoryImageUpload.single("image"), SubCategoryController.createSubCategory);
+ApiRouter.post("/create-sub-category", AuthCheck, CheckPermission(["create_category"]), CategoryImageUpload.single("image"), SubCategoryController.createSubCategory);
 ApiRouter.get("/sub-category-details/:id", SubCategoryController.getSubCategoryDetails);
-ApiRouter.patch("/update-sub-category/:id", AuthCheck, CategoryImageUpload.single("image"), SubCategoryController.updateSubCategory);
-ApiRouter.delete("/delete-sub-category/:id", AuthCheck, SubCategoryController.deleteSubCategory);
+ApiRouter.patch("/update-sub-category/:id", AuthCheck, CheckPermission(["update_category"]), CategoryImageUpload.single("image"), SubCategoryController.updateSubCategory);
+ApiRouter.delete("/delete-sub-category/:id", AuthCheck, CheckPermission(["delete_category"]), SubCategoryController.deleteSubCategory);
 //Restaurant Routes
 ApiRouter.get("/all-restaurant", RestaurantController.getAllRestaurant),
     ApiRouter.post("/create-restaurant", AuthCheck, CheckPermission(["create_restaurant"]), RestaurantImageUpload.single("image"), RestaurantController.createRestaurant);

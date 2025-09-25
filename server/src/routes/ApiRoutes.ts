@@ -32,10 +32,10 @@ ApiRouter.delete("/category-delete/:id",AuthCheck,CheckPermission(["delete_categ
 
 //SubCategory Routes
 ApiRouter.get("/all-sub-category", SubCategoryController.getAllSubCategory)
-ApiRouter.post("/create-sub-category",AuthCheck,CategoryImageUpload.single("image"), SubCategoryController.createSubCategory)
+ApiRouter.post("/create-sub-category",AuthCheck,CheckPermission(["create_category"]),CategoryImageUpload.single("image"), SubCategoryController.createSubCategory)
 ApiRouter.get("/sub-category-details/:id",SubCategoryController.getSubCategoryDetails)
-ApiRouter.patch("/update-sub-category/:id",AuthCheck,CategoryImageUpload.single("image"), SubCategoryController.updateSubCategory)
-ApiRouter.delete("/delete-sub-category/:id",AuthCheck, SubCategoryController.deleteSubCategory)
+ApiRouter.patch("/update-sub-category/:id",AuthCheck,CheckPermission(["update_category"]),CategoryImageUpload.single("image"), SubCategoryController.updateSubCategory)
+ApiRouter.delete("/delete-sub-category/:id",AuthCheck,CheckPermission(["delete_category"]),SubCategoryController.deleteSubCategory)
 
 //Restaurant Routes
 ApiRouter.get("/all-restaurant", RestaurantController.getAllRestaurant),

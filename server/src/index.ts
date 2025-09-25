@@ -35,6 +35,8 @@ app.use(
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 const __filename = fileURLToPath(import.meta.url);
