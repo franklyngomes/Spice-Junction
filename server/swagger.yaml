@@ -1012,7 +1012,7 @@ paths:
         - name: Authorization
           in: header
           schema:
-            type: number
+            type: string
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc2MDAzNjMsImV4cCI6MTc1NzYxMTE2M30.8mdtMpaKn6VA-5Bq3Yy7Sz6jvj_pstY4ltV0Iequ4kQ
