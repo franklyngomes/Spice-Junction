@@ -4,6 +4,14 @@ import * as fsSync from "fs";
 import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
 class RestaurantController {
+    uploadToCloudinary = (file) => new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream({ folder: "spice_junction_restaurants" }, (error, result) => {
+            if (error)
+                return reject(error);
+            resolve(result);
+        });
+        stream.end(file.buffer);
+    });
     async createRestaurant(req, res) {
         try {
             const { error, value } = await RestaurantSchemaJoi.validate(req.body);
@@ -29,11 +37,7 @@ class RestaurantController {
                 });
             }
             //upload to Cloudinary
-            const multerPath = multerReq.file.path.replace(/\\/g, "/");
-            const result = await cloudinary.uploader.upload(multerPath.replace(/\\/g, "/"), {
-                folder: "spice_junction_restaurants",
-            });
-            fs.unlink(multerPath);
+            const result = await this.uploadToCloudinary(multerReq.file);
             const restaurant = new RestaurantModel({
                 name: value.name,
                 ownerId: value.ownerId,
@@ -146,13 +150,9 @@ class RestaurantController {
             if (multerReq.file) {
                 if (restaurant.imageId) {
                     await cloudinary.uploader.destroy(restaurant.imageId);
-                    const multerPath = multerReq.file.path.replace(/\\/g, "/");
-                    const result = await cloudinary.uploader.upload(multerPath.replace(/\\/g, "/"), {
-                        folder: "spice_junction_restaurants",
-                    });
+                    const result = await this.uploadToCloudinary(multerReq.file);
                     restaurant.image = result.secure_url;
                     restaurant.imageId = result.public_id;
-                    fs.unlink(multerPath);
                 }
             }
             await restaurant.save();
