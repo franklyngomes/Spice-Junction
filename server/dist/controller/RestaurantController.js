@@ -116,7 +116,9 @@ class RestaurantController {
     async getRestaurantByOwner(req, res) {
         try {
             const id = req.params.id;
-            const restaurant = await RestaurantModel.findOne({ ownerId: { $eq: id } });
+            const restaurant = await RestaurantModel.findOne({
+                ownerId: { $eq: id },
+            });
             if (!restaurant) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -150,10 +152,10 @@ class RestaurantController {
             if (multerReq.file) {
                 if (restaurant.imageId) {
                     await cloudinary.uploader.destroy(restaurant.imageId);
-                    const result = await this.uploadToCloudinary(multerReq.file);
-                    restaurant.image = result.secure_url;
-                    restaurant.imageId = result.public_id;
                 }
+                const result = await this.uploadToCloudinary(multerReq.file);
+                restaurant.image = result.secure_url;
+                restaurant.imageId = result.public_id;
             }
             await restaurant.save();
             return res.status(HttpCode.success).json({
