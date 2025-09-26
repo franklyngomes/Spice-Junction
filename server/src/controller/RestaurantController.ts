@@ -7,6 +7,7 @@ import type { Request, Response } from "express";
 import * as fsSync from "fs";
 import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
+import { uploadToCloudinary } from "../utils/CloudinaryUpload.js";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -49,7 +50,7 @@ class RestaurantController {
         });
       }
       //upload to Cloudinary
-       const result = await this.uploadToCloudinary(multerReq.file);
+      const result = await uploadToCloudinary(multerReq.file)
 
       const restaurant = new RestaurantModel({
         name: value.name,
@@ -162,7 +163,7 @@ class RestaurantController {
         if (restaurant.imageId) {
           await cloudinary.uploader.destroy(restaurant.imageId);
         }
-        const result = await this.uploadToCloudinary(multerReq.file);
+        const result = await uploadToCloudinary(multerReq.file)
         restaurant.image = result.secure_url;
         restaurant.imageId = result.public_id;
       }

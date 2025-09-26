@@ -3,6 +3,7 @@ import { HttpCode } from "../helper/HttpCode.js";
 import * as fsSync from "fs";
 import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
+import { uploadToCloudinary } from "../utils/CloudinaryUpload.js";
 class RestaurantController {
     uploadToCloudinary = (file) => new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream({ folder: "spice_junction_restaurants" }, (error, result) => {
@@ -37,7 +38,7 @@ class RestaurantController {
                 });
             }
             //upload to Cloudinary
-            const result = await this.uploadToCloudinary(multerReq.file);
+            const result = await uploadToCloudinary(multerReq.file);
             const restaurant = new RestaurantModel({
                 name: value.name,
                 ownerId: value.ownerId,
@@ -153,7 +154,7 @@ class RestaurantController {
                 if (restaurant.imageId) {
                     await cloudinary.uploader.destroy(restaurant.imageId);
                 }
-                const result = await this.uploadToCloudinary(multerReq.file);
+                const result = await uploadToCloudinary(multerReq.file);
                 restaurant.image = result.secure_url;
                 restaurant.imageId = result.public_id;
             }
