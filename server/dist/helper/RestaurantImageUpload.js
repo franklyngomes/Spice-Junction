@@ -3,14 +3,23 @@ const storage = multer.memoryStorage();
 const RestaurantImageUpload = multer({
     storage,
     fileFilter: (req, file, cb) => {
-        const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/avif", "image/webp"];
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+            "image/avif",
+            "image/webp",
+        ];
         if (allowedTypes.includes(file.mimetype)) {
             cb(null, true);
         }
         else {
-            cb(new Error("Only images and PDF files are allowed"));
+            cb(new Error("Only image files are allowed"));
         }
-    }
+    },
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+    },
 });
 export default RestaurantImageUpload;
 //# sourceMappingURL=RestaurantImageUpload.js.map

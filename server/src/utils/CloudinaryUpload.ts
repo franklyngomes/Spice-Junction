@@ -1,11 +1,18 @@
 import cloudinary from "../config/cloudinary.js";
 
-export const uploadToCloudinary = (file: Express.Multer.File, folder = "spice_junction_restaurants") =>
+export const uploadToCloudinary = (file: Express.Multer.File) =>
   new Promise<any>((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder },
+     {
+        folder: "spice_junction_restaurants",
+        resource_type: "auto",
+        public_id: `${Date.now()}-${file.originalname}`,
+      },
       (error, result) => {
-        if (error) return reject(error);
+        if (error) {
+          console.error("Cloudinary upload error:", error);
+          return reject(error);
+        }
         resolve(result);
       }
     );

@@ -19,13 +19,13 @@ declare const OrderModel: mongoose.Model<{
     discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -50,13 +50,13 @@ declare const OrderModel: mongoose.Model<{
     discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -83,13 +83,13 @@ declare const OrderModel: mongoose.Model<{
     discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -120,13 +120,13 @@ declare const OrderModel: mongoose.Model<{
     discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -151,13 +151,13 @@ declare const OrderModel: mongoose.Model<{
     discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -184,13 +184,13 @@ declare const OrderModel: mongoose.Model<{
     discount: number;
     deliveryCharge: number;
     status: "pending" | "preparing" | "out_for_delivery" | "delivered";
-    restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    restaurant?: mongoose.Types.ObjectId | null;
     tax?: {
         packaging: number;
         restaurantGST: number;

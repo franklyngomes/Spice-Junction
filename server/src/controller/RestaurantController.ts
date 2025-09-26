@@ -13,17 +13,6 @@ interface MulterRequest extends Request {
   file?: Express.Multer.File;
 }
 class RestaurantController {
-  private uploadToCloudinary = (file: Express.Multer.File) =>
-    new Promise<any>((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        { folder: "spice_junction_restaurants" },
-        (error, result) => {
-          if (error) return reject(error);
-          resolve(result);
-        }
-      );
-      stream.end(file.buffer);
-    });
 
   async createRestaurant(req: Request, res: Response) {
     try {

@@ -29,7 +29,7 @@ class RestaurantController {
                     message: "Image is required!",
                 });
             }
-            // upload to Cloudinary
+            //upload to Cloudinary
             const result = await uploadToCloudinary(multerReq.file);
             const restaurant = new RestaurantModel({
                 name: value.name,
@@ -46,7 +46,6 @@ class RestaurantController {
                 image: result.secure_url,
                 imageId: result.public_id,
             });
-            console.log(restaurant);
             await restaurant.save();
             return res.status(HttpCode.create).json({
                 status: false,

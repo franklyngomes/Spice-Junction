@@ -58,9 +58,7 @@ const RestaurantSchemaJoi = Joi.object({
         "any.required": "Delivery zone is required!",
         "any.invalid": "Delivery zone must be valid object id!",
     }),
-    image: Joi.string().required().messages({
-        "any.required": "Image is required!",
-    }),
+    image: Joi.string(),
     cuisine: Joi.array()
         .items(Joi.string())
         .required()
@@ -102,12 +100,6 @@ const RestaurantSchema = new Schema({
         type: String,
     },
     imageId: {
-        type: String,
-    },
-    fssai: {
-        type: String,
-    },
-    fssaiId: {
         type: String,
     },
     cuisine: [

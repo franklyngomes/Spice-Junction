@@ -7,24 +7,24 @@ declare const FoodMenuModel: mongoose.Model<{
 } & {
     restaurant: mongoose.Types.ObjectId;
     items: mongoose.Types.DocumentArray<{
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }> & {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }>;
@@ -35,24 +35,24 @@ declare const FoodMenuModel: mongoose.Model<{
 } & {
     restaurant: mongoose.Types.ObjectId;
     items: mongoose.Types.DocumentArray<{
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }> & {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }>;
@@ -65,24 +65,24 @@ declare const FoodMenuModel: mongoose.Model<{
 } & {
     restaurant: mongoose.Types.ObjectId;
     items: mongoose.Types.DocumentArray<{
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }> & {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }>;
@@ -99,24 +99,24 @@ declare const FoodMenuModel: mongoose.Model<{
 } & {
     restaurant: mongoose.Types.ObjectId;
     items: mongoose.Types.DocumentArray<{
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }> & {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }>;
@@ -127,24 +127,24 @@ declare const FoodMenuModel: mongoose.Model<{
 } & {
     restaurant: mongoose.Types.ObjectId;
     items: mongoose.Types.DocumentArray<{
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }> & {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }>;
@@ -157,24 +157,24 @@ declare const FoodMenuModel: mongoose.Model<{
 } & {
     restaurant: mongoose.Types.ObjectId;
     items: mongoose.Types.DocumentArray<{
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }, mongoose.Types.Subdocument<mongoose.mongo.BSON.ObjectId, any, {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }> & {
-        id?: string | null;
         name?: string | null;
-        description?: string | null;
         image?: string | null;
+        id?: string | null;
+        description?: string | null;
         subCategory?: mongoose.Types.ObjectId | null;
         price?: number | null;
     }>;
