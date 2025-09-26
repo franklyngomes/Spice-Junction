@@ -11,7 +11,7 @@ import YAML from "yaml";
 import Razorpay from "razorpay";
 const app = express();
 Database();
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const allowedOrigins = [
     "https://spice-junction.onrender.com",
