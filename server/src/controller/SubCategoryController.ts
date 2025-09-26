@@ -39,14 +39,12 @@ class SubCategoryController {
       }
 
       //upload to Cloudinary
-      const multerPath = multerReq.file.path.replace(/\\/g, "/");
       const result = await cloudinary.uploader.upload(
-        multerPath,
+        multerReq.file.path,
         {
           folder: "spice_junction_sub_category",
         }
       );
-      fs.unlink(multerPath);
       const subCategory = new SubCategoryModel({
         name: value.name,
         category: value.category,
