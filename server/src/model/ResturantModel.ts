@@ -108,12 +108,6 @@ const RestaurantSchema = new Schema(
     imageId: {
       type: String,
     },
-    fssai: {
-      type: String,
-    },
-    fssaiId: {
-      type: String,
-    },
     cuisine: [
       {
         type: String,
