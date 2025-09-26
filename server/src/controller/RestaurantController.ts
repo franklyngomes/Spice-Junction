@@ -13,16 +13,17 @@ interface MulterRequest extends Request {
 }
 class RestaurantController {
   private uploadToCloudinary = (file: Express.Multer.File) =>
-  new Promise<any>((resolve, reject) => {
-    const stream = cloudinary.uploader.upload_stream(
-      { folder: "spice_junction_restaurants" },
-      (error, result) => {
-        if (error) return reject(error);
-        resolve(result);
-      }
-    );
-    stream.end(file.buffer);
-  });
+    new Promise<any>((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "spice_junction_restaurants" },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      );
+      stream.end(file.buffer);
+    });
+
   async createRestaurant(req: Request, res: Response) {
     try {
       const { error, value } = await RestaurantSchemaJoi.validate(req.body);
@@ -48,7 +49,7 @@ class RestaurantController {
         });
       }
       //upload to Cloudinary
-      const result = await this.uploadToCloudinary(multerReq.file)
+      const result = await this.uploadToCloudinary(multerReq.file);
 
       const restaurant = new RestaurantModel({
         name: value.name,
@@ -72,7 +73,7 @@ class RestaurantController {
         data: restaurant,
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return res.status(HttpCode.serverError).json({
         status: false,
         message: (error as Error)?.message,
@@ -125,7 +126,9 @@ class RestaurantController {
   async getRestaurantByOwner(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const restaurant = await RestaurantModel.findOne({ ownerId: { $eq: id } });
+      const restaurant = await RestaurantModel.findOne({
+        ownerId: { $eq: id },
+      });
       if (!restaurant) {
         return res.status(HttpCode.badRequest).json({
           status: false,
@@ -158,10 +161,10 @@ class RestaurantController {
       if (multerReq.file) {
         if (restaurant.imageId) {
           await cloudinary.uploader.destroy(restaurant.imageId);
-          const result = await this.uploadToCloudinary(multerReq.file)
-          restaurant.image = result.secure_url;
-          restaurant.imageId = result.public_id;
         }
+        const result = await this.uploadToCloudinary(multerReq.file);
+        restaurant.image = result.secure_url;
+        restaurant.imageId = result.public_id;
       }
       await restaurant.save();
       return res.status(HttpCode.success).json({
