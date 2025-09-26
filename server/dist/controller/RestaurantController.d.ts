@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 declare class RestaurantController {
-    private uploadToCloudinary;
     createRestaurant(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     getAllRestaurant(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     getRestaurantDetails(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;

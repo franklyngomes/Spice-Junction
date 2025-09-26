@@ -20,6 +20,8 @@ declare const RestaurantModel: mongoose.Model<{
     } | null;
     image?: string | null;
     imageId?: string | null;
+    fssai?: string | null;
+    fssaiId?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -39,6 +41,8 @@ declare const RestaurantModel: mongoose.Model<{
     } | null;
     image?: string | null;
     imageId?: string | null;
+    fssai?: string | null;
+    fssaiId?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
@@ -60,6 +64,8 @@ declare const RestaurantModel: mongoose.Model<{
     } | null;
     image?: string | null;
     imageId?: string | null;
+    fssai?: string | null;
+    fssaiId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -85,6 +91,8 @@ declare const RestaurantModel: mongoose.Model<{
     } | null;
     image?: string | null;
     imageId?: string | null;
+    fssai?: string | null;
+    fssaiId?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -104,6 +112,8 @@ declare const RestaurantModel: mongoose.Model<{
     } | null;
     image?: string | null;
     imageId?: string | null;
+    fssai?: string | null;
+    fssaiId?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
@@ -125,6 +135,8 @@ declare const RestaurantModel: mongoose.Model<{
     } | null;
     image?: string | null;
     imageId?: string | null;
+    fssai?: string | null;
+    fssaiId?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

@@ -10,21 +10,11 @@ import cloudinary from "../config/cloudinary.js";
 import { uploadToCloudinary } from "../utils/CloudinaryUpload.js";
 
 interface MulterRequest extends Request {
-  file?: Express.Multer.File;
+  files?: {
+    [fieldname: string]: Express.Multer.File[];
+  };
 }
 class RestaurantController {
-  private uploadToCloudinary = (file: Express.Multer.File) =>
-    new Promise<any>((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        { folder: "spice_junction_restaurants" },
-        (error, result) => {
-          if (error) return reject(error);
-          resolve(result);
-        }
-      );
-      stream.end(file.buffer);
-    });
-
   async createRestaurant(req: Request, res: Response) {
     try {
       const { error, value } = await RestaurantSchemaJoi.validate(req.body);
@@ -49,7 +39,7 @@ class RestaurantController {
           message: "Image is required!",
         });
       }
-      //upload to Cloudinary
+      // upload to Cloudinary
       const result = await uploadToCloudinary(multerReq.file)
 
       const restaurant = new RestaurantModel({
@@ -67,6 +57,7 @@ class RestaurantController {
         image: result.secure_url,
         imageId: result.public_id,
       });
+      console.log(restaurant);
       await restaurant.save();
       return res.status(HttpCode.create).json({
         status: false,
@@ -163,7 +154,7 @@ class RestaurantController {
         if (restaurant.imageId) {
           await cloudinary.uploader.destroy(restaurant.imageId);
         }
-        const result = await uploadToCloudinary(multerReq.file)
+        const result = await uploadToCloudinary(multerReq.file);
         restaurant.image = result.secure_url;
         restaurant.imageId = result.public_id;
       }

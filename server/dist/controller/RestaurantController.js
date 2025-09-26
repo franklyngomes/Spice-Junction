@@ -5,14 +5,6 @@ import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
 import { uploadToCloudinary } from "../utils/CloudinaryUpload.js";
 class RestaurantController {
-    uploadToCloudinary = (file) => new Promise((resolve, reject) => {
-        const stream = cloudinary.uploader.upload_stream({ folder: "spice_junction_restaurants" }, (error, result) => {
-            if (error)
-                return reject(error);
-            resolve(result);
-        });
-        stream.end(file.buffer);
-    });
     async createRestaurant(req, res) {
         try {
             const { error, value } = await RestaurantSchemaJoi.validate(req.body);
@@ -37,7 +29,7 @@ class RestaurantController {
                     message: "Image is required!",
                 });
             }
-            //upload to Cloudinary
+            // upload to Cloudinary
             const result = await uploadToCloudinary(multerReq.file);
             const restaurant = new RestaurantModel({
                 name: value.name,
@@ -54,6 +46,7 @@ class RestaurantController {
                 image: result.secure_url,
                 imageId: result.public_id,
             });
+            console.log(restaurant);
             await restaurant.save();
             return res.status(HttpCode.create).json({
                 status: false,
