@@ -49,9 +49,8 @@ class RestaurantController {
         });
       }
       //upload to Cloudinary
-      const multerPath = multerReq.file.path.replace(/\\/g, "/");
       const result = await cloudinary.uploader.upload(
-        multerPath.replace(/\\/g, "/"),
+        multerReq.file.path,
         {
           folder: "spice_junction_restaurants",
         }
