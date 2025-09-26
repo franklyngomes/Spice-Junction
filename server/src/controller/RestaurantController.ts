@@ -49,12 +49,7 @@ class RestaurantController {
         });
       }
       //upload to Cloudinary
-      const result = await cloudinary.uploader.upload(
-        multerReq.file.path,
-        {
-          folder: "spice_junction_restaurants",
-        }
-      );
+       const result = await this.uploadToCloudinary(multerReq.file);
 
       const restaurant = new RestaurantModel({
         name: value.name,
