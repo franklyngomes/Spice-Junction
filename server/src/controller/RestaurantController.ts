@@ -48,10 +48,12 @@ class RestaurantController {
       const restaurant = new RestaurantModel({
         name: value.name,
         ownerId: value.ownerId,
-        buildingNo: value.buildingNo,
-        street: value.street,
-        city: value.city,
-        pinCode: value.pinCode,
+        address: {
+          buildingNo: value.buildingNo,
+          street: value.street,
+          city: value.city,
+          pinCode: value.pinCode,
+        },
         phone: value.phone,
         deliveryZone: value.deliveryZone,
         cuisine: value.cuisine,
@@ -65,6 +67,7 @@ class RestaurantController {
         data: restaurant,
       });
     } catch (error) {
+      console.log(error)
       return res.status(HttpCode.serverError).json({
         status: false,
         message: (error as Error)?.message,
