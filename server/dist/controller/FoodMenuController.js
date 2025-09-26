@@ -1,5 +1,6 @@
 import { FoodMenuModel, FoodMenuSchemaJoi } from "../model/FoodMenuModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
+import { RestaurantModel } from "../model/ResturantModel.js";
 class FoodMenuController {
     async createFoodMenu(req, res) {
         try {
@@ -8,6 +9,13 @@ class FoodMenuController {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
                     message: error.message,
+                });
+            }
+            const restaurant = await RestaurantModel.findById(value.restaurant);
+            if (!restaurant?.isApproved) {
+                return res.status(HttpCode.badRequest).json({
+                    status: false,
+                    message: "Your restaurant is not approved! Please try again later.",
                 });
             }
             const { name } = req.body;
@@ -61,7 +69,7 @@ class FoodMenuController {
     async getFoodMenuForRestaurant(req, res) {
         try {
             const id = req.params.id;
-            const foodMenu = await FoodMenuModel.find({ "restaurant": { $eq: id } });
+            const foodMenu = await FoodMenuModel.find({ restaurant: { $eq: id } });
             if (!foodMenu || foodMenu.length === 0) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,

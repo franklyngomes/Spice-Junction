@@ -7,6 +7,7 @@ import type { Request, Response } from "express";
 import * as fsSync from "fs";
 import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
+import { RestaurantModel } from "../model/ResturantModel.js";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -20,6 +21,13 @@ class FoodItemController {
           status: false,
           message: error.message,
         });
+      }
+      const restaurant = await RestaurantModel.findById(value.restaurant)
+      if(!restaurant?.isApproved){
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "Your restaurant is not approved! Please try again later."
+        })
       }
       const { name } = req.body;
       const ifExists = await FoodItemModel.findOne({ name });

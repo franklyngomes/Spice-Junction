@@ -1,6 +1,7 @@
 import { FoodMenuModel, FoodMenuSchemaJoi } from "../model/FoodMenuModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
 import type { Request, Response } from "express";
+import { RestaurantModel } from "../model/ResturantModel.js";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -15,7 +16,14 @@ class FoodMenuController {
           message: error.message,
         });
       }
-      const {name} = req.body
+      const restaurant = await RestaurantModel.findById(value.restaurant);
+      if (!restaurant?.isApproved) {
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "Your restaurant is not approved! Please try again later.",
+        });
+      }
+      const { name } = req.body;
       const ifExists = await FoodMenuModel.findOne({ name });
       if (ifExists) {
         return res.status(HttpCode.badRequest).json({
@@ -61,10 +69,10 @@ class FoodMenuController {
       });
     }
   }
-    async getFoodMenuForRestaurant(req: Request, res: Response) {
+  async getFoodMenuForRestaurant(req: Request, res: Response) {
     try {
-      const id = req.params.id
-      const foodMenu = await FoodMenuModel.find({"restaurant": {$eq: id}});
+      const id = req.params.id;
+      const foodMenu = await FoodMenuModel.find({ restaurant: { $eq: id } });
       if (!foodMenu || foodMenu.length === 0) {
         return res.status(HttpCode.badRequest).json({
           status: false,
@@ -115,7 +123,7 @@ class FoodMenuController {
           message: "food menu not found!",
         });
       }
-      await foodMenu.save()
+      await foodMenu.save();
       return res.status(HttpCode.success).json({
         status: false,
         message: "Food menu updated successfully",

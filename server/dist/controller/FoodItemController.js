@@ -6,6 +6,7 @@ import { HttpCode } from "../helper/HttpCode.js";
 import * as fsSync from "fs";
 import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
+import { RestaurantModel } from "../model/ResturantModel.js";
 class FoodItemController {
     async createFoodItem(req, res) {
         try {
@@ -14,6 +15,13 @@ class FoodItemController {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
                     message: error.message,
+                });
+            }
+            const restaurant = await RestaurantModel.findById(value.restaurant);
+            if (!restaurant?.isApproved) {
+                return res.status(HttpCode.badRequest).json({
+                    status: false,
+                    message: "Your restaurant is not approved! Please try again later."
                 });
             }
             const { name } = req.body;
