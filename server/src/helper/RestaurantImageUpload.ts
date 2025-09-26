@@ -1,4 +1,5 @@
 import multer from "multer"
 
-const RestaurantImageUpload = multer({ storage: multer.memoryStorage() })
+const storage = multer.memoryStorage();
+const RestaurantImageUpload = multer({ storage });
 export default RestaurantImageUpload
