@@ -111,7 +111,7 @@ class RestaurantController {
             const id = req.params.id;
             const restaurant = await RestaurantModel.findOne({
                 ownerId: { $eq: id },
-            });
+            }).populate("ownerId", "firstName lastName email").populate("deliveryZone");
             if (!restaurant) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,

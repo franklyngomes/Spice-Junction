@@ -5,39 +5,39 @@ declare const RestaurantModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
     cuisine: string[];
     isApproved: boolean;
-    isBlocked: boolean;
-    name?: string | null;
     phone?: string | null;
-    image?: string | null;
+    name?: string | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    image?: string | null;
     imageId?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
     cuisine: string[];
     isApproved: boolean;
-    isBlocked: boolean;
-    name?: string | null;
     phone?: string | null;
-    image?: string | null;
+    name?: string | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    image?: string | null;
     imageId?: string | null;
 }, {}, {
     timestamps: true;
@@ -45,20 +45,20 @@ declare const RestaurantModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
     cuisine: string[];
     isApproved: boolean;
-    isBlocked: boolean;
-    name?: string | null;
     phone?: string | null;
-    image?: string | null;
+    name?: string | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    image?: string | null;
     imageId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
@@ -70,39 +70,39 @@ declare const RestaurantModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
     cuisine: string[];
     isApproved: boolean;
-    isBlocked: boolean;
-    name?: string | null;
     phone?: string | null;
-    image?: string | null;
+    name?: string | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    image?: string | null;
     imageId?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
     cuisine: string[];
     isApproved: boolean;
-    isBlocked: boolean;
-    name?: string | null;
     phone?: string | null;
-    image?: string | null;
+    name?: string | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    image?: string | null;
     imageId?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
@@ -110,20 +110,20 @@ declare const RestaurantModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    isBlocked: boolean;
     ownerId: mongoose.Types.ObjectId;
     deliveryZone: mongoose.Types.ObjectId[];
     cuisine: string[];
     isApproved: boolean;
-    isBlocked: boolean;
-    name?: string | null;
     phone?: string | null;
-    image?: string | null;
+    name?: string | null;
     address?: {
         buildingNo?: string | null;
         street?: string | null;
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    image?: string | null;
     imageId?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;

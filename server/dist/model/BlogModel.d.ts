@@ -6,8 +6,8 @@ declare const BlogModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    imageId?: string | null;
     description?: string | null;
+    imageId?: string | null;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
@@ -15,8 +15,8 @@ declare const BlogModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    imageId?: string | null;
     description?: string | null;
+    imageId?: string | null;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }, {}, {
@@ -26,8 +26,8 @@ declare const BlogModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    imageId?: string | null;
     description?: string | null;
+    imageId?: string | null;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 } & {
@@ -41,8 +41,8 @@ declare const BlogModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    imageId?: string | null;
     description?: string | null;
+    imageId?: string | null;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
@@ -50,8 +50,8 @@ declare const BlogModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    imageId?: string | null;
     description?: string | null;
+    imageId?: string | null;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
@@ -61,8 +61,8 @@ declare const BlogModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     image: string;
-    imageId?: string | null;
     description?: string | null;
+    imageId?: string | null;
     title?: string | null;
     author?: mongoose.Types.ObjectId | null;
 }> & {

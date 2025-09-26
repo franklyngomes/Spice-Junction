@@ -5,6 +5,7 @@ declare const UserModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    role: string;
     address: mongoose.Types.DocumentArray<{
         buildingNo?: string | null;
         street?: string | null;
@@ -21,14 +22,13 @@ declare const UserModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     }>;
-    isBlocked: boolean;
-    role: string;
     verified: boolean;
-    phone?: string | null;
+    isBlocked: boolean;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;
     password?: string | null;
+    phone?: string | null;
     verificationToken?: string | null;
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
@@ -38,6 +38,7 @@ declare const UserModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    role: string;
     address: mongoose.Types.DocumentArray<{
         buildingNo?: string | null;
         street?: string | null;
@@ -54,14 +55,13 @@ declare const UserModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     }>;
-    isBlocked: boolean;
-    role: string;
     verified: boolean;
-    phone?: string | null;
+    isBlocked: boolean;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;
     password?: string | null;
+    phone?: string | null;
     verificationToken?: string | null;
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
@@ -73,6 +73,7 @@ declare const UserModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    role: string;
     address: mongoose.Types.DocumentArray<{
         buildingNo?: string | null;
         street?: string | null;
@@ -89,14 +90,13 @@ declare const UserModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     }>;
-    isBlocked: boolean;
-    role: string;
     verified: boolean;
-    phone?: string | null;
+    isBlocked: boolean;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;
     password?: string | null;
+    phone?: string | null;
     verificationToken?: string | null;
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
@@ -112,6 +112,7 @@ declare const UserModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    role: string;
     address: mongoose.Types.DocumentArray<{
         buildingNo?: string | null;
         street?: string | null;
@@ -128,14 +129,13 @@ declare const UserModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     }>;
-    isBlocked: boolean;
-    role: string;
     verified: boolean;
-    phone?: string | null;
+    isBlocked: boolean;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;
     password?: string | null;
+    phone?: string | null;
     verificationToken?: string | null;
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
@@ -145,6 +145,7 @@ declare const UserModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    role: string;
     address: mongoose.Types.DocumentArray<{
         buildingNo?: string | null;
         street?: string | null;
@@ -161,14 +162,13 @@ declare const UserModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     }>;
-    isBlocked: boolean;
-    role: string;
     verified: boolean;
-    phone?: string | null;
+    isBlocked: boolean;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;
     password?: string | null;
+    phone?: string | null;
     verificationToken?: string | null;
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
@@ -180,6 +180,7 @@ declare const UserModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    role: string;
     address: mongoose.Types.DocumentArray<{
         buildingNo?: string | null;
         street?: string | null;
@@ -196,14 +197,13 @@ declare const UserModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     }>;
-    isBlocked: boolean;
-    role: string;
     verified: boolean;
-    phone?: string | null;
+    isBlocked: boolean;
     firstName?: string | null;
     lastName?: string | null;
     email?: string | null;
     password?: string | null;
+    phone?: string | null;
     verificationToken?: string | null;
     refreshToken?: string | null;
     verificationTokenExpires?: string | null;
