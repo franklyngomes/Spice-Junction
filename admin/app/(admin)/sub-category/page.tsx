@@ -145,7 +145,7 @@ const SubCategory = () => {
               <div className="rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.15]">
                 <div className="flex items-center  gap-4 justify-start">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.image}`}
+                    src={`${item.image}`}
                     width={80}
                     height={80}
                     alt='Category Item'

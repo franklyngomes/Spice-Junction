@@ -22,6 +22,7 @@ const schema = yup.object({
   email: yup.string().email().required("Email is required"),
   password: yup.string().required("Password is required").min(8).max(15),
 })
+
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const { handleSubmit, reset, control, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
@@ -31,21 +32,17 @@ export default function SignIn() {
 
   const onSubmit = async (data: SigninFormProps) => {
     const { email, password } = data
-    const payload = {
-      email,
-      password
-    }
+    const payload = { email, password }
     mutateAsync(payload, {
-      onSuccess: (res) => {
-        if (res.error) {
-          toast.error(res.message);
-          return;
-        }
-        const token = res?.accessToken
+      onSuccess: async (res) => {
+        if (res.error) { toast.error(res.message); return; }
+
+        const token = res?.accessToken;
         cookies.set("token", token)
         cookies.set("userId", res?.user._id)
+        cookies.set("role", res.user?.role)
         reset()
-        toast.success(res?.message);
+        toast.success(res?.message)
         router.push("/")
       },
     })
@@ -137,7 +134,7 @@ export default function SignIn() {
 
             <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
-                want to have a restaurant account? {""}
+                Want to list your restaurant? {""}
                 <Link
                   href="/restaurant-signup"
                   className="text-brand-500 hover:text-brand-600 dark:text-brand-400 ml-2"

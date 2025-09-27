@@ -84,7 +84,7 @@ const DeliveryZone = () => {
   return (
     <div>
       <div className="flex flex-wrap justify-between items-center mb-4">
-        <PageBreadcrumb pageTitle="Category" breadCrumbTitle="Category" />
+        <PageBreadcrumb pageTitle="Delivery Zone" breadCrumbTitle="Delivery Zone" />
         <Button size="sm" variant="primary" startIcon={<CategoryIcon />} onClick={openModal}>
           Add Category
         </Button>
@@ -97,26 +97,26 @@ const DeliveryZone = () => {
                 <div className="flex items-end justify-between">
                   <div>
                     <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
-                      <h6 className='text-[12px] text-brand-500'>Area</h6>
+                      <p className='text-[12px] text-brand-500'>Area</p>
                       {item.zoneName}
                     </h5>
                   </div>
                   <div>
                     <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
-                      <h6 className='text-[12px] text-brand-500'>District</h6>
+                      <p className='text-[12px] text-brand-500'>District</p>
                       {item.district}
                     </h5>
                   </div>
                 </div>
                 <div>
                   <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
-                    <h6 className='text-[12px] text-brand-500'>Zone</h6>
+                    <p className='text-[12px] text-brand-500'>Zone</p>
                     {item.division}
                   </h5>
                 </div>
                 <div>
                   <h5 className="mt-2 font-bold bg-gray-200 dark:bg-gray-600 rounded-lg p-2 mb-4 text-gray-800 text-lg dark:text-white/90">
-                    <h6 className='text-[12px] text-brand-500'>Pincodes</h6>
+                    <p className='text-[12px] text-brand-500'>Pincodes</p>
                     <div className='flex flex-row gap-3 mb-4'>
                     {item.pinCodeList?.map((item: string, index: number) => (
                         <div key={index} className="flex justify-center items-center w-20 h-8 px-3 bg-gray-100 rounded-md dark:bg-gray-300 text-sm text-brand-500">

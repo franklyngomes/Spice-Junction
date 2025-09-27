@@ -17,6 +17,7 @@ export default function AdminLayout({
   const cookies = new Cookies()
   const userId = cookies.get("userId")
   const { data } = RestaurantByOwnerQuery(userId, !!userId)
+
   // Dynamic class for main content margin based on sidebar state
   const mainContentMargin = isMobileOpen
     ? "ml-0"
@@ -25,8 +26,8 @@ export default function AdminLayout({
       : "lg:ml-[90px]";
 
   React.useEffect(() => {
-    if(data){
-      cookies.set("restaurantId", data?.data[0]?._id)
+    if(data !== undefined){
+      cookies.set("restaurantId", data?._id)
     }
     return
   }, [data])

@@ -29,7 +29,16 @@ export const endPoints = {
     update_category: "/category-update/"
   },
   restaurant: {
-    restaurant_by_owner: "/restaurant-by-owner/"
+    restaurant_by_owner: "/restaurant-by-owner/",
+    create_restaurant: "/create-restaurant",
+    all_restaurant: "/all-restaurant",
+    restaurant_details: "/restaurant-details/",
+    update_restaurant: "/update-restaurant/",
+    delete_restaurant: "/delete-restaurant/"
+  },
+  request: {
+    all_request: "/admin/get-restaurant-request",
+    respond_request: "/admin/respond-restaurant-request/"
   },
   delivery_zone: {
     create_zone: "/create-delivery-zone",
