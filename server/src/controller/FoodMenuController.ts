@@ -23,14 +23,6 @@ class FoodMenuController {
           message: "Your restaurant is not approved! Please try again later.",
         });
       }
-      const { name } = req.body;
-      const ifExists = await FoodMenuModel.findOne({ name });
-      if (ifExists) {
-        return res.status(HttpCode.badRequest).json({
-          status: false,
-          message: "Food menu with this name already exists!",
-        });
-      }
       const foodMenu = new FoodMenuModel({
         name: value.name,
         restaurant: value.restaurant,
