@@ -25,7 +25,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     name?: string | null;
     imageId?: string | null;
     categoryNo?: string | null;
@@ -53,7 +53,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     name?: string | null;
     imageId?: string | null;
     categoryNo?: string | null;
@@ -83,7 +83,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     name?: string | null;
     imageId?: string | null;
     categoryNo?: string | null;
@@ -117,7 +117,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     name?: string | null;
     imageId?: string | null;
     categoryNo?: string | null;
@@ -145,7 +145,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     name?: string | null;
     imageId?: string | null;
     categoryNo?: string | null;
@@ -175,7 +175,7 @@ declare const SubCategoryModel: mongoose.Model<{
         image?: string | null;
         price?: number | null;
     }>;
-    category: mongoose.Types.ObjectId;
+    category: mongoose.Types.ObjectId[];
     name?: string | null;
     imageId?: string | null;
     categoryNo?: string | null;

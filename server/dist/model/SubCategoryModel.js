@@ -9,14 +9,14 @@ const SubCategorySchemaJoi = Joi.object({
         "string.max": "Name should be not more than 15 characters",
         "any.required": "Name cannot be empty!",
     }),
-    category: Joi.string()
-        .required()
-        .custom((value, helpers) => {
+    category: Joi.array()
+        .items(Joi.string().custom((value, helpers) => {
         if (!mongoose.Types.ObjectId.isValid(value)) {
             return helpers.error("any.invalid");
         }
         return value;
-    }, "Object Validation")
+    }, "Object Validation"))
+        .required()
         .messages({
         "any.required": "Category is required!",
         "any.invalid": "Category must be valid object id!",
@@ -32,11 +32,11 @@ const SubCategorySchema = new Schema({
     name: {
         type: String,
     },
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "category",
-        required: true,
-    },
+    category: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "category",
+            required: true,
+        }],
     image: {
         type: String,
         required: true,
