@@ -3,10 +3,9 @@ import { FoodMenuModel } from "../model/FoodMenuModel.js";
 import { CategoryModel } from "../model/CategoryModel.js";
 import { SubCategoryModel } from "../model/SubCategoryModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
-import * as fsSync from "fs";
-import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
 import { RestaurantModel } from "../model/ResturantModel.js";
+import { uploadFoodItemToCloudinary } from "../utils/FoodItemCloudinaryUpload.js";
 class FoodItemController {
     async createFoodItem(req, res) {
         try {
@@ -21,7 +20,7 @@ class FoodItemController {
             if (!restaurant?.isApproved) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
-                    message: "Your restaurant is not approved! Please try again later."
+                    message: "Your restaurant is not approved! Please try again later.",
                 });
             }
             const { name } = req.body;
@@ -40,11 +39,7 @@ class FoodItemController {
                 });
             }
             //upload to Cloudinary
-            const multerPath = multerReq.file.path.replace(/\\/g, "/");
-            const result = await cloudinary.uploader.upload(multerPath.replace(/\\/g, "/"), {
-                folder: "spice_junction_food_items",
-            });
-            fs.unlink(multerPath);
+            const result = await uploadFoodItemToCloudinary(multerReq.file);
             const foodItem = new FoodItemModel({
                 name: value.name,
                 description: value.description,
@@ -200,14 +195,10 @@ class FoodItemController {
             if (multerReq.file) {
                 if (foodItem.imageId) {
                     await cloudinary.uploader.destroy(foodItem.imageId);
-                    const multerPath = multerReq.file.path.replace(/\\/g, "/");
-                    const result = await cloudinary.uploader.upload(multerPath.replace(/\\/g, "/"), {
-                        folder: "spice_junction_food_items",
-                    });
-                    foodItem.image = result.secure_url;
-                    foodItem.imageId = result.public_id;
-                    fs.unlink(multerPath);
                 }
+                const result = await uploadFoodItemToCloudinary(multerReq.file);
+                foodItem.image = result.secure_url;
+                foodItem.imageId = result.public_id;
             }
             foodItem.name = req.body.name || foodItem.name;
             foodItem.description = req.body.description || foodItem.description;

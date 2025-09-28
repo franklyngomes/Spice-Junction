@@ -1,9 +1,8 @@
 import { BlogModel, BlogSchemaJoi } from "../model/BlogModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
 import type { Request, Response } from "express";
-import * as fsSync from "fs";
-import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
+import { uploadBlogToCloudinary } from "../utils/BlogCloudinaryUpload.js";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -34,14 +33,7 @@ class BlogController {
         });
       }
       //upload to Cloudinary
-      const multerPath = multerReq.file.path.replace(/\\/g, "/");
-      const result = await cloudinary.uploader.upload(
-        multerPath.replace(/\\/g, "/"),
-        {
-          folder: "spice_junction_blogs",
-        }
-      );
-      fs.unlink(multerPath);
+      const result = await uploadBlogToCloudinary(multerReq.file);
       const newBlog = new BlogModel({
         title: value.title,
         author: value.author,
@@ -122,20 +114,14 @@ class BlogController {
         });
       }
       const multerReq = req as MulterRequest;
+
       if (multerReq.file) {
         if (blog.imageId) {
           await cloudinary.uploader.destroy(blog.imageId);
-          const multerPath = multerReq.file.path.replace(/\\/g, "/");
-          const result = await cloudinary.uploader.upload(
-            multerPath.replace(/\\/g, "/"),
-            {
-              folder: "spice_junction_blogs",
-            }
-          );
-          blog.image = result.secure_url;
-          blog.imageId = result.public_id;
-          fs.unlink(multerPath);
         }
+        const result = await uploadBlogToCloudinary(multerReq.file);
+        blog.image = result.secure_url;
+        blog.imageId = result.public_id;
       }
       await blog.save();
       return res.status(HttpCode.success).json({

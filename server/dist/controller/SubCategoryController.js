@@ -1,10 +1,9 @@
 import { SubCategoryModel } from "../model/SubCategoryModel.js";
 import { SubCategorySchemaJoi } from "../model/SubCategoryModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
-import * as fsSync from "fs";
-import { promises as fs } from "fs";
 import cloudinary from "../config/cloudinary.js";
 import path from "path";
+import { uploadCategoryToCloudinary } from "../utils/CategoryCloudinaryUpload.js";
 class SubCategoryController {
     async createSubCategory(req, res) {
         try {
@@ -31,9 +30,7 @@ class SubCategoryController {
                 });
             }
             //upload to Cloudinary
-            const result = await cloudinary.uploader.upload(multerReq.file.path, {
-                folder: "spice_junction_sub_category",
-            });
+            const result = await uploadCategoryToCloudinary(multerReq.file);
             const subCategory = new SubCategoryModel({
                 name: value.name,
                 category: value.category,
@@ -115,14 +112,10 @@ class SubCategoryController {
             if (multerReq.file) {
                 if (category.imageId) {
                     await cloudinary.uploader.destroy(category.imageId);
-                    const multerPath = multerReq.file.path.replace(/\\/g, "/");
-                    const result = await cloudinary.uploader.upload(multerPath.replace(/\\/g, "/"), {
-                        folder: "spice_junction_sub_category",
-                    });
-                    category.image = result.secure_url;
-                    category.imageId = result.public_id;
-                    fs.unlink(multerPath);
                 }
+                const result = await uploadCategoryToCloudinary(multerReq.file);
+                category.image = result.secure_url;
+                category.imageId = result.public_id;
             }
             await category.save();
             return res.status(HttpCode.success).json({

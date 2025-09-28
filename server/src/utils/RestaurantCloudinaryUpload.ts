@@ -1,6 +1,6 @@
 import cloudinary from "../config/cloudinary.js";
 
-export const uploadToCloudinary = (file: Express.Multer.File) =>
+export const uploadRestaurantToCloudinary = (file: Express.Multer.File) =>
   new Promise<any>((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
      {
