@@ -1,0 +1,1 @@
+{"version":3,"file":"HttpCode.js","sourceRoot":"","sources":["../../src/helper/HttpCode.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,QAAQ,GAAG;IACtB,OAAO,EAAE,GAAG;IACZ,MAAM,EAAC,GAAG;IACV,UAAU,EAAE,GAAG;IACf,YAAY,EAAE,GAAG;IACjB,SAAS,EAAC,GAAG;IACb,QAAQ,EAAC,GAAG;IACZ,WAAW,EAAC,GAAG;CAChB,CAAA"}

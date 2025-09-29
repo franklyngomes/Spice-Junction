@@ -4,17 +4,47 @@
   "description": "",
   "license": "ISC",
   "author": "Franklyn Gomes",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec node --loader ts-node/esm ./src/index.ts",
+    "build": "npm install && tsc",
+    "start": "nodemon ./dist/index.js",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.4.0",
+    "@types/nodemailer": "^7.0.1",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0"
   },
   "dependencies": {
+    "@types/multer": "^2.0.0",
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
-    "ejs": "^3.1.10",
+    "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "joi": "^18.0.1",
-    "mongoose": "^8.18.0"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2",
+    "nanoid": "^5.1.5",
+    "nodemailer": "^7.0.6",
+    "razorpay": "^2.9.6",
+    "swagger-ui-express": "^5.0.1",
+    "tsc-watch": "^7.1.1",
+    "yaml": "^2.8.1"
   }
 }
