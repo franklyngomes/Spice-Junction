@@ -5,9 +5,9 @@ import { customAlphabet } from "nanoid";
 const nanoid = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 6);
 
 const SubCategorySchemaJoi = Joi.object({
-  name: Joi.string().min(3).max(15).required().messages({
+  name: Joi.string().min(3).max(30).required().messages({
     "string.min": "Name must be at least 3 characters",
-    "string.max": "Name should be not more than 15 characters",
+    "string.max": "Name should be not more than 30 characters",
     "any.required": "Name cannot be empty!",
   }),
   category: Joi.array()
