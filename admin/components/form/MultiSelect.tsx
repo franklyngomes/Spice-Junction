@@ -25,6 +25,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     useState<string[]>(defaultSelected);
   const [isOpen, setIsOpen] = useState(false);
 
+   React.useEffect(() => {
+    setSelectedOptions(defaultSelected);
+  }, [defaultSelected]);
+
   const toggleDropdown = () => {
     if (disabled) return;
     setIsOpen((prev) => !prev);

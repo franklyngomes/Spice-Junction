@@ -1,7 +1,6 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
 import {CreateSubCategory, SubCategoryDetails, UpdateSubCategory, DeleteSubCategory, AllSubCategory} from "../functions/SubCategoryFunc"
 import { queryClient } from "../../app/provider"
-import { SubCategoryData } from "../../types/types"
 
 export const AllSubCategoryQuery = () => {
   return useQuery({
@@ -14,6 +13,7 @@ export const CreateSubCategoryQuery = () => {
     mutationFn:CreateSubCategory,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:["SUBCATEGORY_LIST"]})
+      queryClient.refetchQueries({queryKey:["SUBCATEGORY_LIST"]})
     },
     onError: (err) => {
       return err;
@@ -32,6 +32,7 @@ export const UpdateSubCategoryQuery = () => {
     mutationFn:({editId, formdata} : {editId:string, formdata: FormData}) => UpdateSubCategory(editId, formdata),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:["SUBCATEGORY_LIST"]})
+      queryClient.refetchQueries({queryKey:["SUBCATEGORY_LIST"]})
       queryClient.invalidateQueries({queryKey:["SUBCATEGORY_DETAILS"]})
     },
     onError: (err) => {

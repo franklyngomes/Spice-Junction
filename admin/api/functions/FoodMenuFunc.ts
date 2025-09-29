@@ -43,7 +43,7 @@ export const FoodMenuDetails = async (id: string) => {
     return { error: true, message: "Unexpected error" };
   }
 }
-export const RestaurantFoodMenu = async (id: string) : Promise<FoodMenuResponse> => {
+export const RestaurantFoodMenu = async (id: string | undefined) : Promise<FoodMenuResponse> => {
   try {
     const response = await axiosInstance.get(endPoints.foodmenu.restaurant_food_menu+id);
     return response?.data

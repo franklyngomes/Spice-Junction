@@ -46,6 +46,8 @@ export interface StoreState {
   setEditId: (id: string) => void;
   user: UserProfile | null
   setUser: (value: UserProfile) => void
+  restaurantId?: string,
+  setRestaurantId: (value: string) => void
 }
 export interface FoodMenuData {
   name: string,
@@ -122,9 +124,9 @@ export interface FoodItemData {
 }
 export interface SubCategory {
   category: {
-    name: string,
-    _id: string
-  }
+    _id:string,
+    name?:string
+  }[],
   categoryNo: string,
   createdAt?: string,
   image: File | string | null,
@@ -147,7 +149,7 @@ export interface SubCategoryDetailsResponse {
 export interface SubCategoryData {
   name: string,
   image: File | string | null,
-  category: string,
+  category: string[],
 }
 export interface CategoryData {
   name: string;

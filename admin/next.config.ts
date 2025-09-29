@@ -16,8 +16,12 @@ const nextConfig: NextConfig = {
         hostname: 'picsum.photos',
       },
       {
-        protocol: 'https', 
+        protocol: 'https',
         hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'spice-junction.onrender.com',
       },
     ],
   },

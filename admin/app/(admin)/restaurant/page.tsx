@@ -83,7 +83,7 @@ const Restaurant = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { editId, isEditing, setIsEditing, setEditId } = useStore();
   const { handleSubmit, reset, control, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-  let id = cookies.get("restaurantId")
+  let id = cookies.get("restaurant")
   if (!id || id === "undefined") {
     id = undefined
   }

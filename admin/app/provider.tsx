@@ -21,7 +21,7 @@ const Provider = ({ children }: { children: ReactNode }) => {
         containerStyle={{
           zIndex: 99999,
         }}
-      />
+        />
     </QueryClientProvider>
   )
 }

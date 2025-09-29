@@ -9,7 +9,7 @@ export const AllFoodMenuQuery = () => {
     queryFn: AllFoodMenu
   })
 }
-export const RestaurantFoodMenuQuery = (id: string, enabled: boolean) => {
+export const RestaurantFoodMenuQuery = (id: string | undefined, enabled: boolean) => {
   return useQuery({
     queryKey: ["RESTAURANT_FOOD_MENU", id],
     queryFn:() => RestaurantFoodMenu(id),

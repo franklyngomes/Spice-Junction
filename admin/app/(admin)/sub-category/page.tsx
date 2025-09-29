@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { CategoryIcon, ChevronDownIcon, PencilIcon, TrashBinIcon } from '../../../icons'
+import { CategoryIcon, PencilIcon, TrashBinIcon } from '../../../icons'
 import Button from "../../../components/ui/button/Button";
 import PageBreadcrumb from '../../../components/common/PageBreadCrumb';
 import { Modal } from '../../../components/ui/modal';
@@ -15,9 +15,9 @@ import { SubCategoryData } from '../../../types/types';
 import toast from 'react-hot-toast';
 import { AllSubCategoryQuery, CreateSubCategoryQuery, DeleteSubCategoryQuery, SubCategoryDetailsQuery, UpdateSubCategoryQuery } from '../../../api/query/SubCategoryQuery';
 import FileInput from '../../../components/form/input/FileInput';
-import Select from '../../../components/form/Select';
 import { AllCategoryQuery } from '../../../api/query/CategoryQuery';
 import Image from 'next/image';
+import MultiSelect from '../../../components/form/MultiSelect';
 
 const schema = yup.object({
   name: yup.string().required("Name is required"),
@@ -29,12 +29,12 @@ const schema = yup.object({
       if (value instanceof File) return value.size > 0;
       return false;
     }),
-  category: yup.string().required("Sub Category is required"),
+  category: yup.array().of(yup.string()).required("Sub Category is required"),
 });
 const SubCategory = () => {
+  const [categoryList, setCategoryList] = React.useState<{ value: string; text: string; selected: boolean; }[]>([])
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [image, setImage] = React.useState<File | null>(null)
-  const [categoryOption, setCategoryOption] = React.useState<{ label: string; value: string }[]>([])
   const { editId, isEditing, setIsEditing, setEditId } = useStore();
   const { data } = AllSubCategoryQuery()
   const subCategory = data?.data
@@ -52,10 +52,12 @@ const SubCategory = () => {
     const { name, category, image } = data
     const formdata = new FormData()
     formdata.append("name", name)
-    formdata.append("category", category)
     if (image instanceof File) {
       formdata.append("image", image);
     }
+    category.forEach((cat: string) => {
+      formdata.append("category", cat)
+    })
     create(formdata, {
       onSuccess: (res) => {
         if (res.error) {
@@ -72,7 +74,9 @@ const SubCategory = () => {
     const { name, category, image } = data
     const formdata = new FormData()
     formdata.append("name", name)
-    formdata.append("category", category)
+    category.forEach((cat: string) => {
+      formdata.append("category", cat)
+    })
     if (image && image instanceof File) {
       formdata.append("image", image);
     } else {
@@ -112,20 +116,22 @@ const SubCategory = () => {
   }, [isEditing, openModal])
   React.useEffect(() => {
     if (categories && Array.isArray(categories)) {
-      setCategoryOption(categories.map((itm) => ({ label: itm.name, value: itm._id })));
+      const formattedCategory = categories.map((item) => ({ value: item._id, text: item.name, selected: false }))
+      setCategoryList(formattedCategory)
     }
   }, [categories])
+
   React.useEffect(() => {
     if (isEditing && category_details) {
       reset({
         name: category_details.name,
-        category: category_details.category?._id,
+        category: category_details.category?.map((item) => item?._id) ?? [],
         image: category_details.image ?? ""
       });
     } else {
       reset({
         name: "",
-        category: "",
+        category: [],
         image: "",
       })
     }
@@ -141,35 +147,40 @@ const SubCategory = () => {
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         {
           subCategory?.map((item, index) => (
-            <div className="col-span-12 sm:col-span-6 space-y-6 md:col-span-4" key={index}>
-              <div className="rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.15]">
-                <div className="flex items-center  gap-4 justify-start">
-                  <Image
-                    src={`${item.image}`}
-                    width={80}
-                    height={80}
-                    alt='Category Item'
+            <div key={index} className="col-span-12 sm:col-span-6 space-y-6 md:col-span-4 rounded-2xl border dark:border-gray-800 dark:bg-white/[0.15] bg-white shadow-sm hover:shadow-md transition overflow-hidden">
+              {/* Image with floating edit button */}
+              <div className="relative p-3">
+                <Image
+                  src={`${item.image}`}
+                  width={100}
+                  height={100}
+                  alt='Category Item'
 
-                    className='rounded-xl h-[80px]!'
-                  />
-                  <h5 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
-                    {item.name}
-                  </h5>
-                </div>
+                  className='rounded-xl h-25! w-25'
+                />
+                <button className="absolute top-2 right-2 bg-brand-500 hover:bg-brand-600 text-white rounded-lg p-4 shadow-md transition" onClick={() => {
+                  setIsEditing(true)
+                  setEditId(item._id)
+                }}>
+                  <PencilIcon className="h-5 w-5" />
+                </button>
+              </div>
 
-                <div className="flex items-end justify-between mt-5">
-                  <div className="flex items-center justify-center w-auto h-12 px-3 bg-gray-100 rounded-xl dark:bg-gray-300">
-                    {item?.items?.length} Items
-                  </div>
-                  <div className="flex flex-col items-center justify-center w-auto h-12 p-3 bg-gray-100 rounded-xl dark:bg-gray-300">
-                    <h6 className='text-[12px] text-brand-500'>Category</h6>
-                    {item?.category?.name}
-                  </div>
-                  <Button size="sm" variant="primary" endIcon={<PencilIcon />} onClick={() => {
-                    setIsEditing(true)
-                    setEditId(item._id)
-                  }}>
-                  </Button>
+              {/* Content */}
+              <div className="p-4">
+                {/* Dish Name */}
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">{item.name}</h3>
+
+                {/* Items Count */}
+                <p className="text-sm text-gray-300 mt-1">{item?.items?.length} Items</p>
+
+                {/* Categories */}
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {item?.category.map((itm, index) => (
+                    <div key={index} className="flex items-center justify-center gap-2 w-auto h-auto px-2 bg-gray-300 dark:bg-brand-500 dark:text-white/90 rounded-md">
+                      {itm.name}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -212,24 +223,23 @@ const SubCategory = () => {
                     </div>
                   </div>
                   <div>
-                    <Label>Select Category</Label>
                     <div className="relative">
                       <Controller
                         control={control}
                         name="category"
-                        render={({ field }) => (
-                          <Select
-                            {...field}
-                            value={field.value ?? ""}
-                            options={categoryOption}
-                            placeholder="Select Category"
-                            className="dark:bg-dark-900"
-                          />
-                        )}
+                        render={({ field }) => {
+                          const { value = [], onChange } = field;
+                          return (
+                            <MultiSelect
+                              label="Select Category"
+                              options={categoryList}
+                              /* @ts-expect-error resetting with string | File | null*/
+                              defaultSelected={value?.map((item) => item)}
+                              onChange={(selected: string[]) => onChange(selected)}
+                            />
+                          );
+                        }}
                       />
-                      <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
-                        <ChevronDownIcon />
-                      </span>
                     </div>
                     {errors.category && (
                       <p style={{ color: "red", margin: "0", padding: "5px" }}>

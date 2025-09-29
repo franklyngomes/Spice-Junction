@@ -13,10 +13,7 @@ export default function Ecommerce() {
   const [isClient, setIsClient] = React.useState(false);
   const cookies = new Cookies()
   const role = cookies.get("role")
-  let restaurant = cookies.get("restaurantId")
-  if (!restaurant || restaurant === "undefined") {
-    restaurant = undefined
-  }
+  const restaurantId = cookies.get("restaurant")
   React.useEffect(() => {
     setIsClient(true)
   }, [])
@@ -26,7 +23,7 @@ export default function Ecommerce() {
         isClient && (
           <>
             {
-              restaurant && role === "restaurant" || role === "admin" ?
+              restaurantId && role === "restaurant" || role === "admin" ?
                 <div className="grid grid-cols-12 gap-4 md:gap-6">
                   <div className="col-span-12 space-y-6 xl:col-span-7">
                     <EcommerceMetrics />

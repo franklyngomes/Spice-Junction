@@ -36,11 +36,13 @@ export default function SignIn() {
     mutateAsync(payload, {
       onSuccess: async (res) => {
         if (res.error) { toast.error(res.message); return; }
-
         const token = res?.accessToken;
         cookies.set("token", token)
         cookies.set("userId", res?.user._id)
         cookies.set("role", res.user?.role)
+        const restaurantId = res?.user?.restaurantId ?? "";
+        cookies.set("restaurant", restaurantId, { path: "/" });
+
         reset()
         toast.success(res?.message)
         router.push("/")

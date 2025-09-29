@@ -7,5 +7,7 @@ export const useStore = create<StoreState>((set) => ({
   setIsEditing: (value) => set(() => ({isEditing: value})),
   setEditId: (id) => set(() => ({editId: id})),
   user: null,
-  setUser: (value) => set(() => ({user: value}))
+  setUser: (value) => set(() => ({user: value})),
+  restaurantId: undefined,
+  setRestaurantId:(value) => set(() => ({restaurantId : value}))
 }))

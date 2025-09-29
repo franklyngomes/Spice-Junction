@@ -2,7 +2,7 @@ import { useMutation, useQuery} from "@tanstack/react-query"
 import {CreateFoodItem, FoodItemDetails, UpdateFoodItem, DeleteFoodItem, RestaurantFoodItem} from "../functions/FoodItemFunc"
 import { queryClient } from "../../app/provider"
 
-export const RestaurantFoodItemQuery = (id: string, enabled: boolean) => {
+export const RestaurantFoodItemQuery = (id: string | undefined, enabled: boolean) => {
   return useQuery({
     queryKey: ["RESTAURANT_FOOD_ITEM", id],
     queryFn:() => RestaurantFoodItem(id),

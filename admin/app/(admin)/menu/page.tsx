@@ -24,7 +24,7 @@ const schema = yup.object({
 const Menu = () => {
   const cookies = new Cookies()
   const { editId, isEditing, setIsEditing, setEditId } = useStore();
-  let id = cookies.get("restaurantId")
+  let id = cookies.get("restaurant")
   if (!id || id === "undefined") {
     id = undefined
   }
