@@ -22,8 +22,24 @@ const SubCategorySchemaJoi = Joi.object({
         "any.invalid": "Category must be valid object id!",
     }),
     items: Joi.array().items({
-        name: Joi.string(),
-        description: Joi.string(),
+        name: Joi.string().min(6).max(50).messages({
+            "string.min": "Name must be at least 6 characters",
+            "string.max": "Name should be not more than 50 characters",
+        }),
+        description: Joi.string().min(50).max(200).messages({
+            "string.min": "Name must be at least 6 characters",
+            "string.max": "Name should be not more than 20 characters",
+        }),
+        subCategory: Joi.string()
+            .custom((value, helpers) => {
+            if (!mongoose.Types.ObjectId.isValid(value)) {
+                return helpers.error("any.invalid");
+            }
+            return value;
+        }, "Object Validation")
+            .messages({
+            "any.invalid": "Sub category must be valid object id!",
+        }),
         price: Joi.number(),
         image: Joi.string(),
     }),
@@ -32,11 +48,13 @@ const SubCategorySchema = new Schema({
     name: {
         type: String,
     },
-    category: [{
+    category: [
+        {
             type: mongoose.Schema.Types.ObjectId,
             ref: "category",
             required: true,
-        }],
+        },
+    ],
     image: {
         type: String,
         required: true,
