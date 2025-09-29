@@ -1,12 +1,25 @@
 import multer from "multer";
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '././uploads/fooditem');
+const storage = multer.memoryStorage();
+const FoodItemImageUpload = multer({
+    storage,
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+            "image/avif",
+            "image/webp",
+        ];
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        }
+        else {
+            cb(new Error("Only image files are allowed"));
+        }
     },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + file.originalname);
-    }
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+    },
 });
-const FoodItemImageUpload = multer({ storage: storage });
 export default FoodItemImageUpload;
 //# sourceMappingURL=FoodItemImageUpload.js.map

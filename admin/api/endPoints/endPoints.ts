@@ -19,39 +19,41 @@ export const endPoints = {
     subcategory_details:"/sub-category-details/",
     all_subcategory: "/all-sub-category",
     delete_subcategory: "/delete-sub-category/",
-    update_subcategory: "/update-sub-category"
+    update_subcategory: "/update-sub-category/"
+  },
+    category: {
+    create_category: "/create-category",
+    category_details:"/category-details/",
+    all_category: "/all-category",
+    delete_category: "/category-delete/",
+    update_category: "/category-update/"
   },
   restaurant: {
-    restaurant_by_owner: "/restaurant-by-owner/"
+    restaurant_by_owner: "/restaurant-by-owner/",
+    create_restaurant: "/create-restaurant",
+    all_restaurant: "/all-restaurant",
+    restaurant_details: "/restaurant-details/",
+    update_restaurant: "/update-restaurant/",
+    delete_restaurant: "/delete-restaurant/"
   },
-  appointments: {
-    appointment_create: "/appointment-create",
-    appointment_list: "/all-appointment",
-    appointment_details: "/appointment-details/",
-    appointment_update: "/appointment-update/",
-    appointment_delete: "/appointment-delete/",
-    appointment_group: "/appointment-group/"
+  request: {
+    all_request: "/admin/get-restaurant-request",
+    respond_request: "/admin/respond-restaurant-request/"
   },
-  patients: {
-    patient_create: "/patient-create",
-    patient_list: "/all-patients",
-    patient_details: "/patient-details/",
-    patient_update: "/patient-update/",
-    patient_delete: "/patient-delete/"
+  delivery_zone: {
+    create_zone: "/create-delivery-zone",
+    get_zone: "/all-delivery-zone",
+    zone_details: "/delivery-zone-details/",
+    zone_delete: "/delete-delivery-zone/"
   },
-  doctors: {
-    doctor_create: "/doctor-create",
-    doctor_list: "/all-doctor",
-    doctor_details: "/doctor-details/",
-    doctor_update: "/doctor-update/",
-    doctor_delete: "/doctor-delete/"
+  blogs: {
+    create_blog: "/create-blog",
+    all_blogs: "/all-blogs",
+    blog_details: "/blogs-details/",
+    blog_update:"/blog-update/",
+    blog_delete: "/blog-delete/"
   },
-  rooms: {
-    room_create: "/room-create",
-    room_list: "/all-room",
-    room_details: "/room-details/",
-    room_update: "/room-update/",
-    room_delete: "/room-delete/"
+  orders: {
   },
   auth: {
     adminsignup: "/admin/signup",

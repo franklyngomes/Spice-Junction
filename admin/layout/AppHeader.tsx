@@ -11,6 +11,7 @@ import { Cookies } from "react-cookie";
 import { DropdownItem } from "../components/ui/dropdown/DropdownItem";
 import { Dropdown } from "../components/ui/dropdown/Dropdown";
 import { AccountIcon, InfoIcon, UsersIcon } from "../icons";
+import { RestaurantByOwnerQuery } from "../api/query/RestaurantQuery";
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
@@ -19,6 +20,10 @@ const AppHeader: React.FC = () => {
   const cookies = new Cookies()
   const { user, setUser } = useStore()
   const token = cookies.get('token')
+  const userId = cookies.get('userId')
+  const {data: rest} = RestaurantByOwnerQuery(userId, !!userId)
+  const restaurant_details = rest?.data
+  cookies.set("restaurantId", restaurant_details?._id)
   const { data,isSuccess, isError } = UserProfileQuery()
 
   const handleToggle = () => {
@@ -58,6 +63,8 @@ const AppHeader: React.FC = () => {
     if (cookies.get('token')) {
       cookies.remove('token')
       cookies.remove('userId')
+      cookies.remove("role")
+      cookies.remove("restaurantId")
     }
   }
 useEffect(() => {

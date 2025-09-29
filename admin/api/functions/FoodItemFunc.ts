@@ -2,8 +2,7 @@ import { Cookies } from "react-cookie";
 import { axiosInstance } from "../axios/axiosInstance";
 import { endPoints } from "../endPoints/endPoints";
 import axios from "axios";
-import { FoodItemData, FoodItemDetailsResponse, FoodItemResponse } from "../../types/types";
-// import { FoodItemData, FoodItemResponse } from "../../types/types";
+import { FoodItemDetailsResponse, FoodItemResponse } from "../../types/types";
 
 export const CreateFoodItem = async (payload: FormData) => {
   const cookies = new Cookies()
@@ -44,7 +43,7 @@ export const RestaurantFoodItem = async (id: string) : Promise<FoodItemResponse>
     return { error: true, message: "Unexpected error" };
   }
 }
-export const UpdateFoodItem = async (id : string,payload : FoodItemData) => {
+export const UpdateFoodItem = async (id : string,payload : FormData) => {
   const cookies = new Cookies()
   const token = cookies.get("token")
   try {

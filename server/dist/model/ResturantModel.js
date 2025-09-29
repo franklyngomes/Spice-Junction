@@ -44,7 +44,7 @@ const RestaurantSchemaJoi = Joi.object({
         .required()
         .messages({
         "string.pattern.base": "Phone number must be exactly 10 digits.",
-        "any.required": "Phone number is required."
+        "any.required": "Phone number is required.",
     }),
     deliveryZone: Joi.array()
         .items(Joi.string().custom((value, helpers) => {
@@ -97,6 +97,9 @@ const RestaurantSchema = new Schema({
         },
     ],
     image: {
+        type: String,
+    },
+    imageId: {
         type: String,
     },
     cuisine: [

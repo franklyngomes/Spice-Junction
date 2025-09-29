@@ -16,16 +16,10 @@ export const ROLE_PERMISSIONS = {
     "delete_category",
 
     "add_delivery_zone",
-    "update_delivery_zone",
     "delete_delivery_zone",
 
     "view_order",
     "delete_order",
-
-    "create_payment_log",
-    "update_payment_log",
-    "delete_payment_log",
-    "view_payment_log",
 
     "block_users",
     "delete_invoice",
@@ -47,21 +41,12 @@ export const ROLE_PERMISSIONS = {
     "update_food_item",
     "delete_food_item",
 
-    "create_order",
     "view_order",
     "update_order",
-    "view_payment_log",
-    "update_payment_log",
   ],
   [ROLES.CUSTOMER]: [
     "create_order",
     "view_order",
-    "create_payment_log",
-    "view_payment_log",
     "create_blog",
-    "update_blog",
-    "delete_blog",
-    "view_order",
-    "create_order"
   ],
 };

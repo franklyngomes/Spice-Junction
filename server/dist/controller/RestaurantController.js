@@ -1,7 +1,7 @@
 import { RestaurantModel, RestaurantSchemaJoi, } from "../model/ResturantModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
-import * as fsSync from "fs";
-import { promises as fs } from "fs";
+import cloudinary from "../config/cloudinary.js";
+import { uploadRestaurantToCloudinary } from "../utils/RestaurantCloudinaryUpload.js";
 class RestaurantController {
     async createRestaurant(req, res) {
         try {
@@ -20,21 +20,30 @@ class RestaurantController {
                     message: "Restaurant with this name already exists!",
                 });
             }
+            const multerReq = req;
+            if (!multerReq.file) {
+                return res.status(HttpCode.notFound).json({
+                    status: false,
+                    message: "Image is required!",
+                });
+            }
+            //upload to Cloudinary
+            const result = await uploadRestaurantToCloudinary(multerReq.file);
             const restaurant = new RestaurantModel({
                 name: value.name,
                 ownerId: value.ownerId,
-                buildingNo: value.buildingNo,
-                street: value.street,
-                city: value.city,
-                pinCode: value.pinCode,
+                address: {
+                    buildingNo: value.buildingNo,
+                    street: value.street,
+                    city: value.city,
+                    pinCode: value.pinCode,
+                },
                 phone: value.phone,
                 deliveryZone: value.deliveryZone,
                 cuisine: value.cuisine,
+                image: result.secure_url,
+                imageId: result.public_id,
             });
-            const multerReq = req;
-            if (!error && multerReq.file) {
-                restaurant.image = multerReq.file.path.replace(/\\/g, "/");
-            }
             await restaurant.save();
             return res.status(HttpCode.create).json({
                 status: false,
@@ -43,6 +52,7 @@ class RestaurantController {
             });
         }
         catch (error) {
+            console.log(error);
             return res.status(HttpCode.serverError).json({
                 status: false,
                 message: error?.message,
@@ -97,7 +107,9 @@ class RestaurantController {
     async getRestaurantByOwner(req, res) {
         try {
             const id = req.params.id;
-            const restaurant = await RestaurantModel.find({ "ownerId": { $eq: id } });
+            const restaurant = await RestaurantModel.findOne({
+                ownerId: { $eq: id },
+            }).populate("ownerId", "firstName lastName email").populate("deliveryZone");
             if (!restaurant) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -127,14 +139,14 @@ class RestaurantController {
                     message: "No restaurant found!",
                 });
             }
-            if (restaurant.image) {
-                const existingImage = restaurant.image;
-                if (fsSync.existsSync(existingImage)) {
-                    fs.unlink(existingImage);
+            const multerReq = req;
+            if (multerReq.file) {
+                if (restaurant.imageId) {
+                    await cloudinary.uploader.destroy(restaurant.imageId);
                 }
-            }
-            if (req.file) {
-                restaurant.image = req.file.path.replace(/\\/g, "/");
+                const result = await uploadRestaurantToCloudinary(multerReq.file);
+                restaurant.image = result.secure_url;
+                restaurant.imageId = result.public_id;
             }
             await restaurant.save();
             return res.status(HttpCode.success).json({
@@ -159,11 +171,8 @@ class RestaurantController {
                     message: "Restaurant not found!",
                 });
             }
-            if (restaurant.image) {
-                const existingImage = restaurant.image;
-                if (fsSync.existsSync(existingImage)) {
-                    fs.unlink(existingImage);
-                }
+            if (restaurant.imageId) {
+                await cloudinary.uploader.destroy(restaurant.imageId);
             }
             return res.status(HttpCode.success).json({
                 status: false,

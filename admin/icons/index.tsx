@@ -70,6 +70,9 @@ import CategoryIcon from "./category.svg"
 import SubCategoryIcon from "./subcategory.svg"
 import OrderIcon from "./orders.svg"
 import DeliveryZoneIcon from "./deliveryzone.svg"
+import RestaurantIcon from "./Restaurant.svg"
+import SettingsIcon from "./settings.svg"
+import RequestIcon from "./request.svg"
 
 export {
   DownloadIcon,
@@ -143,5 +146,8 @@ export {
   CategoryIcon,
   SubCategoryIcon,
   OrderIcon,
-  DeliveryZoneIcon
+  DeliveryZoneIcon,
+  RestaurantIcon,
+  SettingsIcon,
+  RequestIcon
 };

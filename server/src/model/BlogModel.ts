@@ -3,15 +3,11 @@ const Schema = mongoose.Schema;
 import Joi from "joi";
 
 const BlogSchemaJoi = Joi.object({
-  title: Joi.string()
-    .min(10)
-    .max(50)
-    .required()
-    .messages({
-      "string.min": "Title must be at least 10 characters",
-      "string.max": "Title should be not more than 50 characters",
-      "any.required": "Title cannot be empty!",
-    }),
+  title: Joi.string().min(10).max(50).required().messages({
+    "string.min": "Title must be at least 10 characters",
+    "string.max": "Title should be not more than 50 characters",
+    "any.required": "Title cannot be empty!",
+  }),
   image: Joi.string(),
   author: Joi.string()
     .required()
@@ -25,13 +21,10 @@ const BlogSchemaJoi = Joi.object({
       "any.required": "Author is required!",
       "any.invalid": "Author must be valid object id!",
     }),
-  description: Joi.string()
-    .min(35)
-    .required()
-    .messages({
-      "string.min": "Description must be at least 35 characters",
-      "any.required": "Description cannot be empty!",
-    }),
+  description: Joi.string().min(35).required().messages({
+    "string.min": "Description must be at least 35 characters",
+    "any.required": "Description cannot be empty!",
+  }),
 });
 const BlogSchema = new Schema(
   {
@@ -45,6 +38,9 @@ const BlogSchema = new Schema(
     image: {
       type: String,
       required: true,
+    },
+    imageId: {
+      type: String,
     },
     description: {
       type: String,

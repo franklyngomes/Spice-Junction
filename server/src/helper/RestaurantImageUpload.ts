@@ -1,14 +1,28 @@
-import multer from "multer"
-import type { Request } from "express"
+import multer from "multer";
 
-const storage = multer.diskStorage({
-  destination: function (req: Request, file: Express.Multer.File, cb:(error: Error | null, destination: string) => void) {
-    cb(null, '././uploads/restaurant')
+const storage = multer.memoryStorage();
+
+const RestaurantImageUpload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "image/avif",
+      "image/webp",
+    ];
+
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only image files are allowed"));
+    }
   },
-  filename: function (req: Request, file: Express.Multer.File, cb:(error: Error | null, destination: string) => void) {
-    cb(null, "restaurant" + '-' + file.originalname)
-  }
-})
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
-const RestaurantImageUpload = multer({ storage: storage })
-export default RestaurantImageUpload
+export default RestaurantImageUpload;
+

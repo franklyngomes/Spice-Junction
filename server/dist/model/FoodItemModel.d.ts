@@ -12,6 +12,7 @@ declare const FoodItemModel: mongoose.Model<{
     name?: string | null;
     description?: string | null;
     image?: string | null;
+    imageId?: string | null;
     price?: number | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
@@ -24,6 +25,7 @@ declare const FoodItemModel: mongoose.Model<{
     name?: string | null;
     description?: string | null;
     image?: string | null;
+    imageId?: string | null;
     price?: number | null;
 }, {}, {
     timestamps: true;
@@ -38,6 +40,7 @@ declare const FoodItemModel: mongoose.Model<{
     name?: string | null;
     description?: string | null;
     image?: string | null;
+    imageId?: string | null;
     price?: number | null;
 } & {
     _id: mongoose.Types.ObjectId;
@@ -56,6 +59,7 @@ declare const FoodItemModel: mongoose.Model<{
     name?: string | null;
     description?: string | null;
     image?: string | null;
+    imageId?: string | null;
     price?: number | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
@@ -68,6 +72,7 @@ declare const FoodItemModel: mongoose.Model<{
     name?: string | null;
     description?: string | null;
     image?: string | null;
+    imageId?: string | null;
     price?: number | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
@@ -82,6 +87,7 @@ declare const FoodItemModel: mongoose.Model<{
     name?: string | null;
     description?: string | null;
     image?: string | null;
+    imageId?: string | null;
     price?: number | null;
 }> & {
     _id: mongoose.Types.ObjectId;

@@ -1,7 +1,6 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
 import {CreateFoodItem, FoodItemDetails, UpdateFoodItem, DeleteFoodItem, RestaurantFoodItem} from "../functions/FoodItemFunc"
 import { queryClient } from "../../app/provider"
-import { FoodItemData } from "../../types/types"
 
 export const RestaurantFoodItemQuery = (id: string, enabled: boolean) => {
   return useQuery({
@@ -30,7 +29,7 @@ export const FoodItemDetailsQuery = (id: string, enabled: boolean) => {
 }
 export const UpdateFoodItemQuery = () => {
   return useMutation({
-    mutationFn:({editId, payload} : {editId:string, payload: FoodItemData}) => UpdateFoodItem(editId, payload),
+    mutationFn:({editId, formdata} : {editId:string, formdata: FormData}) => UpdateFoodItem(editId, formdata),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:["RESTAURANT_FOOD_ITEM"]})
       queryClient.invalidateQueries({queryKey:["FOOD_ITEM_DETAILS"]})

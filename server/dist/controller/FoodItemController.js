@@ -3,8 +3,9 @@ import { FoodMenuModel } from "../model/FoodMenuModel.js";
 import { CategoryModel } from "../model/CategoryModel.js";
 import { SubCategoryModel } from "../model/SubCategoryModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
-import * as fsSync from "fs";
-import { promises as fs } from "fs";
+import cloudinary from "../config/cloudinary.js";
+import { RestaurantModel } from "../model/ResturantModel.js";
+import { uploadFoodItemToCloudinary } from "../utils/FoodItemCloudinaryUpload.js";
 class FoodItemController {
     async createFoodItem(req, res) {
         try {
@@ -15,6 +16,13 @@ class FoodItemController {
                     message: error.message,
                 });
             }
+            const restaurant = await RestaurantModel.findById(value.restaurant);
+            if (!restaurant?.isApproved) {
+                return res.status(HttpCode.badRequest).json({
+                    status: false,
+                    message: "Your restaurant is not approved! Please try again later.",
+                });
+            }
             const { name } = req.body;
             const ifExists = await FoodItemModel.findOne({ name });
             if (ifExists) {
@@ -23,6 +31,15 @@ class FoodItemController {
                     message: "Food item with this name already exists!",
                 });
             }
+            const multerReq = req;
+            if (!multerReq.file) {
+                return res.status(HttpCode.notFound).json({
+                    status: false,
+                    message: "Image is required!",
+                });
+            }
+            //upload to Cloudinary
+            const result = await uploadFoodItemToCloudinary(multerReq.file);
             const foodItem = new FoodItemModel({
                 name: value.name,
                 description: value.description,
@@ -30,11 +47,9 @@ class FoodItemController {
                 subCategory: value.subCategory,
                 price: value.price,
                 menu: value.menu,
+                image: result.secure_url,
+                imageId: result.public_id,
             });
-            const multerReq = req;
-            if (!error && multerReq.file) {
-                foodItem.image = multerReq.file.path.replace(/\\/g, "/");
-            }
             await foodItem.save();
             const ifItemExists = await FoodMenuModel.find({
                 items: { $elemMatch: { name: { $eq: value.name } } },
@@ -143,7 +158,10 @@ class FoodItemController {
     async getFoodItemDetails(req, res) {
         try {
             const id = req.params.id;
-            const foodItem = await FoodItemModel.findById(id).populate("restaurant").populate("subCategory").populate("menu", "name _id");
+            const foodItem = await FoodItemModel.findById(id)
+                .populate("restaurant")
+                .populate("subCategory")
+                .populate("menu", "name _id");
             if (!foodItem) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -173,14 +191,14 @@ class FoodItemController {
                     message: "food item not found!",
                 });
             }
-            if (foodItem.image) {
-                const existingImage = foodItem.image;
-                if (fsSync.existsSync(existingImage)) {
-                    fs.unlink(existingImage);
+            const multerReq = req;
+            if (multerReq.file) {
+                if (foodItem.imageId) {
+                    await cloudinary.uploader.destroy(foodItem.imageId);
                 }
-            }
-            if (req.file) {
-                foodItem.image = req.file.path.replace(/\\/g, "/");
+                const result = await uploadFoodItemToCloudinary(multerReq.file);
+                foodItem.image = result.secure_url;
+                foodItem.imageId = result.public_id;
             }
             foodItem.name = req.body.name || foodItem.name;
             foodItem.description = req.body.description || foodItem.description;
@@ -241,21 +259,18 @@ class FoodItemController {
                     message: "Food item not found!",
                 });
             }
-            if (foodItem.image) {
-                const existingImage = foodItem.image;
-                if (fsSync.existsSync(existingImage)) {
-                    fs.unlink(existingImage);
-                }
+            if (foodItem.imageId) {
+                await cloudinary.uploader.destroy(foodItem.imageId);
             }
             const foodMenu = await FoodMenuModel.updateOne({ "items.id": id }, {
                 $pull: { items: { id: id } },
             });
             const deleteSubCategory = await SubCategoryModel.updateOne({ _id: foodItem.subCategory }, {
-                $pull: { items: { id: id } }
+                $pull: { items: { id: id } },
             });
             const findCategory = await SubCategoryModel.findById(foodItem.subCategory);
             const deleteCategory = await CategoryModel.updateOne({ _id: findCategory?.category, "items.id": id }, {
-                $pull: { items: { id: id } }
+                $pull: { items: { id: id } },
             });
             return res.status(HttpCode.success).json({
                 status: false,

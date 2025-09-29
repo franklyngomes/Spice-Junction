@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = "https://spice-junction-server.onrender.com"
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 export const axiosInstance = axios.create({
   baseURL

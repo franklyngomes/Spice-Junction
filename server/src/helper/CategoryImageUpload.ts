@@ -1,14 +1,26 @@
 import multer from "multer"
-import type { Request } from "express"
+const storage = multer.memoryStorage();
 
-const storage = multer.diskStorage({
-  destination: function (req : Request, file : Express.Multer.File, cb :(error: Error | null, destination: string) => void) {
-    cb(null, '././uploads/category')
+const CategoryImageUpload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "image/avif",
+      "image/webp",
+    ];
+
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only image files are allowed"));
+    }
   },
-  filename: function (req : Request, file : Express.Multer.File, cb :(error: Error | null, destination: string) => void) {
-    cb(null, file.fieldname + '-' + file.originalname)
-  }
-})
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
-const CategoryImageUpload = multer({ storage: storage })
-export default CategoryImageUpload
+export default CategoryImageUpload ;

@@ -1,8 +1,9 @@
 import { SubCategoryModel } from "../model/SubCategoryModel.js";
 import { SubCategorySchemaJoi } from "../model/SubCategoryModel.js";
 import { HttpCode } from "../helper/HttpCode.js";
-import * as fsSync from "fs";
-import { promises as fs } from "fs";
+import cloudinary from "../config/cloudinary.js";
+import path from "path";
+import { uploadCategoryToCloudinary } from "../utils/CategoryCloudinaryUpload.js";
 class SubCategoryController {
     async createSubCategory(req, res) {
         try {
@@ -21,37 +22,40 @@ class SubCategoryController {
                     message: "Category with this name already exists!",
                 });
             }
+            const multerReq = req;
+            if (!multerReq.file) {
+                return res.status(HttpCode.notFound).json({
+                    status: false,
+                    message: "Image is required!",
+                });
+            }
+            //upload to Cloudinary
+            const result = await uploadCategoryToCloudinary(multerReq.file);
             const subCategory = new SubCategoryModel({
                 name: value.name,
                 category: value.category,
+                image: result.secure_url,
+                imageId: result.public_id,
             });
-            const multerReq = req;
-            if (multerReq.file) {
-                subCategory.image = multerReq.file.path.replace(/\\/g, "/");
-            }
-            else {
-                return res.status(HttpCode.notFound).json({
-                    status: false,
-                    message: "Image is required!"
-                });
-            }
             await subCategory.save();
             return res.status(HttpCode.create).json({
                 status: true,
                 message: "Category created successfully",
-                data: subCategory
+                data: subCategory,
             });
         }
         catch (error) {
+            console.log(error);
             return res.status(HttpCode.serverError).json({
                 status: false,
-                message: error?.message,
+                message: error instanceof Error ? error.message : JSON.stringify(error),
+                error,
             });
         }
     }
     async getAllSubCategory(req, res) {
         try {
-            const category = await SubCategoryModel.find();
+            const category = await SubCategoryModel.find().populate("category", "name _id");
             if (!category || category.length === 0) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -74,7 +78,7 @@ class SubCategoryController {
     async getSubCategoryDetails(req, res) {
         try {
             const id = req.params.id;
-            const category = await SubCategoryModel.findById(id);
+            const category = await SubCategoryModel.findById(id).populate("category", "name _id");
             if (!category) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -104,14 +108,14 @@ class SubCategoryController {
                     message: "No category found!",
                 });
             }
-            if (category.image) {
-                const existingImage = category.image;
-                if (fsSync.existsSync(existingImage)) {
-                    fs.unlink(existingImage);
+            const multerReq = req;
+            if (multerReq.file) {
+                if (category.imageId) {
+                    await cloudinary.uploader.destroy(category.imageId);
                 }
-            }
-            if (req.file) {
-                category.image = req.file.path.replace(/\\/g, "/");
+                const result = await uploadCategoryToCloudinary(multerReq.file);
+                category.image = result.secure_url;
+                category.imageId = result.public_id;
             }
             await category.save();
             return res.status(HttpCode.success).json({
@@ -120,6 +124,7 @@ class SubCategoryController {
             });
         }
         catch (error) {
+            console.log(error);
             return res.status(HttpCode.serverError).json({
                 status: false,
                 message: error?.message,
@@ -136,11 +141,8 @@ class SubCategoryController {
                     message: "No category found!",
                 });
             }
-            if (category.image) {
-                const existingImage = category.image;
-                if (fsSync.existsSync(existingImage)) {
-                    fs.unlink(existingImage);
-                }
+            if (category.imageId) {
+                await cloudinary.uploader.destroy(category.imageId);
             }
             return res.status(HttpCode.success).json({
                 status: false,

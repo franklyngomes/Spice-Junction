@@ -14,9 +14,13 @@ import {
   OrderIcon,
   SubCategoryIcon,
   CategoryIcon,
-  DeliveryZoneIcon
+  DeliveryZoneIcon,
+  RestaurantIcon,
+  RequestIcon
 } from "../icons/index";
 import { useStore } from "../store/store";
+import Badge from "../components/ui/badge/Badge";
+import { AllRequestQuery } from "../api/query/RestaurantQuery";
 
 type NavItem = {
   name: string;
@@ -26,16 +30,20 @@ type NavItem = {
 };
 
 const AdminNavItems: NavItem[] = [
-
   {
     icon: <GridIcon />,
     name: "Dashboard",
     path: "/",
   },
   {
-    icon: <GridIcon />,
-    name: "Restaurant",
-    path: "/restaurant",
+    icon: <RestaurantIcon />,
+    name: "All Restaurants",
+    path: "/all-restaurant",
+  },
+  {
+    icon: <RequestIcon />,
+    name: "Requests",
+    path: "/requests",
   },
   {
     icon: <CategoryIcon />,
@@ -57,17 +65,17 @@ const AdminNavItems: NavItem[] = [
     name: "Orders",
     path: "/orders",
   },
-  {
-    icon: <PaymentIcon />,
-    name: "Payments",
-    path: "/payments",
-  }
 ];
 const RestaurantNavItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
     path: "/",
+  },
+  {
+    icon: <RestaurantIcon />,
+    name: "Restaurant",
+    path: "/restaurant",
   },
   {
     icon: <FoodMenuIcon />,
@@ -80,35 +88,15 @@ const RestaurantNavItems: NavItem[] = [
     path: "/items",
   },
   {
-    icon: <CategoryIcon />,
-    name: "Category",
-    path: "/category",
-  },
-  {
-    icon: <SubCategoryIcon />,
-    name: "Sub Category",
-    path: "/sub-category",
-  },
-  {
-    icon: <DeliveryZoneIcon />,
-    name: "Delivery Zone",
-    path: "/delivery-zone",
-  },
-  {
     icon: <OrderIcon />,
     name: "Orders",
     path: "/orders",
   },
   {
-    icon: < PaymentIcon/>,
+    icon: < PaymentIcon />,
     name: "Billing",
     path: "/billing",
   },
-  {
-    icon: <PaymentIcon />,
-    name: "Payments",
-    path: "/payments",
-  }
 ];
 const othersItems: NavItem[] = [
   {
@@ -122,7 +110,8 @@ const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
   const { user } = useStore()
-
+  const { data } = AllRequestQuery()
+  const requests = data?.data
   const renderMenuItems = (
     navItems: NavItem[],
     menuType: "main" | "others"
@@ -151,9 +140,17 @@ const AppSidebar: React.FC = () => {
                   }`}
               >
                 {nav.icon}
+                hello
               </span>
               {(isExpanded || isHovered || isMobileOpen) && (
-                <span className={`menu-item-text`}>{nav.name}</span>
+                <span className={`menu-item-text`}>
+                  {nav.name}
+                  {nav.name === "Requests" && (
+                    <span>
+                      {requests?.length && <Badge color="success">{requests?.length}</Badge>}
+                    </span>
+                  )}
+                </span>
               )}
               {(isExpanded || isHovered || isMobileOpen) && (
                 <ChevronDownIcon
@@ -179,9 +176,27 @@ const AppSidebar: React.FC = () => {
                     }`}
                 >
                   {nav.icon}
+                  {(!isExpanded && !isHovered) && (
+                    <span className="absolute bottom-[-15px] left-3">
+                      {
+                      nav.name === "Requests" && (
+                        <span>
+                          {requests?.length && <Badge color="success">{requests?.length}</Badge>}
+                        </span>
+                      )
+                    }
+                    </span>
+                  )}
                 </span>
                 {(isExpanded || isHovered || isMobileOpen) && (
-                  <span className={`menu-item-text`}>{nav.name}</span>
+                  <span className={`menu-item-text`}>
+                    {nav.name}
+                    {nav.name === "Requests" && (
+                      <span>
+                        {requests?.length && <Badge color="success">{requests?.length}</Badge>}
+                      </span>
+                    )}
+                  </span>
                 )}
               </Link>
             )

@@ -443,6 +443,8 @@ class UserController {
           message: "Incorrect password!",
         });
       }
+      const findRestaurant = await RestaurantModel.findOne({"ownerId" : {$eq: user._id}})
+      const restaurantId =  findRestaurant?._id
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       if (!jwtSecretKey) {
         return res.status(HttpCode.notFound).json({
@@ -490,6 +492,7 @@ class UserController {
           lastName: user.lastName,
           email: user?.email,
           role: user?.role,
+          restaurantId: restaurantId
         },
         accessToken: accessToken,
       });

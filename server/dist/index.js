@@ -11,10 +11,10 @@ import YAML from "yaml";
 import Razorpay from "razorpay";
 const app = express();
 Database();
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const allowedOrigins = [
-    "https://spice-junction-server.onrender.com",
+    "https://spice-junction.onrender.com",
     "http://localhost:5173",
     "http://localhost:3000",
     "http://localhost:5000",
@@ -32,6 +32,8 @@ app.use(cors({
         }
     },
     credentials: true,
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

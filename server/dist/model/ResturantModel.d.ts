@@ -19,6 +19,7 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     image?: string | null;
+    imageId?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -37,6 +38,7 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     image?: string | null;
+    imageId?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
@@ -57,6 +59,7 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     image?: string | null;
+    imageId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -81,6 +84,7 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     image?: string | null;
+    imageId?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -99,6 +103,7 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     image?: string | null;
+    imageId?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
@@ -119,6 +124,7 @@ declare const RestaurantModel: mongoose.Model<{
         pinCode?: string | null;
     } | null;
     image?: string | null;
+    imageId?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {

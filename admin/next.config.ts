@@ -12,12 +12,12 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https', // Specify the protocol (e.g., 'http', 'https')
-        hostname: 'picsum.photos', // The exact hostname of the image source
+        protocol: 'https',
+        hostname: 'picsum.photos',
       },
       {
-        protocol: 'https', // Specify the protocol (e.g., 'http', 'https')
-        hostname: 'spice-junction-server.onrender.com', // The exact hostname of the image source
+        protocol: 'https', 
+        hostname: 'res.cloudinary.com',
       },
     ],
   },

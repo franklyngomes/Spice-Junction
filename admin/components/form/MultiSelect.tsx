@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-interface Option {
+export interface Option {
   value: string;
   text: string;
   selected: boolean;
@@ -58,7 +58,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       <div className="relative z-20 inline-block w-full">
         <div className="relative flex flex-col items-center">
           <div onClick={toggleDropdown}  className="w-full">
-            <div className="mb-2 flex h-11 rounded-lg border border-gray-300 py-1.5 pl-3 pr-3 shadow-theme-xs outline-hidden transition focus:border-brand-300 focus:shadow-focus-ring dark:border-gray-700 dark:bg-gray-900 dark:focus:border-brand-300">
+            <div className="mb-2 flex h-auto rounded-lg border border-gray-300 py-1.5 pl-3 pr-3 shadow-theme-xs outline-hidden transition focus:border-brand-300 focus:shadow-focus-ring dark:border-gray-700 dark:bg-gray-900 dark:focus:border-brand-300">
               <div className="flex flex-wrap flex-auto gap-2">
                 {selectedValuesText.length > 0 ? (
                   selectedValuesText.map((text, index) => (
@@ -130,14 +130,14 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
           {isOpen && (
             <div
-              className="absolute left-0 z-40 w-full overflow-y-auto bg-white rounded-lg shadow-sm top-full max-h-select dark:bg-gray-900"
+              className="absolute left-0 z-40 w-full overflow-y-auto bg-white rounded-lg shadow-sm top-full max-h-select border dark:border-gray-600 border-gray-300 dark:bg-gray-900"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col">
                 {options.map((option, index) => (
                   <div key={index}>
                     <div
-                      className={`hover:bg-primary/5 w-full cursor-pointer rounded-t border-b border-gray-200 dark:border-gray-800`}
+                      className={`hover:bg-primary/5 w-full cursor-pointer rounded-t border-b border-gray-400 dark:border-gray-600`}
                       onClick={() => handleSelect(option.value)}
                     >
                       <div

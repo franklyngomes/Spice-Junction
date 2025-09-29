@@ -71,7 +71,8 @@ export interface FoodItem {
   image: string,
   isAvailable: boolean
   menu: {
-    name: string
+    name: string,
+    _id: string
   },
   name: string,
   price: number
@@ -81,26 +82,26 @@ export interface FoodItem {
   __v: number,
   _id: string,
 }
-export interface FoodItemDetailsResponse{
-  data?:{
+export interface FoodItemDetailsResponse {
+  data?: {
     createdAt?: string,
-  description: string,
-  image: string,
-  isAvailable: boolean
-  menu?: {
-    name?: string,
-    _id?: string,
-  },
-  name: string,
-  price: number
-  restaurant: string,
-  subCategory?: {
-    _id?:string,
-    name?:string,
-  },
-  updatedAt?: string,
-  __v: number,
-  _id: string,
+    description: string,
+    image: string,
+    isAvailable: boolean
+    menu?: {
+      name?: string,
+      _id?: string,
+    },
+    name: string,
+    price: number
+    restaurant: string,
+    subCategory?: {
+      _id?: string,
+      name?: string,
+    },
+    updatedAt?: string,
+    __v: number,
+    _id: string,
   },
   error?: boolean,
   message?: string,
@@ -120,24 +121,151 @@ export interface FoodItemData {
   image: File | string | null
 }
 export interface SubCategory {
-  category: string[]
+  category: {
+    name: string,
+    _id: string
+  }
   categoryNo: string,
   createdAt?: string,
-  image: string,
+  image: File | string | null,
   items?: []
   name: string,
   updatedAt?: string,
   __v?: number,
   _id: string,
 }
-export interface SubCategoryResponse{
+export interface SubCategoryResponse {
   data?: SubCategory[],
   error?: boolean,
   message?: string,
 }
-export interface SubCategoryData{
+export interface SubCategoryDetailsResponse {
+  data?: SubCategory,
+  error?: boolean,
+  message?: string,
+}
+export interface SubCategoryData {
+  name: string,
+  image: File | string | null,
+  category: string,
+}
+export interface CategoryData {
+  name: string;
+}
+export interface CategoryItem {
+  name: string,
+  categoryId: string,
+  createdAt?: string,
+  items?: []
+  updatedAt?: string,
+  __v?: number,
+  _id: string,
+}
+export interface CategoryResponse {
+  data?: CategoryItem[],
+  error?: boolean,
+  message?: string,
+}
+export interface DeliveryZoneItem {
+  createdAt: string,
+  district: string,
+  division: string,
+  pinCodeList: string[],
+  state: string
+  updatedAt: string,
+  zoneName: string,
+  __v: number
+  _id: string
+}
+export interface DeliveryZoneResponse {
+  data?: DeliveryZoneItem[],
+  error?: boolean,
+  message?: string,
+}
+export interface DeliveryZoneData {
+  zoneName: string,
+  district: string
+}
+export interface RestaurantData {
+  buildingNo: string,
+  street: string,
+  city: string,
+  pinCode: string
+  cuisine: string[],
+  deliveryZone: string[],
+  image: File | string | null,
+  name: string,
+  ownerId: string,
+  phone: string
+}
+export interface RestaurantItem {
+  address: {
+    buildingNo: string,
+    street: string,
+    city: string,
+    pinCode: string
+  }
+  createdAt?: string,
+  cuisine: string[],
+  deliveryZone: string[],
+  image: string,
+  imageId?: string,
+  isApproved: boolean,
+  isBlocked: boolean,
+  name: string,
+  ownerId: string,
+  phone: string
+  updatedAt?: string,
+  __v?: number,
+  _id: string,
+}
+export interface RestaurantDetailsResponse {
+  data?: {
+    address: {
+    buildingNo: string,
+    street: string,
+    city: string,
+    pinCode: string
+  }
+  createdAt?: string,
+  cuisine: string[],
+  deliveryZone: string[],
+  image: string,
+  imageId?: string,
+  isApproved: boolean,
+  isBlocked: boolean,
+  name: string,
+  ownerId: string,
+  phone: string
+  updatedAt?: string,
+  __v?: number,
+  _id: string,
+  },
+  error?: boolean,
+  message?: string,
+}
+export interface RestaurantResponse {
+  data?: RestaurantItem[],
+  error?: boolean,
+  message?: string,
+}
+export interface RequestData {
+  isApprovedStatus?: string,
+  response?: boolean
+}
+export interface RestaurantUpdateData {
+  isApprovedStatus?: string,
+  isBlockedStatus?:string,
+  isApproved?: boolean,
+  isBlocked?:boolean,
+  buildingNo?: string,
+  street?: string,
+  city?: string,
+  pinCode?: string
+  cuisine?: string[],
+  deliveryZone?: string[],
+  image?: File | string | null,
   name?: string,
-  image?: string,
-  category?: string,
-
+  ownerId?: string,
+  phone?: string
 }
