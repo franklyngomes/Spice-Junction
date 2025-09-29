@@ -46,8 +46,11 @@ text-decoration: none;}
 .footer-icons a:hover{color: grey;}
 
 .footer-content a {text-decoration: none;
-color: inherit;}
+color: inherit;
+}
 .footer-content a:hover{color: grey;}
+.footer-form{
+max-width: 100%;}
 .footer-form input::placeholder{color: white;
 }
 
@@ -68,3 +71,9 @@ left: 0;}
     color: white;
 }
 .lower-footer a:hover{color:grey;}
+.read-more-header{background:url(./Assets/72859bb71ecd45823d93ddfbc45d0b174371335b.jpg)    no-repeat;
+  background-position: center 20%;
+  background-size: cover;
+}
+
+.pages-fresh-showcase  { column-count: 2;}
