@@ -20,10 +20,31 @@ const FoodMenuSchemaJoi = Joi.object({
         "any.invalid": "Restaurant must be valid object id!",
     }),
     items: Joi.array().items({
-        name: Joi.string(),
-        description: Joi.string(),
-        subCategory: Joi.string(),
-        price: Joi.number(),
+        name: Joi.string().min(6).max(50).required().messages({
+            "string.min": "Name must be at least 6 characters",
+            "string.max": "Name should be not more than 50 characters",
+            "any.required": "Name cannot be empty!",
+        }),
+        description: Joi.string().min(50).max(200).required().messages({
+            "string.min": "Name must be at least 6 characters",
+            "string.max": "Name should be not more than 20 characters",
+            "any.required": "Name cannot be empty!",
+        }),
+        subCategory: Joi.string()
+            .required()
+            .custom((value, helpers) => {
+            if (!mongoose.Types.ObjectId.isValid(value)) {
+                return helpers.error("any.invalid");
+            }
+            return value;
+        }, "Object Validation")
+            .messages({
+            "any.required": "Sub category is required!",
+            "any.invalid": "Sub category must be valid object id!",
+        }),
+        price: Joi.number()
+            .required()
+            .messages({ "any.required": "Price cannot be empty!" }),
         image: Joi.string(),
     }),
 });
