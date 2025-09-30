@@ -12,6 +12,7 @@ import transporter from "../middleware/SendMail.js";
 import jwt from "jsonwebtoken";
 import { RestaurantModel } from "../model/ResturantModel.js";
 import { sendEmail } from "../helper/EmailService.js";
+import type { Types } from "mongoose";
 
 // Extend Express Request interface to include 'user'
 declare global {
@@ -26,6 +27,14 @@ declare global {
       };
     }
   }
+}
+interface UserDocument{
+  email: string,
+  firstName: string,
+  lastName: string
+}
+interface Restaurant {
+  ownerId: Types.ObjectId | UserDocument;
 }
 
 class UserController {
@@ -645,7 +654,7 @@ class UserController {
       </tr>
     </table>
   </body>
-  `,
+  `
       );
       const hmacSecretKey = process.env.HMAC_VERIFICATION_SECRET;
       if (!hmacSecretKey) {
@@ -842,16 +851,76 @@ class UserController {
     try {
       const id = req.params.id;
       const { response } = req.body;
-      const restaurant = await RestaurantModel.findByIdAndUpdate(id, req.body);
+      const restaurant = await RestaurantModel.findByIdAndUpdate(
+        id,
+        req.body
+      );
       if (!restaurant) {
         return res.status(HttpCode.notFound).json({
           status: false,
           message: "Restaurant not found!",
         });
       }
+      const restaurantDetails = await RestaurantModel.findById(id).populate("ownerId", "firstName lastName email")
+      const owner = restaurantDetails?.ownerId as unknown as UserDocument
       if (response === true) {
         restaurant.isApproved = true;
         await restaurant.save();
+        await sendEmail(
+          owner.email,
+          "Verify Your Email - Spice Junction",
+          `
+      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      style="padding: 40px 0;"
+    >
+      <tr>
+        <td align="center">
+          <table
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="max-width: 500px; background-color: #ffffff; border-radius: 12px; padding: 40px 20px; font-family: Arial, sans-serif;"
+          >
+            <tr>
+              <td align="center" style="font-size: 24px; font-weight: bold; color: #111827; padding-bottom: 10px;">
+                <h4>Hello <span style="color: #F90912;">${owner?.firstName}</span>, </h4>
+                <h5>Welcome to Spice Junction! Your Restaurant has been approved, You can start serving now.</h5>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-size: 14px; color: #6b7280; padding-bottom: 30px;">
+                Login to use Spice Junction restaurant panel,
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <a
+                  href="https://spice-junction.onrender.com/signin"
+                  style="display: inline-block; background-color: #F90912; color: #ffffff; text-decoration: none; padding: 12px 24px; font-size: 14px; font-weight: bold; border-radius: 6px;"
+                >
+                  Signin
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-size: 12px; color: #6b7280; padding-top: 30px;">
+                You're receiving this email because you have an account in Spice Junction. If you are not sure why you're receiving this, please contact us by replying to this email.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+      `
+        );
         return res.status(HttpCode.success).json({
           status: true,
           message: "Request Approved",
