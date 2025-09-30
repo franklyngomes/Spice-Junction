@@ -54,7 +54,7 @@ class FoodItemController {
             const ifItemExists = await FoodMenuModel.find({
                 items: { $elemMatch: { name: { $eq: value.name } } },
             });
-            if (!ifItemExists) {
+            if (ifItemExists) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
                     message: "Food item with this name already exists in the menu!",
@@ -73,18 +73,20 @@ class FoodItemController {
                 },
             });
             const findCategory = await SubCategoryModel.findById(foodItem.subCategory);
-            const addToCategory = await CategoryModel.updateOne({ _id: findCategory?.category }, {
-                $push: {
-                    items: {
-                        id: foodItem._id,
-                        name: foodItem.name,
-                        description: foodItem.description,
-                        price: foodItem.price,
-                        subCategory: foodItem.subCategory,
-                        image: foodItem.image,
+            if (findCategory && findCategory.category?.length > 0) {
+                await CategoryModel.updateMany({ _id: { $in: findCategory?.category } }, {
+                    $push: {
+                        items: {
+                            id: foodItem._id,
+                            name: foodItem.name,
+                            description: foodItem.description,
+                            price: foodItem.price,
+                            subCategory: foodItem.subCategory,
+                            image: foodItem.image,
+                        },
                     },
-                },
-            });
+                });
+            }
             const addToSubCategory = await SubCategoryModel.updateOne({ _id: foodItem?.subCategory }, {
                 $push: {
                     items: {
