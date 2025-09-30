@@ -44,6 +44,7 @@
     "nanoid": "^5.1.5",
     "nodemailer": "^7.0.6",
     "razorpay": "^2.9.6",
+    "resend": "^6.1.1",
     "swagger-ui-express": "^5.0.1",
     "tsc-watch": "^7.1.1",
     "yaml": "^2.8.1"

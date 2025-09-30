@@ -3,6 +3,15 @@ import { UserModel, UserSchemaJoi } from "../model/UserModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 import type { Request, Response } from "express";
+import {
+  comparePassword,
+  hashPassword,
+  hmacProcess,
+} from "../middleware/Auth.js";
+import transporter from "../middleware/SendMail.js";
+import jwt from "jsonwebtoken";
+import { RestaurantModel } from "../model/ResturantModel.js";
+import { sendEmail } from "../helper/EmailService.js";
 
 // Extend Express Request interface to include 'user'
 declare global {
@@ -18,14 +27,6 @@ declare global {
     }
   }
 }
-import {
-  comparePassword,
-  hashPassword,
-  hmacProcess,
-} from "../middleware/Auth.js";
-import transporter from "../middleware/SendMail.js";
-import jwt from "jsonwebtoken";
-import { RestaurantModel } from "../model/ResturantModel.js";
 
 class UserController {
   async signup(req: Request, res: Response) {
@@ -73,12 +74,10 @@ class UserController {
         verificationTokenExpires: Date.now() + 10 * 60 * 1000,
       });
       await newUser.save();
-      await transporter.sendMail({
-        from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
-        to: email,
-        subject: "Verify Your Email - Spice Junction",
-        html: `
-      <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+      await sendEmail(
+        email,
+        "Verify Your Email - Spice Junction",
+        `<body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -125,9 +124,8 @@ class UserController {
         </td>
       </tr>
     </table>
-  </body>
-      `,
-      });
+  </body>`
+      );
       return res.status(HttpCode.create).json({
         status: true,
         message: "Registration successful, Please verify your email",
@@ -185,11 +183,10 @@ class UserController {
         verificationTokenExpires: Date.now() + 10 * 60 * 1000,
       });
       await newUser.save();
-      await transporter.sendMail({
-        from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
-        to: email,
-        subject: "Verify Your Email - Spice Junction",
-        html: `
+      await sendEmail(
+        email,
+        "Verify Your Email - Spice Junction",
+        `
       <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
@@ -239,8 +236,8 @@ class UserController {
       </tr>
     </table>
   </body>
-      `,
-      });
+      `
+      );
       return res.status(HttpCode.create).json({
         status: true,
         message: "Registration successful, Please verify your email",
@@ -298,11 +295,10 @@ class UserController {
         verificationTokenExpires: Date.now() + 10 * 60 * 1000,
       });
       await newUser.save();
-      await transporter.sendMail({
-        from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
-        to: email,
-        subject: "Verify Your Email - Spice Junction",
-        html: `
+      await sendEmail(
+        email,
+        "Verify Your Email - Spice Junction",
+        `
       <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
@@ -352,8 +348,8 @@ class UserController {
       </tr>
     </table>
   </body>
-      `,
-      });
+      `
+      );
       return res.status(HttpCode.create).json({
         status: true,
         message: "Registration successful, Please verify your email",
@@ -443,8 +439,10 @@ class UserController {
           message: "Incorrect password!",
         });
       }
-      const findRestaurant = await RestaurantModel.findOne({"ownerId" : {$eq: user._id}})
-      const restaurantId =  findRestaurant?._id
+      const findRestaurant = await RestaurantModel.findOne({
+        ownerId: { $eq: user._id },
+      });
+      const restaurantId = findRestaurant?._id;
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       if (!jwtSecretKey) {
         return res.status(HttpCode.notFound).json({
@@ -492,7 +490,7 @@ class UserController {
           lastName: user.lastName,
           email: user?.email,
           role: user?.role,
-          restaurantId: restaurantId
+          restaurantId: restaurantId,
         },
         accessToken: accessToken,
       });
@@ -600,11 +598,10 @@ class UserController {
         });
       }
       const code = Math.floor(Math.random() * 1000000).toString();
-      const mail = await transporter.sendMail({
-        from: `Spice Junction ${process.env.NODEMAILER_EMAIL}`,
-        to: email,
-        subject: "Rest password OTP",
-        html: `<body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+      const mail = await sendEmail(
+        email,
+        "Rest password OTP",
+        `<body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -649,7 +646,7 @@ class UserController {
     </table>
   </body>
   `,
-      });
+      );
       const hmacSecretKey = process.env.HMAC_VERIFICATION_SECRET;
       if (!hmacSecretKey) {
         return res.status(HttpCode.notFound).json({
@@ -657,7 +654,7 @@ class UserController {
           message: "JWT Secret key is missing!",
         });
       }
-      if (mail.accepted[0] === user.email) {
+      if (mail?.data?.id) {
         const hashCode = hmacProcess(code, hmacSecretKey);
         user.forgotPasswordCode = hashCode;
         user.forgotPasswordCodeValidation = Date.now();
@@ -726,17 +723,15 @@ class UserController {
   async userProfile(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const user = await UserModel.findById(id,
-        {
-          _id: 1,
-          firstName: 1,
-          lastName: 1,
-          role: 1,
-          email: 1,
-          phone: 1,
-          address: 1,
-        }
-      );
+      const user = await UserModel.findById(id, {
+        _id: 1,
+        firstName: 1,
+        lastName: 1,
+        role: 1,
+        email: 1,
+        phone: 1,
+        address: 1,
+      });
       if (!user) {
         return res.status(HttpCode.notFound).json({
           status: false,
@@ -765,27 +760,30 @@ class UserController {
           message: "User not found!",
         });
       }
-      const {buildingNo, street, city, pinCode} = req.body
-      const updateAddress = await UserModel.updateOne({_id: id},{
-        $push: {
-          address: {
-            buildingNo: buildingNo,
-            street: street,
-            city: city,
-            pinCode: pinCode
-          }
+      const { buildingNo, street, city, pinCode } = req.body;
+      const updateAddress = await UserModel.updateOne(
+        { _id: id },
+        {
+          $push: {
+            address: {
+              buildingNo: buildingNo,
+              street: street,
+              city: city,
+              pinCode: pinCode,
+            },
+          },
         }
-      })
-      if(!updateAddress){
-         return res.status(HttpCode.notFound).json({
+      );
+      if (!updateAddress) {
+        return res.status(HttpCode.notFound).json({
           status: false,
           message: "Failed to update address!",
         });
       }
       return res.status(HttpCode.success).json({
         status: true,
-        message: "Address updated successfully!"
-      })
+        message: "Address updated successfully!",
+      });
     } catch (error) {
       return res.status(HttpCode.serverError).json({
         status: false,
@@ -796,19 +794,22 @@ class UserController {
   async deleteUserAddress(req: Request, res: Response) {
     try {
       const id = req.params.id;
-      const updateAddress = await UserModel.updateOne({"address._id": id},{
-        $pull: {address: {_id:id}}
-      })
-      if(!updateAddress){
-         return res.status(HttpCode.notFound).json({
+      const updateAddress = await UserModel.updateOne(
+        { "address._id": id },
+        {
+          $pull: { address: { _id: id } },
+        }
+      );
+      if (!updateAddress) {
+        return res.status(HttpCode.notFound).json({
           status: false,
           message: "Failed to delete address!",
         });
       }
       return res.status(HttpCode.success).json({
         status: true,
-        message: "Address deleted successfully!"
-      })
+        message: "Address deleted successfully!",
+      });
     } catch (error) {
       return res.status(HttpCode.serverError).json({
         status: false,
