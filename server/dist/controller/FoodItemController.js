@@ -51,15 +51,6 @@ class FoodItemController {
                 imageId: result.public_id,
             });
             await foodItem.save();
-            const ifItemExists = await FoodMenuModel.find({
-                items: { $elemMatch: { name: { $eq: value.name } } },
-            });
-            if (ifItemExists) {
-                return res.status(HttpCode.badRequest).json({
-                    status: false,
-                    message: "Food item with this name already exists in the menu!",
-                });
-            }
             const foodMenu = await FoodMenuModel.updateOne({ _id: foodItem.menu }, {
                 $push: {
                     items: {
