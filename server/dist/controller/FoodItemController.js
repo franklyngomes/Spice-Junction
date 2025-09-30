@@ -197,7 +197,6 @@ class FoodItemController {
             foodItem.description = req.body.description || foodItem.description;
             foodItem.price = req.body.price || foodItem.price;
             foodItem.subCategory = req.body.subCategory || foodItem.subCategory;
-            await foodItem.save();
             const foodMenu = await FoodMenuModel.updateOne({
                 "items.id": id,
             }, {
@@ -230,6 +229,31 @@ class FoodItemController {
                     "items.$.image": foodItem.image,
                 },
             });
+            if (foodItem.subCategory !== req.body.subCategory) {
+                const findCategory = await SubCategoryModel.findById(req.body.subCategory);
+                if (findCategory && findCategory.category?.length > 0) {
+                    await CategoryModel.updateMany({ _id: { $in: findCategory?.category } }, {
+                        $push: {
+                            items: {
+                                id: foodItem._id,
+                                name: foodItem.name,
+                                description: foodItem.description,
+                                price: foodItem.price,
+                                subCategory: req.body.subCategory,
+                                image: foodItem.image,
+                            },
+                        },
+                    });
+                }
+                await SubCategoryModel.updateOne({ _id: foodItem.subCategory }, {
+                    $pull: { items: { id: id } },
+                });
+                const categories = await SubCategoryModel.findById(foodItem.subCategory);
+                const deleteCategory = await CategoryModel.updateOne({ _id: categories?.category, "items.id": id }, {
+                    $pull: { items: { id: id } },
+                });
+            }
+            await foodItem.save();
             return res.status(HttpCode.success).json({
                 status: false,
                 message: "Food item updated successfully",
