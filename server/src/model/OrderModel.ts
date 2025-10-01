@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 import Joi from "joi";
+import { customAlphabet } from "nanoid";
+const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6)
 
 const OrderSchemaJoi = Joi.object({
   customerId: Joi.string()
@@ -60,6 +62,10 @@ const OrderSchemaJoi = Joi.object({
 });
 const OrderSchema = new Schema(
   {
+    orderNo: {
+      type: String,
+      unique: true,
+    },
     customerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
@@ -133,11 +139,16 @@ const OrderSchema = new Schema(
     },
     transactionId: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   { timestamps: true }
 );
+OrderSchema.pre("validate", async function (next){
+  if(!this.orderNo){
+    this.orderNo = `ODR-${nanoid()}`;
+  }
+})
 
 const OrderModel = mongoose.model("orders", OrderSchema);
 export { OrderModel, OrderSchemaJoi };
