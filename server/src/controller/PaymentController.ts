@@ -124,6 +124,29 @@ class PaymentController {
       });
     }
   }
+  async RestaurantOrderPayments(req: Request, res: Response) {
+    try {
+      const id = req.params.id
+      const payments = await PaymentModel.find({"order.restaurant": {$eq: id}})
+      if(!payments){
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "No payments found!"
+        })
+      }
+      return res.status(HttpCode.success).json({
+        status: true,
+        message: "Payments fetched successfully",
+        data: payments
+      })
+
+    } catch (error) {
+       return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message,
+      });
+    }
+  }
 }
 
 export default new PaymentController();

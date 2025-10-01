@@ -3,6 +3,7 @@ declare class PaymentController {
     createPaymentOrder(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     verifyPayment(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     createPaymentRecord(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    RestaurantOrderPayments(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
 }
 declare const _default: PaymentController;
 export default _default;

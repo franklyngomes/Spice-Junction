@@ -34,11 +34,13 @@ export const ROLE_PERMISSIONS = {
         "delete_food_item",
         "view_order",
         "update_order",
+        "view_payment"
     ],
     [ROLES.CUSTOMER]: [
         "create_order",
         "view_order",
         "create_blog",
+        "make_payment"
     ],
 };
 //# sourceMappingURL=role.js.map

@@ -43,10 +43,12 @@ export const ROLE_PERMISSIONS = {
 
     "view_order",
     "update_order",
+    "view_payment"
   ],
   [ROLES.CUSTOMER]: [
     "create_order",
     "view_order",
     "create_blog",
+    "make_payment"
   ],
 };
