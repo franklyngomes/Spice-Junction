@@ -5,6 +5,7 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    date: NativeDate;
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -39,6 +40,7 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    date: NativeDate;
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -75,6 +77,7 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    date: NativeDate;
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -115,6 +118,7 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    date: NativeDate;
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -149,6 +153,7 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    date: NativeDate;
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -185,6 +190,7 @@ declare const OrderModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    date: NativeDate;
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;

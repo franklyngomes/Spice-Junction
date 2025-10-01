@@ -70,7 +70,7 @@ class OrderController {
     }
     async getAllOrder(req, res) {
         try {
-            const orders = await OrderModel.find();
+            const orders = await OrderModel.find().populate("customerId", "firstName lastName email");
             if (!orders || orders.length === 0) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -93,7 +93,7 @@ class OrderController {
     async getOrderDetails(req, res) {
         try {
             const id = req.params.id;
-            const order = await OrderModel.findById(id);
+            const order = await OrderModel.findById(id).populate("customerId", "firstName lastName email");
             if (!order) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -116,7 +116,7 @@ class OrderController {
     async getOrderByRestaurant(req, res) {
         try {
             const id = req.params.id;
-            const order = await OrderModel.find({ restaurant: id });
+            const order = await OrderModel.find({ restaurant: id }).populate("customerId", "firstName lastName email");
             if (!order) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
@@ -140,7 +140,7 @@ class OrderController {
         try {
             let id = req.params.id;
             console.log(id);
-            const order = await OrderModel.find({ customerId: id });
+            const order = await OrderModel.find({ customerId: id }).populate("customerId", "firstName lastName email");
             if (!order) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,

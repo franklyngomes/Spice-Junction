@@ -139,6 +139,10 @@ const OrderSchema = new Schema({
         type: String,
         default: "",
     },
+    date: {
+        type: Date,
+        default: Date.now()
+    }
 }, { timestamps: true });
 OrderSchema.pre("validate", async function (next) {
     if (!this.orderNo) {
