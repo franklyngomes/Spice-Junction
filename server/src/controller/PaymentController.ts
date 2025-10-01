@@ -3,6 +3,7 @@ import Razorpay from "razorpay";
 import crypto from "crypto";
 import { HttpCode } from "../helper/HttpCode.js";
 import { PaymentModel } from "../model/PaymentModel.js";
+import { OrderModel } from "../model/OrderModel.js";
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID!,
@@ -98,6 +99,18 @@ class PaymentController {
             message: "Failed to create payment record!"
         })
       }
+      const updateOrder = await OrderModel.findById(order)
+      if(!updateOrder){
+        return res.status(HttpCode.notFound).json({
+            status: false,
+            message: "Order not found!"
+        })
+      }
+      if(paymentDetails?.status === "captured"){
+        updateOrder.payment = "success"
+        updateOrder.transactionId = record.transactionId as string
+      }
+      updateOrder.save();
       return res.status(HttpCode.success).json({
         status: true,
         message: "Payment record created successfully"

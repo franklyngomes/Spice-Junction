@@ -123,9 +123,18 @@ const OrderSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "preparing", "out_for_delivery", "delivered"],
+      enum: ["pending_payment", "preparing", "out_for_delivery", "delivered"],
+      default: "pending_payment",
+    },
+    payment: {
+      type: String,
+      enum: ["pending", "success", "failed"],
       default: "pending",
     },
+    transactionId: {
+      type: String,
+      default: ""
+    }
   },
   { timestamps: true }
 );

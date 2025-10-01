@@ -44,10 +44,10 @@ class OrderController {
         items,
         discount,
         address: {
-          buildingNo,
-          street,
-          city,
-          pinCode,
+          buildingNo: buildingNo,
+          street: street,
+          city: city,
+          pinCode: pinCode,
         },
       });
       const appliedDiscount = discount || newOrder.discount;

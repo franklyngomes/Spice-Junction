@@ -18,7 +18,9 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "pending" | "preparing" | "out_for_delivery" | "delivered";
+    status: "pending_payment" | "preparing" | "out_for_delivery" | "delivered";
+    payment: "pending" | "success" | "failed";
+    transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
@@ -49,7 +51,9 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "pending" | "preparing" | "out_for_delivery" | "delivered";
+    status: "pending_payment" | "preparing" | "out_for_delivery" | "delivered";
+    payment: "pending" | "success" | "failed";
+    transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
@@ -82,7 +86,9 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "pending" | "preparing" | "out_for_delivery" | "delivered";
+    status: "pending_payment" | "preparing" | "out_for_delivery" | "delivered";
+    payment: "pending" | "success" | "failed";
+    transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
@@ -119,7 +125,9 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "pending" | "preparing" | "out_for_delivery" | "delivered";
+    status: "pending_payment" | "preparing" | "out_for_delivery" | "delivered";
+    payment: "pending" | "success" | "failed";
+    transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
@@ -150,7 +158,9 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "pending" | "preparing" | "out_for_delivery" | "delivered";
+    status: "pending_payment" | "preparing" | "out_for_delivery" | "delivered";
+    payment: "pending" | "success" | "failed";
+    transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;
@@ -183,7 +193,9 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "pending" | "preparing" | "out_for_delivery" | "delivered";
+    status: "pending_payment" | "preparing" | "out_for_delivery" | "delivered";
+    payment: "pending" | "success" | "failed";
+    transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
     address?: {
         buildingNo?: string | null;

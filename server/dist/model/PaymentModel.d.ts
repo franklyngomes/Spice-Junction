@@ -9,8 +9,8 @@ declare const PaymentModel: mongoose.Model<{
     status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
-    method?: string | null;
     transactionId?: string | null;
+    method?: string | null;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -19,8 +19,8 @@ declare const PaymentModel: mongoose.Model<{
     status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
-    method?: string | null;
     transactionId?: string | null;
+    method?: string | null;
 }, {}, {
     timestamps: true;
 }> & {
@@ -31,8 +31,8 @@ declare const PaymentModel: mongoose.Model<{
     status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
-    method?: string | null;
     transactionId?: string | null;
+    method?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -47,8 +47,8 @@ declare const PaymentModel: mongoose.Model<{
     status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
-    method?: string | null;
     transactionId?: string | null;
+    method?: string | null;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -57,8 +57,8 @@ declare const PaymentModel: mongoose.Model<{
     status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
-    method?: string | null;
     transactionId?: string | null;
+    method?: string | null;
 }>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
@@ -69,8 +69,8 @@ declare const PaymentModel: mongoose.Model<{
     status: "pending" | "success" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
-    method?: string | null;
     transactionId?: string | null;
+    method?: string | null;
 }> & {
     _id: mongoose.Types.ObjectId;
 } & {
