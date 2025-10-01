@@ -107,8 +107,10 @@ class PaymentController {
         })
       }
       if(paymentDetails?.status === "captured"){
-        updateOrder.payment = "success"
+        updateOrder.payment = "Success"
         updateOrder.transactionId = record.transactionId as string
+      }else{
+        updateOrder.payment = "Failed"
       }
       updateOrder.save();
       return res.status(HttpCode.success).json({

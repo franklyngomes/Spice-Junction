@@ -6,7 +6,7 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
-    status: "pending" | "success" | "failed";
+    status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
     transactionId?: string | null;
@@ -16,7 +16,7 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
-    status: "pending" | "success" | "failed";
+    status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
     transactionId?: string | null;
@@ -28,7 +28,7 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
-    status: "pending" | "success" | "failed";
+    status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
     transactionId?: string | null;
@@ -44,7 +44,7 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
-    status: "pending" | "success" | "failed";
+    status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
     transactionId?: string | null;
@@ -54,7 +54,7 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
-    status: "pending" | "success" | "failed";
+    status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
     transactionId?: string | null;
@@ -66,7 +66,7 @@ declare const PaymentModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
-    status: "pending" | "success" | "failed";
+    status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
     amount?: number | null;
     transactionId?: string | null;

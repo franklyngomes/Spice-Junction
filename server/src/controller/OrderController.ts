@@ -145,7 +145,7 @@ class OrderController {
     try {
       let id = req.params.id;
       console.log(id);
-      const order = await OrderModel.find({ customerId: id }).populate("customerId", "firstName lastName email");
+      const order = await OrderModel.find({ customerId: id }).populate("customerId", "firstName lastName email").populate("foodItem", "name");
       if (!order) {
         return res.status(HttpCode.badRequest).json({
           status: false,
