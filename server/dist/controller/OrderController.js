@@ -116,7 +116,7 @@ class OrderController {
     async getOrderByRestaurant(req, res) {
         try {
             const id = req.params.id;
-            const order = await OrderModel.find({ restaurant: id }).populate("customerId", "firstName lastName email");
+            const order = await OrderModel.find({ restaurant: id }).populate("customerId", "firstName lastName email").populate("items.foodItem", "name");
             if (!order) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
