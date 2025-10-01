@@ -28,6 +28,7 @@ declare const OrderModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    orderNo?: string | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -61,6 +62,7 @@ declare const OrderModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    orderNo?: string | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -96,6 +98,7 @@ declare const OrderModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    orderNo?: string | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -135,6 +138,7 @@ declare const OrderModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    orderNo?: string | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -168,6 +172,7 @@ declare const OrderModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    orderNo?: string | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
@@ -203,6 +208,7 @@ declare const OrderModel: mongoose.Model<{
         city?: string | null;
         pinCode?: string | null;
     } | null;
+    orderNo?: string | null;
     tax?: {
         packaging: number;
         restaurantGST: number;
