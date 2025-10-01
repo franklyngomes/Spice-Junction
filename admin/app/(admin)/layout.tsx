@@ -4,7 +4,7 @@ import { useSidebar } from "../../context/SidebarContext";
 import AppHeader from "../../layout/AppHeader";
 import AppSidebar from "../../layout/AppSidebar";
 import Backdrop from "../../layout/Backdrop";
-import Provider from "../provider";
+import Provider from "./provider";
 import { RestaurantByOwnerQuery } from "../../api/query/RestaurantQuery";
 import { Cookies } from "react-cookie";
 

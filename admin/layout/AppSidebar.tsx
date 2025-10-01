@@ -16,7 +16,8 @@ import {
   CategoryIcon,
   DeliveryZoneIcon,
   RestaurantIcon,
-  RequestIcon
+  RequestIcon,
+  VideoIcon
 } from "../icons/index";
 import { useStore } from "../store/store";
 import Badge from "../components/ui/badge/Badge";
@@ -41,6 +42,11 @@ const AdminNavItems: NavItem[] = [
     path: "/all-restaurant",
   },
   {
+    icon: <VideoIcon />,
+    name: "Blogs",
+    path: "/blog",
+  },
+  {
     icon: <RequestIcon />,
     name: "Requests",
     path: "/requests",
@@ -61,9 +67,9 @@ const AdminNavItems: NavItem[] = [
     path: "/delivery-zone",
   },
   {
-    icon: <OrderIcon />,
-    name: "Orders",
-    path: "/orders",
+    icon: < PaymentIcon />,
+    name: "Billing",
+    path: "/billing",
   },
 ];
 const RestaurantNavItems: NavItem[] = [

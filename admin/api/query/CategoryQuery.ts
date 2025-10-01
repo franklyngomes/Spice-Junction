@@ -1,5 +1,5 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
-import { queryClient } from "../../app/provider"
+import { queryClient } from "../../app/(admin)/provider"
 import { CategoryData } from "../../types/types"
 import { AllCategory, CategoryDetails, CreateCategory, DeleteCategory, UpdateCategory } from "../functions/CategoryFunc"
 

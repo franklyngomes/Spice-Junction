@@ -1,6 +1,6 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
 import {CreateFoodMenu, AllFoodMenu, FoodMenuDetails, UpdateFoodMenu, DeleteFoodMenu, RestaurantFoodMenu} from "../functions/FoodMenuFunc"
-import { queryClient } from "../../app/provider"
+import { queryClient } from "../../app/(admin)/provider"
 import { FoodMenuData } from "../../types/types"
 
 export const AllFoodMenuQuery = () => {

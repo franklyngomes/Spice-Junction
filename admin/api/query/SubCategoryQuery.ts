@@ -1,6 +1,6 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
 import {CreateSubCategory, SubCategoryDetails, UpdateSubCategory, DeleteSubCategory, AllSubCategory} from "../functions/SubCategoryFunc"
-import { queryClient } from "../../app/provider"
+import { queryClient } from "../../app/(admin)/provider"
 
 export const AllSubCategoryQuery = () => {
   return useQuery({

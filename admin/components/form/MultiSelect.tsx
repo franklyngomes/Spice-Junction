@@ -134,10 +134,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
 
           {isOpen && (
             <div
-              className="absolute left-0 z-40 w-full overflow-y-auto bg-white rounded-lg shadow-sm top-full max-h-select border dark:border-gray-600 border-gray-300 dark:bg-gray-900"
+              className="relative left-0 z-42 w-full overflow-y-auto bg-white rounded-lg shadow-sm top-full max-h-select border dark:border-gray-600 border-gray-300 dark:bg-gray-900"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col ">
                 {options.map((option, index) => (
                   <div key={index}>
                     <div

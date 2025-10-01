@@ -54,6 +54,11 @@ export const endPoints = {
     blog_delete: "/blog-delete/"
   },
   orders: {
+    restaurant_orders: "/order-by-restaurant/",
+    update_order: "/order-update/",
+    order_details: "/order-details/",
+    all_orders: "/all-order",
+    
   },
   auth: {
     adminsignup: "/admin/signup",
