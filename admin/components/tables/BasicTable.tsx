@@ -12,32 +12,49 @@ import { Dropdown } from "../ui/dropdown/Dropdown";
 import { MoreDotIcon } from "../../icons";
 import { useStore } from "../../store/store";
 import { useModal } from "../../hooks/useModal";
-import Image from "next/image";
-import { BillGenerateQuery } from "../../api/query/BillGenerationQuery";
-import toast from "react-hot-toast";
-import Button from "../ui/button/Button";
-import { useRouter } from "next/navigation";
 
 type TableColumn<T>= {
   label: string;
   key?: keyof T | string;
   render?: (row:T, index: number) => React.ReactNode
 }
+interface foodItem {
+  foodItem: {
+    _id: string,
+    name: string
+  },
+  quantity: number
+  _id: string
+}
+interface DataItem{
+  orderNo?: string;
+  firstName?: string;
+  method?: string
+  lastName?: string;
+  items?: foodItem[];
+  restaurant?:string
+  transactionId?: string
+  amount?: number;
+  status?: string;
+  payment?: string;
+  date?: Date;
+}
+interface Data{
+  data: DataItem[]
+}
 
 interface BasicTableProps<T extends{_id:string; invoice?:string}>{
   tableColumns: TableColumn<T>[];
-  data: any ;
+  data: Data ;
   onDelete: (id:string) => void;
   billOption?: boolean;
   billType?: string;
 }
 
-export default function BasicTable<T extends{_id: string; invoice?:string}>({ tableColumns, data, onDelete, billOption, billType }: BasicTableProps<T>) {
-  const router = useRouter()
+export default function BasicTable<T extends{_id: string; invoice?:string}>({ tableColumns, data, onDelete, billOption }: BasicTableProps<T>) {
   const { setIsEditing, setEditId } = useStore();
   const { openModal} = useModal();
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
-  const { mutateAsync: submit } = BillGenerateQuery()
   const { user } = useStore()
 
 
@@ -97,7 +114,7 @@ export default function BasicTable<T extends{_id: string; invoice?:string}>({ ta
 
             {/* Table Body */}
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05] -z-10">
-              {data && data.length > 0 ? (
+              {data ? (
                 /* @ts-expect-error ignore*/
                 data.map((item, index: number) => (
                   <TableRow key={index} className="dark:hover:bg-gray-700 hover:bg-gray-100">

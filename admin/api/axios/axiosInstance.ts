@@ -6,7 +6,8 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 const cookies = new Cookies()
 
 export const axiosInstance = axios.create({
-  baseURL
+  baseURL,
+  withCredentials: true
 })
 
 axios.defaults.withCredentials = true;
@@ -30,7 +31,7 @@ axiosInstance.interceptors.response.use((response) => response,
         // Call refresh token endpoint
         const { data } = await axios.post(`${baseURL}${endPoints.auth.refresh_token}`, {}, { withCredentials: true })
         // Save new access token
-        cookies.set("token", data.accessToken,{ path: "/", sameSite: "strict" })
+         cookies.set("token", data.accessToken,{ path: "/", sameSite: "none" })
 
         //Retry original request with new token
         axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`
@@ -39,8 +40,8 @@ axiosInstance.interceptors.response.use((response) => response,
         return axiosInstance(originalRequest)
       } catch (error) {
         console.error("Refresh token failed!", error)
-        cookies.remove("token");
-        window.location.href = "/signin"
+        // cookies.remove("token");
+        // window.location.href = "/signin"
       }
     }
     return Promise.reject(error);
