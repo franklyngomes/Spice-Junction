@@ -22,8 +22,7 @@ export const ROLE_PERMISSIONS = {
     "delete_order",
 
     "block_users",
-    "delete_invoice",
-    "view_invoice",
+    "view_payment",   
 
     "create_blog",
     "update_blog",

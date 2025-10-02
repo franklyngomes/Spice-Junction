@@ -17,6 +17,12 @@ class FoodMenuController {
         });
       }
       const restaurant = await RestaurantModel.findById(value.restaurant);
+       if (restaurant?.isBlocked) {
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "Your restaurant is blocked! Please contact admin",
+        });
+      }
       if (!restaurant?.isApproved) {
         return res.status(HttpCode.badRequest).json({
           status: false,
