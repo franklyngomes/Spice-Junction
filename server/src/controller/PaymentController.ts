@@ -83,40 +83,41 @@ class PaymentController {
   }
   async createPaymentRecord(req: Request, res: Response) {
     try {
-      const { razorpay_payment_id, order } = req.body;
+      const { razorpay_payment_id, order, restaurant } = req.body;
       const paymentDetails = await razorpay.payments.fetch(razorpay_payment_id);
-      const paymentMethod = paymentDetails.method
-      const amount = (paymentDetails?.amount as number) / 100
+      const paymentMethod = paymentDetails.method;
+      const amount = (paymentDetails?.amount as number) / 100;
       const record = await PaymentModel.create({
         order,
         amount,
+        restaurant,
         status: paymentDetails?.status === "captured" ? "success" : "pending",
         method: paymentMethod,
-      })
-      if(!record){
+      });
+      if (!record) {
         return res.status(HttpCode.badRequest).json({
-            status: false,
-            message: "Failed to create payment record!"
-        })
+          status: false,
+          message: "Failed to create payment record!",
+        });
       }
-      const updateOrder = await OrderModel.findById(order)
-      if(!updateOrder){
+      const updateOrder = await OrderModel.findById(order);
+      if (!updateOrder) {
         return res.status(HttpCode.notFound).json({
-            status: false,
-            message: "Order not found!"
-        })
+          status: false,
+          message: "Order not found!",
+        });
       }
-      if(paymentDetails?.status === "captured"){
-        updateOrder.payment = "Success"
-        updateOrder.transactionId = record.transactionId as string
-      }else{
-        updateOrder.payment = "Failed"
+      if (paymentDetails?.status === "captured") {
+        updateOrder.payment = "Success";
+        updateOrder.transactionId = record.transactionId as string;
+      } else {
+        updateOrder.payment = "Failed";
       }
       updateOrder.save();
       return res.status(HttpCode.success).json({
         status: true,
-        message: "Payment record created successfully"
-      })
+        message: "Payment record created successfully",
+      });
     } catch (error) {
       return res.status(HttpCode.serverError).json({
         status: false,
@@ -124,24 +125,46 @@ class PaymentController {
       });
     }
   }
+  // https://spice-junction.onrender.com
   async RestaurantOrderPayments(req: Request, res: Response) {
     try {
-      const id = req.params.id
-      const payments = await PaymentModel.find({"order.restaurant": {$eq: id}})
-      if(!payments){
+      const id = req.params.id;
+      const payments = await PaymentModel.find({restaurant: id});
+      if (!payments) {
         return res.status(HttpCode.notFound).json({
           status: false,
-          message: "No payments found!"
-        })
+          message: "No payments found!",
+        });
       }
       return res.status(HttpCode.success).json({
         status: true,
         message: "Payments fetched successfully",
-        data: payments
-      })
-
+        data: payments,
+      });
     } catch (error) {
-       return res.status(HttpCode.serverError).json({
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message,
+      });
+    }
+  }
+  async AllPayments(req: Request, res: Response) {
+    try {
+      const id = req.params.id;
+      const payments = await PaymentModel.find();
+      if (!payments) {
+        return res.status(HttpCode.notFound).json({
+          status: false,
+          message: "No payments found!",
+        });
+      }
+      return res.status(HttpCode.success).json({
+        status: true,
+        message: "Payments fetched successfully",
+        data: payments,
+      });
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
         status: false,
         message: (error as Error)?.message,
       });

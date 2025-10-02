@@ -71,27 +71,28 @@ class PaymentController {
     }
     async createPaymentRecord(req, res) {
         try {
-            const { razorpay_payment_id, order } = req.body;
+            const { razorpay_payment_id, order, restaurant } = req.body;
             const paymentDetails = await razorpay.payments.fetch(razorpay_payment_id);
             const paymentMethod = paymentDetails.method;
             const amount = paymentDetails?.amount / 100;
             const record = await PaymentModel.create({
                 order,
                 amount,
+                restaurant,
                 status: paymentDetails?.status === "captured" ? "success" : "pending",
                 method: paymentMethod,
             });
             if (!record) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
-                    message: "Failed to create payment record!"
+                    message: "Failed to create payment record!",
                 });
             }
             const updateOrder = await OrderModel.findById(order);
             if (!updateOrder) {
                 return res.status(HttpCode.notFound).json({
                     status: false,
-                    message: "Order not found!"
+                    message: "Order not found!",
                 });
             }
             if (paymentDetails?.status === "captured") {
@@ -104,7 +105,7 @@ class PaymentController {
             updateOrder.save();
             return res.status(HttpCode.success).json({
                 status: true,
-                message: "Payment record created successfully"
+                message: "Payment record created successfully",
             });
         }
         catch (error) {
@@ -114,20 +115,44 @@ class PaymentController {
             });
         }
     }
+    // https://spice-junction.onrender.com
     async RestaurantOrderPayments(req, res) {
         try {
             const id = req.params.id;
-            const payments = await PaymentModel.find({ "order.restaurant": { $eq: id } });
+            const payments = await PaymentModel.find({ restaurant: id });
             if (!payments) {
                 return res.status(HttpCode.notFound).json({
                     status: false,
-                    message: "No payments found!"
+                    message: "No payments found!",
                 });
             }
             return res.status(HttpCode.success).json({
                 status: true,
                 message: "Payments fetched successfully",
-                data: payments
+                data: payments,
+            });
+        }
+        catch (error) {
+            return res.status(HttpCode.serverError).json({
+                status: false,
+                message: error?.message,
+            });
+        }
+    }
+    async AllPayments(req, res) {
+        try {
+            const id = req.params.id;
+            const payments = await PaymentModel.find();
+            if (!payments) {
+                return res.status(HttpCode.notFound).json({
+                    status: false,
+                    message: "No payments found!",
+                });
+            }
+            return res.status(HttpCode.success).json({
+                status: true,
+                message: "Payments fetched successfully",
+                data: payments,
             });
         }
         catch (error) {

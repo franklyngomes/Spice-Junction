@@ -8,16 +8,18 @@ import path from "path";
 import * as swaggerui from "swagger-ui-express";
 import fs from "fs";
 import YAML from "yaml";
-import Razorpay from "razorpay";
 
 const app = express();
 Database();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.set("view engine", "ejs");
+app.set("views", "views");
 const allowedOrigins = [
   "https://spice-junction.onrender.com",
   "http://localhost:5173",
   "http://localhost:3000",
+  "http://localhost:3001",
   "http://localhost:5000",
 ];
 app.set("trust proxy", 1);
@@ -64,21 +66,6 @@ const swaggerFile = fs.readFileSync(
   "utf-8"
 );
 const swaggerDocument = YAML.parse(swaggerFile);
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Spice Junction Api Doc",
-      version: "1.0.0",
-    },
-    servers: [
-      {
-        url: "https://spice-junction-server.onrender.com",
-      },
-    ],
-  },
-  apis: ["./src/routes/*.ts"], // files containing annotations as above
-};
 app.use("/api-doc", swaggerui.serve, swaggerui.setup(swaggerDocument));
 //Swagger Configuration End
 

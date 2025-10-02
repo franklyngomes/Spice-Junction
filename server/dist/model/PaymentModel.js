@@ -14,6 +14,11 @@ const PaymentSchema = new Schema({
         ref: "orders",
         required: true,
     },
+    restaurant: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "restaurants",
+        required: true,
+    },
     amount: {
         type: Number,
     },

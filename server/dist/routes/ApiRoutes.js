@@ -69,6 +69,7 @@ ApiRouter.delete("/order-delete/:id", AuthCheck, CheckPermission(["delete_order"
 ApiRouter.post("/create-payment", AuthCheck, CheckPermission(["make_payment"]), PaymentController.createPaymentOrder);
 ApiRouter.post("/verify-payment", AuthCheck, CheckPermission(["make_payment"]), PaymentController.verifyPayment);
 ApiRouter.post("/create-payment-record", AuthCheck, CheckPermission(["make_payment"]), PaymentController.createPaymentRecord);
+ApiRouter.get("/all-payment", AuthCheck, CheckPermission(["view_payment"]), PaymentController.AllPayments);
 ApiRouter.get("/restaurant-order-payment", AuthCheck, CheckPermission(["view_payment"]), PaymentController.RestaurantOrderPayments);
 //Blog Routes
 ApiRouter.post("/create-blog", AuthCheck, CheckPermission(["create_blog"]), BlogImageUpload.single("image"), BlogController.createBlog);

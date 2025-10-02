@@ -5,6 +5,7 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    restaurant: mongoose.Types.ObjectId;
     date: NativeDate;
     status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
@@ -15,6 +16,7 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    restaurant: mongoose.Types.ObjectId;
     date: NativeDate;
     status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
@@ -27,6 +29,7 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    restaurant: mongoose.Types.ObjectId;
     date: NativeDate;
     status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
@@ -43,6 +46,7 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    restaurant: mongoose.Types.ObjectId;
     date: NativeDate;
     status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
@@ -53,6 +57,7 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    restaurant: mongoose.Types.ObjectId;
     date: NativeDate;
     status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
@@ -65,6 +70,7 @@ declare const PaymentModel: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
+    restaurant: mongoose.Types.ObjectId;
     date: NativeDate;
     status: "success" | "pending" | "failed";
     order: mongoose.Types.ObjectId;
