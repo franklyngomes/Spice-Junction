@@ -481,7 +481,7 @@ class UserController {
       res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
       });
       return res.status(HttpCode.success).json({
         status: true,
@@ -560,7 +560,7 @@ class UserController {
           res.cookie("refreshToken", newRefreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            sameSite: "none",
           });
           return res.status(HttpCode.success).json({
             status: true,
