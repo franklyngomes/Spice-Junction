@@ -466,6 +466,7 @@ class UserController {
     }
     async refreshToken(req, res) {
         try {
+            console.log(req.cookies);
             const token = req.cookies.refreshToken;
             if (!token) {
                 return res.status(HttpCode.notFound).json({
