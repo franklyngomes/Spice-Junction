@@ -141,8 +141,7 @@ class PaymentController {
     }
     async AllPayments(req, res) {
         try {
-            const id = req.params.id;
-            const payments = await PaymentModel.find();
+            const payments = await PaymentModel.find().populate("restaurant", "_id name");
             if (!payments) {
                 return res.status(HttpCode.notFound).json({
                     status: false,
