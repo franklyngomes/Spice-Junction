@@ -61,7 +61,7 @@ class RestaurantController {
     }
     async getAllRestaurant(req, res) {
         try {
-            const restaurant = await RestaurantModel.find();
+            const restaurant = await RestaurantModel.find({ isBlocked: false });
             if (!restaurant || restaurant.length === 0) {
                 return res.status(HttpCode.badRequest).json({
                     status: false,
