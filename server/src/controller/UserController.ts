@@ -28,10 +28,10 @@ declare global {
     }
   }
 }
-interface UserDocument{
-  email: string,
-  firstName: string,
-  lastName: string
+interface UserDocument {
+  email: string;
+  firstName: string;
+  lastName: string;
 }
 interface Restaurant {
   ownerId: Types.ObjectId | UserDocument;
@@ -452,13 +452,6 @@ class UserController {
         ownerId: { $eq: user._id },
       });
       const restaurantId = findRestaurant?._id;
-      const jwtSecretKey = process.env.JWT_SECRET_KEY;
-      if (!jwtSecretKey) {
-        return res.status(HttpCode.notFound).json({
-          status: false,
-          message: "JWT Secret key is missing!",
-        });
-      }
       //Access
       const accessToken = jwt.sign(
         {
@@ -468,7 +461,7 @@ class UserController {
           email: user?.email,
           role: user?.role,
         },
-        jwtSecretKey,
+        process.env.JWT_SECRET_KEY!,
         { expiresIn: "3d" }
       );
       //Refresh
@@ -480,7 +473,7 @@ class UserController {
           email: user?.email,
           role: user?.role,
         },
-        jwtSecretKey,
+        process.env.JWT_REFRESH_SECRET_KEY!,
         { expiresIn: "7d" }
       );
       user.refreshToken = refreshToken;
@@ -512,7 +505,6 @@ class UserController {
   }
   async refreshToken(req: Request, res: Response) {
     try {
-      console.log(req.cookies)
       const token = req.cookies.refreshToken;
       if (!token) {
         return res.status(HttpCode.notFound).json({
@@ -527,23 +519,9 @@ class UserController {
           message: "Invalid refresh token!",
         });
       }
-      const jwtRefreshSecretKey = process.env.JWT_REFRESH_SECRET_KEY;
-      if (!jwtRefreshSecretKey) {
-        return res.status(HttpCode.notFound).json({
-          status: false,
-          message: "JWT refresh secret key is missing!",
-        });
-      }
-      const jwtSecretKey = process.env.JWT_SECRET_KEY;
-      if (!jwtSecretKey) {
-        return res.status(HttpCode.notFound).json({
-          status: false,
-          message: "JWT Secret key is missing!",
-        });
-      }
       jwt.verify(
         token,
-        jwtRefreshSecretKey,
+        process.env.JWT_REFRESH_SECRET_KEY!,
         async (error: any, decoded: any) => {
           if (error) {
             return res.status(HttpCode.unauthorized).json({
@@ -561,8 +539,8 @@ class UserController {
               email: user?.email,
               role: user?.role,
             },
-            jwtSecretKey,
-            { expiresIn: "3hr" }
+            process.env.JWT_SECRET_KEY!,
+            { expiresIn: "3d" }
           );
 
           //New Refresh Token
@@ -574,10 +552,11 @@ class UserController {
               email: user?.email,
               role: user?.role,
             },
-            jwtRefreshSecretKey,
+            process.env.JWT_REFRESH_SECRET_KEY!,
             { expiresIn: "7d" }
           );
-
+          user.refreshToken = newRefreshToken;
+          await user.save();
           res.cookie("refreshToken", newRefreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
@@ -852,18 +831,18 @@ class UserController {
     try {
       const id = req.params.id;
       const { response } = req.body;
-      const restaurant = await RestaurantModel.findByIdAndUpdate(
-        id,
-        req.body
-      );
+      const restaurant = await RestaurantModel.findByIdAndUpdate(id, req.body);
       if (!restaurant) {
         return res.status(HttpCode.notFound).json({
           status: false,
           message: "Restaurant not found!",
         });
       }
-      const restaurantDetails = await RestaurantModel.findById(id).populate("ownerId", "firstName lastName email")
-      const owner = restaurantDetails?.ownerId as unknown as UserDocument
+      const restaurantDetails = await RestaurantModel.findById(id).populate(
+        "ownerId",
+        "firstName lastName email"
+      );
+      const owner = restaurantDetails?.ownerId as unknown as UserDocument;
       if (response === true) {
         restaurant.isApproved = true;
         await restaurant.save();

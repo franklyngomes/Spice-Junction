@@ -413,13 +413,6 @@ class UserController {
                 ownerId: { $eq: user._id },
             });
             const restaurantId = findRestaurant?._id;
-            const jwtSecretKey = process.env.JWT_SECRET_KEY;
-            if (!jwtSecretKey) {
-                return res.status(HttpCode.notFound).json({
-                    status: false,
-                    message: "JWT Secret key is missing!",
-                });
-            }
             //Access
             const accessToken = jwt.sign({
                 _id: user._id,
@@ -427,7 +420,7 @@ class UserController {
                 lastName: user.lastName,
                 email: user?.email,
                 role: user?.role,
-            }, jwtSecretKey, { expiresIn: "3d" });
+            }, process.env.JWT_SECRET_KEY, { expiresIn: "3d" });
             //Refresh
             const refreshToken = jwt.sign({
                 _id: user._id,
@@ -435,7 +428,7 @@ class UserController {
                 lastName: user.lastName,
                 email: user?.email,
                 role: user?.role,
-            }, jwtSecretKey, { expiresIn: "7d" });
+            }, process.env.JWT_REFRESH_SECRET_KEY, { expiresIn: "7d" });
             user.refreshToken = refreshToken;
             await user.save();
             res.cookie("refreshToken", refreshToken, {
@@ -466,7 +459,6 @@ class UserController {
     }
     async refreshToken(req, res) {
         try {
-            console.log(req.cookies);
             const token = req.cookies.refreshToken;
             if (!token) {
                 return res.status(HttpCode.notFound).json({
@@ -481,21 +473,7 @@ class UserController {
                     message: "Invalid refresh token!",
                 });
             }
-            const jwtRefreshSecretKey = process.env.JWT_REFRESH_SECRET_KEY;
-            if (!jwtRefreshSecretKey) {
-                return res.status(HttpCode.notFound).json({
-                    status: false,
-                    message: "JWT refresh secret key is missing!",
-                });
-            }
-            const jwtSecretKey = process.env.JWT_SECRET_KEY;
-            if (!jwtSecretKey) {
-                return res.status(HttpCode.notFound).json({
-                    status: false,
-                    message: "JWT Secret key is missing!",
-                });
-            }
-            jwt.verify(token, jwtRefreshSecretKey, async (error, decoded) => {
+            jwt.verify(token, process.env.JWT_REFRESH_SECRET_KEY, async (error, decoded) => {
                 if (error) {
                     return res.status(HttpCode.unauthorized).json({
                         status: false,
@@ -509,7 +487,7 @@ class UserController {
                     lastName: user.lastName,
                     email: user?.email,
                     role: user?.role,
-                }, jwtSecretKey, { expiresIn: "3hr" });
+                }, process.env.JWT_SECRET_KEY, { expiresIn: "3d" });
                 //New Refresh Token
                 const newRefreshToken = jwt.sign({
                     _id: user._id,
@@ -517,7 +495,9 @@ class UserController {
                     lastName: user.lastName,
                     email: user?.email,
                     role: user?.role,
-                }, jwtRefreshSecretKey, { expiresIn: "7d" });
+                }, process.env.JWT_REFRESH_SECRET_KEY, { expiresIn: "7d" });
+                user.refreshToken = newRefreshToken;
+                await user.save();
                 res.cookie("refreshToken", newRefreshToken, {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
