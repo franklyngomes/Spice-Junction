@@ -23,30 +23,10 @@ type TableColumn<T>= {
   key?: keyof T | string;
   render?: (row:T, index: number) => React.ReactNode
 }
-interface BillDataProps {
-  appointmentId?: string;
-  patientId?: string;
-  doctorId?: string;
-  referenceDoctor?: string;
-  testId?: string
-  billNo?: string;
-  chargeType?: string;
-  noOfHour?: number;
-  charge?: number;
-  standardCharge?: number;
-  appliedCharge?: number;
-  discount: number;
-  tax: number;
-  source: string;
-  paymentMethod: string;
-  date: Date;
-  status?: string;
-}
-
 
 interface BasicTableProps<T extends{_id:string; invoice?:string}>{
   tableColumns: TableColumn<T>[];
-  data: BillDataProps ;
+  data: any ;
   onDelete: (id:string) => void;
   billOption?: boolean;
   billType?: string;
@@ -60,20 +40,6 @@ export default function BasicTable<T extends{_id: string; invoice?:string}>({ ta
   const { mutateAsync: submit } = BillGenerateQuery()
   const { user } = useStore()
 
-  const onClick = (data:BillDataProps) => {
-    const billData = data
-    submit({ billType, billData}, {
-      onSuccess: () => {
-      }
-    })
-  }
-  const previewBill = (invoice?: string) => {
-    if (!invoice) {
-      toast.error("No invoice found!")
-      return
-    }
-    router.push(`https://medisync-backend-ybge.onrender.com${invoice}`)
-  }
 
   function toggleDropdown(index: number) {
     setOpenDropdownIndex(prev => (prev === index ? null : index));
@@ -132,6 +98,7 @@ export default function BasicTable<T extends{_id: string; invoice?:string}>({ ta
             {/* Table Body */}
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05] -z-10">
               {data && data.length > 0 ? (
+                /* @ts-expect-error ignore*/
                 data.map((item, index: number) => (
                   <TableRow key={index} className="dark:hover:bg-gray-700 hover:bg-gray-100">
                     {tableColumns.map((col, colIndex) => (
@@ -146,14 +113,6 @@ export default function BasicTable<T extends{_id: string; invoice?:string}>({ ta
                           : ""}
                       </TableCell>
                     ))}
-                    {
-                      billOption &&
-                      <TableCell className=" text-gray-800 text-center dark:text-gray-200">
-                        <Button size="x_sm" variant="primary" onClick={() => previewBill(item.invoice)}>
-                          View <Image src={"/images/task/pdf.svg"} alt="pdf" width={20} height={20} />
-                        </Button>
-                      </TableCell>
-                    }
                     <TableCell className="relative text-center">
                       <button
                         type="button"
@@ -181,18 +140,6 @@ export default function BasicTable<T extends{_id: string; invoice?:string}>({ ta
                             >
                               Edit
                             </DropdownItem>
-                            {
-                              billOption &&
-                              <DropdownItem
-                                onItemClick={() => {
-                                  onClick(item)
-                                  closeDropdown()
-                                }}
-                                className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-                              >
-                                Generate Invoice
-                              </DropdownItem>
-                            }
                             {
                               user?.role === "Admin" ?
                                 <DropdownItem

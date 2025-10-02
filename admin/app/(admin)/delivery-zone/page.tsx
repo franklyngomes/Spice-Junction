@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { CategoryIcon, PencilIcon, TrashBinIcon } from '../../../icons'
+import { DeliveryZoneIcon, PencilIcon, TrashBinIcon } from '../../../icons'
 import Button from "../../../components/ui/button/Button";
 import PageBreadcrumb from '../../../components/common/PageBreadCrumb';
 import { Modal } from '../../../components/ui/modal';
@@ -85,8 +85,8 @@ const DeliveryZone = () => {
     <div>
       <div className="flex flex-wrap justify-between items-center mb-4">
         <PageBreadcrumb pageTitle="Delivery Zone" breadCrumbTitle="Delivery Zone" />
-        <Button size="sm" variant="primary" startIcon={<CategoryIcon />} onClick={openModal}>
-          Add Category
+        <Button size="sm" variant="primary" startIcon={<DeliveryZoneIcon />} onClick={openModal}>
+          Add Zone
         </Button>
       </div>
       <div className="grid grid-cols-12 gap-4 md:gap-6">

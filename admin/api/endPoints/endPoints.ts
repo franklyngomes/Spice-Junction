@@ -58,7 +58,10 @@ export const endPoints = {
     update_order: "/order-update/",
     order_details: "/order-details/",
     all_orders: "/all-order",
-    
+  },
+  payments: {
+    all_payments: "/all-payment",
+    restaurant_payments: "/restaurant-order-payment/"
   },
   auth: {
     adminsignup: "/admin/signup",

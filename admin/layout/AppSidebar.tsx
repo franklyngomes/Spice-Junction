@@ -68,8 +68,8 @@ const AdminNavItems: NavItem[] = [
   },
   {
     icon: < PaymentIcon />,
-    name: "Billing",
-    path: "/billing",
+    name: "All Payments",
+    path: "/all-payments",
   },
 ];
 const RestaurantNavItems: NavItem[] = [
@@ -100,8 +100,8 @@ const RestaurantNavItems: NavItem[] = [
   },
   {
     icon: < PaymentIcon />,
-    name: "Billing",
-    path: "/billing",
+    name: "Payments",
+    path: "/payments",
   },
 ];
 const othersItems: NavItem[] = [
@@ -185,12 +185,12 @@ const AppSidebar: React.FC = () => {
                   {(!isExpanded && !isHovered) && (
                     <span className="absolute bottom-[-15px] left-3">
                       {
-                      nav.name === "Requests" && (
-                        <span>
-                          {requests?.length && <Badge color="success">{requests?.length}</Badge>}
-                        </span>
-                      )
-                    }
+                        nav.name === "Requests" && (
+                          <span>
+                            {requests?.length && <Badge color="success">{requests?.length}</Badge>}
+                          </span>
+                        )
+                      }
                     </span>
                   )}
                 </span>

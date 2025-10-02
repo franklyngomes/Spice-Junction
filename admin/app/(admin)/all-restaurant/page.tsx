@@ -53,7 +53,7 @@ const AllRestaruant = () => {
   const { isOpen, openModal, closeModal } = useModal();
   const { mutateAsync: update } = UpdateRestaurantQuery()
 
-  const onSubmit = (data : RestaurantUpdateData) => {
+  const onSubmit = (data: RestaurantUpdateData) => {
     const { isApprovedStatus, isBlockedStatus } = data
     let isApproved
     let isBlocked
@@ -82,10 +82,10 @@ const AllRestaruant = () => {
   React.useEffect(() => {
     if (isEditing && restaurant_details) {
       reset({
-      name: restaurant_details.name,
-      isApprovedStatus: restaurant_details.isApproved ? "true" : "false",
-      isBlockedStatus: restaurant_details.isBlocked ? "true" : "false"
-    });
+        name: restaurant_details.name,
+        isApprovedStatus: restaurant_details.isApproved ? "true" : "false",
+        isBlockedStatus: restaurant_details.isBlocked ? "true" : "false"
+      });
     } else {
       reset({
         name: "",
@@ -104,62 +104,64 @@ const AllRestaruant = () => {
       <div className="flex flex-wrap justify-between items-center mb-4">
         <PageBreadcrumb pageTitle="All Restaurants" breadCrumbTitle="All Restaurants" />
       </div>
-      {
-        restaurants?.map((item, index: number) => (
-          <div className="col-span-12 sm:col-span-6 space-y-6 md:col-span-4" key={index}>
-            <div className={`rounded-2xl border border-gray-200 ${item.isBlocked ? "bg-gray-200 dark:border-gray-700 dark:bg-gray-700" : "bg-white dark:border-gray-800 dark:bg-white/[0.040]"} p-4 `}>
-              <div className="flex items-center  gap-4 justify-start">
-                <Image
-                  src={`${item.image}`}
-                  width={80}
-                  height={80}
-                  alt='Category Item'
+      <div className='flex justify-start gap-5 flex-col md:flex-row'>
+        {
+          restaurants?.map((item, index: number) => (
+            <div className="" key={index}>
+              <div className={`rounded-2xl border border-gray-200 ${item.isBlocked ? "bg-gray-200 dark:border-gray-700 dark:bg-gray-700" : "bg-white dark:border-gray-800 dark:bg-white/[0.040]"} p-4 `}>
+                <div className="flex items-center  gap-4 justify-start">
+                  <Image
+                    src={`${item.image}`}
+                    width={80}
+                    height={80}
+                    alt='Category Item'
 
-                  className='rounded-xl h-[80px]!'
-                />
-                <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
-                  {item.name}
-                </h5>
-              </div>
-
-              <div className={`rounded-2xl border border-gray-200 ${item.isBlocked ? "bg-gray-300 dark:border-gray-700 dark:bg-gray-800" : "bg-white dark:border-gray-800 dark:bg-white/[0.15]"} p-4  mt-5`}>
-                <div className='mb-5'>
-                  <p className='text-[12px] text-brand-500 font-semibold'>Status</p>
-                  <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
-                    {item.isApproved ? "Approved" : "Pending Approval"}
-                  </h6>
-                </div>
-                <div className='mb-5'>
-                  <p className='text-[12px] text-brand-500 font-semibold'>Block Status</p>
-                  <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
-                    {item.isBlocked ? <span className='text-brand-500'>Blocked</span> : "Active"}
-                  </h6>
-                </div>
-                <div className='mb-5'>
-                  <p className='text-[12px] text-brand-500 font-semibold'>Cuisines</p>
-                  <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
-                    {item?.cuisine?.map((item: string, index: number) => (<span key={index} className='mr-2'>{item},</span>))}
-                  </h6>
-                </div>
-                <div className='mb-5'>
+                    className='rounded-xl h-[80px]!'
+                  />
                   <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
-                    <p className='text-[12px] text-brand-500'>Address</p>
-                    {item.address.buildingNo} {item.address.street}, {item.address.city}, {item.address.pinCode}
+                    {item.name}
                   </h5>
                 </div>
-                <div>
-                  <Button size="sm" variant="primary" endIcon={<SettingsIcon />} onClick={() => {
-                    setIsEditing(true)
-                    setEditId(item._id)
-                  }}>
-                    Settings
-                  </Button>
+
+                <div className={`rounded-2xl border border-gray-200 ${item.isBlocked ? "bg-gray-300 dark:border-gray-700 dark:bg-gray-800" : "bg-white dark:border-gray-800 dark:bg-white/[0.15]"} p-4  mt-5`}>
+                  <div className='mb-5'>
+                    <p className='text-[12px] text-brand-500 font-semibold'>Status</p>
+                    <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
+                      {item.isApproved ? "Approved" : "Pending Approval"}
+                    </h6>
+                  </div>
+                  <div className='mb-5'>
+                    <p className='text-[12px] text-brand-500 font-semibold'>Block Status</p>
+                    <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
+                      {item.isBlocked ? <span className='text-brand-500'>Blocked</span> : "Active"}
+                    </h6>
+                  </div>
+                  <div className='mb-5'>
+                    <p className='text-[12px] text-brand-500 font-semibold'>Cuisines</p>
+                    <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
+                      {item?.cuisine?.map((item: string, index: number) => (<span key={index} className='mr-2'>{item},</span>))}
+                    </h6>
+                  </div>
+                  <div className='mb-5'>
+                    <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
+                      <p className='text-[12px] text-brand-500'>Address</p>
+                      {item.address.buildingNo} {item.address.street}, {item.address.city}, {item.address.pinCode}
+                    </h5>
+                  </div>
+                  <div>
+                    <Button size="sm" variant="primary" endIcon={<SettingsIcon />} onClick={() => {
+                      setIsEditing(true)
+                      setEditId(item._id)
+                    }}>
+                      Settings
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
       <Modal isOpen={isOpen} onClose={() => {
         setIsEditing(false)
         closeModal()
