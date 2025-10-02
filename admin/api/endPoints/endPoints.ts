@@ -69,7 +69,8 @@ export const endPoints = {
     verifyEmail: "/verify-email/",
     signin: "/signin",
     forgot_password: "/forgot-password",
-    reset_password: "/reset-password"
+    reset_password: "/reset-password",
+    refresh_token: "/refresh-token"
   },
   generateBill: "/generate",
   previewBill: "/preview",

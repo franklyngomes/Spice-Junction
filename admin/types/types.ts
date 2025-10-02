@@ -124,8 +124,8 @@ export interface FoodItemData {
 }
 export interface SubCategory {
   category: {
-    _id:string,
-    name?:string
+    _id: string,
+    name?: string
   }[],
   categoryNo: string,
   createdAt?: string,
@@ -224,24 +224,24 @@ export interface RestaurantItem {
 export interface RestaurantDetailsResponse {
   data?: {
     address: {
-    buildingNo: string,
-    street: string,
-    city: string,
-    pinCode: string
-  }
-  createdAt?: string,
-  cuisine: string[],
-  deliveryZone: string[],
-  image: string,
-  imageId?: string,
-  isApproved: boolean,
-  isBlocked: boolean,
-  name: string,
-  ownerId: string,
-  phone: string
-  updatedAt?: string,
-  __v?: number,
-  _id: string,
+      buildingNo: string,
+      street: string,
+      city: string,
+      pinCode: string
+    }
+    createdAt?: string,
+    cuisine: string[],
+    deliveryZone: string[],
+    image: string,
+    imageId?: string,
+    isApproved: boolean,
+    isBlocked: boolean,
+    name: string,
+    ownerId: string,
+    phone: string
+    updatedAt?: string,
+    __v?: number,
+    _id: string,
   },
   error?: boolean,
   message?: string,
@@ -257,9 +257,9 @@ export interface RequestData {
 }
 export interface RestaurantUpdateData {
   isApprovedStatus?: string,
-  isBlockedStatus?:string,
+  isBlockedStatus?: string,
   isApproved?: boolean,
-  isBlocked?:boolean,
+  isBlocked?: boolean,
   buildingNo?: string,
   street?: string,
   city?: string,
@@ -271,3 +271,49 @@ export interface RestaurantUpdateData {
   ownerId?: string,
   phone?: string
 }
+export interface BlogItem {
+  author: {
+    firstName: string,
+    lastName: string,
+    _id: string,
+  }
+  createdAt: string,
+  description: string,
+  image: string,
+  imageId: string,
+  title: string,
+  updatedAt: string,
+  __v: number
+  _id: string
+}
+export interface BlogResponse {
+  data?: BlogItem[],
+  error?: boolean,
+  message?: string,
+}
+export interface BlogData{
+  author: string,
+  title: string,
+  description: string,
+  image: string | File | null
+}
+export interface BlogDetailsResponse {
+  data?: {
+    author: {
+      firstName: string,
+      lastName: string,
+      _id: string,
+    }
+    createdAt: string,
+    description: string,
+    image: string,
+    imageId: string,
+    title: string,
+    updatedAt: string,
+    __v: number
+    _id: string
+  },
+  error?: boolean,
+  message?: string
+}
+
