@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Cookies } from "react-cookie";
 import { endPoints } from '../endPoints/endPoints';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL
+const baseURL = process.env.BASE_URL
 const cookies = new Cookies()
 
 export const axiosInstance = axios.create({
