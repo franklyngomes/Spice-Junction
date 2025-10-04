@@ -63,8 +63,8 @@ const AppHeader: React.FC = () => {
       cookies.remove("role")
       cookies.remove("restaurant")
       cookies.remove("refreshToken")
-      router.push("/signin")
     }
+    router.push("/signin")
   }
 useEffect(() => {
   if (!token) return;
