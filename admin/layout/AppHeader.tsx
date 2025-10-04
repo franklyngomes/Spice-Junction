@@ -57,13 +57,11 @@ const AppHeader: React.FC = () => {
     setIsOpen(false);
   }
   function handleSignout() {
-    if (cookies.get('token')) {
       cookies.remove('token')
       cookies.remove('userId')
       cookies.remove("role")
       cookies.remove("restaurant")
       cookies.remove("refreshToken")
-    }
     router.push("/signin")
   }
 useEffect(() => {
