@@ -46,6 +46,7 @@ export const CreateRestaurantQuery = () => {
     mutationFn: CreateRestaurant,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:["RESTAURANT"]})
+      queryClient.refetchQueries({queryKey:["RESTAURANT"]})
       queryClient.invalidateQueries({queryKey:["RESTAURANT_LIST"]})
     },
     onError: (err) => {
@@ -70,7 +71,9 @@ export const DeleteRestaurantQuery = () => {
   return useMutation({
     mutationFn:(id: string) => DeleteRestaurant(id),
     onSuccess: () => {
+      queryClient.invalidateQueries({queryKey:["RESTAURANT"]})
       queryClient.invalidateQueries({queryKey:["RESTAURANT_LIST"]})
+      queryClient.invalidateQueries({queryKey:["REQUEST_LIST"]})
     },
     onError: (err) => {
       return err;

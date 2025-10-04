@@ -1,10 +1,10 @@
 "use client"
 import React from 'react'
-import { AllRestaurantQuery, RestaurantDetailsQuery, UpdateRestaurantQuery } from '../../../api/query/RestaurantQuery'
+import { AllRestaurantQuery, DeleteRestaurantQuery, RestaurantDetailsQuery, UpdateRestaurantQuery } from '../../../api/query/RestaurantQuery'
 import Image from 'next/image'
 import Button from '../../../components/ui/button/Button'
 import { useStore } from '../../../store/store'
-import { ChevronDownIcon, SettingsIcon } from '../../../icons'
+import { ChevronDownIcon, SettingsIcon, TrashBinIcon } from '../../../icons'
 import { Modal } from '../../../components/ui/modal'
 import { useModal } from '../../../hooks/useModal'
 import { Controller, useForm } from 'react-hook-form'
@@ -52,6 +52,7 @@ const AllRestaruant = () => {
   const { handleSubmit, reset, control, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const { isOpen, openModal, closeModal } = useModal();
   const { mutateAsync: update } = UpdateRestaurantQuery()
+  const { mutateAsync: delete_restaurant } = DeleteRestaurantQuery()
 
   const onSubmit = (data: RestaurantUpdateData) => {
     const { isApprovedStatus, isBlockedStatus } = data
@@ -68,6 +69,20 @@ const AllRestaruant = () => {
     }
     const payload = { isApproved, isBlocked }
     update({ editId, payload }, {
+      onSuccess: (res) => {
+        if (res.error) {
+          toast.error(res.message);
+          return;
+        }
+        setIsEditing(false)
+        closeModal()
+        toast.success(res?.message);
+      },
+    })
+  }
+  const onDelete = () => {
+    const id = editId
+    delete_restaurant(id, {
       onSuccess: (res) => {
         if (res.error) {
           toast.error(res.message);
@@ -248,15 +263,21 @@ const AllRestaruant = () => {
               </div>
             </div>
             <div className="flex items-center gap-3 px-2 mt-6 lg:justify-end">
-              {
-                <Button size="sm" variant="outline" onClick={() => {
-                  setIsEditing(false)
-                  closeModal()
-                  reset()
-                }}>
-                  Cancel
-                </Button>
-              }
+              <Button size="sm" variant="outline" onClick={() => {
+                setIsEditing(false)
+                closeModal()
+                reset()
+              }}>
+                Cancel
+              </Button>
+              <Button size="sm" variant="outline" className='text-brand-500!' onClick={() => {
+                setIsEditing(false)
+                onDelete()
+                closeModal()
+                reset()
+              }}>
+                <TrashBinIcon /> Delete
+              </Button>
               <Button size="sm" type="submit">
                 {isEditing ? "Save" : "Submit"}
               </Button>

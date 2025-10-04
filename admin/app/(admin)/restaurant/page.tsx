@@ -79,6 +79,7 @@ const Restaurant = () => {
   const zone = data?.data
   const { data: restaurant } = RestaurantByOwnerQuery(userId, !!userId)
   const restaurant_details = restaurant?.data
+  console.log(restaurant_details)
   const { isOpen, openModal, closeModal } = useModal();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { editId, isEditing, setIsEditing, setEditId } = useStore();
@@ -87,7 +88,7 @@ const Restaurant = () => {
   if (!id || id === "undefined") {
     id = undefined
   }
-  const { mutateAsync: create } = CreateRestaurantQuery()
+  const { mutateAsync: create, isPending: isCreating } = CreateRestaurantQuery()
 
   const onSubmit = (data: RestaurantData) => {
     const { name,
@@ -181,6 +182,11 @@ const Restaurant = () => {
   React.useEffect(() => {
     setIsClient(true);
   }, []);
+  React.useEffect(() => {
+    if(restaurant_details){
+      cookies.set("restaurant", restaurant_details._id)
+    }
+  },[restaurant_details])
   return (
     <div>
       {isClient && (
@@ -522,8 +528,8 @@ const Restaurant = () => {
                       Cancel
                     </Button>
                   }
-                  <Button size="sm" type="submit">
-                    {isEditing ? "Save" : "Submit"}
+                  <Button size="sm" type="submit" disabled={isCreating}>
+                    {isEditing ?  "Save" : (isCreating ? "Submitting..." : "Submit")}
                   </Button>
                 </div>
               </form>
