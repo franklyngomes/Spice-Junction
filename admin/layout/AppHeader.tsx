@@ -11,6 +11,7 @@ import { Cookies } from "react-cookie";
 import { DropdownItem } from "../components/ui/dropdown/DropdownItem";
 import { Dropdown } from "../components/ui/dropdown/Dropdown";
 import { AccountIcon, InfoIcon, UsersIcon } from "../icons";
+import { useRouter } from "next/navigation";
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
@@ -20,6 +21,7 @@ const AppHeader: React.FC = () => {
   const { user, setUser } = useStore()
   const token = cookies.get('token')
   const { data,isSuccess, isError } = UserProfileQuery()
+  const router = useRouter()
 
   const handleToggle = () => {
     if (window.innerWidth >= 1024) {
@@ -60,6 +62,8 @@ const AppHeader: React.FC = () => {
       cookies.remove('userId')
       cookies.remove("role")
       cookies.remove("restaurant")
+      cookies.remove("refreshToken")
+      router.push("/signin")
     }
   }
 useEffect(() => {
