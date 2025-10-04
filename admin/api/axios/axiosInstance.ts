@@ -40,8 +40,8 @@ axiosInstance.interceptors.response.use((response) => response,
         return axiosInstance(originalRequest)
       } catch (error) {
         console.error("Refresh token failed!", error)
-        // cookies.remove("token");
-        // window.location.href = "/signin"
+        cookies.remove("token");
+        window.location.href = "/signin"
       }
     }
     return Promise.reject(error);
