@@ -12,15 +12,16 @@ import { DropdownItem } from "../components/ui/dropdown/DropdownItem";
 import { Dropdown } from "../components/ui/dropdown/Dropdown";
 import { AccountIcon, InfoIcon, UsersIcon } from "../icons";
 import { useRouter } from "next/navigation";
+import Button from "../components/ui/button/Button";
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
   const [isOpen, setIsOpen] = useState(false);
   const cookies = new Cookies()
-  const { user, setUser } = useStore()
+  const { user, setUser, setIsSigOut } = useStore()
   const token = cookies.get('token')
-  const { data,isSuccess, isError } = UserProfileQuery()
+  const { data, isSuccess, isError } = UserProfileQuery()
   const router = useRouter()
 
   const handleToggle = () => {
@@ -57,20 +58,21 @@ const AppHeader: React.FC = () => {
     setIsOpen(false);
   }
   function handleSignout() {
-      cookies.remove('token')
-      cookies.remove('userId')
-      cookies.remove("role")
-      cookies.remove("restaurant")
-      cookies.remove("refreshToken")
+    setIsSigOut(true)
+    cookies.remove('token', { path: "/" })
+    cookies.remove('userId', { path: "/" })
+    cookies.remove("role", { path: "/" })
+    cookies.remove("restaurant", { path: "/" })
+    cookies.remove("refreshToken", { path: "/" })
     router.push("/signin")
   }
-useEffect(() => {
-  if (!token) return;
+  useEffect(() => {
+    if (!token) return;
 
-  if (isSuccess) {
-    setUser(data?.data?.data);
-  }
-}, [token, isError, isSuccess, data]);
+    if (isSuccess) {
+      setUser(data?.data?.data);
+    }
+  }, [token, isError, isSuccess, data]);
 
   return (
     <header className="sticky top-0 flex w-full bg-white border-gray-200 z-99999 dark:border-gray-800 dark:bg-gray-900 lg:border-b">
@@ -258,13 +260,12 @@ useEffect(() => {
                     : null
                 }
               </ul>
-              <Link
-                href="/signin"
+              <Button
                 onClick={handleSignout}
-                className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+                className="flex items-center gap-3 px-3! py-2! mt-3 font-medium text-white! rounded-lg group text-theme-sm hover:bg-brand-600 hover:text-gray-700"
               >
                 <svg
-                  className="fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
+                  className="fill-white dark:group-hover:fill-white"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -279,7 +280,7 @@ useEffect(() => {
                   />
                 </svg>
                 Sign out
-              </Link>
+              </Button>
             </Dropdown>
           </div>
 

@@ -41,7 +41,6 @@ const Blogs = () => {
   const { editId, isEditing, setIsEditing, setEditId } = useStore();
   const { data } = AllBlogQuery()
   const blogs = data?.data
-  console.log(blogs)
   const { data: details } = BlogDetailsQuery(editId, !!editId)
   const blog_details = details?.data
   const { isOpen, openModal, closeModal } = useModal();

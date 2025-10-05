@@ -9,5 +9,8 @@ export const useStore = create<StoreState>((set) => ({
   user: null,
   setUser: (value) => set(() => ({user: value})),
   restaurantId: undefined,
-  setRestaurantId:(value) => set(() => ({restaurantId : value}))
+  setRestaurantId:(value) => set(() => ({restaurantId : value})),
+  isSignOut: false,
+  setIsSigOut: (value) => set(() => ({isSignOut: value}))
+
 }))

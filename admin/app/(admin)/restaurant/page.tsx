@@ -79,7 +79,6 @@ const Restaurant = () => {
   const zone = data?.data
   const { data: restaurant } = RestaurantByOwnerQuery(userId, !!userId)
   const restaurant_details = restaurant?.data
-  console.log(restaurant_details)
   const { isOpen, openModal, closeModal } = useModal();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { editId, isEditing, setIsEditing, setEditId } = useStore();

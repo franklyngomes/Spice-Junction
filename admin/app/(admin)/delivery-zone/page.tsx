@@ -32,7 +32,6 @@ const DeliveryZone = () => {
 
   const onSubmit = (data: DeliveryZoneData) => {
     const { zoneName, district } = data
-    console.log("Api Call")
     const payload = {
       zoneName,
       district

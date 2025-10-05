@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Cookies } from "react-cookie";
 import { endPoints } from '../endPoints/endPoints';
+import { useStore } from '../../store/store';
 
 const baseURL = "https://spice-junction.onrender.com"
 const cookies = new Cookies()
@@ -22,10 +23,12 @@ axiosInstance.interceptors.request.use((config) => {
 })
 
 axiosInstance.interceptors.response.use((response) => response,
-  async (error) => {
-    const originalRequest = error.config;
+async (error) => {
+  const {isSignOut} = useStore()
+  console.log(isSignOut)
+  const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (!isSignOut && error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         // Call refresh token endpoint

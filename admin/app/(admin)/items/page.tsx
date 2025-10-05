@@ -50,7 +50,6 @@ const Items = () => {
   const cookies = new Cookies()
   const { editId, isEditing, setIsEditing, setEditId} = useStore();
   const restaurantId = cookies.get("restaurant")
-  console.log(restaurantId)
   const { data } = RestaurantFoodItemQuery(restaurantId, !!restaurantId)
   const food_item = data?.data
   const { data: menu } = RestaurantFoodMenuQuery(restaurantId, !!restaurantId)

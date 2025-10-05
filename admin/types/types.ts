@@ -48,6 +48,8 @@ export interface StoreState {
   setUser: (value: UserProfile) => void
   restaurantId?: string,
   setRestaurantId: (value: string) => void
+  isSignOut: boolean,
+  setIsSigOut: (value: boolean) => void
 }
 export interface FoodMenuData {
   name: string,

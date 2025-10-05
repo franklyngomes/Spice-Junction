@@ -32,7 +32,6 @@ const Category = () => {
 
   const onSubmit = (data: CategoryData) => {
     const { name } = data
-    console.log("Api Call")
     const payload = {
       name
     }
