@@ -119,10 +119,10 @@ const AllRestaruant = () => {
       <div className="flex flex-wrap justify-between items-center mb-4">
         <PageBreadcrumb pageTitle="All Restaurants" breadCrumbTitle="All Restaurants" />
       </div>
-      <div className='flex justify-start gap-5 flex-col md:flex-row'>
+      <div className='grid md:grid-cols-2 gap-4'>
         {
           restaurants?.map((item, index: number) => (
-            <div className="" key={index}>
+            <div className="grid-cols-2" key={index}>
               <div className={`rounded-2xl border border-gray-200 ${item.isBlocked ? "bg-gray-200 dark:border-gray-700 dark:bg-gray-700" : "bg-white dark:border-gray-800 dark:bg-white/[0.040]"} p-4 `}>
                 <div className="flex items-center  gap-4 justify-start">
                   <Image
@@ -160,8 +160,11 @@ const AllRestaruant = () => {
                   <div className='mb-5'>
                     <h5 className="mt-2 font-bold text-gray-800 text-lg dark:text-white/90">
                       <p className='text-[12px] text-brand-500'>Address</p>
-                      {item.address.buildingNo} {item.address.street}, {item.address.city}, {item.address.pinCode}
                     </h5>
+                    <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90 text-wrap">
+                      {item.address.buildingNo} {item.address.street}, {item.address.city},
+                    </h6>
+                    <h6 className="font-bold text-gray-800 text-md dark:text-white/90">{item.address.pinCode}</h6>
                   </div>
                   <div>
                     <Button size="sm" variant="primary" endIcon={<SettingsIcon />} onClick={() => {
