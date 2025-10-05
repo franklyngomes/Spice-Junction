@@ -43,7 +43,7 @@ class BlogController {
       });
       await newBlog.save();
       return res.status(HttpCode.create).json({
-        status: false,
+        status: true,
         message: "Blog created!",
         data: newBlog,
       });
@@ -67,7 +67,7 @@ class BlogController {
         });
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Blogs fetched successfully",
         data: blogs,
       });
@@ -92,7 +92,7 @@ class BlogController {
         });
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Blog fetched successfully",
         data: blog,
       });
@@ -125,7 +125,7 @@ class BlogController {
       }
       await blog.save();
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Blog updated successfully",
       });
     } catch (error) {
@@ -149,7 +149,7 @@ class BlogController {
         await cloudinary.uploader.destroy(blog.imageId);
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Blog deleted successfully",
       });
     } catch (error) {

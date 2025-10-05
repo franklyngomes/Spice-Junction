@@ -63,7 +63,7 @@ class SubCategoryController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Categories fetched successfully",
                 data: category,
             });
@@ -86,7 +86,7 @@ class SubCategoryController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Category fetched successfully",
                 data: category,
             });
@@ -119,7 +119,7 @@ class SubCategoryController {
             }
             await category.save();
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Category updated successfully",
             });
         }
@@ -145,7 +145,7 @@ class SubCategoryController {
                 await cloudinary.uploader.destroy(category.imageId);
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Category deleted successfully",
             });
         }

@@ -30,7 +30,7 @@ class FoodMenuController {
             });
             await foodMenu.save();
             return res.status(HttpCode.create).json({
-                status: false,
+                status: true,
                 message: "FoodMenu created!",
                 data: foodMenu,
             });
@@ -52,7 +52,7 @@ class FoodMenuController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Food menus fetched successfully",
                 data: foodMenu,
             });
@@ -75,7 +75,7 @@ class FoodMenuController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Food menus fetched successfully",
                 data: foodMenu,
             });
@@ -98,7 +98,7 @@ class FoodMenuController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Food menu fetched successfully",
                 data: foodMenu,
             });
@@ -122,7 +122,7 @@ class FoodMenuController {
             }
             await foodMenu.save();
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Food menu updated successfully",
             });
         }
@@ -144,7 +144,7 @@ class FoodMenuController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Food menu deleted successfully",
             });
         }

@@ -16,7 +16,7 @@ class CategoryController {
             });
             await category.save();
             return res.status(HttpCode.create).json({
-                status: false,
+                status: true,
                 message: "Category created successfully",
                 data: category
             });
@@ -38,7 +38,7 @@ class CategoryController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Categories fetched successfully",
                 data: category
             });
@@ -61,7 +61,7 @@ class CategoryController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Category fetched successfully",
                 data: category
             });
@@ -84,7 +84,7 @@ class CategoryController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Category updated successfully",
             });
         }
@@ -106,7 +106,7 @@ class CategoryController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Category deleted successfully",
             });
         }

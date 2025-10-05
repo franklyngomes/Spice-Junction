@@ -56,7 +56,7 @@ class RestaurantController {
       });
       await restaurant.save();
       return res.status(HttpCode.create).json({
-        status: false,
+        status: true,
         message: "Restaurant created! Please wait for approval.",
         data: restaurant,
       });
@@ -78,7 +78,7 @@ class RestaurantController {
         });
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Restaurants fetched successfully",
         data: restaurant,
       });
@@ -100,7 +100,7 @@ class RestaurantController {
         });
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Restaurant fetched successfully",
         data: restaurant,
       });
@@ -124,7 +124,7 @@ class RestaurantController {
         });
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Restaurant fetched successfully",
         data: restaurant,
       });
@@ -156,7 +156,7 @@ class RestaurantController {
       }
       await restaurant.save();
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Restaurant updated successfully",
       });
     } catch (error) {
@@ -180,7 +180,7 @@ class RestaurantController {
         await cloudinary.uploader.destroy(restaurant.imageId);
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Restaurant deleted successfully",
       });
     } catch (error) {

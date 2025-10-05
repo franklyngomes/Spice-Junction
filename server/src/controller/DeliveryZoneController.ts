@@ -61,7 +61,7 @@ class DeliveryZoneController {
         })
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Delivery zones fetched successfully",
         data: zones
       })
@@ -83,7 +83,7 @@ class DeliveryZoneController {
         })
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Delivery zone fetched successfully",
         data: zone
       })
@@ -105,7 +105,7 @@ class DeliveryZoneController {
         })
       }
       return res.status(HttpCode.success).json({
-        status: false,
+        status: true,
         message: "Delivery deleted successfully",
       })
     } catch (error) {

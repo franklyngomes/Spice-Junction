@@ -78,7 +78,7 @@ class OrderController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Orders fetched successfully",
                 data: orders,
             });
@@ -101,7 +101,7 @@ class OrderController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Order fetched successfully",
                 data: order,
             });
@@ -124,7 +124,7 @@ class OrderController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Orders fetched successfully",
                 data: order,
             });
@@ -148,7 +148,7 @@ class OrderController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Orders fetched successfully",
                 data: order,
             });
@@ -172,7 +172,7 @@ class OrderController {
             }
             await order.save();
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Order updated successfully",
             });
         }
@@ -194,7 +194,7 @@ class OrderController {
                 });
             }
             return res.status(HttpCode.success).json({
-                status: false,
+                status: true,
                 message: "Order deleted successfully",
             });
         }
