@@ -2,7 +2,7 @@ import { Cookies } from "react-cookie";
 import { axiosInstance } from "../axios/axiosInstance";
 import { endPoints } from "../endPoints/endPoints";
 import axios from "axios";
-import { RequestData, RestaurantDetailsResponse, RestaurantResponse, RestaurantUpdateData } from "../../types/types";
+import { RequestData, RestaurantDetailsResponse, RestaurantResponse } from "../../types/types";
 
 export const RestaurantByOwner = async (id: string) => {
   const cookies = new Cookies()
@@ -97,11 +97,11 @@ export const CreateRestaurant = async (payload: FormData) => {
     return { error: true, message: "Unexpected error" };
   }
 }
-export const UpdateRestaurant = async (id: string, payload: RestaurantUpdateData) => {
+export const UpdateRestaurant = async (id: string, formdata: FormData) => {
   const cookies = new Cookies()
   const token = cookies.get("token")
   try {
-    const response = await axiosInstance.patch(endPoints.restaurant.update_restaurant + id, payload, {
+    const response = await axiosInstance.patch(endPoints.restaurant.update_restaurant + id, formdata, {
       "headers": {
         "Authorization": `Bearer ${token}`
       }

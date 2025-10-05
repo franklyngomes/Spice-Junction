@@ -17,7 +17,7 @@ import TextArea from '../../../components/form/input/TextArea'
 import FileInput from '../../../components/form/input/FileInput'
 import MultiSelect from '../../../components/form/MultiSelect'
 import { AllZoneQuery } from '../../../api/query/DeliveryZoneQuery'
-import { CreateRestaurantQuery, RestaurantByOwnerQuery } from '../../../api/query/RestaurantQuery'
+import { CreateRestaurantQuery, RestaurantByOwnerQuery, RestaurantDetailsQuery, UpdateRestaurantQuery } from '../../../api/query/RestaurantQuery'
 import toast from 'react-hot-toast'
 import { DeliveryZoneItem, RestaurantData } from '../../../types/types'
 
@@ -87,7 +87,10 @@ const Restaurant = () => {
   if (!id || id === "undefined") {
     id = undefined
   }
+  const { data: details } = RestaurantDetailsQuery(id, !!id)
+  const editDetails = details?.data
   const { mutateAsync: create, isPending: isCreating } = CreateRestaurantQuery()
+  const { mutateAsync: update} = UpdateRestaurantQuery()
 
   const onSubmit = (data: RestaurantData) => {
     const { name,
@@ -133,8 +136,46 @@ const Restaurant = () => {
     })
   }
 
-  const onUpdate = () => {
-
+  const onUpdate = (data: RestaurantData) => {
+    const { name,
+      ownerId,
+      buildingNo,
+      street,
+      city,
+      pinCode,
+      phone,
+      cuisine,
+      deliveryZone } = data
+    const formdata = new FormData()
+    formdata.append("name", name)
+    formdata.append("ownerId", ownerId)
+    formdata.append("buildingNo", buildingNo)
+    formdata.append("street", street)
+    formdata.append("city", city)
+    formdata.append("pinCode", pinCode)
+    formdata.append("phone", phone)
+    cuisine.forEach((cuisine: string) => {
+      formdata.append("cuisine", cuisine)
+    })
+    deliveryZone.forEach((zone: string) => {
+      formdata.append("deliveryZone", zone)
+    })
+    if (image && image instanceof File) {
+      formdata.append("image", image);
+    } else {
+      formdata.append("image", editDetails?.image ?? "")
+    }
+    update({ id, formdata }, {
+      onSuccess: (res) => {
+        if (res.error) {
+          toast.error(res.message);
+          return;
+        }
+        setIsEditing(false)
+        closeModal()
+        toast.success(res?.message);
+      },
+    })
   }
   React.useEffect(() => {
     if (isEditing) {
@@ -149,18 +190,18 @@ const Restaurant = () => {
     }
   }, [zone])
   React.useEffect(() => {
-    if (isEditing && restaurant_details) {
+    if (isEditing && editDetails) {
       reset({
-        name: restaurant_details.name,
-        ownerId: restaurant_details.ownerId,
-        buildingNo: restaurant_details.address.buildingNo,
-        street: restaurant_details.address.street,
-        city: restaurant_details.address.city,
-        pinCode: restaurant_details.address.pinCode,
-        phone: restaurant_details.phone,
-        cuisine: restaurant_details.cuisine,
-        image: restaurant_details.image,
-        deliveryZone: restaurant_details.deliveryZone
+        name: editDetails.name,
+        ownerId: editDetails.ownerId,
+        buildingNo: editDetails.address.buildingNo,
+        street: editDetails.address.street,
+        city: editDetails.address.city,
+        pinCode: editDetails.address.pinCode,
+        phone: editDetails.phone,
+        cuisine: editDetails.cuisine,
+        image: editDetails.image,
+        deliveryZone: editDetails.deliveryZone
       });
     } else {
       reset({
@@ -176,25 +217,35 @@ const Restaurant = () => {
         deliveryZone: []
       })
     }
-  }, [isEditing, restaurant_details, reset]);
+
+  }, [isEditing, editDetails, reset]);
 
   React.useEffect(() => {
     setIsClient(true);
   }, []);
   React.useEffect(() => {
-    if(restaurant_details){
+    if (restaurant_details) {
       cookies.set("restaurant", restaurant_details._id)
     }
-  },[restaurant_details])
+  }, [restaurant_details])
   return (
     <div>
       {isClient && (
         <div>
           <div className="flex flex-wrap justify-between items-center mb-4">
             <PageBreadcrumb pageTitle="My Restaurant" breadCrumbTitle="Restaurant" />
-            <Button size="sm" variant="primary" startIcon={<RestaurantIcon />} onClick={openModal}>
-              {!id ? "Add Restaurant" : "Edit Restaurant"}
-            </Button>
+            {
+              !editDetails ?
+                <Button size="sm" variant="primary" startIcon={<RestaurantIcon />} onClick={openModal}>
+                  Add Restaurant
+                </Button>
+                :
+                <Button size="sm" variant="primary" startIcon={<RestaurantIcon />} onClick={() => {
+                  setIsEditing(true)
+                }}>
+                  Edit Restaurant
+                </Button>
+            }
           </div>
           <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] lg:p-6">
             {
@@ -528,7 +579,7 @@ const Restaurant = () => {
                     </Button>
                   }
                   <Button size="sm" type="submit" disabled={isCreating}>
-                    {isEditing ?  "Save" : (isCreating ? "Submitting..." : "Submit")}
+                    {isEditing ? "Save" : (isCreating ? "Submitting..." : "Submit")}
                   </Button>
                 </div>
               </form>

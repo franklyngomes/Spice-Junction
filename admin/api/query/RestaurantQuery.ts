@@ -1,7 +1,7 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
 import { AllRequest, AllRestaurant, CreateRestaurant, DeleteRestaurant, RespondRequest, RestaurantByOwner, RestaurantDetails, UpdateRestaurant } from "../functions/RestaurantFunc"
 import { queryClient } from "../../app/(admin)/provider"
-import { RequestData, RestaurantUpdateData } from "../../types/types"
+import { RequestData } from "../../types/types"
 export const RestaurantByOwnerQuery = (id: string, enabled: boolean) => {
   return useQuery({
     queryKey: ["RESTAURANT", id],
@@ -56,7 +56,7 @@ export const CreateRestaurantQuery = () => {
 };
 export const UpdateRestaurantQuery = () => {
   return useMutation({
-    mutationFn:({editId, payload} : {editId:string, payload : RestaurantUpdateData}) => UpdateRestaurant(editId, payload),
+    mutationFn:({id, formdata} : {id:string, formdata : FormData}) => UpdateRestaurant(id, formdata),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey:["RESTAURANT"]})
       queryClient.invalidateQueries({queryKey:["RESTAURANT_LIST"]})
