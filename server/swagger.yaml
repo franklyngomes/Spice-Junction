@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Spice Junction
-  version: 1.1.0
+  version: 1.0.0
 servers:
   - url: https://spice-junction.onrender.com
 components:
@@ -81,8 +81,8 @@ paths:
             schema:
               type: object
               example:
-                email: franklyngomes15@gmail.com
-                password: Admin_12345
+                email: quadeyaunifre-8075@yopmail.com
+                password: Customer_1234
       security:
         - noauthAuth: []
       responses:
@@ -130,13 +130,20 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /user-profile/68bea9b51a3871015b45f6cb:
+  /user-profile/{id}:
     get:
       tags:
         - Authentication/User
       summary: user-profile
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68bea9b51a3871015b45f6cb
       responses:
         '200':
           description: Successful response
@@ -170,7 +177,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /set-user-address/68bea9b51a3871015b45f6cb:
+  /set-user-address/{id}:
     post:
       tags:
         - Authentication/User
@@ -187,18 +194,32 @@ paths:
                 pinCode: '700019'
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68bea9b51a3871015b45f6cb
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /delete-user-address/68c9010b23e3b1f2bda8c54c:
+  /delete-user-address/{id}:
     delete:
       tags:
         - Authentication/User
       summary: delete-user-address
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c9010b23e3b1f2bda8c54c
       responses:
         '200':
           description: Successful response
@@ -216,19 +237,26 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /restaurant-details/68c2d209bb5dcc00c93e7927:
+  /restaurant-details/{id}:
     get:
       tags:
         - Restaurant
       summary: restaurant-details
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c2d209bb5dcc00c93e7927
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /update-restaurant/68c28d6ef26f0f1146aa2bd6:
+  /update-restaurant/{id}:
     patch:
       tags:
         - Restaurant
@@ -275,22 +303,35 @@ paths:
         - name: Authorization
           in: header
           schema:
-            type: string
+            type: number
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjY3Mjc4LCJleHAiOjE3NTc2NzgwNzh9.u_252k2ITzeErAGIOE_WmshM0hCB0rX09U7P4SazSWQ
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4Njg0OTQ1LCJleHAiOjE3NTg5NDQxNDV9.43zPfn_DmIH1A3v3Vru3kqM_-znuih5ffeL_U7M4Mj4
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d41aa3bcf295eb52f5b6b3
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /restaurant-by-owner/68c2d1a1bb5dcc00c93e7920:
+  /restaurant-by-owner/{id}:
     get:
       tags:
         - Restaurant
       summary: restaurant-by-owner
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c2d1a1bb5dcc00c93e7920
       responses:
         '200':
           description: Successful response
@@ -308,7 +349,7 @@ paths:
               type: object
               example:
                 name: Biryani
-                restaurant: 68c7a951fead776eb280e8c0
+                restaurant: 68d68e9efa1f1818435b9d57
       security:
         - noauthAuth: []
       parameters:
@@ -318,7 +359,7 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTE1NDQ4LCJleHAiOjE3NTc5MjYyNDh9.GhBBoeXPcnWyz5gW0_1vKNd3gefeZVvbbs0rItpNBLE
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4ODY4MTQ0LCJleHAiOjE3NTkxMjczNDR9.nqGJnX3nLLbx9iUQ6Yv2EMuAy8dXAkhe-rLQjj0VQFU
       responses:
         '200':
           description: Successful response
@@ -336,19 +377,26 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /food-menu-details/68c3c39d5cdde5fd45a87c87:
+  /food-menu-details/{id}:
     get:
       tags:
         - Food Menu
       summary: food-menu-details
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c3c39d5cdde5fd45a87c87
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /delete-food-menu/68c3c4fc5cdde5fd45a87c90:
+  /delete-food-menu/{id}:
     delete:
       tags:
         - Food Menu
@@ -363,12 +411,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjYwMDQ4LCJleHAiOjE3NTc2NzA4NDh9.6r3VkkEMI-7zUR7fdCt2OFSt_Bi8CKSCmteeRbksxi8
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c3c4fc5cdde5fd45a87c90
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /update-food-menu/68c3c4fc5cdde5fd45a87c90:
+  /update-food-menu/{id}:
     patch:
       tags:
         - Food Menu
@@ -390,30 +444,49 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3NjYwMDQ4LCJleHAiOjE3NTc2NzA4NDh9.6r3VkkEMI-7zUR7fdCt2OFSt_Bi8CKSCmteeRbksxi8
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c3c4fc5cdde5fd45a87c90
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /restaurant-food-menu/68c2d209bb5dcc00c93e7927:
+  /restaurant-food-menu/{restaurantid}:
     get:
       tags:
         - Food Menu
       summary: restaurant-food-menu
       security:
         - noauthAuth: []
+      parameters:
+        - name: restaurantid
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d68e9efa1f1818435b9d57
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /restaurant-food-item/68c2d209bb5dcc00c93e7927:
+  /restaurant-food-item/{restaurantid}:
     get:
       tags:
         - Food Item
       summary: restaurant-food-item
       security:
         - noauthAuth: []
+      parameters:
+        - name: restaurantid
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
@@ -432,25 +505,27 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Mutton Biryani Special (2pcs)
+                  example: Chowman's Favourite Soup
                 description:
                   type: string
                   example: >-
-                    Enjoy our soft mutton biryani specialty, delivering layered
-                    rice, subtle spices, and hearty goodness in every delicious
-                    serving.
+                    From the house of Chowman, our very own specialty soup is a
+                    pure bliss that comes with an amalgamation of two different
+                    soups in perfect proportion, adding up luxury ingredients
+                    such as prawn, Pak Choi, egg drops, mushrooms, boneless
+                    chicken and many more
                 restaurant:
                   type: string
-                  example: 68c7a951fead776eb280e8c0
+                  example: 68d68e9efa1f1818435b9d57
                 subCategory:
                   type: string
-                  example: 68c256bd19895d64ea0cf23e
+                  example: 68d8f929256e1772e897eee8
                 price:
                   type: integer
-                  example: '750'
+                  example: '315'
                 menu:
                   type: string
-                  example: 68c7a9befead776eb280e8c3
+                  example: 68d8a249071ca717c0fc8693
                 image:
                   type: string
                   format: binary
@@ -463,25 +538,32 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTExODE5LCJleHAiOjE3NTc5MjI2MTl9.Fj8lR2DPg1qRNyntNE67lWTBKCHEDonRBIMmu01Z4aA
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4ODY4MTQ0LCJleHAiOjE3NTkxMjczNDR9.nqGJnX3nLLbx9iUQ6Yv2EMuAy8dXAkhe-rLQjj0VQFU
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /food-item-details/68c6349fd2312180031c2123:
+  /food-item-details/{id}:
     get:
       tags:
         - Food Item
       summary: food-item-details
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d8bb437fe414211986314f
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /update-food-item/68c63ceea368459a2375fd58:
+  /update-food-item/{id}:
     patch:
       tags:
         - Food Item
@@ -521,16 +603,22 @@ paths:
         - name: Authorization
           in: header
           schema:
-            type: string
+            type: number
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3ODE3Nzc5LCJleHAiOjE3NTc4Mjg1Nzl9.ACHLHw7bMDZmZtbALkD9FXIcvNnviURHQTHgF6mQabA
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4Njg0OTQ1LCJleHAiOjE3NTg5NDQxNDV9.43zPfn_DmIH1A3v3Vru3kqM_-znuih5ffeL_U7M4Mj4
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d8bb437fe414211986314f
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /delete-food-item/68c6418403d4244ef8f4ada2:
+  /delete-food-item/{id}:
     delete:
       tags:
         - Food Item
@@ -541,10 +629,16 @@ paths:
         - name: Authorization
           in: header
           schema:
-            type: string
+            type: number
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3ODE3Nzc5LCJleHAiOjE3NTc4Mjg1Nzl9.ACHLHw7bMDZmZtbALkD9FXIcvNnviURHQTHgF6mQabA
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4Njg0OTQ1LCJleHAiOjE3NTg5NDQxNDV9.43zPfn_DmIH1A3v3Vru3kqM_-znuih5ffeL_U7M4Mj4
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d8bb437fe414211986314f
       responses:
         '200':
           description: Successful response
@@ -573,7 +667,7 @@ paths:
             schema:
               type: object
               example:
-                name: Main Course
+                name: Sweets
       security:
         - noauthAuth: []
       parameters:
@@ -583,7 +677,7 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg0MzkwMDgsImV4cCI6MTc1ODY5ODIwOH0.VVpiHWtfXQXAMxAJg05lAPgs3djcoeR9_5q3HuU15cc
       responses:
         '200':
           description: Successful response
@@ -601,19 +695,26 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /category-details/68c1670d1e07948832b01771:
+  /category-details/{id}:
     get:
       tags:
         - Category
       summary: category-details
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c1674f68f13ab404ff2484
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /category-update/68c1670d1e07948832b01771:
+  /category-update/{id}:
     patch:
       tags:
         - Category
@@ -635,12 +736,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c1674f68f13ab404ff2484
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /category-delete/68c1670d1e07948832b01771:
+  /category-delete/{id}:
     delete:
       tags:
         - Category
@@ -655,6 +762,12 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c1670d1e07948832b01771
       responses:
         '200':
           description: Successful response
@@ -673,23 +786,23 @@ paths:
               properties:
                 name:
                   type: string
-                  example: sdfg
+                  example: Ice Cream
                 image:
                   type: string
                   format: binary
                 category:
                   type: string
-                  example: 68c17e40ab2e8417e8f0e4d9
+                  example: 68c1675b68f13ab404ff248a
       security:
         - noauthAuth: []
       parameters:
         - name: Authorization
           in: header
           schema:
-            type: string
+            type: number
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4Njg0OTQ1LCJleHAiOjE3NTg5NDQxNDV9.43zPfn_DmIH1A3v3Vru3kqM_-znuih5ffeL_U7M4Mj4
       responses:
         '200':
           description: Successful response
@@ -707,19 +820,26 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /sub-category-details/68c2573417904b6e042a6ad8:
+  /sub-category-details/{id}:
     get:
       tags:
         - Sub Category
       summary: sub-category-details
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c2573417904b6e042a6ad8
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /update-sub-category/68c2573417904b6e042a6ad8:
+  /update-sub-category/{id}:
     patch:
       tags:
         - Sub Category
@@ -745,16 +865,22 @@ paths:
         - name: Authorization
           in: header
           schema:
-            type: string
+            type: number
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4Njg0OTQ1LCJleHAiOjE3NTg5NDQxNDV9.43zPfn_DmIH1A3v3Vru3kqM_-znuih5ffeL_U7M4Mj4
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c2573417904b6e042a6ad8
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /delete-sub-category/68c2599a32bef5673e702bf9:
+  /delete-sub-category/{id}:
     delete:
       tags:
         - Sub Category
@@ -769,6 +895,12 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1MDQ5MTEsImV4cCI6MTc1NzUxNTcxMX0.uSMsgBlR0IMHIyssENrnYXbUUnE3gQ36OZEOP2J7OJc
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c2573417904b6e042a6ad8
       responses:
         '200':
           description: Successful response
@@ -787,10 +919,10 @@ paths:
               example:
                 customerId: 68bea9b51a3871015b45f6cb
                 items:
-                  - foodItem: 68c68bef9b7ba7e004d760e4
-                    quantity: 2
-                  - foodItem: 68c68adc9b7ba7e004d76075
+                  - foodItem: 68d8bd747fe4142119863217
                     quantity: 1
+                  - foodItem: 68da2876a008ee1d14945bbb
+                    quantity: 2
                 buildingNo: Haldia Petrochemical Building
                 street: Sector v, Wipro More
                 city: Kolkata
@@ -804,7 +936,7 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyOTg2MSwiZXhwIjoxNzU3OTQwNjYxfQ.AAGbgdo7uHq18Ne8Uxu84CXwzr5EZ_sYU24rYGm7R0E
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1OTMwNzczNCwiZXhwIjoxNzU5NTY2OTM0fQ.ykkZYeH2Ibmj8rcoVguyYjZGmgL8BuIcQgd2SeVR4yc
       responses:
         '200':
           description: Successful response
@@ -830,7 +962,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /order-by-customer/68bea9b51a3871015b45f6cb:
+  /order-by-customer/{customerid}:
     get:
       tags:
         - Order
@@ -845,12 +977,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyODUyNCwiZXhwIjoxNzU3OTM5MzI0fQ.Cl6FIOueuSU9sRblmu5qad-mvUn3qCShGt0f_seOjVE
+        - name: customerid
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68bea9b51a3871015b45f6cb
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /order-by-restaurant/68c2d209bb5dcc00c93e7927:
+  /order-by-restaurant/{restaurantid}:
     get:
       tags:
         - Order
@@ -865,12 +1003,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyODUyNCwiZXhwIjoxNzU3OTM5MzI0fQ.Cl6FIOueuSU9sRblmu5qad-mvUn3qCShGt0f_seOjVE
+        - name: restaurantid
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c2d209bb5dcc00c93e7927
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /order-update/68c7d73da5b9e1e410a30e07:
+  /order-update/{id}:
     patch:
       tags:
         - Order
@@ -892,12 +1036,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTI5NzI2LCJleHAiOjE3NTc5NDA1MjZ9.2aDskQ-6MWp2ljJkxiof8-ccF__iD-83qqTm8qhu-vU
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c7d73da5b9e1e410a30e07
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /order-delete/68c7e19923ecf26b782d010e:
+  /order-delete/{id}:
     delete:
       tags:
         - Order
@@ -912,12 +1062,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc5Mjk5NTksImV4cCI6MTc1Nzk0MDc1OX0.VOLP3jzNsibIOUzo3vGUYmBreXTtfG1zp4TvOqy1gtU
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c7e19923ecf26b782d010e
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /order-details/68c7d73da5b9e1e410a30e07:
+  /order-details/{id}:
     get:
       tags:
         - Order
@@ -932,6 +1088,12 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1Nzk0ODEyNCwiZXhwIjoxNzU4MjA3MzI0fQ.yTG_b02FKSaZ-U6leKqBMoA7pBUVUsg9ydEWrVV1GZk
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c7d73da5b9e1e410a30e07
       responses:
         '200':
           description: Successful response
@@ -977,25 +1139,39 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /delivery-zone-details/68c11b92a3275b7ddd0a2689:
+  /delivery-zone-details/{id}:
     get:
       tags:
         - Delivery Zone
       summary: delivery-zone-details
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c11b92a3275b7ddd0a2689
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /delete-delivery-zone/68c11b92a3275b7ddd0a2689:
+  /delete-delivery-zone/{id}:
     delete:
       tags:
         - Delivery Zone
       summary: delete-delivery-zone
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c11b92a3275b7ddd0a2689
       responses:
         '200':
           description: Successful response
@@ -1015,13 +1191,13 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc2MDAzNjMsImV4cCI6MTc1NzYxMTE2M30.8mdtMpaKn6VA-5Bq3Yy7Sz6jvj_pstY4ltV0Iequ4kQ
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg5NDA1NDAsImV4cCI6MTc1OTE5OTc0MH0.jZXhVy6_ESSoI3X5NxVG_oESF-2Hn7Egd4wKzJBddgs
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /admin/respond-restaurant-request/68c2da329dc267c4bb6ca1c3:
+  /admin/respond-restaurant-request/{id}:
     patch:
       tags:
         - Admin
@@ -1043,12 +1219,18 @@ paths:
           example: >-
             Bearer
             eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc2MDAzNjMsImV4cCI6MTc1NzYxMTE2M30.8mdtMpaKn6VA-5Bq3Yy7Sz6jvj_pstY4ltV0Iequ4kQ
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68c2da329dc267c4bb6ca1c3
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /delete-restaurant/68c2cfbabb5dcc00c93e7918:
+  /delete-restaurant/{id}:
     delete:
       tags:
         - Admin
@@ -1062,7 +1244,13 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTc1OTc2ODUsImV4cCI6MTc1NzYwODQ4NX0.axkQuWo7XZnJju5QWhc41UoktgNYGLMsC3RnK7EUGvw
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg3MzAyMzIsImV4cCI6MTc1ODk4OTQzMn0.hSQeLUqGX1NtiWM5OGTTx6UG5mM1hQ-VnY2lmPsc0UM
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d41aa3bcf295eb52f5b6b3
       responses:
         '200':
           description: Successful response
@@ -1118,7 +1306,7 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDVlYmM4MjVhZTc2MGQwNjMwOWMiLCJmaXJzdE5hbWUiOiJKYXNvbiIsImxhc3ROYW1lIjoiRHV2YWwiLCJlbWFpbCI6ImczZHljQHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU3OTE1NDQ4LCJleHAiOjE3NTc5MjYyNDh9.GhBBoeXPcnWyz5gW0_1vKNd3gefeZVvbbs0rItpNBLE
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMyZDFhMWJiNWRjYzAwYzkzZTc5MjAiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6IjNqdHZ1QHBvd2Vyc2NyZXdzLmNvbSIsInJvbGUiOiJyZXN0YXVyYW50IiwiaWF0IjoxNzU4ODYyMzUyLCJleHAiOjE3NTkxMjE1NTJ9.oIGGR50vw5aS9bf-92u42jIXZFd4mecDVBloe6Swgo8
       responses:
         '200':
           description: Successful response
@@ -1209,6 +1397,14 @@ paths:
                   format: binary
       security:
         - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg3MzAyMzIsImV4cCI6MTc1ODk4OTQzMn0.hSQeLUqGX1NtiWM5OGTTx6UG5mM1hQ-VnY2lmPsc0UM
       responses:
         '200':
           description: Successful response
@@ -1226,19 +1422,26 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /blogs-details/68ca581dff354153d8dae4f6:
+  /blogs-details/{id}:
     get:
       tags:
         - Blogs
       summary: blogs-details
       security:
         - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d4200ae4ffa1160aa56e5f
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /blog-update/68ca581dff354153d8dae4f6:
+  /blog-update/{id}:
     patch:
       tags:
         - Blogs
@@ -1266,18 +1469,46 @@ paths:
                   format: binary
       security:
         - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg3MzAyMzIsImV4cCI6MTc1ODk4OTQzMn0.hSQeLUqGX1NtiWM5OGTTx6UG5mM1hQ-VnY2lmPsc0UM
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d41fe1e4ffa1160aa56e5b
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /blog-delete/68ca581dff354153d8dae4f6:
+  /blog-delete/{id}:
     delete:
       tags:
         - Blogs
       summary: blog-delete
       security:
         - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGMxNjI5ZjgyNTEwOTk3YzEwODg1OGYiLCJmaXJzdE5hbWUiOiJGcmFua2x5biIsImxhc3ROYW1lIjoiR29tZXMiLCJlbWFpbCI6ImZyYW5rbHluZ29tZXMxNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg3MzAyMzIsImV4cCI6MTc1ODk4OTQzMn0.hSQeLUqGX1NtiWM5OGTTx6UG5mM1hQ-VnY2lmPsc0UM
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68d41fe1e4ffa1160aa56e5b
       responses:
         '200':
           description: Successful response

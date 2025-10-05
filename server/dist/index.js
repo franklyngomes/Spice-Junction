@@ -18,9 +18,9 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 const allowedOrigins = [
     "https://spice-junction.onrender.com",
+    "https://spice-junction-admin.onrender.com",
     "http://localhost:5173",
     "http://localhost:3000",
-    "http://localhost:3001",
     "http://localhost:5000",
 ];
 app.set("trust proxy", 1);
