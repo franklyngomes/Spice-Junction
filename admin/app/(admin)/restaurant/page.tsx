@@ -24,7 +24,7 @@ import { DeliveryZoneItem, RestaurantData } from '../../../types/types'
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 const schema = yup.object({
-  name: yup.string().required("Name is required"),
+  name: yup.string().min(6).max(35).required("Name is required"),
   ownerId: yup.string().required("OwnerId is required"),
   buildingNo: yup.string().required("Building No. is required"),
   street: yup.string().required("Street is required"),
