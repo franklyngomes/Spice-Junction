@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 import Joi from "joi";
 
 const FoodMenuSchemaJoi = Joi.object({
-  name: Joi.string().min(3).max(20).required().messages({
+  name: Joi.string().min(3).max(60).required().messages({
     "string.min": "Name must be at least 3 characters",
-    "string.max": "Name should be not more than 20 characters",
+    "string.max": "Name should be not more than 60 characters",
     "any.required": "Name cannot be empty!",
   }),
   restaurant: Joi.string()
