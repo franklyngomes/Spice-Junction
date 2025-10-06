@@ -4,7 +4,7 @@ const AdminRouter = express.Router()
 import { AuthCheck } from "../middleware/Auth.js";
 import CheckPermission from "../middleware/CheckPermission.js";
 
-AdminRouter.post("/signup", UserController.adminSignup)
+AdminRouter.post("/signup",AuthCheck,CheckPermission(["create_admin"]),UserController.adminSignup)
 AdminRouter.get("/get-restaurant-request",AuthCheck,CheckPermission(["view_restaurant_request"]), UserController.restaurantRequests)
 AdminRouter.patch("/respond-restaurant-request/:id",AuthCheck,CheckPermission(["update_restaurant"]), UserController.responseRestaurantRequest)
 
