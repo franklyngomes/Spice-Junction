@@ -217,7 +217,11 @@ export interface RestaurantItem {
   isApproved: boolean,
   isBlocked: boolean,
   name: string,
-  ownerId: string,
+  ownerId: {
+    firstName: string,
+    lastName: string,
+    email: string
+  },
   phone: string
   updatedAt?: string,
   __v?: number,
@@ -239,7 +243,11 @@ export interface RestaurantDetailsResponse {
     isApproved: boolean,
     isBlocked: boolean,
     name: string,
-    ownerId: string,
+    ownerId: {
+      firstName: string,
+      lastName: string,
+      email: string
+    },
     phone: string
     updatedAt?: string,
     __v?: number,
@@ -293,7 +301,7 @@ export interface BlogResponse {
   error?: boolean,
   message?: string,
 }
-export interface BlogData{
+export interface BlogData {
   author: string,
   title: string,
   description: string,

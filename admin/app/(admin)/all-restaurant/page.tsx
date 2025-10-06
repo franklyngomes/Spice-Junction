@@ -68,7 +68,10 @@ const AllRestaruant = () => {
       isBlocked = true
     }
     const payload = { isApproved, isBlocked }
-    update({ editId, payload }, {
+    const id = editId
+    const formdata = payload
+    {/* @ts-expect-error ignore*/}
+    update({ id, formdata }, {
       onSuccess: (res) => {
         if (res.error) {
           toast.error(res.message);
@@ -139,6 +142,18 @@ const AllRestaruant = () => {
                 </div>
 
                 <div className={`rounded-2xl border border-gray-200 ${item.isBlocked ? "bg-gray-300 dark:border-gray-700 dark:bg-gray-800" : "bg-white dark:border-gray-800 dark:bg-white/[0.15]"} p-4  mt-5`}>
+                  <div className='mb-5'>
+                    <p className='text-[12px] text-brand-500 font-semibold'>Owner</p>
+                    <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
+                      {item.ownerId.firstName} {item.ownerId.lastName}
+                    </h6>
+                  </div>
+                  <div className='mb-5'>
+                    <p className='text-[12px] text-brand-500 font-semibold'>Email</p>
+                    <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
+                      {item.ownerId.email}
+                    </h6>
+                  </div>
                   <div className='mb-5'>
                     <p className='text-[12px] text-brand-500 font-semibold'>Status</p>
                     <h6 className="mt-2 font-bold text-gray-800 text-md dark:text-white/90">
