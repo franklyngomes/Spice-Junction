@@ -962,11 +962,11 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /order-by-customer/{customerid}:
+  /customer-order-history/{customerid}:
     get:
       tags:
         - Order
-      summary: order-by-customer
+      summary: customer-order-history
       security:
         - noauthAuth: []
       parameters:
@@ -976,7 +976,7 @@ paths:
             type: string
           example: >-
             Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1NzkyODUyNCwiZXhwIjoxNzU3OTM5MzI0fQ.Cl6FIOueuSU9sRblmu5qad-mvUn3qCShGt0f_seOjVE
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1OTc3ODQyMiwiZXhwIjoxNzYwMDM3NjIyfQ.79WKFrTHSrIIlSGSCGtHsJ5hZxbrAnNjcp8p2Pp9Cr0
         - name: customerid
           in: path
           schema:
@@ -1094,6 +1094,32 @@ paths:
             type: string
           required: true
           example: 68c7d73da5b9e1e410a30e07
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /customer-pending-order/{customerid}:
+    get:
+      tags:
+        - Order
+      summary: customer-pending-order
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJlYTliNTFhMzg3MTAxNWI0NWY2Y2IiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InF1YWRleWF1bmlmcmUtODA3NUB5b3BtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc1OTc3ODQyMiwiZXhwIjoxNzYwMDM3NjIyfQ.79WKFrTHSrIIlSGSCGtHsJ5hZxbrAnNjcp8p2Pp9Cr0
+        - name: customerid
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 68bea9b51a3871015b45f6cb
       responses:
         '200':
           description: Successful response
