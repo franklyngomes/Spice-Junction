@@ -183,7 +183,7 @@ class FoodItemController {
     async updateFoodItem(req, res) {
         try {
             const id = req.params.id;
-            const { name, description, price, subCategory: newSubCategoryId, } = req.body;
+            const { name, description, price, menu: newMenu, subCategory: newSubCategoryId, } = req.body;
             // 1. Find the food item and store its original subcategory
             const foodItem = await FoodItemModel.findById(id);
             if (!foodItem) {
@@ -193,11 +193,13 @@ class FoodItemController {
                 });
             }
             const originalSubCategoryId = foodItem.subCategory.toString();
+            const originalMenuId = foodItem.menu.toString();
             // 2. Prepare the data for updates
             const updateData = {
                 name: name || foodItem.name,
                 description: description || foodItem.description,
                 price: price || foodItem.price,
+                menu: newMenu || foodItem.menu,
                 subCategory: newSubCategoryId || foodItem.subCategory,
                 image: foodItem.image, // Default to old image
             };
@@ -216,58 +218,59 @@ class FoodItemController {
             await foodItem.save();
             // 5. Check if the subcategory has changed and perform the correct actions
             const subCategoryHasChanged = newSubCategoryId && newSubCategoryId !== originalSubCategoryId;
+            const menuHasChanged = newMenu && newMenu !== originalMenuId;
+            const itemPayload = {
+                id: foodItem._id,
+                name: foodItem.name,
+                description: foodItem.description,
+                price: foodItem.price,
+                subCategory: foodItem.subCategory,
+                image: foodItem.image,
+            };
+            const setUpdate = {
+                "items.$.name": updateData.name,
+                "items.$.description": updateData.description,
+                "items.$.price": updateData.price,
+                "items.$.image": updateData.image,
+                "items.$.subCategory": updateData.subCategory,
+            };
+            // --- SubCategory update ---
             if (subCategoryHasChanged) {
-                // --- MOVE OPERATION: Pull from old locations, Push to new locations ---
-                const itemPayload = {
-                    id: foodItem._id,
-                    name: foodItem.name,
-                    description: foodItem.description,
-                    price: foodItem.price,
-                    subCategory: foodItem.subCategory,
-                    image: foodItem.image,
-                };
-                // A. Pull from the OLD subcategory
-                await SubCategoryModel.updateOne({ _id: originalSubCategoryId }, { $pull: { items: { id: id } } });
-                // B. Pull from ALL OLD parent categories
+                // Pull from old subcategory
+                await SubCategoryModel.updateOne({ _id: originalSubCategoryId }, { $pull: { items: { id } } });
+                // Pull from old categories
                 const oldSubCategoryDoc = await SubCategoryModel.findById(originalSubCategoryId);
-                if (oldSubCategoryDoc && oldSubCategoryDoc.category?.length > 0) {
-                    await CategoryModel.updateMany({ _id: { $in: oldSubCategoryDoc.category } }, { $pull: { items: { id: id } } });
+                if (oldSubCategoryDoc?.category?.length) {
+                    await CategoryModel.updateMany({ _id: { $in: oldSubCategoryDoc.category } }, { $pull: { items: { id } } });
                 }
-                // C. Push to the NEW subcategory
+                // Push to new subcategory
                 await SubCategoryModel.updateOne({ _id: newSubCategoryId }, { $push: { items: itemPayload } });
-                // D. Push to ALL NEW parent categories
+                // Push to new categories
                 const newSubCategoryDoc = await SubCategoryModel.findById(newSubCategoryId);
-                if (newSubCategoryDoc && newSubCategoryDoc.category?.length > 0) {
+                if (newSubCategoryDoc?.category?.length) {
                     await CategoryModel.updateMany({ _id: { $in: newSubCategoryDoc.category } }, { $push: { items: itemPayload } });
                 }
             }
             else {
-                // --- UPDATE-IN-PLACE OPERATION ---
-                const setUpdate = {
-                    "items.$.name": updateData.name,
-                    "items.$.description": updateData.description,
-                    "items.$.price": updateData.price,
-                    "items.$.image": updateData.image,
-                };
-                // Update in the current subcategory
+                // Update in current subcategory
                 await SubCategoryModel.updateOne({ _id: originalSubCategoryId, "items.id": id }, { $set: setUpdate });
-                // Update in all current parent categories
+                // Update in current categories
                 const currentSubCategoryDoc = await SubCategoryModel.findById(originalSubCategoryId);
-                if (currentSubCategoryDoc &&
-                    currentSubCategoryDoc.category?.length > 0) {
+                if (currentSubCategoryDoc?.category?.length) {
                     await CategoryModel.updateMany({ _id: { $in: currentSubCategoryDoc.category }, "items.id": id }, { $set: setUpdate });
                 }
             }
-            // 6. Update the item in the FoodMenuModel (this is always an update-in-place)
-            await FoodMenuModel.updateOne({ "items.id": id }, {
-                $set: {
-                    "items.$.name": updateData.name,
-                    "items.$.description": updateData.description,
-                    "items.$.price": updateData.price,
-                    "items.$.subCategory": updateData.subCategory,
-                    "items.$.image": updateData.image,
-                },
-            });
+            // --- Menu update ---
+            if (menuHasChanged) {
+                // Pull from old menu
+                await FoodMenuModel.updateOne({ _id: originalMenuId }, { $pull: { items: { id } } });
+                // Push to new menu
+                await FoodMenuModel.updateOne({ _id: newMenu }, { $push: { items: itemPayload } });
+            }
+            else {
+                // Update in current menu
+                await FoodMenuModel.updateOne({ _id: originalMenuId, "items.id": id }, { $set: setUpdate });
+            }
             return res.status(HttpCode.success).json({
                 status: true,
                 message: "Food item updated successfully",

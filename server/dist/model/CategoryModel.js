@@ -6,9 +6,10 @@ const nanoid = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 6);
 const CategorySchemaJoi = Joi.object({
     name: Joi.string()
         .min(3)
-        .max(20)
+        .max(30)
         .required()
-        .messages({ "any.required": "Name cannot be empty!" }),
+        .messages({ "any.required": "Name cannot be empty!", "string.min": "Name must be at least 3 characters",
+        "string.max": "Name should be not more than 30 characters", }),
     items: Joi.array().items({
         name: Joi.string(),
         description: Joi.string(),

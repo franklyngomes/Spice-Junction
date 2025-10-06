@@ -39,7 +39,8 @@ export const ROLE_PERMISSIONS = {
         "create_order",
         "view_order",
         "create_blog",
-        "make_payment"
+        "make_payment",
+        "delete_order",
     ],
 };
 //# sourceMappingURL=role.js.map

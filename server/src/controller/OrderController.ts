@@ -141,12 +141,11 @@ class OrderController {
       });
     }
   }
-  async getOrderByCustomer(req: Request, res: Response) {
+  async customerOrderHistory(req: Request, res: Response) {
     try {
       let id = req.params.id;
-      console.log(id);
-      const order = await OrderModel.find({ customerId: id }).populate("customerId", "firstName lastName email").populate("items.foodItem", "name");
-      if (!order) {
+      const order = await OrderModel.find({$and:[{ customerId: id }, {status: {$eq:"Delivered"}}]}).populate("customerId", "firstName lastName email").populate("items.foodItem", "name");
+      if (!order || order.length === 0 ) {
         return res.status(HttpCode.badRequest).json({
           status: false,
           message: "No Orders found!",
@@ -155,6 +154,28 @@ class OrderController {
       return res.status(HttpCode.success).json({
         status: true,
         message: "Orders fetched successfully",
+        data: order,
+      });
+    } catch (error) {
+      return res.status(HttpCode.serverError).json({
+        status: false,
+        message: (error as Error)?.message,
+      });
+    }
+  }
+  async getPendingOrderByCustomer(req: Request, res: Response) {
+    try {
+      let id = req.params.id;
+      const order = await OrderModel.find({$and:[{ customerId: id }, {status: "Pending Payment"}]})
+      if (!order || order.length === 0) {
+        return res.status(HttpCode.badRequest).json({
+          status: false,
+          message: "No Order found!",
+        });
+      }
+      return res.status(HttpCode.success).json({
+        status: true,
+        message: "Order fetched successfully",
         data: order,
       });
     } catch (error) {

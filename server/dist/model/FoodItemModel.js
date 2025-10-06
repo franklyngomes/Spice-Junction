@@ -7,9 +7,9 @@ const FoodItemSchemaJoi = Joi.object({
         "string.max": "Name should be not more than 50 characters",
         "any.required": "Name cannot be empty!",
     }),
-    description: Joi.string().min(30).max(200).required().messages({
+    description: Joi.string().min(30).max(350).required().messages({
         "string.min": "Description must be at least 30 characters",
-        "string.max": "Description should be not more than 200 characters",
+        "string.max": "Description should be not more than 350 characters",
         "any.required": "Description cannot be empty!",
     }),
     restaurant: Joi.string()

@@ -4,7 +4,8 @@ declare class OrderController {
     getAllOrder(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     getOrderDetails(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     getOrderByRestaurant(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
-    getOrderByCustomer(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    customerOrderHistory(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    getPendingOrderByCustomer(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     updateOrder(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     deleteOrder(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
 }
