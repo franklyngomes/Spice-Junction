@@ -34,7 +34,7 @@ class UserController {
             const verificationToken = jwt.sign({ email }, jwtSecretKey, {
                 expiresIn: "10m",
             });
-            const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+            const verificationLink = `https://spice-junction-admin.onrender.com/verify-email?token=${verificationToken}`;
             const { value, error } = UserSchemaJoi.validate(req.body);
             if (error) {
                 return res.status(HttpCode.badRequest).json({
