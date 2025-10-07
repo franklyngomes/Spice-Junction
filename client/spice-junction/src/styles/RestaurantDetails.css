@@ -1,0 +1,106 @@
+.sm-wrap{
+  max-width: var(--max-width);
+  margin: 40px auto 70px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.sm-eyebrow{
+  color: var(--accent);
+  margin: 28px 0 2px;
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+
+.sm-title{
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+/* Tabs */
+.sm-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:18px;
+  margin-bottom: 22px;
+}
+.sm-tab{
+  background:none;
+  border:none;
+  padding:6px 2px;
+  font-weight:600;
+  color:#666;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+}
+.sm-tab.active{
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+
+.rd-wrap {
+  padding-top: 80px; 
+}
+
+
+
+.sm-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+@media (max-width: 1000px){ .sm-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px){ .sm-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px){ .sm-grid{ grid-template-columns: 1fr; } }
+
+.sm-card{
+  background:#fff;
+  border-radius:12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  overflow:hidden;
+  text-align:left;
+}
+.sm-imgWrap{
+  width:100%;
+  height:170px;
+  overflow:hidden;
+}
+.sm-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.sm-body{
+  padding: 12px 14px 14px;
+}
+.sm-name{
+  font-weight:700;
+  margin-bottom:6px;
+}
+.sm-metaRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+.sm-stars span{ color:#f5b400; margin-right:2px; }
+.sm-price{ color: var(--accent); font-weight:800; }
+.sm-icons{ display:flex; gap:12px; color:#999; font-size:14px; }
+
+.sm-ctaRow{ margin-top:22px; }
+.sm-moreBtn{
+  background: var(--accent);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:6px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow: 0 10px 24px rgba(198,40,40,0.18);
+}
+.sm-moreBtn:hover{ filter:brightness(.95); }

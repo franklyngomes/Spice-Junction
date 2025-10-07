@@ -1,0 +1,43 @@
+.blog-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.blog-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card-title {
+  font-weight: bold;
+}
+
+.testimonial-box {
+  margin-top: 60px;
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  min-height: 200px;
+}
+
+.testimonial-avatar {
+  width: 80px !important;
+  height: 80px !important;
+  margin: 0 auto 15px auto;
+}
+
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.testimonial-name {
+  font-weight: bold;
+}

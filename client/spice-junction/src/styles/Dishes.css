@@ -1,0 +1,80 @@
+/* Dishes section: reduced vertical padding */
+.dishes-section {
+  padding: 24px 0; /* smaller vertical padding than before */
+  background: #fff;
+}
+
+/* Narrower container padding (keeps layout aligned but uses more width) */
+.dishes-section .container {
+  padding-left: 12px;   /* slightly reduced from global */
+  padding-right: 12px;
+  max-width: 1200px;
+}
+
+/* Card base (slightly smaller/cleaner) */
+.dish-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* Image: moderate height, no crop, centered, no big inner padding */
+.dish-card img {
+  width: 100%;
+  height: 240px;         /* moderate height - not too tall */
+  object-fit: contain;   /* show full image (no cropping) */
+  object-position: center;
+  background: #fafafa;   /* neutral background for different aspect ratios */
+  padding: 8px 6px;      /* small padding so images don't touch rounded edges */
+  box-sizing: border-box;
+  border-bottom: 1px solid #f1f1f1;
+   border-radius: 8px;   /* new → softly rounded corners for image */
+}
+/* Force image corners to be rounded */
+.dish-card .MuiCardMedia-root {
+  border-radius: 8px 8px 0 0; /* round only top corners */
+  overflow: hidden;
+}
+
+
+/* If you prefer slight crop but better fill, use the following instead:
+.dish-card img {
+  height: 240px;
+  object-fit: cover;
+  object-position: center;
+}
+*/
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 32px;   /* was 24px → gives extra gap under heading */
+}
+
+/* OUR in black */
+.section-head h2 .black-text {
+  color: #000;
+}
+
+/* DISHES in red (use your accent color variable) */
+.section-head h2 .red-text {
+  color: var(--accent);
+}
+
+
+/* Grid spacing - keep modest gap between cards */
+@media (min-width: 900px) {
+  .MuiGrid-spacing-xs-3 {
+    gap: 18px; /* ensures spacing roughly matches spacing={3} */
+  }
+}
+
+/* Responsive: reduce card image height on small screens */
+@media (max-width: 600px) {
+  .dish-card img {
+    height: 180px;
+    padding: 6px;
+  }
+}

@@ -1,0 +1,97 @@
+/* .navbar {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: white;
+  padding: 0 40px;
+}
+
+.navbar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: white !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav-link.active {
+  color: red !important;
+}
+
+.navbar-icons button {
+  color: white;
+}
+ */
+
+
+
+
+ .navbar {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: white;
+  padding: 0 40px;
+  transition: background 200ms ease, box-shadow 200ms ease, color 200ms ease;
+}
+
+/* when scrolled */
+.navbar.scrolled {
+  background: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  color: #111;
+}
+
+/* toolbar stays the same */
+.navbar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* logo colors */
+.navbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: inherit;            /* inherit from navbar */
+  text-decoration: none;
+}
+
+/* link row */
+.navbar-links {
+  display: flex;
+  gap: 30px;
+}
+
+/* default (top of page) -> white text */
+.nav-link {
+  color: inherit !important; /* inherit (white at top, dark when scrolled) */
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* active stays red in both states */
+.nav-link.active {
+  color: #e40000 !important;
+}
+
+/* right icons use inherited color */
+.navbar-icons button {
+  color: inherit;
+}

@@ -1,0 +1,70 @@
+.pages-container {
+  padding-top: 80px;
+  /* padding-bottom: 80px; */
+}
+
+/* Section Box */
+.section-box {
+  margin-bottom: 48px;
+}
+
+/* Left Image */
+.left-image {
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  /* object-fit: cover; */
+  width: 50%;
+  height: 350px;
+}
+
+/* Highlight text (red heading) */
+.highlight-text {
+  /* padding-top: 130px; */
+  color: #d32f2f; /* MUI error color */
+  font-weight: bold;
+}
+
+/* Paragraph text */
+.desc-text {
+  margin-top: 20px;
+  color: #666;
+  line-height: 2.6;
+  /* font: size 15px;; */
+}
+
+/* Middle image */
+.middle-image-box {
+  margin-bottom: 48px;
+}
+.middle-image {
+  margin-top: 40px;
+  border-radius: 8px;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ingredients title */
+.ingredients-title {
+  margin-bottom: 24px;
+}
+
+/* Ingredient grid images */
+.ingredient-img {
+  
+  border-radius: 8px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease;
+}
+
+.ingredient-img:hover {
+  transform: scale(1.05);
+}
+
+.ingre{
+  padding-bottom: 50px;
+}
