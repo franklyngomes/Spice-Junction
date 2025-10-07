@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 export const middleware = (request: NextRequest) => {
   const token = request?.cookies.get('token')?.value
-  const publicPaths = ["/signin", "/reset-password", "/forgot-password", "/restaurant-signup"]
+  const publicPaths = ["/signin", "/reset-password", "/forgot-password", "/restaurant-signup", "/verify-email"]
   const isPublicPaths = publicPaths.includes(request.nextUrl.pathname)
 
   if (!token && !isPublicPaths) {
