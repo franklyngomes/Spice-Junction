@@ -1,0 +1,201 @@
+
+.cart-container {
+  padding-top: 100px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.cart-title {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+}
+
+
+.empty-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+.muted { color: #666; }
+.small { font-size: 12px; }
+
+
+.order-list { display: grid; gap: 6px; }
+
+.item-row {
+  padding: 14px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.item-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #f6f6f6;
+}
+
+.item-info { padding-left: 16px; }
+.item-name { font-weight: 700; font-size: 18px; }
+.item-price { color: #666; font-weight: 600; margin-top: 2px; }
+
+.qty-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  min-width: 112px;
+  justify-content: space-between;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.step-btn {
+  width: 28px !important;
+  height: 28px !important;
+  border: 1px solid #eee !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+}
+
+.qty-text {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: #d33;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.section-header { margin-top: 18px; margin-bottom: 8px; }
+.section-title { font-weight: 700; }
+
+.address-actions { display: flex; gap: 16px; }
+.link-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+.link-btn:last-child { color: #111; text-decoration: underline; }
+
+.address-card {
+  border: 1px solid #eee;
+  border-radius: 14px !important;
+  background: #fff;
+}
+.address-card-content { padding: 20px !important; }
+.addr-name { font-weight: 700; margin-bottom: 8px; }
+.addr-line { color: #666; }
+.addr-meta { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+
+.email-chip {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ffd7db;
+  background: #fff5f6;
+  color: #d33;
+  font-weight: 600;
+  font-size: 13px;
+}
+.phone-text { color: #999; font-size: 13px; }
+
+.total-card {
+  margin-top: 16px;
+  border: 1px solid #eee;
+  border-radius: 14px !important;
+  background: #fff;
+}
+.total-card-content {
+  padding: 18px 20px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.total-left { display: grid; gap: 4px; }
+.total-title { font-weight: 700; }
+.total-amount { font-weight: 800; font-size: 20px; }
+
+.divider-spacer { margin-top: 8px !important; }
+.policy { color: #aaa; font-size: 11px; margin-top: 8px; line-height: 1.4; }
+.policy-head { letter-spacing: .5px; text-transform: uppercase; }
+
+
+.footer-bar {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px 0 28px 0;
+  background: linear-gradient(to top, rgba(255,255,255,0.92), rgba(255,255,255,0));
+  margin-top: 8px;
+}
+
+.checkout-btn {
+  background: #ff1515 !important;
+  padding: 12px 42px !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  text-transform: none !important;
+}
+
+.clear-btn {
+  margin-top: 8px !important;
+  color: #666 !important;
+  text-transform: none !important;
+}
+
+
+/* Center the empty cart message */
+.empty-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;       /* space inside the card */
+  margin: 40px auto;        /* gap from "Your Order" heading */
+  max-width: 600px;
+  min-height: 200px;        /* ensures enough vertical space */
+}
+
+/* Push footer down when cart is empty */
+.cart-container {
+  min-height: calc(100vh - 200px);  /* leave room for footer */
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-container .empty-card {
+  flex-grow: 1;   /* take up free vertical space */
+}
+
+/* Bold + bigger font for "Your cart is empty" */
+.empty-card .MuiTypography-root:first-child {
+  font-weight: 700;
+  font-size: 1.3rem;   /* increase size (default ~1rem → bigger) */
+}
+
+/* Red color for the muted text below */
+.empty-card .muted {
+  color: #d32f2f !important;  /* red for "Add some tasty dishes..." */
+  font-weight: 500;           /* slight boldness for visibility */
+}

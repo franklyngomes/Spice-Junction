@@ -1,0 +1,67 @@
+/* ---------- base styles you already had (unchanged) ---------- */
+.dishes-section {
+  padding: 24px 0;
+  background: #fff;
+}
+.dishes-section .container {
+  padding-left: 12px;
+  padding-right: 12px;
+  max-width: 1200px;
+}
+.dish-card { border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.dish-card img {
+  width: 100%; height: 240px; object-fit: contain; object-position: center;
+  background: #fafafa; padding: 8px 6px; box-sizing: border-box;
+  border-bottom: 1px solid #f1f1f1; border-radius: 8px;
+}
+.dish-card .MuiCardMedia-root { border-radius: 8px 8px 0 0; overflow: hidden; }
+
+.section-head h2 .black-text { color: #000; }
+.section-head h2 .red-text   { color: var(--accent); }
+
+@media (min-width: 900px){ .MuiGrid-spacing-xs-3 { gap: 18px; } }
+@media (max-width: 600px){ .dish-card img { height: 180px; padding: 6px; } }
+
+/* =========================================================
+   FINAL, NON-CONFLICTING HEADER RULES (keep only these)
+   ========================================================= */
+
+/* 1) Default (works for /menu): H2 on the left, action button on the right */
+.dishes-section .section-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  min-height: 56px !important;
+  margin: 0 0 24px 0 !important;
+  z-index: 2 !important;
+}
+.dishes-section .section-head h2 {
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+/* 2) HOME-only override: when the "View all" button (class .view-all) is present,
+      center the title and pin "View all" to the right */
+@supports selector(.section-head:has(.view-all)) {
+  .dishes-section .section-head:has(.view-all) {
+    justify-content: center !important;
+  }
+  .dishes-section .section-head:has(.view-all) h2 {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+  }
+  .dishes-section .section-head:has(.view-all) .view-all {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+/* theme colors for the title */
+.dishes-section .section-head h2 .black-text { color: #111 !important; }
+.dishes-section .section-head h2 .red-text   { color: var(--accent, #e40000) !important; }

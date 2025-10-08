@@ -1,0 +1,70 @@
+
+:root{
+  --accent: #c62828;
+  --max-width: 1100px;
+  --serif: 'Playfair Display', serif;
+  --sans: 'Lato', 'Helvetica', Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  font-family: var(--sans);
+  color: #222;
+  margin:0;
+  background:#fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+.section-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin: 48px 0 24px;
+}
+.section-head h2 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: .6px;
+}
+.section-head a.view-all {
+  color: var(--accent);
+  text-decoration:none;
+  font-weight:700;
+}
+
+
+/* ===== Full-bleed strip between Discover and Quality ===== */
+.between-strip {
+  position: relative;
+  height: 210px;
+  display: block;
+
+  /* make the background bulletproof */
+  background-image: url('/image/food-strip.jpg') !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center center !important;
+
+
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  margin-top: 54px;
+  margin-bottom: 54px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12) inset;
+}
