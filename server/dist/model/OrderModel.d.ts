@@ -6,6 +6,7 @@ declare const OrderModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -19,7 +20,6 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     payment: "Pending" | "Success" | "Failed";
     transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
@@ -41,6 +41,7 @@ declare const OrderModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -54,7 +55,6 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     payment: "Pending" | "Success" | "Failed";
     transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
@@ -78,6 +78,7 @@ declare const OrderModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -91,7 +92,6 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     payment: "Pending" | "Success" | "Failed";
     transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
@@ -119,6 +119,7 @@ declare const OrderModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -132,7 +133,6 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     payment: "Pending" | "Success" | "Failed";
     transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
@@ -154,6 +154,7 @@ declare const OrderModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -167,7 +168,6 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     payment: "Pending" | "Success" | "Failed";
     transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;
@@ -191,6 +191,7 @@ declare const OrderModel: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     date: NativeDate;
+    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     items: mongoose.Types.DocumentArray<{
         foodItem: mongoose.Types.ObjectId;
         quantity: number;
@@ -204,7 +205,6 @@ declare const OrderModel: mongoose.Model<{
     customerId: mongoose.Types.ObjectId;
     discount: number;
     deliveryCharge: number;
-    status: "Pending Payment" | "Preparing" | "Out for delivery" | "Delivered";
     payment: "Pending" | "Success" | "Failed";
     transactionId: string;
     restaurant?: mongoose.Types.ObjectId | null;

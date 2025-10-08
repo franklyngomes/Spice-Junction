@@ -19,7 +19,7 @@ declare class UserController {
     verifyEmail(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     signin(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     refreshToken(req: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined>;
-    forgotPassword(req: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined>;
+    forgotPassword(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     resetPassword(req: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined>;
     userProfile(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     setUserAddress(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;

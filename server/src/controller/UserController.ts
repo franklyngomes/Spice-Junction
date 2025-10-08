@@ -11,8 +11,9 @@ import {
 import transporter from "../middleware/SendMail.js";
 import jwt from "jsonwebtoken";
 import { RestaurantModel } from "../model/ResturantModel.js";
-import { sendEmail } from "../helper/EmailService.js";
+// import { sendEmail } from "../helper/EmailService.js";
 import type { Types } from "mongoose";
+import { sendMail } from "../middleware/GoogleMail.js";
 
 // Extend Express Request interface to include 'user'
 declare global {
@@ -83,7 +84,7 @@ class UserController {
         verificationTokenExpires: Date.now() + 10 * 60 * 1000,
       });
       await newUser.save();
-      await sendEmail(
+      await sendMail(
         email,
         "Verify Your Email - Spice Junction",
         `<body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
@@ -192,7 +193,7 @@ class UserController {
         verificationTokenExpires: Date.now() + 10 * 60 * 1000,
       });
       await newUser.save();
-      await sendEmail(
+      await sendMail(
         email,
         "Verify Your Email - Spice Junction",
         `
@@ -304,7 +305,7 @@ class UserController {
         verificationTokenExpires: Date.now() + 10 * 60 * 1000,
       });
       await newUser.save();
-      await sendEmail(
+      await sendMail(
         email,
         "Verify Your Email - Spice Junction",
         `
@@ -587,7 +588,7 @@ class UserController {
         });
       }
       const code = Math.floor(Math.random() * 1000000).toString();
-      const mail = await sendEmail(
+      const mail = await sendMail(
         email,
         "Rest password OTP",
         `<body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
@@ -643,7 +644,7 @@ class UserController {
           message: "JWT Secret key is missing!",
         });
       }
-      if (mail?.data?.id) {
+      // if (mail?.data?.id) {
         const hashCode = hmacProcess(code, hmacSecretKey);
         user.forgotPasswordCode = hashCode;
         user.forgotPasswordCodeValidation = Date.now();
@@ -652,7 +653,7 @@ class UserController {
           status: true,
           message: "OTP for reset password sent!",
         });
-      }
+      // }
     } catch (error) {
       return res.status(HttpCode.serverError).json({
         status: false,
@@ -846,7 +847,7 @@ class UserController {
       if (response === true) {
         restaurant.isApproved = true;
         await restaurant.save();
-        await sendEmail(
+        await sendMail(
           owner.email,
           "Verify Your Email - Spice Junction",
           `

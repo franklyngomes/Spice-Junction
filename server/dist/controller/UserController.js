@@ -6,7 +6,7 @@ import { comparePassword, hashPassword, hmacProcess, } from "../middleware/Auth.
 import transporter from "../middleware/SendMail.js";
 import jwt from "jsonwebtoken";
 import { RestaurantModel } from "../model/ResturantModel.js";
-import { sendEmail } from "../helper/EmailService.js";
+import { sendMail } from "../middleware/GoogleMail.js";
 class UserController {
     async signup(req, res) {
         try {
@@ -53,7 +53,7 @@ class UserController {
                 verificationTokenExpires: Date.now() + 10 * 60 * 1000,
             });
             await newUser.save();
-            await sendEmail(email, "Verify Your Email - Spice Junction", `<body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+            await sendMail(email, "Verify Your Email - Spice Junction", `<body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -159,7 +159,7 @@ class UserController {
                 verificationTokenExpires: Date.now() + 10 * 60 * 1000,
             });
             await newUser.save();
-            await sendEmail(email, "Verify Your Email - Spice Junction", `
+            await sendMail(email, "Verify Your Email - Spice Junction", `
       <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
@@ -268,7 +268,7 @@ class UserController {
                 verificationTokenExpires: Date.now() + 10 * 60 * 1000,
             });
             await newUser.save();
-            await sendEmail(email, "Verify Your Email - Spice Junction", `
+            await sendMail(email, "Verify Your Email - Spice Junction", `
       <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
@@ -528,7 +528,7 @@ class UserController {
                 });
             }
             const code = Math.floor(Math.random() * 1000000).toString();
-            const mail = await sendEmail(email, "Rest password OTP", `<body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
+            const mail = await sendMail(email, "Rest password OTP", `<body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
       border="0"
@@ -580,16 +580,16 @@ class UserController {
                     message: "JWT Secret key is missing!",
                 });
             }
-            if (mail?.data?.id) {
-                const hashCode = hmacProcess(code, hmacSecretKey);
-                user.forgotPasswordCode = hashCode;
-                user.forgotPasswordCodeValidation = Date.now();
-                await user.save();
-                return res.status(HttpCode.success).json({
-                    status: true,
-                    message: "OTP for reset password sent!",
-                });
-            }
+            // if (mail?.data?.id) {
+            const hashCode = hmacProcess(code, hmacSecretKey);
+            user.forgotPasswordCode = hashCode;
+            user.forgotPasswordCodeValidation = Date.now();
+            await user.save();
+            return res.status(HttpCode.success).json({
+                status: true,
+                message: "OTP for reset password sent!",
+            });
+            // }
         }
         catch (error) {
             return res.status(HttpCode.serverError).json({
@@ -779,7 +779,7 @@ class UserController {
             if (response === true) {
                 restaurant.isApproved = true;
                 await restaurant.save();
-                await sendEmail(owner.email, "Verify Your Email - Spice Junction", `
+                await sendMail(owner.email, "Verify Your Email - Spice Junction", `
       <body style="margin: 0; padding: 0; <body style="margin: 0; padding: 0; background-image:url('https://spice-junction-server.onrender.com/background.png'); background-position: top; background-repeat: no-repeat; background-size: cover">
     <table
       align="center"
