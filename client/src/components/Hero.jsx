@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Typography, TextField, Button } from '@mui/material'
-import '../styles/hero.css'
+import '../styles/Hero.css'
 
 export default function Hero() {
   const [term, setTerm] = useState('')
