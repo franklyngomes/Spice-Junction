@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Grid, Typography, Button } from '@mui/material'
-import '../styles/quality.css'
+import '../styles/Quality.css'
 
 export default function QualitySection() {
   const plateImg = '/image/quality-plate.png'
