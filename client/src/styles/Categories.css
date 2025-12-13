@@ -1,0 +1,78 @@
+.categories-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin: 36px 0;
+  padding: 0 8px;
+}
+
+.category-explore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+}
+.explore-badge {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #fff 45%, #f9f9f9 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#c62828;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  font-size: 14px;
+}
+.explore-badge span{ display:block; font-weight:600; font-size:12px; }
+.explore-text{ margin-top:8px; font-weight:600; color:#111; font-size:14px; }
+
+
+.category-list {
+  display:flex;
+  gap: 28px;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+.category-item {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-width: 88px;
+}
+.category-item img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border: 6px solid #fff;
+}
+.category-title {
+  margin-top: 8px;
+  color: #111;
+  font-weight: 600;
+}
+
+
+/* Custom scrollbar for category list */
+.category-list::-webkit-scrollbar {
+  height: 6px; /* scrollbar thickness */
+}
+
+.category-list::-webkit-scrollbar-track {
+  background: transparent; /* keep track clean */
+}
+
+.category-list::-webkit-scrollbar-thumb {
+  background-color: #f28b82; /* light red */
+  border-radius: 3px;
+}
+
+.category-list {
+  scrollbar-color: #e07167 transparent; /* thumb + track */
+  scrollbar-width: thin;
+}

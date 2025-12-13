@@ -1,0 +1,105 @@
+ .navbar {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: white;
+  padding: 0 40px;
+  transition: background 200ms ease, box-shadow 200ms ease, color 200ms ease;
+}
+
+
+.navbar.scrolled {
+  background: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  color: #111;
+}
+
+
+.navbar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.navbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: inherit;            
+  text-decoration: none;
+}
+
+
+.navbar-links {
+  display: flex;
+  gap: 30px;
+}
+
+
+.nav-link {
+  color: inherit !important; 
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* active stays red in both states */
+.nav-link.active {
+  color: #e40000 !important;
+}
+
+/* right icons use inherited color */
+.navbar-icons button {
+  color: inherit;
+}
+
+/* Make all right-side icons use the navbar's current text color */
+.navbar-icons .MuiIconButton-root,
+.navbar-icons .MuiSvgIcon-root {
+  color: inherit !important;     /* force white at top, dark after scroll */
+}
+
+/* Ensure the navbar defines the color for both states */
+.navbar {
+  color: #fff;                   /* top of page: white icons/text */
+}
+
+.navbar.scrolled {
+  color: #111;                   /* after scroll: dark icons/text */
+}
+
+/* (optional) keep layout stable so icons don't get pushed out */
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* --- ACTIVE + HOVER STATES (no logic change) --- */
+
+/* Make the current route red. Works with NavLink (aria-current) or your .active class */
+.navbar-links a[aria-current="page"],
+.navbar-links .nav-link.active,
+.navbar-links .active > .nav-link {
+  color: #e40000 !important;
+}
+
+/* Hover turns links red */
+.navbar-links .nav-link:hover {
+  color: #e40000 !important;
+}
+
+/* Place icon before the brand text without changing JSX */
+.navbar-logo {
+  display: inline-flex;          /* lets the icon sit next to text */
+  align-items: center;
+  gap: 4px;                      /* space between icon and text */
+}
+
+.navbar-logo::before {
+  content: "";
+  display: inline-block;
+  width: 50px;   /* ⬅️ increase this */
+  height: 50px;  /* ⬅️ increase this */
+  background: url("/favicon.ico") no-repeat center / contain;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.15));
+}

@@ -1,0 +1,91 @@
+
+.discover-wrapper {
+  margin: 60px 0;
+}
+.discover-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+.discover-img-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+  background: #fff;
+  width: 420px;
+  margin-left: 40px; 
+}
+
+.discover-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+
+.discover-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 50px; 
+}
+
+
+.discover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;  
+  line-height: 1.2;
+  margin-bottom: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+
+.discover-paragraph {
+  color: #444;
+  margin-bottom: 20px;
+  max-width: 560px;
+  font-size: 16px; 
+  line-height: 1.7;
+}
+
+
+.discover-cta {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 4px;
+  text-transform: none;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  margin-bottom: 22px;
+  align-self: flex-start;
+  box-shadow: 0 8px 18px rgba(198,40,40,0.18);
+}
+
+.discover-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.discover-list li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #111;
+  font-size: 14px;
+}
+
+
+.list-icon {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}

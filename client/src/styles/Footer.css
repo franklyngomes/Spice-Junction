@@ -1,0 +1,131 @@
+/* .footer {
+  background: #111;
+  color: #fff;
+  padding: 40px 20px;
+}
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+.footer-columns h4 {
+  margin-bottom: 12px;
+}
+.footer-columns ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  font-size: 0.9rem;
+} */
+
+
+
+.footer {
+  background-color: black;
+  color: white;
+  padding: 60px 30px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-title {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.red-text {
+  color: red !important;
+}
+
+.footer-text {
+  color: #ccc;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+/* Useful links same as footer text */
+.footer-link,
+.footer-link:visited,
+.footer-link:active {
+  color: white !important;
+  text-decoration: none !important;
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* No hover color change */
+.footer-link:hover {
+  color: white !important;
+}
+
+/* --- Social Media Icons --- */
+.footer-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Always white — no hover change */
+.icon-btn {
+  color: white !important;
+  cursor: pointer;
+}
+
+/* Remove hover color change for icons */
+.icon-btn:hover {
+  color: white !important;
+}
+
+/* --- Contact email stays red --- */
+.footer-link.red-text {
+  color: red !important;
+}
+
+/* Newsletter input */
+.newsletter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.newsletter-input .MuiOutlinedInput-root {
+  background-color: white;
+  border-radius: 20px;
+}
+
+.newsletter-input input::placeholder {
+  color: #aaa;                      /* base gray */
+  text-shadow: 1px 1px 2px #00000033; /* subtle shadow */
+  opacity: 1;
+}
+
+
+/* Footer bottom line */
+.footer-bottom {
+  text-align: left;
+  border-top: 1px solid #333;
+  margin-top: 40px;
+  padding-top: 15px;
+  color: #888;
+  /* font-size: 0.8rem; */
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  font-size: 0.9rem;
+}

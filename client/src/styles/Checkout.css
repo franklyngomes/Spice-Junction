@@ -1,0 +1,256 @@
+
+.checkout-wrap {
+  padding-top: 100px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.ck-title {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+
+.ck-two-col {
+  margin-top: 6px;
+}
+.ck-left {
+  padding-right: 12px;
+}
+.ck-right {
+  padding-left: 12px;
+  display: block;   
+}
+
+
+.section-label {
+  font-weight: 700;
+  margin: 6px 0 8px;
+}
+.section-label.spaced {
+  margin-top: 14px;
+}
+
+
+.card {
+  border: 1px solid #eee;
+  border-radius: 14px;
+  background: #fff;
+}
+.card-body {
+  padding: 16px;
+}
+
+
+.order-card .order-line {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f4f4f4;
+}
+.order-card .order-line:last-child {
+  border-bottom: none;
+}
+.dish-thumb {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f6f6f6;
+}
+.dish-meta {
+  display: grid;
+  gap: 2px;
+}
+.dish-name {
+  font-weight: 700;
+}
+.dish-price {
+  color: #666;
+  font-weight: 600;
+}
+
+
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  background: #fafafa;
+  padding: 8px 12px;
+  min-width: 106px;
+  justify-content: space-between;
+}
+.step-btn {
+  width: 26px !important;
+  height: 26px !important;
+  border: 1px solid #eee !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+}
+.qty-txt {
+  min-width: 22px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+.row-3 {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.save-check {
+  color: #666 !important;
+}
+
+
+.summary-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  color: #444;
+  padding: 4px 0;
+}
+.sum-divider {
+  margin: 10px 0 !important;
+}
+.sum-row.total {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+
+.payment-card {
+  margin-top: 12px;
+}
+.payment-card .pay-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 6px;
+}
+.pay-item {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  border: 1px solid #f1f1f1;
+  border-radius: 12px;
+  background: #fff;
+  padding: 12px 6px;
+}
+.pay-ico {
+  font-size: 34px !important;
+}
+.pay-cash {
+  color: #20b038 !important;
+}
+.pay-card {
+  color: #0070f3 !important;
+}
+.pay-upi {
+  color: #111 !important;
+}
+
+
+.right-cta {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.place-btn {
+  width: 100%;
+  max-width: 100%;
+  background: #ff1515 !important;
+  border-radius: 12px !important;
+  padding: 12px 0 !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  box-shadow: 0 6px 0 #d61212 !important;
+}
+.back-link {
+  margin-top: 6px;
+  background: transparent;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Style Cancel button like Checkout, but blue */
+.cancel-btn {
+  width: 100%;
+  max-width: 100%;
+  background: #0070f3 !important;   /* Blue */
+  border-radius: 12px !important;
+  padding: 12px 0 !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  box-shadow: 0 6px 0 #0056c7 !important;  /* darker blue shadow */
+  color: #fff !important;
+}
+
+/* === Buttons inline (no JSX changes) === */
+.right-cta {
+  display: grid;                 /* override the flex-column */
+  grid-template-columns: 1fr;    /* mobile: stacked */
+  gap: 10px;                     /* space between buttons */
+}
+
+/* make both buttons fill their grid cell cleanly */
+.right-cta .place-btn,
+.right-cta .cancel-btn {
+  width: 100%;
+  max-width: none;
+  padding: 12px 0 !important;    /* same height */
+}
+
+/* desktop/tablet: two columns for the buttons */
+@media (min-width: 768px) {
+  .right-cta {
+    grid-template-columns: 1fr 1fr;   /* Checkout | Cancel */
+    align-items: stretch;
+  }
+  /* put Back to Cart beneath both buttons */
+  .right-cta .back-link {
+    grid-column: 1 / -1;              /* spans both columns */
+    text-align: center;
+    margin-top: 2px;
+  }
+}
+
+
+
+
+@media (max-width: 900px) {
+  .ck-left,
+  .ck-right {
+    padding: 0;
+  }
+  .row-3 {
+    grid-template-columns: 1fr;
+  }
+  .order-card .order-line {
+    grid-template-columns: 60px 1fr auto;
+  }
+  .place-btn {
+    width: 100%;
+  }
+}

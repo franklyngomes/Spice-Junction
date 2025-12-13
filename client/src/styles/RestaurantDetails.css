@@ -1,0 +1,467 @@
+.sm-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:18px;
+  margin-bottom: 22px;
+}
+.sm-tab{
+  background:none;
+  border:none;
+  padding:6px 2px;
+  font-weight:600;
+  color:#666;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+}
+.sm-tab.active{
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+
+.rd-wrap {
+  padding-top: 80px; 
+}
+
+
+
+.sm-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+@media (max-width: 1000px){ .sm-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px){ .sm-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px){ .sm-grid{ grid-template-columns: 1fr; } }
+
+.sm-card{
+  background:#fff;
+  border-radius:12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  overflow:hidden;
+  text-align:left;
+}
+.sm-imgWrap{
+  width:100%;
+  height:170px;
+  overflow:hidden;
+}
+.sm-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.sm-body{
+  padding: 12px 14px 14px;
+}
+.sm-name{
+  font-weight:700;
+  margin-bottom:6px;
+}
+.sm-metaRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+.sm-stars span{ color:#f5b400; margin-right:2px; }
+.sm-price{ color: var(--accent); font-weight:800; }
+.sm-icons{ display:flex; gap:12px; color:#999; font-size:14px; }
+
+.sm-ctaRow{ margin-top:22px; }
+.sm-moreBtn{
+  background: var(--accent);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:6px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow: 0 10px 24px rgba(198,40,40,0.18);
+}
+.sm-moreBtn:hover{ filter:brightness(.95); }
+
+
+.rd-wrap{
+ 
+  padding-top: 80px;
+}
+
+.rd-grid{
+  max-width: var(--max-width, 1180px);
+  margin: 26px auto 14px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 420px 1fr;   
+  gap: 28px;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  box-shadow: 0 14px 36px rgba(0,0,0,.06);
+}
+
+
+.rd-left { display: flex; flex-direction: column; }
+
+.rd-imageWrap{
+  width: 100%;
+  aspect-ratio: 3 / 2;               
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+.rd-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.rd-chips{ margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+.rd-chip{
+  background: #f4f6f8 !important;
+  color: #555 !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  height: 26px !important;
+}
+
+
+.rd-right{ padding-top: 4px; }
+
+.rd-title{
+  font-family: var(--serif, "Playfair Display", serif);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.rd-desc{
+  color: #6b7280;                 
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+
+.rd-infoGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;   
+  gap: 12px 18px;
+  margin-bottom: 14px;
+}
+.rd-infoItem{}
+.rd-label{
+  font-size: .85rem;
+  color: #9ca3af;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: none;
+  margin-bottom: 2px;
+}
+.rd-value{
+  color: #111827;
+  font-weight: 700;                  
+}
+
+
+.rd-meta{ margin-top: 8px; }
+.rd-metaTitle{
+  font-weight: 700;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+.rd-metaRow{
+  font-size: .9rem;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+
+.rd-primaryBtn{
+  display: inline-block;
+  margin-top: 12px;
+  background: var(--accent, #e40000);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(228,0,0,.15);
+}
+.rd-primaryBtn:hover{ filter: brightness(.96); }
+
+
+.sm-wrap{
+  max-width: var(--max-width, 1180px);
+  margin: 36px auto 70px;
+  padding: 0 20px;
+  text-align: center;
+}
+.sm-eyebrow{
+  color: var(--accent, #e40000);
+  margin: 24px 0 4px;
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+.sm-title{
+  font-family: var(--serif, "Playfair Display", serif);
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+
+.sm-card{ border: 1px solid #eee; }
+
+
+.sm-moreBtn{
+  background: var(--accent, #e40000);
+  border-radius: 8px;
+  font-weight: 700;
+  padding: 12px 22px;
+  box-shadow: 0 12px 26px rgba(228,0,0,.18);
+}
+
+
+@media (max-width: 992px){
+  .rd-grid{
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+  .rd-infoGrid{
+    grid-template-columns: 1fr;    
+  }
+}
+@media (max-width: 540px){
+  .rd-grid{ padding: 14px; gap: 18px; }
+  .rd-title{ font-size: 1.6rem; }
+}
+
+
+
+.rd-grid{
+  max-width: none !important;     
+  width: 100% !important;
+  margin: 24px 0 14px !important;
+  border-radius: 0 !important;    
+  box-shadow: none !important;    
+  border: 0 !important;           
+  padding: 28px 48px !important;  
+  background: #fff;              
+  grid-template-columns: minmax(420px, 40vw) 1fr; 
+  column-gap: 36px;
+}
+
+
+.rd-imageWrap{
+  aspect-ratio: 16 / 9;           /* wider banner feel */
+}
+
+
+.rd-right{ padding-top: 6px; }
+
+
+.rd-infoGrid{
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+
+
+
+.sm-menuTabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin: 10px 0 20px;
+}
+
+.sm-menuTab{
+  background:#fff;
+  color:#333;
+  border:1px solid #eee;
+  padding:10px 14px;
+  border-radius:20px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+}
+
+.sm-menuTab:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+
+.sm-menuTab.active{
+  background:#e40000;           /* red active */
+  color:#fff;
+  border-color:#e40000;
+  box-shadow: 0 12px 28px rgba(228,0,0,0.25);
+}
+
+
+.sm-icons span[title="Add to cart"] { cursor: pointer; pointer-events: auto }
+.sm-card, .sm-card * { pointer-events: auto }
+.sm-imgWrap::before, .sm-imgWrap::after { pointer-events: none }
+
+
+/* Make Address and Phone stacked vertically */
+.rd-right .rd-infoGrid {
+  display: flex !important;
+  flex-direction: column;   /* stack items */
+  gap: 14px;                /* space between Address and Phone */
+  margin-top: 14px;
+  align-items: flex-start;
+}
+
+/* Headings red */
+.rd-right .rd-infoItem .rd-label {
+  color: #e11d48;           /* red */
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+/* Values (slightly lighter black) */
+.rd-right .rd-infoItem .rd-value {
+  color: #333;              
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+
+/* Back to Home styling */
+.rd-back {
+  color: #e11d48 !important; /* red */
+  font-weight: 700;
+  font-size: 1.1rem;          /* a bit bigger */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.rd-back:hover {
+  text-decoration: underline;
+}
+
+
+/* responsive gutters */
+@media (max-width: 1100px){
+  .rd-grid{
+    padding: 22px 28px !important;
+    grid-template-columns: 1fr;   /* stack on smaller screens */
+    row-gap: 18px;
+  }
+  .rd-imageWrap{ aspect-ratio: 4 / 3; }
+  .rd-infoGrid{ grid-template-columns: 1fr; }
+}
+
+
+/* 1) Remove the favorite (heart) icon */
+.sm-icons span[title="Like"] {
+  display: none !important;
+}
+
+/* 2) Make the cart icon look like a red "Add to cart" button */
+.sm-icons span[title="Add to cart"] {
+  display: inline-block;
+  background: var(--accent, #e40000);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 10px 24px rgba(228, 0, 0, 0.18);
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+  /* hide the emoji and inject text via pseudo-element */
+  font-size: 0;               /* hide original 🛒 glyph */
+}
+
+/* Add the visible label */
+.sm-icons span[title="Add to cart"]::after {
+  content: "Add to cart";
+  font-size: 14px;            /* visible text size */
+}
+
+/* Hover/active feedback */
+.sm-icons span[title="Add to cart"]:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(228, 0, 0, 0.22);
+}
+.sm-icons span[title="Add to cart"]:active {
+  transform: translateY(0);
+}
+/* make all "Add to cart" look identical, regardless of card/text */
+.sm-card .sm-icons span[title="Add to cart"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  background: var(--accent, #e40000) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 24px rgba(228, 0, 0, 0.18) !important;
+
+  /* enforce equal size */
+  min-width: 112px !important;
+  min-height: 36px !important;
+  padding: 0 14px !important;
+
+  /* hide the emoji and show label via ::after */
+  font-size: 0 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+/* visible label */
+.sm-card .sm-icons span[title="Add to cart"]::after {
+  content: "Add to cart";
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* keep icons row consistent */
+.sm-card .sm-icons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+/* Simplify Add to cart button look */
+.sm-card .sm-icons span[title="Add to cart"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  background: #e40000 !important;   /* solid red */
+  color: #fff !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  min-width: 110px !important;
+  min-height: 36px !important;
+  padding: 8px 16px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+
+  box-shadow: none !important;      /* remove glowing shadow */
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* visible text */
+.sm-card .sm-icons span[title="Add to cart"]::after {
+  content: "Add to cart";
+}
+
+/* Hover effect: darker red with subtle shadow */
+.sm-card .sm-icons span[title="Add to cart"]:hover {
+  background: #b80000 !important;   /* darker red */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
+}
