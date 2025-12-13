@@ -1,0 +1,1 @@
+{"version":3,"file":"RestaurantRoutes.js","sourceRoot":"","sources":["../../src/routes/RestaurantRoutes.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,SAAS,CAAC;AAC9B,OAAO,cAAc,MAAM,iCAAiC,CAAC;AAC7D,MAAM,sBAAsB,GAAG,OAAO,CAAC,MAAM,EAAE,CAAA;AAE/C,sBAAsB,CAAC,IAAI,CAAC,SAAS,EAAE,cAAc,CAAC,gBAAgB,CAAC,CAAA;AAEvE,eAAe,sBAAsB,CAAA"}
