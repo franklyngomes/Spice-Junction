@@ -20,7 +20,7 @@ app.set("views", "views");
 const allowedOrigins = [
   "https://spice-junction.onrender.com",
   "https://spice-junction-admin.onrender.com",
-  "https://spice-junction-omega.vercel.app/",
+  "https://spice-junction-omega.vercel.app",
   "http://localhost:5173",
   "http://localhost:3000",
   "http://localhost:5000",
