@@ -1,6 +1,6 @@
 import axios from 'axios'
 const axiosInstance = axios.create({
-  baseURL: 'https://spice-junction.onrender.com/api', 
+  baseURL: 'https://spice-junction.onrender.com/', 
   headers: { 'Content-Type': 'application/json' }
 })
 
